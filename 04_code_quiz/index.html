@@ -1,32 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="Description" content="Enter your description here"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-<link rel="stylesheet" href="assets/css/bootstrap.css">
-<title>Title</title>
-</head>
-<body>
-  <div class="container">
-    <h1>04 Coding Quiz Challenge</h1>
-    <hr class="border-primary">
-    <p> Basic javascript quiz, every question needs to be answered within 30 secs!</p>
-    <hr class="border-secondary">
-    <div class="form-group">
-      <label for="start">Start Quiz</label>
-      <button id="start" class="form-control btn btn-block btn-primary" >Start
-        </button>
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="icon" type="image/png"
+      href="https://icons.iconarchive.com/icons/alecive/flatwoken/256/Apps-File-Javascript-icon.png" />
+
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/bootstrap.css">
+    <title>Hello, world!</title>
+  </head>
+
+  <body>
+    <style>
+      .mini {
+        max-width: 512px;
+      }
+
+      ;
+
+      .hidden {
+        display: none;
+      }
+    </style>
+    <div class="container mini" id="info"></div>
+    <div class="container mini">
+      <div class="row">
+        <div class="col">
+          <button id="start" class="btn btn-block btn-primary"> Start </button>
+        </div>
+        <div class="col">
+          <button id="re_start" class="btn btn-block btn-secondary disabled"> Re-Start </button>
+
+        </div>
+      </div>
     </div>
+    <div class="container mini my-3">
+      <p id="question_number" class="text-hide">Question 1</p>
+      <fieldset class="form-group bg-primary rounded" id="range_div">
+      </fieldset>
+    </div>
+    <div class="container mini my-3"  id="progress_div">
+    </div>
+    <div class="container mini my-3" id="display">
 
-  </div>
+    </div>
+    <div class="container mini my-3">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>
-<script src="app.js"></script>
-</body>
+    </div>
+    <!-- Optional JavaScript; choose one of the two! -->
+    <!-- append info and start buttons -->
+    <script src="welcome.js"></script>
+    <!-- global variable questions -->
+    <script src="questions.js"></script>
+    <script src="app.js"></script>
+
+  </body>
+
 </html>
