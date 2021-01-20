@@ -8,7 +8,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="icon" type="image/png"
-      href="https://icons.iconarchive.com/icons/alecive/flatwoken/256/Apps-File-Javascript-icon.png" />
+      href="js-logo.png" />
 
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet" />
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
@@ -19,22 +19,22 @@
     <style>
       .mini {
         max-width: 512px;
-      }
-
-      ;
+      };
 
       .hidden {
         display: none;
-      }
+      };
     </style>
+    
     <div class="container mini" id="info"></div>
     <div class="container mini">
       <div class="row">
-        <div class="col">
+        <div class="col" id="start_div" >
           <button id="start" class="btn btn-block btn-primary"> Start </button>
         </div>
         <div class="col text-primary">
-          <h4 id="question_number" class="border-primary text-hide">Question 1</h4>
+          <h4 id="question_number" class="border-primary text-hide">
+            Question 1</h4>
 
         </div>
       </div>
@@ -45,10 +45,9 @@
     </div>
     <div class="container mini my-3"  id="progress_div">
     </div>
-    <div class="container mini my-3" id="question_div">
-      <h4 id="question_text"></h4>
 
-    </div>
+    <div class="container mini my-3" id="question_div"></div>
+    
     <!-- Optional JavaScript; choose one of the two! -->
     <!-- append info and start buttons -->
     <script src="welcome.js"></script>

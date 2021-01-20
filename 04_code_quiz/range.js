@@ -10,19 +10,34 @@ function range_listener () {
 		$progress_bar.setAttribute("aria-valuenow", range_index * step);
 	}
 	const current_index = document.getElementById("index_range").value;
-
-	const $range = document.getElementById(event.target.id);
 	const $index = document.getElementById("question_number");
-	const current_value = $range.value;
+	
+	$index.innerText = `Question ${current_index}`;
+	
+	display_question( current_index );
 
-	$index.innerText = `Question ${current_value}`;
-	// console.log("current_value >> ", current_value);
-
-	const question = questions[current_index];
-	// console.log( question );
-
-	animate_progress(current_value);
+	animate_progress(current_index);
 }
+function display_question ( current_index ) {
+	const question = questions[ current_index - 1 ];
+
+	const $q = document.createElement( 'h4' );
+	$q.textContent = question.title;
+	$q.setAttribute("id", `question_${current_index}`);
+
+	const $div = document.getElementById( "question_div" );
+	$div.appendChild( $q );
+
+	question.choices.forEach(
+		c => {
+			const $btn = document.createElement( 'button' );
+			$btn.className = "btn btn-lg btn-outline-primary";
+			$btn.textContent = c;
+			$div.appendChild($btn);
+		}
+	);
+}
+
 function append_input_range ( array ) {
 	let $index = document.getElementById("question_number");
 	$index.className = "text-center";
