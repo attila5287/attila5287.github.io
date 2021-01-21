@@ -1,5 +1,5 @@
 render( questions );
-// ├update_stats(index)   
+// ├update_question_no(index)   
 // ├update_slider(index)  
 // ├update_progress_bar(index)
 // ├display_question(index)
@@ -8,24 +8,33 @@ render( questions );
 
 function render ( data ) {// by default before user interaction
   const index = 0; 
-  $index = document.querySelector( "#index" );
-  $index.innerText = index;
-  // console.log( 'index by default :>> ', index );
+  $range = document.querySelector( "#range" );
+  
+  $range.setAttribute( "value", index );
   
   const length = data.length;
-  // console.log('number of questions in quiz :>> ', length);
+  $range.setAttribute("max", data.length-1);
+  $range.addEventListener( "change", ( event ) => {
+    const new_question_index = $range.value;
+		console.log("event.target.id :>> ", $range.value);
+    update_question_no($range.value, length);
+    update_progress_bar(length, index);
+    display_question( data,  );
+	});
   
+  update_question_no( index, length );
   update_progress_bar( length, index );
   display_question( data, index );
-  $total_count = document.querySelector( "#q_count" )
-    ;
-  $total_count.innerText = length;
+  // console.log('number of questions in quiz :>> ', length);
+}
 
-  $range = document.querySelector( "#range" );
-  range.setAttribute("max", data.length);
-	$range.addEventListener("change", (event) => {
-		console.log("event.target.id :>> ", $range.value);
-	});
+function update_question_no ( index, length ) {
+  $q_no = document.querySelector( "#q_no" ); // index+1
+  
+  $q_no.innerText = index+1;
+  // console.log( 'index by default :>> ', index );
+  $total_count = document.querySelector( "#q_count" );
+  $total_count.innerText = length;
 }
 
 function display_question ( data, index ) {
@@ -46,11 +55,11 @@ function display_question ( data, index ) {
   }
 }
 
-function update_progress_bar ( length, index ) {
+function update_progress_bar ( length, i ) {
   const step = Math.floor( 100 / length );
   $progress = document.querySelector( "#progress" );
   $progress.setAttribute( "step", step );
-  const perc = step * index;
+  const perc = step * i;
   const pro_style = "width: " + perc + "%; ";
   $progress.setAttribute( "style", pro_style );
   $progress.setAttribute( "aria-valuenow", perc );
