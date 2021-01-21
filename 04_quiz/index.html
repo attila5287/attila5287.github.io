@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="js quiz with client side storage"/>
+<link rel="stylesheet" href="bootstrap.css">
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet" />
+<title>04 ClientSide</title>
+  <style>
+      .mini {
+        max-width: 512px;
+      };
+
+      .hidden {
+        display: none;
+      };
+        .text-xl{
+      font-size: 2rem;
+    }
+    .text-bold {
+      font-weight: bold;
+    }
+    </style>
+</head>
+<body>
+  <div class="container mini text-center mt-4">
+    <h1 class="pb-0 mb-0">
+      <i class="far fa-question-circle text-primary"></i>
+      Coding Quiz // 04
+    </h1>
+    <p>
+      <h3 class="fas fas fa-clipboard-list mr-2"></h3>
+      local storage only  // client-side API // pre-database
+    </p>
+    <hr class="border-primary border-bottom">
+  </div>
+  <style>
+  
+  </style>
+<div class="container mini text-right mt-4">
+  
+  <div class="row">
+    <div class="bg-transparent col">slider index</div> 
+    <div class="bg-transparent col">current score </div> 
+    <div class="bg-transparent col">seconds left </div> 
+  </div>
+
+  <div class="row">
+    <div class="col"><span class="text-bold text-xl text-primary"  id="index">1</span>   <h3 class="ml-2 fas fa-sliders-h"></h3></div>
+    <div class="col"><span class="text-bold text-xl text-primary"  id="score">0</span>   <h3 class="ml-2 fas fa-trophy"></h3></div>
+    <div class="col"><span class="text-bold text-xl text-primary"  id="seconds">10</span><h3 class="ml-2 fas fa-stopwatch"></h3></div>
+  </div>
+
+</div>
+<div class="container mini text-center mt-4">
+  <div class="progress">
+    <div class="progress-bar bg-primary" role="progressbar" style="width: 1%" aria-valuenow="1" aria-valuemin="1" aria-valuemax="100" id="progress"></div>
+  </div>
+</div>
+<div class="container mini text-center mt-4">
+  
+  <div class="container mini question">
+    <h1 class="text-primary fab fa-js fa-pull-left"></h1>
+    <h5 class="text-center title">  </h5>
+    <hr class="border-primary">
+    <div class="row">
+      <div class="col-auto">
+        <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+          <button type="click" class="btn btn-outline-primary choice_btn" >a</button>
+          <button type="click" class="btn btn-outline-primary choice_btn" >b</button>
+          <button type="click" class="btn btn-outline-primary choice_btn" >c</button>
+          <button type="click" class="btn btn-outline-primary choice_btn" >d</button>
+        </div>
+      </div>
+      <div class="col">
+        <div class="d-flex flex-column text-left">
+          <p class="choice_text"></p>
+          <p class="choice_text"></p>
+          <p class="choice_text"></p>
+          <p class="choice_text"></p>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="data.js"></script>
+<script src="render.js"></script>
+
+</body>
+</html>
