@@ -16,46 +16,76 @@
       .hidden {
         display: none;
       };
-        .text-xl{
+      body {
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+      };
+      
+      .text-xl{
       font-size: 2rem;
-    }
-    .text-bold {
-      font-weight: bold;
-    }
-    </style>
+      };
+      </style>
 </head>
 <body>
-  <div class="container mini text-center mt-4">
-    <h1 class="pb-0 mb-0">
-      <i class="far fa-question-circle text-primary"></i>
-      Coding Quiz // 04
+  <div class="container mini mt-4">
+    <h1 class="pb-0 mb-0 mx-2">
+      <i class="fas fa-stopwatch text-secondary mx-2 fa-fw"></i>
+      &middot;
+      Coding Quiz
+       &middot;
+       04
     </h1>
     <p>
-      <h3 class="fas fas fa-clipboard-list mr-2"></h3>
-      local storage only  // client-side API // pre-database
+      <h3 class="fas fa-clipboard-list mx-2 fa-fw"></h3>
+      local storage only &middot; client-side API &middot;  no-database
     </p>
-    <hr class="border-primary border-bottom">
+    <p>
+      <h3 class="fas fa-compass mx-2 fa-fw"></h3>
+      uni-directional data-flow 
+      &middot;
+      render>user interaction>render
+      
+    </p>
+    <hr class="border-secondary">
   </div>
   <style>
   
   </style>
-<div class="container mini text-right mt-4">
+<div class="container mini mt-4">
   
-  <div class="row">
-    <div class="bg-transparent col">slider index</div> 
-    <div class="bg-transparent col">current score </div> 
-    <div class="bg-transparent col">seconds left </div> 
+  <div class="row text-center align-items-center">
+    <div class="col">
+      <h4 class="fas fa-sliders-h"></h4>
+      question no
+    </div> 
+    <div class="col">
+      <h4 class="fas fa-sliders-h"></h4>
+      number of q's
+    </div> 
+    <div class="col">
+      <h4 class="fas fa-trophy"></h4>
+      current score </div> 
+    <div class="col ">
+      <h4 class="fas fa-hourglass-half"></h4>
+      seconds left </div> 
   </div>
 
-  <div class="row">
-    <div class="col"><span class="text-bold text-xl text-primary"  id="index">1</span>   <h3 class="ml-2 fas fa-sliders-h"></h3></div>
-    <div class="col"><span class="text-bold text-xl text-primary"  id="score">0</span>   <h3 class="ml-2 fas fa-trophy"></h3></div>
-    <div class="col"><span class="text-bold text-xl text-primary"  id="seconds">10</span><h3 class="ml-2 fas fa-stopwatch"></h3></div>
+  <div class="row text-center">
+
+  <h1 class="col text-bold  text-primary">
+    <span id="index"> 1 </span> 
+    /
+    <span id="q_count">5  </span>
+  </h1>
+  <h1 class="col text-bold  text-primary" id="score">0</h1>
+  <h1 class="col text-bold  text-primary" id="seconds">10</h1>
+
   </div>
 
   <div class="container mini mt-4">
     <div class="form-group">
-        <input id="range" class="custom-range bg-primary rounded px-3 pb-3 pt-3" type="range" name="" min="0" value="0" >
+        <input id="range" class="custom-range bg-primary rounded px-3 pb-3 pt-3" type="range" name="" min="1" value="0" >
       </div>
     </div>
   </div>
@@ -70,7 +100,7 @@
   
   <div class="container mini question">
     <h1 class="text-primary fab fa-js fa-pull-left"></h1>
-    <h5 class="text-center title">  </h5>
+    <h5 class="text-center title mb-0">  </h5>
     <hr class="border-primary">
     <div class="row">
       <div class="col-auto">
