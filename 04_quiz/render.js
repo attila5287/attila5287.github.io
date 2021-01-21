@@ -15,11 +15,13 @@ function render ( data ) {// by default before user interaction
   const length = data.length;
   $range.setAttribute("max", data.length-1);
   $range.addEventListener( "change", ( event ) => {
-    const new_question_index = $range.value;
-		console.log("event.target.id :>> ", $range.value);
-    update_question_no($range.value, length);
-    update_progress_bar(length, index);
-    display_question( data,  );
+    const new_question_index = +$range.value;
+
+		console.log("range-input-value :>> ", $range.value);
+    update_question_no( +$range.value
+      , length );
+    update_progress_bar(length, new_question_index+1);
+    display_question(data, new_question_index);
 	});
   
   update_question_no( index, length );
