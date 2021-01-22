@@ -87,7 +87,7 @@ function start_stop_quiz () {
     stop_quiz();
   }
   function stop_quiz () {
-    $iconstart.className = "far fa-play-circle";
+    $iconstart.className = "far fa-play-circle text-dark";
 		$start.className =
 			"btn btn-lg btn-primary btn-block rounded-xl text-center";
     $start.setAttribute( "data-mode", "start" );
@@ -113,7 +113,7 @@ function start_stop_quiz () {
     $start.className =
       "btn btn-lg btn-outline-primary btn-block rounded-xl text-center";
   $start.setAttribute("data-mode", "stop");
-    document.getElementById("mode").innerText = "Quiz Started";
+    document.getElementById("mode").innerText = "Stop Quiz:";
     document.querySelectorAll( ".before" )
       .forEach( element => {
 
