@@ -77,6 +77,7 @@ function update_progress_bar ( length, i ) {
 const $start = document.getElementById( "start" );
 
 function start_stop_quiz () {
+  const $iconstart = document.getElementById("iconstart");
   const mode = $start.getAttribute("data-mode");
   console.log( "mode :>> ", mode );
   if (mode == "start") {
@@ -86,6 +87,9 @@ function start_stop_quiz () {
     stop_quiz();
   }
   function stop_quiz () {
+    $iconstart.className = "far fa-play-circle";
+		$start.className =
+			"btn btn-lg btn-primary btn-block rounded-xl text-center";
     $start.setAttribute( "data-mode", "start" );
     console.log('test stop quiz');
     
@@ -105,6 +109,9 @@ function start_stop_quiz () {
     
   }
   function start_quiz () {
+    $iconstart.className = "far fa-stop-circle";
+    $start.className =
+      "btn btn-lg btn-outline-primary btn-block rounded-xl text-center";
   $start.setAttribute("data-mode", "stop");
     document.getElementById("mode").innerText = "Quiz Started";
     document.querySelectorAll( ".before" )
@@ -123,9 +130,8 @@ function start_stop_quiz () {
   } 
   
   
-  const $iconstart = document.getElementById( "iconstart" );
-  $iconstart.className = "far fa-stop-circle";
-  $start.className = "btn btn-lg btn-outline-primary btn-block rounded-xl text-center";
+
+
 };
 $start.onclick = start_stop_quiz;
 

@@ -73,25 +73,22 @@
       </div>
 
       <div class="col-9 d-none after">
-        <div class="d-flex flex-row justify-content-around">
+        <div class="d-flex flex-row justify-content-around my-2">
           <div class="card w-100" >
-            <div class="card-header">
-              <h3 class="fas fa-hashtag"></h3>
-            </div>
-            <div class="card-body text-center my-0 py-0">
+            <div class="card-body text-center my-2 py-0">
+              <h3 class="fas fa-hashtag fa-pull-left"></h3>
               <h1 class="card-title text-primary">
                 <span id="q_no"></span> /<span class="text-sm-left" id="q_count">  </span>
               </h1>
             </div>
+
             <div class="card-footer text-center  font-weight-bold">
               Current Question
             </div>
           </div>
           <div class="card w-100">
-            <div class="card-header">
-              <h3 class="fas fa-coins"></h3>
-            </div>
-            <div class="card-body text-center my-0 py-0">
+            <div class="card-body text-center my-2 py-0">
+              <h3 class="fas fa-coins fa-pull-left"></h3>
               <h1 class="card-title text-primary"id="score">0</h1>
               
             </div>
@@ -100,10 +97,8 @@
             </div>
           </div>
           <div class="card w-100">
-            <div class="card-header">
-              <h3 class="fas fa-stopwatch"></h3>
-            </div>
-            <div class="card-body text-center my-0 py-0">
+            <div class="card-body text-center my-2 py-0">
+              <h3 class="fas fa-stopwatch fa-pull-left"></h3>
               <h1 class="card-title text-primary" id="seconds">60</h1>
               
             </div>
@@ -118,20 +113,22 @@
     </div>
   </div>
 </div>
+<hr class="mini border-secondary mx-4">
+
 <div class="container mini mt-4 d-none after">
   <div class="form-group">
       <input id="range" class="custom-range bg-primary rounded-xl px-3 pb-3 pt-3" type="range" name="" min=0  step=1    max=4>
     </div>
   </div>
 
-<div class="container mini text-center d-none after">
-  <div class="progress mx-2 border-0 rounded-xl">
+<div class="container mini my-2 d-none after">
+  <div class="progress m-2 border-0 rounded-xl">
     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100" style="width: 99%" id="progress"></div>
   </div>
 </div>
 <div class="container mini question d-none after">
   <h1 class="text-primary fab fa-js fa-pull-left"></h1>
-  <h5 class="title mb-0">  </h5>
+  <h4 class="title text-success">  </h4>
   <hr class="border-primary">
   <div class="row">
     <div class="col-auto">
@@ -144,10 +141,10 @@
     </div>
     <div class="col">
       <div class="d-flex flex-column text-left">
-        <p class="choice_text"></p>
-        <p class="choice_text"></p>
-        <p class="choice_text"></p>
-        <p class="choice_text"></p>
+        <p class="choice_text text-success"></p>
+        <p class="choice_text text-success"></p>
+        <p class="choice_text text-success"></p>
+        <p class="choice_text text-success"></p>
         
       </div>
     </div>
