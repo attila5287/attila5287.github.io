@@ -14,9 +14,6 @@
 
 <title>04 ClientSide</title>
   <style>
-    body {
-      font-size: 0.95rem;
-    }
     .card {
       border-radius:1.25rem;
     }
@@ -27,13 +24,8 @@
         max-width: 512px;
       };
 
-      .hidden {
-        display: none;
-      };
       body {
         font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.5;
       };
       
       .text-xl{
@@ -43,8 +35,8 @@
 </head>
 <body>
   <div class="container mini mt-4">
-    <h1 class="text-primary pb-0 mb-0 mx-2">
-      <i class="text-primary fab fa-node-js fa-fw"></i>
+    <h1 class="text-success pb-0 mb-0 mx-2">
+      <i class="text-dark bg-primary fab fa-node-js fa-fw p-2 rounded-lg"></i>
       Coding Quiz
       <i class="text-secondary">
         // 04 hw
@@ -53,22 +45,25 @@
     <div class="row">
       <div class="col-3">
         <label for="start" class="font-weight-bold mt-2" id="mode">Start Quiz:</label>
-        <button class="btn btn-lg btn-primary btn-block rounded-xl text-center" data-mode="start"  id="start">
+        <button class="btn btn-lg btn-primary
+         btn-block rounded-xl text-center" data-mode="start"  id="start">
           <h1 class="text-dark far fa-play-circle" id="iconstart"></h1> 
         </button>
       </div>
       <div class="col-9 before">
         <p class="mt-3">
-          <i class="fas fa-compass mx-2 fa-fw"></i>
+          <i class="fas fa-code mx-2 fa-fw"></i>
           Welcome to coding quiz!
         </p>
         <p class="">
-          <hi class="fas fa-compass mx-2 fa-fw"></hi>
-           Start button on the left will start a new quiz after a count-down
+          <hi class="fas fa-code mx-2 fa-fw"></hi>
+           The button on the left 
+           <i class="far fa-play-circle"></i>
+           will start a new quiz after a count-down
         </p>
         <p class="">
-          <i class="fas fa-compass mx-2 fa-fw"></i>
-           Answer questions by clicking the choice and proceed to next q!
+          <i class="fas fa-code mx-2 fa-fw"></i>
+           Answer questions by clicking the small button
         </p>
       </div>
 
@@ -122,11 +117,11 @@
   </div>
 
 <div class="container mini my-2 d-none after">
-  <div class="progress m-2 border-0 rounded-xl">
+  <div class="progress border-0 rounded-xl">
     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100" style="width: 99%" id="progress"></div>
   </div>
 </div>
-<div class="container mini question d-none after">
+<div class="container mini mt-3 question d-none after">
   <h1 class="text-primary fab fa-js fa-pull-left"></h1>
   <h4 class="title text-success">  </h4>
   <hr class="border-primary mini">
