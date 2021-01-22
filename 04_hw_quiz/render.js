@@ -14,33 +14,46 @@ function render ( data ) {// by default before user interaction
   const length = data.length;
 
   $choice_btns = document.querySelectorAll( ".choice_btn" );
+  let answers = {};
 
-  $choice_btns.forEach(el => {
-    el.addEventListener( "click", ( event ) => {
-      console.log('index :>> ', index);
-      console.log('event.target.id :>> ', event.target.id);
-    })
-  });
-
-
+  update_choice_btns( index, answers );
+  
+  
   $range.setAttribute("max", data.length-1);
   $range.addEventListener( "change", ( event ) => {
     const new_question_index = +$range.value;
-
+    
     console.log("range-input-value :>> ", $range.value);
     console.log( "range-input-value :>> ", +$range.value );
     
-
+    
+    update_choice_btns(new_question_index, answers);
+    
     update_question_no( +$range.value
       , length );
     update_progress_bar(length, new_question_index+1);
-    display_question(data, new_question_index);
+    display_question( data, new_question_index );
+    
 	});
   
   update_question_no( index, length );
   update_progress_bar( length, index );
   display_question( data, index );
   // console.log('number of questions in quiz :>> ', length);
+}
+
+function update_choice_btns ( index, answers ) {
+  $choice_btns.forEach( el => {
+    el.setAttribute( "data-question", `q${index}` );
+
+    el.addEventListener( "click", ( event ) => {
+      const key = event.target.getAttribute( "data-question" );
+      answers[ key ] = event.target.id; // id's are preset
+      console.log( 'answers :>> ', answers );
+    } );
+
+
+  } );
 }
 
 function update_question_no ( index, length ) {
