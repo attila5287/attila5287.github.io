@@ -1,23 +1,33 @@
 render( questions );
-// ├update_question_no(index)   
-// ├update_slider(index)  
-// ├update_progress_bar(index)
-// ├display_question(index)
-// └start_timer() 
+// ├ update_question_no(index)   +
+// ├ update_slider(index)        +
+// ├ update_progress_bar(index)  +
+// ├ display_question(index)     +
+// ├ start_timer()               -
+// └ choice_listener()
  
 
 function render ( data ) {// by default before user interaction
   const index = 0; 
   $range = document.querySelector( "#range" );
-  
   $range.setAttribute( "value", index );
-  
   const length = data.length;
+
+  $choice_btns = document.querySelectorAll( ".choice_btn" );
+
+  $choice_btns.forEach(el => {
+    el.addEventListener( "click", ( event ) => {
+      console.log('index :>> ', index);
+      console.log('event.target.id :>> ', event.target.id);
+    })
+  });
+
+
   $range.setAttribute("max", data.length-1);
   $range.addEventListener( "change", ( event ) => {
     const new_question_index = +$range.value;
 
-		console.log("range-input-value :>> ", $range.value);
+    console.log("range-input-value :>> ", $range.value);
     console.log( "range-input-value :>> ", +$range.value );
     
 
@@ -70,9 +80,6 @@ function update_progress_bar ( length, i ) {
   $progress.setAttribute( "aria-valuenow", perc );
 }
 // console.log('choices :>> ', choices);
-
-
-
 
 const $start = document.getElementById( "start" );
 
@@ -128,9 +135,6 @@ function start_stop_quiz () {
       } );
     
   } 
-  
-  
-
 
 };
 $start.onclick = start_stop_quiz;
