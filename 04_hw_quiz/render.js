@@ -18,6 +18,9 @@ function render ( data ) {// by default before user interaction
     const new_question_index = +$range.value;
 
 		console.log("range-input-value :>> ", $range.value);
+    console.log( "range-input-value :>> ", +$range.value );
+    
+
     update_question_no( +$range.value
       , length );
     update_progress_bar(length, new_question_index+1);
@@ -31,17 +34,17 @@ function render ( data ) {// by default before user interaction
 }
 
 function update_question_no ( index, length ) {
-  $q_no = document.querySelector( "#q_no" ); // index+1
+  const $q_no = document.querySelector( "#q_no" ); // index+1
   
   $q_no.innerText = index+1;
   // console.log( 'index by default :>> ', index );
-  $total_count = document.querySelector( "#q_count" );
+  const $total_count = document.querySelector( "#q_count" );
   $total_count.innerText = length;
 }
 
 function display_question ( data, index ) {
   const d = data[ index ];
-  console.log( 'question being displayed :>> ', d );
+  console.log( 'question on display :>> ', d.title );
 
   $div = document.querySelector( ".question" );
   const $title = $div.querySelector( ".title" );
@@ -70,4 +73,59 @@ function update_progress_bar ( length, i ) {
 
 
 
+
+const $start = document.getElementById( "start" );
+
+function start_stop_quiz () {
+  const mode = $start.getAttribute("data-mode");
+  console.log( "mode :>> ", mode );
+  if (mode == "start") {
+    start_quiz();  
+    
+  } else {
+    stop_quiz();
+  }
+  function stop_quiz () {
+    $start.setAttribute( "data-mode", "start" );
+    console.log('test stop quiz');
+    
+    document.getElementById( "mode" ).innerText = "Re-start Quiz";
+    
+    document.querySelectorAll( ".after" )
+      .forEach( element => {
+          element.classList.add("d-none");
+      } );
+    
+    
+    document.querySelectorAll( ".before" )
+      .forEach( $el => {
+      // console.log('after');
+      $el.classList.remove("d-none");
+      } );
+    
+  }
+  function start_quiz () {
+  $start.setAttribute("data-mode", "stop");
+    document.getElementById("mode").innerText = "Quiz Started";
+    document.querySelectorAll( ".before" )
+      .forEach( element => {
+
+        element.classList.add( "d-none" );
+        
+      } );
+    
+    document.querySelectorAll( ".after" )
+      .forEach( element => {
+      // console.log('after');
+      element.classList.remove('d-none');
+      } );
+    
+  } 
+  
+  
+  const $iconstart = document.getElementById( "iconstart" );
+  $iconstart.className = "far fa-stop-circle";
+  $start.className = "btn btn-lg btn-outline-primary btn-block rounded-xl text-center";
+};
+$start.onclick = start_stop_quiz;
 
