@@ -4,98 +4,112 @@ function render ( data) {// by default before user interaction
   let length = data.length;
   display_question(data, index);
   update_question_no(length, index);
-  test_input(index, data);
-  const $seconds = document.getElementById( "seconds" );
-  function setTime ( index, length ) {
-    let secondsLeft = 2;
-    const constant_for_progress = secondsLeft;
+  update_slider(index, data);
 
-		var timerInterval = setInterval(function () {
-			update_progress_bar(constant_for_progress, secondsLeft);
-			// console.log("secondsLeft :>> ", secondsLeft);
-
-			$seconds.textContent = secondsLeft;
-
-			secondsLeft--;
-      if ( secondsLeft == 0 ) {
-        if (data[index+1]) {
-          console.log(data[index + 1]);
-          display_question(data, index + 1);
-          update_question_no(length, index + 1);
-          test_input(index + 1, data);
-          setTime(index + 1, 5);
-          
-        } else {
-          secondsLeft = 0;
-          console.log( "interval cleared" );
-          
-          $more_after = document.querySelectorAll( ".more_after" );
-          $more_after.forEach(($el) => {
-						$el.classList.add("d-none");
-					});
-          
-          
-          clearInterval( timerInterval );
-        }
-			}
-		}, 1000);
-	}
-  setTime( index, length );
-  
-  
-  function test_input (index, data) {
-    $range = document.querySelector( "#range" );
-    $range.setAttribute( "value", index );
-    $range.setAttribute( "max", data.length - 1 );
-    $range.addEventListener( "change", ( event ) => {
-      // console.log( "range-input-value :>> ", +$range.value );
-      const new_question_index = +$range.value;
-
-      update_question_no( length, new_question_index );
-      
-      display_question( data, new_question_index );
-
-
-    } );
-  }
+  setTime(index, length, data);
 }
-
 function display_question(data, idx) {
-  const q = data[ idx ];
-  if (!q) {
-    document.querySelector( ".question" ).classList.add( "d-none" );
-  } else {
-    // console.log( 'question on display :>> ', d.title );
-  
-    $div = document.querySelector(".question");
-    const $title = $div.querySelector(".title");
+	const q = data[idx]; // question
+	if (!q) {
+		document.querySelector(".question").classList.add("d-none");
+	} else {
+		$div = document.querySelector(".question");
+		const $title = $div.querySelector(".title");
     $title.textContent = q.title;
     const choices = q.choices;
-    $choices = $div.querySelectorAll(".choice_text");
-    $btns = document.querySelectorAll(".choice_btn");
-    for (let i = 0; i < choices.length; i++) {
-      const text_content = choices[i];
-      const $c = $choices[i];
-      const $btn = $btns[i];
-      $c.textContent = text_content;
-      $btn.setAttribute("data-choice_text", text_content);
-      $btn.setAttribute("data-solution", `${questions[idx].answer}`);
-      $btn.setAttribute("data-no", `${idx}`);
-    }
-    const answers = data.map( d => d.answer ); 
-  
-    $btns.forEach( ( el, i ) => {
-      el.addEventListener("click", (event) => {
-        const key = event.target.getAttribute("data-no");
-        const correct_answers = questions.map((d) => d.answer);
-        answers[key] = event.target.dataset.choice_text;
-        console.log("user answered :>> ", answers[key]);
-        console.log("solution manual :>> ", correct_answers[key]);
-      });
-    });
     
-  }
+    $check_board = document.getElementById("check_board");
+    $i = document.createElement( "i" );
+    $i.setAttribute("class", "far fa-square");
+    $i.setAttribute("id", `checkbox_${idx}`);
+    $check_board.appendChild( $i );
+    
+    
+		$choices = $div.querySelectorAll(".choice_text");
+		$btns = document.querySelectorAll(".choice_btn");
+		for (let i = 0; i < choices.length; i++) {
+			const text_content = choices[i];
+			const $c = $choices[i];
+			const $btn = $btns[i];
+			$c.textContent = text_content;
+			$btn.setAttribute("data-choice_text", text_content);
+			$btn.setAttribute("data-solution", `${questions[idx].answer}`);
+			$btn.setAttribute("data-no", `${idx}`);
+		}
+		const answers = data.map((d) => d.answer);
+    $score = document.getElementById( "score" );
+    const length = data.length;
+		$btns.forEach(($btn, i) => {
+			$btn.addEventListener("click", (event) => {
+				const key = event.target.getAttribute("data-no");
+				const correct_answers = questions.map((d) => d.answer);
+				answers[key] = event.target.dataset.choice_text;
+				
+        if ( answers[ key ] == correct_answers[ key ] && event.target == $btn ) {
+          console.log( 'length :>> ', length );
+					const points = Math.round(100 / length);
+          console.log('points :>> ', points);
+          $score.textContent = +$score.textContent + points;
+          console.log('correct answer in foreach');
+				} else {
+					$score.textContent = +$score.textContent + 0;
+				}
+
+        if (data[idx + 1] && event.target.id == $btn.id) {
+          console.log( "idx :>> ", idx );
+          console.log('$btn.id :>> ', $btn.id);
+					display_question(data, idx + 1);
+					update_question_no(length, idx + 1);
+					update_slider(idx + 1, data);
+				} else {
+					// secondsLeft = 0;
+					console.log("interval cleared");
+
+					$more_after = document.querySelectorAll(".more_after");
+					$more_after.forEach(($el) => {
+						$el.classList.add("d-none");
+					});
+				}
+
+			});
+		});
+	}
 }
+
+function setTime ( index, length, data ) {
+  const $seconds = document.getElementById("seconds");
+  let secondsLeft = 60;
+  const round_duration = secondsLeft; //static
+
+  var timerInterval = setInterval(function () {
+    update_progress_bar(round_duration, secondsLeft);
+    // console.log("secondsLeft :>> ", secondsLeft);
+
+    $seconds.textContent = secondsLeft;
+
+    secondsLeft--;
+    if ( secondsLeft == 0 ) {
+      clearInterval( timerInterval );
+    }
+  }, 1000);
+}
+
+function update_slider (index, data) {
+  $range = document.querySelector( "#range" );
+  $range.setAttribute( "value", index );
+  $range.setAttribute( "max", data.length - 1 );
+  $range.addEventListener( "change", ( event ) => {
+    // console.log( "range-input-value :>> ", +$range.value );
+    const new_question_index = +$range.value;
+
+    update_question_no( length, new_question_index );
+    
+    display_question( data, new_question_index );
+
+
+  } );
+}
+
 
 function update_question_no(length, no) {
 	const $q_no = document.querySelector("#q_no"); // index+1
@@ -105,8 +119,9 @@ function update_question_no(length, no) {
 	const $total_count = document.querySelector("#q_count");
 	$total_count.innerText = length;
 }
+
 function update_progress_bar ( total, comp ) {//index and length
-  const step = Math.floor(100 / total);
+  const step = 100 / total;
   $progress = document.querySelector( "#progress" );
   $progress.setAttribute( "step", step );
   const perc = step * comp;
@@ -141,8 +156,7 @@ function start_stop_quiz () {
     
     document.getElementById( "mode" ).innerText = "Re-start Quiz";
     
-    document.querySelectorAll( ".after" )
-      .forEach( element => {
+    document.querySelectorAll( ".after" ).forEach( element => {
           element.classList.add("d-none");
       } );
     
