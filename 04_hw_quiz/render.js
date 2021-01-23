@@ -45,9 +45,9 @@ function display_question(data, idx, scores) {
 				const key = event.target.getAttribute("data-no");
 				const solutions = questions.map((d) => d.answer);
         answers[key] = event.target.dataset.choice_text;
-        console.log('question no :>> ', key);
-        console.log('user answered :>> ', answers[key]);
-        console.log( 'correct answer  :>> ', solutions[ key ] );
+        // console.log('question no :>> ', key);
+        // console.log('user answered :>> ', answers[key]);
+        // console.log( 'correct answer  :>> ', solutions[ key ] );
 				
         if ( answers[ key ] == solutions[ key ] && event.target == $btn ) {
           // console.log('scores :>> ', scores);
@@ -55,7 +55,7 @@ function display_question(data, idx, scores) {
           const points = Math.round( 100 / length );
           scores[ k ] = points;
 
-          console.log('user scores points :>> ', points);
+          // console.log('user scores points :>> ', points);
           
           const total_points = Object.keys( scores )
           .map((k) => scores[k])
@@ -64,7 +64,7 @@ function display_question(data, idx, scores) {
 					$score.textContent = +total_points;
           
         } else {
-          console.log('no points');
+          // console.log('no points');
           $score.textContent = +$score.textContent;
 				}
 
