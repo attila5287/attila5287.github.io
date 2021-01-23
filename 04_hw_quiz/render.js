@@ -43,23 +43,29 @@ function display_question(data, idx, scores) {
 		$btns.forEach(($btn, i) => {
       $btn.addEventListener( "click", ( event ) => {
 				const key = event.target.getAttribute("data-no");
-				const correct_answers = questions.map((d) => d.answer);
-				answers[key] = event.target.dataset.choice_text;
+				const solutions = questions.map((d) => d.answer);
+        answers[key] = event.target.dataset.choice_text;
+        console.log('question no :>> ', key);
+        console.log('user answered :>> ', answers[key]);
+        console.log( 'correct answer  :>> ', solutions[ key ] );
 				
-        if ( answers[ key ] == correct_answers[ key ] && event.target == $btn ) {
+        if ( answers[ key ] == solutions[ key ] && event.target == $btn ) {
           // console.log('scores :>> ', scores);
           const k = `points_${idx}`;
           const points = Math.round( 100 / length );
           scores[ k ] = points;
+
+          console.log('user scores points :>> ', points);
           
           const total_points = Object.keys( scores )
-						.map((k) => scores[k])
-            .reduce( ( x, y ) => x + y );
+          .map((k) => scores[k])
+          .reduce( ( x, y ) => x + y );
           
 					$score.textContent = +total_points;
-
-				} else {
-					$score.textContent = +$score.textContent;
+          
+        } else {
+          console.log('no points');
+          $score.textContent = +$score.textContent;
 				}
 
         if (data[idx + 1] && event.target.id == $btn.id) {
