@@ -1,11 +1,3 @@
-// render( questions );
-// ├ update_question_no(index)   +
-// ├ update_slider(index)        +
-// ├ update_progress_bar(index)  +
-// ├ display_question(index)     +
-// ├ start_timer()               -
-// └ choice_listener()
-
 function render ( data) {// by default before user interaction
   let answers = {};
   let index = 0; 
@@ -15,23 +7,34 @@ function render ( data) {// by default before user interaction
   test_input(index, data);
   const $seconds = document.getElementById( "seconds" );
   function setTime ( index, length ) {
-    let secondsLeft = 5;
+    let secondsLeft = 10;
 		var timerInterval = setInterval(function () {
-			update_progress_bar(length, secondsLeft);
+			update_progress_bar(10, secondsLeft);
+			// console.log("secondsLeft :>> ", secondsLeft);
 
-			console.log("secondsLeft :>> ", secondsLeft);
 			$seconds.textContent = secondsLeft;
 
-			// index++;
 			secondsLeft--;
-
-			if (secondsLeft == 0 ) {
-				clearInterval(timerInterval);
-				console.log("interval cleared");
-				display_question(data, index + 1);
-				update_question_no(length, index + 1);
-				test_input(index + 1, data);
-				setTime(index + 1, 5);
+      if ( secondsLeft == 0 ) {
+        if (data[index+1]) {
+          console.log(data[index + 1]);
+          display_question(data, index + 1);
+          update_question_no(length, index + 1);
+          test_input(index + 1, data);
+          setTime(index + 1, 5);
+          
+        } else {
+          secondsLeft = 0;
+          console.log( "interval cleared" );
+          
+          $more_after = document.querySelectorAll( ".more_after" );
+          $more_after.forEach(($el) => {
+						$el.classList.add("d-none");
+					});
+          
+          
+          clearInterval( timerInterval );
+        }
 			}
 		}, 1000);
 	}
@@ -48,8 +51,6 @@ function render ( data) {// by default before user interaction
 
       update_question_no( length, new_question_index );
       
-      update_progress_bar( length, new_question_index );
-
       display_question( data, new_question_index );
 
 
@@ -58,35 +59,40 @@ function render ( data) {// by default before user interaction
 }
 
 function display_question(data, idx) {
-	const q = data[idx];
-	// console.log( 'question on display :>> ', d.title );
-
-	$div = document.querySelector(".question");
-	const $title = $div.querySelector(".title");
-	$title.textContent = q.title;
-	const choices = q.choices;
-	$choices = $div.querySelectorAll(".choice_text");
-  $btns = document.querySelectorAll(".choice_btn");
-	for (let i = 0; i < choices.length; i++) {
-		const text_content = choices[i];
-		const $c = $choices[i];
-		const $btn = $btns[i];
-    $c.textContent = text_content;
-    $btn.setAttribute("data-choice_text", text_content);
-		$btn.setAttribute("data-solution", `${questions[idx].answer}`);
-		$btn.setAttribute("data-no", `${idx}`);
+  const q = data[ idx ];
+  if (!q) {
+    document.querySelector( ".question" ).classList.add( "d-none" );
+  } else {
+    // console.log( 'question on display :>> ', d.title );
+  
+    $div = document.querySelector(".question");
+    const $title = $div.querySelector(".title");
+    $title.textContent = q.title;
+    const choices = q.choices;
+    $choices = $div.querySelectorAll(".choice_text");
+    $btns = document.querySelectorAll(".choice_btn");
+    for (let i = 0; i < choices.length; i++) {
+      const text_content = choices[i];
+      const $c = $choices[i];
+      const $btn = $btns[i];
+      $c.textContent = text_content;
+      $btn.setAttribute("data-choice_text", text_content);
+      $btn.setAttribute("data-solution", `${questions[idx].answer}`);
+      $btn.setAttribute("data-no", `${idx}`);
+    }
+    const answers = data.map( d => d.answer ); 
+  
+    $btns.forEach( ( el, i ) => {
+      el.addEventListener("click", (event) => {
+        const key = event.target.getAttribute("data-no");
+        const correct_answers = questions.map((d) => d.answer);
+        answers[key] = event.target.dataset.choice_text;
+        console.log("user answered :>> ", answers[key]);
+        console.log("solution manual :>> ", correct_answers[key]);
+      });
+    });
+    
   }
-  const answers = data.map( d => d.answer ); 
-
-  $btns.forEach( ( el, i ) => {
-		el.addEventListener("click", (event) => {
-			const key = event.target.getAttribute("data-no");
-			const correct_answers = questions.map((d) => d.answer);
-			answers[key] = event.target.dataset.choice_text;
-			console.log("user answered :>> ", answers[key]);
-			console.log("solution manual :>> ", correct_answers[key]);
-		});
-	});
 }
 
 function update_question_no(length, no) {

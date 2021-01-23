@@ -18,7 +18,7 @@
       font-size: 1rem;
     }
     .rounded-top{
-      border-radius: 0.25rem 0.25rem 0rem 0rem ;
+      border-radius: 0.75rem 0.75rem 0 0 ;
     }
     .card {
       border-radius:1.25rem;
@@ -74,30 +74,33 @@
 
       <div class="col-9 d-none after">
         <div class="d-flex flex-row justify-content-around my-2">
-          <div class="card w-100" >
+          <div class="card w-100 bg-transparent more_after" >
             <div class="card-body text-center my-2 py-0">
               <h1 class="fas fa-hashtag fa-pull-left"></h1>
-              <h1 class="card-title text-primary text-nowrap">
-                <span id="q_no"></span>/
-                <span class="text-sm" id="q_count">  </span>
+              <h1 class="card-title text-primary">
+                <span id="q_no"></span>
               </h1>
             </div>
 
             <div class="card-footer m-0 p-0 text-sm text-center  font-weight-bold">
-              Current Question
+              out of 
+              <span class="text-sm text-primary" id="q_count">  </span>
             </div>
           </div>
-          <div class="card w-100">
+          <div class="card w-100 bg-transparent">
             <div class="card-body text-center my-2 py-0">
               <h1 class="fas fa-coins fa-pull-left"></h1>
               <h1 class="card-title text-primary"id="score">0</h1>
               
             </div>
             <div class="card-footer m-0 p-0 text-sm text-center  font-weight-bold">
-              Score
+              Score / 
+              <span class="text-primary">
+                100
+              </span>
             </div>
           </div>
-          <div class="card w-100">
+          <div class="card w-100 bg-transparent more_after">
             <div class="card-body text-center my-2 py-0">
               <h1 class="fas fa-stopwatch fa-pull-left"></h1>
               <h1 class="card-title text-primary font-weight-bold" id="seconds"></h1>
@@ -115,11 +118,11 @@
   </div>
 </div>
 
-
 <div class="container mini mt-4 d-none after">
       <input id="range" class="custom-range" type="range" name="range" min=0  step=1 value=0 readonly>
-    </div>
+      
   </div>
+</div>
 
 <div class="container mini my-2 d-none after">
   <div class="progress border-0 rounded-xl">
@@ -127,9 +130,15 @@
   </div>
 </div>
 <div class="container mini mt-3 question d-none after">
-  <h1 class="text-primary fab fa-js fa-pull-left"></h1>
-  <h4 class="title text-success">  </h4>
-  <hr class="border-primary mini">
+  <div class="row">
+    <div class="col-auto">
+      <h1 class="text-primary fab fa-js"></h1>
+    </div>
+    <div class="col">
+      <h4 class="title text-success">  </h4>
+    </div>
+  </div>
+  <hr class="border-primary mini mt-1 mb-2">
   <div class="row">
     <div class="col-auto">
       <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
