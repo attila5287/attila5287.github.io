@@ -7,9 +7,11 @@ function render ( data) {// by default before user interaction
   test_input(index, data);
   const $seconds = document.getElementById( "seconds" );
   function setTime ( index, length ) {
-    let secondsLeft = 10;
+    let secondsLeft = 2;
+    const constant_for_progress = secondsLeft;
+
 		var timerInterval = setInterval(function () {
-			update_progress_bar(10, secondsLeft);
+			update_progress_bar(constant_for_progress, secondsLeft);
 			// console.log("secondsLeft :>> ", secondsLeft);
 
 			$seconds.textContent = secondsLeft;
