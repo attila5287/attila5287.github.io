@@ -1,15 +1,21 @@
-function render ( data) {// by default before user interaction
+function render ( data ) {// by default before user interaction
   let answers = {};
   let index = 0; 
   let length = data.length;
-  display_question(data, index);
+  let scores = {};
+  for (let n = 0; n < data.length; n++) {
+    const k = `points_${n}`;
+    scores[k] = 0;
+  }
+  display_question(data, index, scores);
   update_question_no(length, index);
-  update_slider(index, data);
+  update_slider( index, data );
+  
 
   setTime(index, length, data);
 }
-function display_question(data, idx) {
-	const q = data[idx]; // question
+function display_question(data, idx, scores) {
+  const q = data[ idx ]; // question
 	if (!q) {
 		document.querySelector(".question").classList.add("d-none");
 	} else {
@@ -17,13 +23,6 @@ function display_question(data, idx) {
 		const $title = $div.querySelector(".title");
     $title.textContent = q.title;
     const choices = q.choices;
-    
-    $check_board = document.getElementById("check_board");
-    $i = document.createElement( "i" );
-    $i.setAttribute("class", "far fa-square");
-    $i.setAttribute("id", `checkbox_${idx}`);
-    $check_board.appendChild( $i );
-    
     
 		$choices = $div.querySelectorAll(".choice_text");
 		$btns = document.querySelectorAll(".choice_btn");
@@ -38,27 +37,33 @@ function display_question(data, idx) {
 		}
 		const answers = data.map((d) => d.answer);
     $score = document.getElementById( "score" );
+    
+
     const length = data.length;
 		$btns.forEach(($btn, i) => {
-			$btn.addEventListener("click", (event) => {
+      $btn.addEventListener( "click", ( event ) => {
 				const key = event.target.getAttribute("data-no");
 				const correct_answers = questions.map((d) => d.answer);
 				answers[key] = event.target.dataset.choice_text;
 				
         if ( answers[ key ] == correct_answers[ key ] && event.target == $btn ) {
-          console.log( 'length :>> ', length );
-					const points = Math.round(100 / length);
-          console.log('points :>> ', points);
-          $score.textContent = +$score.textContent + points;
-          console.log('correct answer in foreach');
+          // console.log('scores :>> ', scores);
+          const k = `points_${idx}`;
+          const points = Math.round( 100 / length );
+          scores[ k ] = points;
+          
+          const total_points = Object.keys( scores )
+						.map((k) => scores[k])
+            .reduce( ( x, y ) => x + y );
+          
+					$score.textContent = +total_points;
+
 				} else {
-					$score.textContent = +$score.textContent + 0;
+					$score.textContent = +$score.textContent;
 				}
 
         if (data[idx + 1] && event.target.id == $btn.id) {
-          console.log( "idx :>> ", idx );
-          console.log('$btn.id :>> ', $btn.id);
-					display_question(data, idx + 1);
+          display_question( data, idx + 1, scores );
 					update_question_no(length, idx + 1);
 					update_slider(idx + 1, data);
 				} else {
@@ -98,16 +103,7 @@ function update_slider (index, data) {
   $range = document.querySelector( "#range" );
   $range.setAttribute( "value", index );
   $range.setAttribute( "max", data.length - 1 );
-  $range.addEventListener( "change", ( event ) => {
-    // console.log( "range-input-value :>> ", +$range.value );
-    const new_question_index = +$range.value;
 
-    update_question_no( length, new_question_index );
-    
-    display_question( data, new_question_index );
-
-
-  } );
 }
 
 
