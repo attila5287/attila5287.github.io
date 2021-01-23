@@ -1,110 +1,120 @@
-render( questions );
+// render( questions );
 // ├ update_question_no(index)   +
 // ├ update_slider(index)        +
 // ├ update_progress_bar(index)  +
 // ├ display_question(index)     +
 // ├ start_timer()               -
 // └ choice_listener()
- 
 
-function render ( data ) {// by default before user interaction
-  const index = 0; 
-  $range = document.querySelector( "#range" );
-  $range.setAttribute( "value", index );
-  const length = data.length;
-
-  $choice_btns = document.querySelectorAll( ".choice_btn" );
+function render ( data) {// by default before user interaction
   let answers = {};
+  let index = 0; 
+  let length = data.length;
+  display_question(data, index);
+  update_question_no(length, index);
+  test_input(index, data);
+  const $seconds = document.getElementById( "seconds" );
+  function setTime ( index, length ) {
+    let secondsLeft = 5;
+		var timerInterval = setInterval(function () {
+			update_progress_bar(length, secondsLeft);
 
-  choices_and_answer( index, answers );
+			console.log("secondsLeft :>> ", secondsLeft);
+			$seconds.textContent = secondsLeft;
+
+			// index++;
+			secondsLeft--;
+
+			if (secondsLeft == 0 ) {
+				clearInterval(timerInterval);
+				console.log("interval cleared");
+				display_question(data, index + 1);
+				update_question_no(length, index + 1);
+				test_input(index + 1, data);
+				setTime(index + 1, 5);
+			}
+		}, 1000);
+	}
+  setTime( index, length );
   
   
-  $range.setAttribute("max", data.length-1);
-  $range.addEventListener( "change", ( event ) => {
-    const new_question_index = +$range.value;
-    
-    console.log("range-input-value :>> ", $range.value);
-    console.log( "range-input-value :>> ", +$range.value );
-    
-    
-    choices_and_answer(new_question_index, answers);
-    
-    update_question_no( +$range.value
-      , length );
-    update_progress_bar(length, new_question_index+1);
-    display_question( data, new_question_index );
-    
-	});
-  
-  update_question_no( index, length );
-  update_progress_bar( length, index );
-  display_question( data, index );
-  // console.log('number of questions in quiz :>> ', length);
-}
+  function test_input (index, data) {
+    $range = document.querySelector( "#range" );
+    $range.setAttribute( "value", index );
+    $range.setAttribute( "max", data.length - 1 );
+    $range.addEventListener( "change", ( event ) => {
+      // console.log( "range-input-value :>> ", +$range.value );
+      const new_question_index = +$range.value;
 
-function choices_and_answer ( index, answers ) {
-  $choice_btns.forEach( el => {
-    el.setAttribute( "data-question", `q${index}` );
+      update_question_no( length, new_question_index );
+      
+      update_progress_bar( length, new_question_index );
 
-    // el.addEventListener( "click", ( event ) => {
-    //   const key = event.target.getAttribute( "data-question" );
-    //   answers[ key ] = event.target.id; // id's are preset
-    //   // console.log( 'answers :>> ', answers );
-    //   console.log('questions :>> ', questions);
-    // } );
-
-    el.onclick = (event) => {
-      const key = event.target.getAttribute("data-question");
-      answers[key] = event.target.id; // id's are preset
-      console.log( 'answers :>> ', answers );
-      console.log("questions :>> ", questions);
-    }
+      display_question( data, new_question_index );
 
 
-  } );
-}
-
-function update_question_no ( index, length ) {
-  const $q_no = document.querySelector( "#q_no" ); // index+1
-  
-  $q_no.innerText = index+1;
-  // console.log( 'index by default :>> ', index );
-  const $total_count = document.querySelector( "#q_count" );
-  $total_count.innerText = length;
-}
-
-function display_question ( data, index ) {
-  const d = data[ index ];
-  console.log( 'question on display :>> ', d.title );
-
-  $div = document.querySelector( ".question" );
-  const $title = $div.querySelector( ".title" );
-  $title.textContent = d.title;
-  const choices = d.choices;
-  $choices = $div.querySelectorAll( ".choice_text" );
-
-  for ( let i = 0; i < choices.length; i++ ) {
-    const c = choices[ i ];
-    const $c = $choices[ i ];
-    $c.textContent = c;
-
+    } );
   }
 }
 
-function update_progress_bar ( length, i ) {
-  const step = Math.floor( 100 / length );
+function display_question(data, idx) {
+	const q = data[idx];
+	// console.log( 'question on display :>> ', d.title );
+
+	$div = document.querySelector(".question");
+	const $title = $div.querySelector(".title");
+	$title.textContent = q.title;
+	const choices = q.choices;
+	$choices = $div.querySelectorAll(".choice_text");
+  $btns = document.querySelectorAll(".choice_btn");
+	for (let i = 0; i < choices.length; i++) {
+		const text_content = choices[i];
+		const $c = $choices[i];
+		const $btn = $btns[i];
+    $c.textContent = text_content;
+    $btn.setAttribute("data-choice_text", text_content);
+		$btn.setAttribute("data-solution", `${questions[idx].answer}`);
+		$btn.setAttribute("data-no", `${idx}`);
+  }
+  const answers = data.map( d => d.answer ); 
+
+  $btns.forEach( ( el, i ) => {
+		el.addEventListener("click", (event) => {
+			const key = event.target.getAttribute("data-no");
+			const correct_answers = questions.map((d) => d.answer);
+			answers[key] = event.target.dataset.choice_text;
+			console.log("user answered :>> ", answers[key]);
+			console.log("solution manual :>> ", correct_answers[key]);
+		});
+	});
+}
+
+function update_question_no(length, no) {
+	const $q_no = document.querySelector("#q_no"); // index+1
+
+	$q_no.innerText = no + 1;
+	// console.log( 'index by default :>> ', index );
+	const $total_count = document.querySelector("#q_count");
+	$total_count.innerText = length;
+}
+function update_progress_bar ( total, comp ) {//index and length
+  const step = Math.floor(100 / total);
   $progress = document.querySelector( "#progress" );
   $progress.setAttribute( "step", step );
-  const perc = step * i;
-  const pro_style = "width: " + perc + "%; ";
-  $progress.setAttribute( "style", pro_style );
+  const perc = step * comp;
+  const style_perc = "width: " + perc + "%; ";
+  $progress.setAttribute( "style", style_perc );
   $progress.setAttribute( "aria-valuenow", perc );
 }
-// console.log('choices :>> ', choices);
 
 const $start = document.getElementById( "start" );
 
 function start_stop_quiz () {
+  render(questions);
+  
+  
+  
+  
   const $iconstart = document.getElementById("iconstart");
   const mode = $start.getAttribute("data-mode");
   console.log( "mode :>> ", mode );
