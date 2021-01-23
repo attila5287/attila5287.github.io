@@ -1,3 +1,15 @@
+$send_btn = document.getElementById("send_btn");
+$send_btn.onclick = () => {
+	console.log("test send your score button");
+  $icn = document.getElementById( "iconsent" );
+  $icn.setAttribute( "class", "fas fa-check-circle" );
+  $send_btn.classList.remove("btn-outline-primary");
+  $send_btn.classList.add("btn-outline-secondary");
+  
+};
+window.localStorage.setItem( "test", "test" );
+console.log( 'object :>> ', window.localStorage.getItem( "test" ) );
+
 function render ( data ) {// by default before user interaction
   let answers = {};
   let index = 0; 
@@ -10,8 +22,6 @@ function render ( data ) {// by default before user interaction
   display_question(data, index, scores);
   update_question_no(length, index);
   update_slider( index, data );
-  
-
   setTime(index, length, data);
 }
 function display_question(data, idx, scores) {
@@ -76,8 +86,12 @@ function display_question(data, idx, scores) {
 					// secondsLeft = 0;
 					console.log("interval cleared");
 
-					$more_after = document.querySelectorAll(".more_after");
-					$more_after.forEach(($el) => {
+					$viz_after = document.querySelectorAll(".viz_after");
+					$viz_after.forEach(($el) => {
+            $el.classList.remove("d-none");
+					});
+					$hide_after = document.querySelectorAll(".hide_after");
+					$hide_after.forEach(($el) => {
 						$el.classList.add("d-none");
 					});
 				}

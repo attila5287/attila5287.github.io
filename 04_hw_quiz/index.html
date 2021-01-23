@@ -83,12 +83,12 @@
           <div class="d-flex flex-row justify-content-around my-2">
             <div class="card w-100 bg-transparent">
               <div class="card-body text-center my-2 py-0">
-                <h1 class="fas fa-hashtag fa-pull-left more_after"></h1>
-                <h1 class="card-title text-primary more_after">
+                <h1 class="fas fa-hashtag fa-pull-left hide_after"></h1>
+                <h1 class="card-title text-primary hide_after">
                   <span id="q_no"></span>
                 </h1>
               </div>
-              <div class="card-footer m-0 p-0 text-sm text-center  font-weight-bold more_after">
+              <div class="card-footer m-0 p-0 text-sm text-center  font-weight-bold hide_after">
                 out of
                 <span class="text-sm text-primary" id="q_count"> </span>
               </div>
@@ -108,11 +108,11 @@
             </div>
             <div class="card w-100 bg-transparent">
               <div class="card-body text-center my-2 py-0">
-                <h1 class="fas fa-stopwatch fa-pull-left more_after"></h1>
-                <h1 class="card-title text-primary font-weight-bold more_after" id="seconds"></h1>
+                <h1 class="fas fa-stopwatch fa-pull-left hide_after"></h1>
+                <h1 class="card-title text-primary font-weight-bold hide_after" id="seconds"></h1>
 
               </div>
-              <div class="card-footer m-0 p-0 text-sm text-center  font-weight-bold more_after">
+              <div class="card-footer m-0 p-0 text-sm text-center  font-weight-bold hide_after">
                 Seconds Left
               </div>
             </div>
@@ -122,12 +122,12 @@
 
       </div>
     </div>
-    <div class="container mini mt-4 d-none after more_after">
+    <div class="container mini mt-4 d-none after hide_after">
       <input id="range" class="custom-range" type="range" name="range" min=0 step=1 value=0 >
 
     </div>
     
-    <div class="container mini my-2 d-none after more_after">
+    <div class="container mini my-2 d-none after hide_after">
       <div class="progress border-0 rounded-xl">
         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
           aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"
@@ -135,7 +135,7 @@
       </div>
     </div>
 
-    <div class="container mini mt-3 question d-none after more_after">
+    <div class="container mini mt-3 question d-none after hide_after">
       <div class="row">
         <div class="col-auto">
           <h1 class="text-primary fab fa-js"></h1>
@@ -166,6 +166,66 @@
       </div>
     </div>
     
+    <div class="container mini mt-3 question">
+      <h1 class="mb-0">
+        <i class="far fa-paper-plane bg-primary pt-2 pb-4 px-3 text-dark"></i>
+        Send Your Score
+      </h1>
+      <hr class="border-primary mt-0">
+      <div class="form-group">
+        <label for="player_name" class="font-italic">
+          <i class="fas fa-id-card-alt text-xl mr-2"></i>
+          Player Name</label>
+        <input id="player_name" class="form-control form-control-lg" type="text" name="" placeholder="Selcuk Attila Turkoz" value="">
+        <i class="text-xl text-primary">
+          Final Score is
+          <i class="fas fa-coins"></i>
+          <span id="final_score">
+            100
+          </span>
+          .
+        </i>
+
+      </div>
+      <div class="form-group">
+        <button class="btn btn-lg btn-outline-primary
+          btn-block rounded-xl text-center" id="send_btn">
+            <h1 class="fab fa-fly" id="iconsent"></h1>
+        </button>
+      </div>
+
+      <div class="form-group">
+      </div>
+
+    </div>
+
+    <div class="container mini mt-3 question">
+      <h1 class="mb-0">
+        <i class="fas fa-trophy bg-primary pt-2 pb-4 px-3 text-dark"></i>
+        High Scores
+      </h1>
+      <hr class="border-primary mt-0">
+      <table class="table table-dark table-borderless table-hover table-striped table-sm text-monospace text-success">
+        <thead class="border-bottom border-success text-xl">
+          <tr>
+            <th>Player</th>
+            <th>Score</th>
+          </tr>
+        </thead>        
+        <tbody>
+          <tr>
+            <td>Selcuk</td><td>100</td>
+          </tr>
+          <tr>
+            <td>Attila</td><td>100</td>
+          </tr>
+          <tr>
+            <td>Turkoz</td><td>100</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <script src="data.js"></script>
     <script src="render.js"></script>
   </body>
