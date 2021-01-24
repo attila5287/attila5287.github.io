@@ -1,14 +1,97 @@
-$send_btn = document.getElementById("send_btn");
+//  render ( data )
+//  ├ display_question(data, index, scores);
+//  └ setTime(index, length, data);
+
+const $send_btn = document.getElementById( "send_btn" );
 $send_btn.onclick = () => {
 	console.log("test send your score button");
-  $icn = document.getElementById( "iconsent" );
+  const $icn = document.getElementById( "iconsent" );
   $icn.setAttribute( "class", "fas fa-check-circle" );
   $send_btn.classList.remove("btn-outline-primary");
-  $send_btn.classList.add("btn-outline-secondary");
+  $send_btn.classList.add( "btn-outline-secondary" );
   
+  // game is over and total point ic
+  const $score = document.getElementById( "score" );
+
+  const $score_final = document.getElementById( "final_score" );
+  $score_final.textContent = +$score.textContent || 0;
+  console.log( '$score :>> ', $score.textContent );
+
 };
-window.localStorage.setItem( "test", "test" );
-console.log( 'object :>> ', window.localStorage.getItem( "test" ) );
+
+function store_high_scorers ( ) {
+  const names = [
+    "selcuk",
+    "attila",
+    "turkoz",
+  ]
+
+  const scores = [
+    '80',
+    '70',
+    '60',
+  ]
+  let res = [];
+  for (let i = 0; i < names.length; i++) {
+    let hi = {};
+    hi[ 'Ranking' ] =  i ;
+    hi[ 'Player' ] = names[ i ];
+    hi[ 'Score' ] = scores[ i ];
+    res.push(hi)
+  }
+  localStorage.setItem( "high_scorers", JSON.stringify( res ) );
+  const stored = JSON.parse( localStorage.getItem( "high_scorers" ) );
+  
+  console.log("stored :>> ", stored);
+}
+
+function update_high_scorers (new_player, new_score ) {
+  const stored = JSON.parse( localStorage.getItem( "high_scorers" ) );
+  const new_hi = {
+    Ranking: 0,
+    Player: new_player,
+    Score: new_score,
+  };
+  
+  stored.push()
+
+}
+
+function render_high_scorers () {
+  
+  const stored = JSON.parse( localStorage.getItem( "high_scorers" ) ) || [];
+  const $thead_tr = document.getElementById( "hi_headers" );
+  const headers = Object.keys( stored[ 0 ] ) || [];
+  headers.forEach( k => {
+    const $td = document.createElement( "td" );
+    $td.textContent = k;
+    $thead_tr.appendChild($td);
+  } );
+
+  const $tbody = document.getElementById( "high_scorers" );
+  console.log('on display :>> ', stored);
+  
+  for ( let i = 0; i < stored.length; i++ ) {
+    const $tr = document.createElement( "tr" );
+    const row_data = stored[ i ];
+
+    Object.keys(row_data).forEach( k => {
+      
+      const $td = document.createElement( "td" );
+      $td.setAttribute("class", "text-uppercase");
+      $td.textContent = row_data[ k ];
+      $tr.appendChild( $td );  
+
+    } );
+    $tbody.appendChild( $tr );
+  }
+
+
+}
+store_high_scorers();
+update_high_scorers();
+render_high_scorers("test", 75);
+
 
 function render ( data ) {// by default before user interaction
   let answers = {};
@@ -55,18 +138,12 @@ function display_question(data, idx, scores) {
 				const key = event.target.getAttribute("data-no");
 				const solutions = questions.map((d) => d.answer);
         answers[key] = event.target.dataset.choice_text;
-        // console.log('question no :>> ', key);
-        // console.log('user answered :>> ', answers[key]);
-        // console.log( 'correct answer  :>> ', solutions[ key ] );
 				
         if ( answers[ key ] == solutions[ key ] && event.target == $btn ) {
-          // console.log('scores :>> ', scores);
+          
           const k = `points_${idx}`;
           const points = Math.round( 100 / length );
           scores[ k ] = points;
-
-          // console.log('user scores points :>> ', points);
-          
           const total_points = Object.keys( scores )
           .map((k) => scores[k])
           .reduce( ( x, y ) => x + y );
@@ -78,6 +155,8 @@ function display_question(data, idx, scores) {
           $score.textContent = +$score.textContent;
 				}
 
+          
+
         if (data[idx + 1] && event.target.id == $btn.id) {
           display_question( data, idx + 1, scores );
 					update_question_no(length, idx + 1);
@@ -86,19 +165,25 @@ function display_question(data, idx, scores) {
 					// secondsLeft = 0;
 					console.log("interval cleared");
 
-					$viz_after = document.querySelectorAll(".viz_after");
-					$viz_after.forEach(($el) => {
-            $el.classList.remove("d-none");
-					});
-					$hide_after = document.querySelectorAll(".hide_after");
-					$hide_after.forEach(($el) => {
-						$el.classList.add("d-none");
-					});
+					commence_game();
+          
+
 				}
 
 			});
 		});
 	}
+}
+
+function commence_game () {
+  $viz_after = document.querySelectorAll( ".viz_after" );
+  $viz_after.forEach( ( $el ) => {
+    $el.classList.remove( "d-none" );
+  } );
+  $hide_after = document.querySelectorAll( ".hide_after" );
+  $hide_after.forEach( ( $el ) => {
+    $el.classList.add( "d-none" );
+  } );
 }
 
 function setTime ( index, length, data ) {
