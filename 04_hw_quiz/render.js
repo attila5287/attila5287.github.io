@@ -4,7 +4,7 @@
 
 const $send_btn = document.getElementById( "send_btn" );
 $send_btn.onclick = () => {
-	console.log("test send your score button");
+  console.log( "test save btn" );
   const $icn = document.getElementById( "iconsent" );
   $icn.setAttribute( "class", "fas fa-check-circle" );
   $send_btn.classList.remove("btn-outline-primary");
@@ -16,7 +16,9 @@ $send_btn.onclick = () => {
   const $score_final = document.getElementById( "final_score" );
   $score_final.textContent = +$score.textContent || 0;
   console.log( '$score :>> ', $score.textContent );
-
+  const $nm = document.getElementById( "player_name" );
+  const new_high = $nm.value || "ANONYMOUS";
+  add_high_scorer(new_high, $score.textContent);
 };
 
 function store_high_scorers ( ) {
@@ -45,7 +47,7 @@ function store_high_scorers ( ) {
   console.log("stored :>> ", stored);
 }
 
-function update_high_scorers (new_player, new_score ) {
+function add_high_scorer (new_player, new_score ) {
   const stored = JSON.parse( localStorage.getItem( "high_scorers" ) );
   const new_hi = {
     Ranking: 0,
@@ -53,14 +55,16 @@ function update_high_scorers (new_player, new_score ) {
     Score: new_score,
   };
   
-  stored.push()
-
+  stored.push( new_hi );
+  localStorage.setItem( "high_scorers", JSON.stringify( stored ) );
+  render_high_scorers();
 }
 
 function render_high_scorers () {
   
   const stored = JSON.parse( localStorage.getItem( "high_scorers" ) ) || [];
   const $thead_tr = document.getElementById( "hi_headers" );
+  $thead_tr.innerHTML = "";
   const headers = Object.keys( stored[ 0 ] ) || [];
   headers.forEach( k => {
     const $td = document.createElement( "td" );
@@ -69,6 +73,7 @@ function render_high_scorers () {
   } );
 
   const $tbody = document.getElementById( "high_scorers" );
+   $tbody.innerHTML = "";
   console.log('on display :>> ', stored);
   
   for ( let i = 0; i < stored.length; i++ ) {
@@ -89,8 +94,9 @@ function render_high_scorers () {
 
 }
 store_high_scorers();
-update_high_scorers();
-render_high_scorers("test", 75);
+
+// add_high_scorer( "test", 75 );
+
 
 
 function render ( data ) {// by default before user interaction
@@ -176,6 +182,7 @@ function display_question(data, idx, scores) {
 }
 
 function commence_game () {
+  render_high_scorers();
   $viz_after = document.querySelectorAll( ".viz_after" );
   $viz_after.forEach( ( $el ) => {
     $el.classList.remove( "d-none" );
