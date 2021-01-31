@@ -94,9 +94,9 @@
         </div>
         <div class="col-6">
           <div class="row mx-1">
-            <div data-increment="-1" class="totalhour_btns col-4 btn text-xl btn-outline-info btn-sm rounded-xl"> - </div>
+            <div id="minus_total"  data-increment="-1" class="totalhour_btns col-4 btn text-xl btn-outline-info btn-sm rounded-xl"> - </div>
             <div class="col-4 text-center text-xl text-info rounded-xl"><h2 id="total"></h2></div>
-            <div data-increment="1"  class="totalhour_btns col-4 btn text-xl btn-outline-info btn-sm rounded-xl"> + </div>
+            <div id="plus_total"  data-increment="1"  class="totalhour_btns col-4 btn text-xl btn-outline-info btn-sm rounded-xl"> + </div>
             
           </div>
           
@@ -128,6 +128,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
     <script src="chk_mod.js"></script>
+    <script src="local_storage.js"></script>
     <script src="app.js"></script>
 
   </body>
