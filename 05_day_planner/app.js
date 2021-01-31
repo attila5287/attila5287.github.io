@@ -46,8 +46,14 @@ $(document).ready(function () {
       
 		}
 	}
-	let starting_hour= 9; 
-  init(starting_hour, 5+12);
+	let start_hour= 9; 
+	let finish_hour= 17; 
+  init(start_hour, finish_hour);
+
+	$("#start").text(start_hour);
+	$("#finish").text(finish_hour);
+
+
 
   function update_forms ( hour ) {
     // console.log('hour :>> ', hour);
@@ -129,18 +135,28 @@ $(document).ready(function () {
   // let current_hour = moment().hour();
   // update_forms(current_hour);
 	
-	test_interval( starting_hour, update_icons_pre, update_icons_app, update_forms, update_btns );
+	$( "#demo_button" ).on( "click", () => {
+		console.log('test :>> ');
+			let current = start_hour-1;
+			setInterval( () => {
+				current++;
+				update_icons_pre( current );
+				update_icons_app( current );
+				update_forms( current );
+				update_btns( current );
+				$( "#slider" ).val( current );
+		
+				const each_step = 100 / ( finish_hour - start_hour );
+				const current_progress = each_step* (current-start_hour);
+				$("#progress_bar")
+					.attr("aria-valuenow", current_progress)
+					.attr("style", "width: " + current_progress + "%;");
+				
+				
+			}, 500 );
+			
+	});
 	
-});
-function test_interval ( starting_hour, update_icons_pre, update_icons_app, update_forms, update_btns ) {
-	let current = starting_hour;
-	setInterval( () => {
-		current++;
-		update_icons_pre( current );
-		update_icons_app( current );
-		update_forms( current );
-		update_btns( current );
-		$( "#slider" ).val( current );
-	}, 750 );
-}
+} );
+
 

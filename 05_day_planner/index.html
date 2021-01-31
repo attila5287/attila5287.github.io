@@ -69,14 +69,44 @@
         <i class="far fa-clock p-1 mr-2"></i> 
         <span  id="currentTime" class="text-light my-0">
         </span>
+        <button id="demo_button" class="ml-2 btn btn-sm btn-outline-success" type="button">
+          <i class="fas fa-play-circle"> </i>
+          demo
+        </button>
       </p>
     </header>
-    <div class="container mini form-group my-0">
-      <p class="text-hide text-center text-primary font-italic my-0">test current hour manually via slider below</p>
-      <input id="slider" class="bg-light py-0 rounded-xl custom-range" type="range" name="" min="0" max="100">
+    <div class="container mini before d-none">
+      <div class="row">
+        <div class="col-6"> <button class="btn btn-primary btn-block" type="button">
+          <h4 class="fas fa-plus my-0"></h4>
+        </button></div>
+        <div class="col-6"> <button class="btn btn-primary btn-block" type="button"><h4 class="fas fa-plus my-0"></h4></button></div>
+      </div>
+      <div class="row">
+        <div  class="col"><h1 id="start" class="text-center my-0 bg-dark py-2 h-100"></h1></div>
+        <div  class="col"><h1 id="finish" class="text-center my-0 bg-dark py-2 h-100"></h1></div>
+      </div>
+      <div class="row">
+        <div class="col-6"> <button class="btn btn-primary btn-block" type="button">
+          <h4 class="fas fas fa-minus my-0"></h4>
+        </button></div>
+        <div class="col-6"> <button class="btn btn-primary btn-block" type="button"><h4 class="fas fas fa-minus my-0"></h4></button></div>
+      </div>      
+      <button id="start_planner" class="btn btn-primary btn-block btn-lg mt-2" type="button">
+        <h1 class="my-0 fas fa-play"></h1>
+      </button>
     </div>
-    <hr class="border-primary border-med mt-0 mb-24 mini">
-    <div class="container mini" id="main">
+    <hr class="border-primary border-med mt-1 mb-24 mini">
+    <div class="container mini form-group my-0 after">
+      <p class="text-hide text-center text-primary font-italic my-0">test current hour manually via slider below</p>
+      <input id="slider" class="bg-light py-0 rounded-xl custom-range" type="range" name="">
+    </div>
+    <div class="container mini form-group my-0 after">
+      <div class="progress">
+        <div id="progress_bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+      </div>      
+    </div>
+    <div class="container mini after" id="main">
       <!-- Timeblocks go here -->
     </div>
 
