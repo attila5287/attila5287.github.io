@@ -24,9 +24,12 @@ function render () {
 			start_hour = start_hour + 1;
 			$("#start").text(start_hour);
 		}	
-		localStorage.setItem("start", start_hour);
-		console.log(' locally stored:>> ', localStorage.getItem("start"));
+			local_start( start_hour );
 	} );
+	$( "#save_all_button" ).on( "click", () => {
+		console.log( 'test save all' );
+		
+	});
 	
 	$( "#minus_start" )
 		.on( "click", () => {
@@ -46,15 +49,16 @@ function render () {
 		.on( "click", () => {
 			$("#demo_icon").removeClass("far fa-play-circle");
 			$("#demo_icon").addClass("far fa-cog fa-spin");
-			$("#demo_button").addClass("border-0").attr("disabled", true); // button el
+			$("#demo_button").addClass().attr("disabled", true); // button el
 		let i = start_hour;
-		setInterval( () => {
+		let demoInterval = setInterval( () => {
 			if (i == start_hour + total) {
 				$("#slider").val(start_hour);
 				update_all( current_hour );
 				$("#demo_icon").removeClass("fa-spin");
 				$("#demo_icon").removeClass("fa-cog");
-				$("#demo_icon").addClass("fas fa-check-circle opac-50");
+				$( "#demo_icon" ).addClass( "fas fa-check-circle opac-50" );
+				clearInterval(demoInterval);
 			} else {
 				i++;
 				$("#slider").val(i);
@@ -101,10 +105,8 @@ function render () {
 
 	$( "#plus_total" )
 		.on( "click", () => {
-		if ( total > 11 ) {
-			$( "#total" ).text( total );
-			localstore_total( total );
-			
+			if ( total > 11 ) {
+			console.log('pass total increment by');
 		} else {
 			total++;
 			$( "#total" ).text( total );
@@ -135,6 +137,7 @@ function render () {
 	}
 
 	function init ( start, finish ) {
+		// localstore_blanks();
 		$('#main').html("");
 		for ( let index = start; index < finish; index++ ) {
 			$( "#slider" ).attr( "min", start );
