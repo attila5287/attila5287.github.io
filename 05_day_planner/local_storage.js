@@ -20,12 +20,18 @@ function localstore_blanks () {
 function localstore_saveall () {
   const stored = JSON.parse( window.localStorage.getItem( "all_hours" ) );
   const forms = $( ".user_input" );
-  $.each( $( "textarea" ), function ( i, v ) {
+  $( ".save" ).on( "click", function ( i, v ) {
+    
     const start = parseInt($( "#start" ).text());
     console.log('start :>> ', start);
-    const id = `#textarea_${i + start}`;
-    console.log('id :>> ', id);
-    console.log( '$(id).val() :>> ', $( id ).attr("data-index") );
+    const k = `${i + start}`;
+    stored[k] = 
+    console.log(
+			"data-ind :>> ",
+			$(`#textarea_${i + start}`).attr("data-index")
+		);
+    console.log("val :>> ", $(`#textarea_${i + start}`).val());
+    console.log("sblg :>> ", $(this).siblings("textarea").val());
     
     
     

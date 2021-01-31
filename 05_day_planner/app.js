@@ -167,30 +167,25 @@ function render () {
 			//change_text
 			icon_pre.addClass("text-success");
 
-			let main_div = $( "<div>" );
-			row.append( main_div );
 			let textarea = $("<textarea>");
-			main_div.append(textarea);
+			row.append(textarea);
 			textarea
 				.attr("rows", 2)
 				.attr("id", `textarea_${index}`)
 				.attr("data-index", index)
-				.attr("class", "form-control form-control-dark user_input");
+				.attr("class", "col-7 form-control form-control-dark user_input");
         
       
-			let append_div = $("<div>");
-			append_div.attr("class", "col-3");
-			row.append(append_div);
 			let btn_save = $("<button>");
 			btn_save
 				.attr("data-index", index)
-				.attr("class", "h-100 btn btn-block btn-outline-success save");
+				.attr("class", "h-100 col-3 btn btn-block btn-outline-success save");
 
 			let icon_append = $("<h2>");
 			icon_append
 				.attr("class", "fas fa-hourglass-start text-success icon_app")
 				.attr("data-index", index);
-			append_div.append(btn_save);
+			row.append(btn_save);
 			btn_save.append(icon_append);
       
 		}
