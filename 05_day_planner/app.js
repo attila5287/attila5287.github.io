@@ -6,7 +6,7 @@ function render () {
 	let start_hour = moment().hour();
 	let current_hour = moment().hour();
 	let total = 3;
-	let settings_collapsed = false;
+	let settings_collapsed = true;
 
 	init( current_hour, start_hour + total );
 	update_all(current_hour);
@@ -66,19 +66,19 @@ function render () {
 	} );
 	$( '#settings_button' )
 		.on( "click", () => {
-			if ( !settings_collapsed ) {
-				settings_collapsed = true;
-				$( "#settings_collapse" ).removeClass("d-none");
+			if ( settings_collapsed ) {
+				settings_collapsed = false;
+				$("#settings_collapse").removeClass("d-none");
 				$("#settings_icon").removeClass("fa-cogs");
 				$("#settings_icon").addClass("fa-chevron-down");
 				$("#settings_button").addClass("border-0");
 			}
 			else {
-				$("#settings_collapse").toggleClass("d-none");
-				$("#settings_icon").toggleClass("fa-cogs");
-				$("#settings_icon").toggleClass("fa-chevron-down");
+				settings_collapsed = true;
+				$("#settings_collapse").addClass("d-none");
+				$("#settings_icon").removeClass("fa-chevron-dowm");
+				$("#settings_icon").addClass("fa-cogs");
 				$("#settings_button").removeClass("border-0");
-				
 			}
 
 	} );
