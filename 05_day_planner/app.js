@@ -264,9 +264,10 @@ function render () {
 					$(this).addClass("text-warning");
 				} else if (scheduled < hour) {
 					$(this).removeClass("text-xl");
+					$(this).removeClass("text-success");
 					$(this).removeClass("text-warning");
-					$(this).removeClass("text-secondary");
-					$(this).addClass("far fa-history");
+					$(this).removeClass("far fa-clock");
+					$(this).addClass("fas fa-history");
 					$(this).addClass("text-secondary");
 				} else if (scheduled > hour) {
 					$(this).removeClass("text-xl");
