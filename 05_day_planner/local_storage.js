@@ -21,9 +21,11 @@ function localstore_saveall () {
   const stored = JSON.parse( window.localStorage.getItem( "all_hours" ) );
   const forms = $( ".user_input" );
   console.log( 'forms :>> ', forms.length );
-  $(".user_input").each(() => {
-    console.log('test');
-  });$( ".user_input" );
+  $( ".user_input" ).each( () => {
+    
+    console.log( 'test' );
+    
+  });
   
   window.localStorage.setItem( "all_hours", JSON.stringify( stored ) );
   const log = JSON.parse(window.localStorage.getItem("all_hours"));
