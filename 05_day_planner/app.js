@@ -56,7 +56,7 @@ function render () {
 		let i = start_hour;
 		let demoInterval = setInterval( () => {
 			if (i == start_hour + total) {
-				$("#slider").val(start_hour);
+				$("#slider").val(current_hour);
 				update_all( current_hour );
 				$("#demo_icon").removeClass("fa-spin");
 				$("#demo_icon").removeClass("fa-cog");
@@ -129,8 +129,10 @@ function render () {
 				init( start_recent, start_recent + total_recent );
 				update_all(current_hour);
 	} );
+	$( ".user_input" ).each(() => {
+		console.log('$(this) :>> ', $(this).val());
+	});	
 	
-		
   
 	
 	function update_progress ( current ) {
@@ -165,12 +167,15 @@ function render () {
 			//change_text
 			icon_pre.addClass("text-success");
 
+			let main_div = $( "<div>" );
+			row.append( main_div );
 			let textarea = $("<textarea>");
-			row.append(textarea);
+			main_div.append(textarea);
 			textarea
 				.attr("rows", 2)
+				.attr("id", `textarea_${index}`)
 				.attr("data-index", index)
-				.attr("class", "col-7 form-control form-control-dark user_input");
+				.attr("class", "form-control form-control-dark user_input");
         
       
 			let append_div = $("<div>");

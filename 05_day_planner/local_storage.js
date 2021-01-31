@@ -1,4 +1,4 @@
-function local_start(start) {
+function local_start ( start ) {
 	localStorage.setItem("start", start);
 	console.log(" locally stored:>> ", localStorage.getItem("start"));
 }
@@ -20,14 +20,20 @@ function localstore_blanks () {
 function localstore_saveall () {
   const stored = JSON.parse( window.localStorage.getItem( "all_hours" ) );
   const forms = $( ".user_input" );
-  console.log( 'forms :>> ', forms.length );
-  $( ".user_input" ).each( () => {
+  $.each( $( "textarea" ), function ( i, v ) {
+    const start = parseInt($( "#start" ).text());
+    console.log('start :>> ', start);
+    const id = `#textarea_${i + start}`;
+    console.log('id :>> ', id);
+    console.log( '$(id).val() :>> ', $( id ).attr("data-index") );
     
-    console.log( 'test' );
+    
     
   });
   
   window.localStorage.setItem( "all_hours", JSON.stringify( stored ) );
+
+
   const log = JSON.parse(window.localStorage.getItem("all_hours"));
   console.log('loc save all :>> ', log);
 };
