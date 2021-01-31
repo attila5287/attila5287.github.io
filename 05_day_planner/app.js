@@ -5,7 +5,7 @@ $(document).ready(render);
 function render () {
 	let start_hour = moment().hour();
 	let current_hour = moment().hour();
-	let total = 3;
+	let total = +window.localStorage.getItem("total");
 	let settings_collapsed = true;
 
 	init( current_hour, start_hour + total );
