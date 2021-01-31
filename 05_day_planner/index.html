@@ -50,12 +50,12 @@
         box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
       }
       .rounded-xl{
-        border-radius: 0.25rem;
+        border-radius: 0.75rem;
       }
     </style>
   </head>
   <body>
-    <header>
+    <header class="mb-0">
       <h1 class="text-center text-success mb-0">
         <i class="fas fa-briefcase"></i>
         <span class="text-info"> Work </span>
@@ -69,44 +69,57 @@
         <i class="far fa-clock p-1 mr-2"></i> 
         <span  id="currentTime" class="text-light my-0">
         </span>
-        <button id="demo_button" class="ml-2 btn btn-sm btn-outline-success" type="button">
+        <button id="demo_button" class="ml-2 btn btn-sm  btn-outline-success" type="button">
           <i class="fas fa-play-circle"> </i>
           demo
         </button>
       </p>
     </header>
-    <div class="container mini before d-none">
+    <div class="container mini before mt-0">
+      <p class="text-center my-0 font-italic">
+        <i class="text-success text-xl fas fa-stopwatch mx-2"></i>
+        <span class="text-success text-xl"> start hour </span> on the left
+        <i class="text-info text-xl fas fa-history mx-2"></i>
+        <span class="text-info text-xl"> total hours </span> on the right
+
+      </p>
       <div class="row">
-        <div class="col-6"> <button class="btn btn-primary btn-block" type="button">
-          <h4 class="fas fa-plus my-0"></h4>
-        </button></div>
-        <div class="col-6"> <button class="btn btn-primary btn-block" type="button"><h4 class="fas fa-plus my-0"></h4></button></div>
+        <div class="col-6">
+          <div class="row ml-1">
+            <div data-increment="-1" class="start_btns col-4 btn text-xl btn-outline-success btn-sm rounded-xl"> - </div>
+            <div class="col-4 text-center text-xl text-success rounded-xl"><h2 id="start"></h2></div>
+            <div data-increment="1"  class="start_btns col-4 btn text-xl btn-outline-success btn-sm rounded-xl"> + </div>
+            
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row mx-1">
+            <div data-increment="-1" class="totalhour_btns col-4 btn text-xl btn-outline-info btn-sm rounded-xl"> - </div>
+            <div class="col-4 text-center text-xl text-info rounded-xl"><h2 id="total_hours"></h2></div>
+            <div data-increment="1"  class="totalhour_btns col-4 btn text-xl btn-outline-info btn-sm rounded-xl"> + </div>
+            
+          </div>
+          
+        </div>
+          
       </div>
-      <div class="row">
-        <div  class="col"><h1 id="start" class="text-center my-0 bg-dark py-2 h-100"></h1></div>
-        <div  class="col"><h1 id="finish" class="text-center my-0 bg-dark py-2 h-100"></h1></div>
+      <div class="row mx-2">
+        <button class="btn btn-outline-warning btn-block mt-2 rounded-xl text-xl" type="button">
+          start a session
+        </button>
       </div>
-      <div class="row">
-        <div class="col-6"> <button class="btn btn-primary btn-block" type="button">
-          <h4 class="fas fas fa-minus my-0"></h4>
-        </button></div>
-        <div class="col-6"> <button class="btn btn-primary btn-block" type="button"><h4 class="fas fas fa-minus my-0"></h4></button></div>
-      </div>      
-      <button id="start_planner" class="btn btn-primary btn-block btn-lg mt-2" type="button">
-        <h1 class="my-0 fas fa-play"></h1>
-      </button>
     </div>
-    <hr class="border-primary border-med mt-1 mb-24 mini">
+    <hr class="border-primary border-med mt-1 mb-2 mini">
     <div class="container mini form-group my-0 after">
       <p class="text-hide text-center text-primary font-italic my-0">test current hour manually via slider below</p>
-      <input id="slider" class="bg-light py-0 rounded-xl custom-range" type="range" name="">
+      <input id="slider" class="mt-1 rounded-xl custom-range" type="range" name="">
     </div>
     <div class="container mini form-group my-0 after">
       <div class="progress">
-        <div id="progress_bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+        <div id="progress_bar" class="progress-bar progress-bar-striped progress-bar-animated rounded-xl" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
       </div>      
     </div>
-    <div class="container mini after" id="main">
+    <div class="container mini" id="main">
       <!-- Timeblocks go here -->
     </div>
 

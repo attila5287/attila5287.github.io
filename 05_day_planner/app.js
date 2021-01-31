@@ -1,6 +1,82 @@
-$(document).ready(function () {
+$( document ).ready( function () {
+		let start_hour = 9;
+		let finish_hour = 17; 
+	$("#start").text(start_hour);
+	$("#total_hours").text(finish_hour - start_hour);
+	$( ".start_btns" ).on( "click", () => {
+		console.log('object :>> ', $(this).attr('data-increment'));
+	});
+
+
   
-  function init(start, finish) {
+	function init ( start, finish ) {
+		  function update_forms(hour) {
+				// console.log('hour :>> ', hour);
+
+				$.each($(".user_input"), function (i, el) {
+					const scheduled = $(this).attr("data-index");
+					// console.log("data-attr",$(this).attr("data-index"));
+					if (scheduled == hour) {
+						$(this).addClass("border-warning");
+					} else if (scheduled < hour) {
+						$(this).removeClass("border-warning");
+					}
+				});
+			}
+			function update_btns(hour) {
+				$.each($(".save"), function (i, el) {
+					const scheduled = +$(this).attr("data-index");
+					if (scheduled == hour) {
+						console.log("scheduled :>> ", scheduled);
+						$(this).removeClass("btn-outline-success");
+						$(this).addClass("btn-outline-warning");
+					} else if (scheduled < hour) {
+						$(this).removeClass("btn-outline-success");
+						$(this).removeClass("btn-outline-warning");
+						$(this).addClass("btn-outline-secondary");
+					}
+				});
+			}
+			function update_icons_app(hour) {
+				$.each($(".icon_app"), function (i, el) {
+					const scheduled = +$(this).attr("data-index");
+					if (scheduled == hour) {
+						console.log("scheduled :>> ", scheduled);
+						$(this).removeClass("fas fa-hourglass-start");
+						$(this).addClass("fas fa-hourglass-half");
+						$(this).removeClass("text-success");
+						$(this).removeClass("text-secondary");
+						$(this).addClass("text-warning");
+					} else if (scheduled < hour) {
+						$(this).removeClass("fas fa-hourglass-start");
+						$(this).removeClass("fas fa-hourglass-half");
+						$(this).addClass("fas fa-hourglass-end");
+						$(this).removeClass("text-success");
+						$(this).removeClass("text-warning");
+						$(this).addClass("text-light");
+					}
+				});
+			}
+			function update_icons_pre(hour) {
+				$.each($(".icon_pre"), function (i, el) {
+					const scheduled = +$(this).attr("data-index");
+					if (scheduled == hour) {
+						console.log("scheduled :>> ", scheduled);
+						$(this).removeClass("far fa-clock");
+						$(this).addClass("fas fa-clock text-xl");
+						$(this).removeClass("text-success");
+						$(this).removeClass("text-secondary");
+						$(this).addClass("text-warning");
+					} else if (scheduled < hour) {
+						$(this).removeClass("far fa-clock");
+						$(this).removeClass("fas fa-clock");
+						$(this).addClass("fas fa-history");
+						$(this).removeClass("text-success");
+						$(this).removeClass("text-warning");
+						$(this).addClass("text-light");
+					}
+				});
+			}
 		for ( let index = start; index < finish; index++ ) {
 			$( "#slider" ).attr( "min", start );
 			$( "#slider" ).attr("max", finish );
@@ -45,118 +121,42 @@ $(document).ready(function () {
 			btn_save.append(icon_append);
       
 		}
+		$( '#demo_button' ).on( "click", () => {
+			
+			test_interval(
+				start_hour,
+				finish_hour,
+				update_icons_pre,
+				update_icons_app,
+				update_forms,
+				update_btns
+			);
+			
+			function test_interval ( start_hour, finish_hour,  update_icons_pre, update_icons_app, update_forms, update_btns ) {
+				let current = start_hour-1;
+				setInterval( () => {
+					current++;
+					update_icons_pre( current );
+					update_icons_app( current );
+					update_forms( current );
+					update_btns( current );
+					$( "#slider" ).val( current );
+			
+					const each_step = 100 / ( finish_hour - start_hour );
+					const current_progress = each_step* (current-start_hour);
+					$("#progress_bar")
+						.attr("aria-valuenow", current_progress)
+						.attr("style", "width: " + current_progress + "%;");
+					
+					
+				}, 750 );
+				
+			}
+			
+		} )
+		
 	}
-	let start_hour= 9; 
-	let finish_hour= 17; 
   init(start_hour, finish_hour);
 
-	$("#start").text(start_hour);
-	$("#finish").text(finish_hour);
-
-
-
-  function update_forms ( hour ) {
-    // console.log('hour :>> ', hour);
-
-     $.each(
-				$(".user_input"),
-       function ( i, el ) {
-         const scheduled = $( this ).attr( "data-index" );
-        // console.log("data-attr",$(this).attr("data-index"));
-         if ( scheduled == hour ) {
-
-           $(this).addClass("border-warning");
-          } else if (scheduled < hour) {
-						
-						$(this).removeClass("border-warning");
-					}
-        }
-			);
-    
-  }
-  function update_btns(hour) {
-		$.each($(".save"), function (i, el) {
-			const scheduled = +$(this).attr("data-index");
-      if ( scheduled == hour ) {
-        console.log( 'scheduled :>> ', scheduled );
-				$(this).removeClass("btn-outline-success");
-        $( this ).addClass( "btn-outline-warning" );
-        
-			} else if (scheduled < hour) {
-				$(this).removeClass("btn-outline-success");
-				$(this).removeClass("btn-outline-warning");
-        $( this ).addClass( "btn-outline-secondary" );
-			}
-		});
-  }
-  function update_icons_app(hour) {
-		$.each($(".icon_app"), function (i, el) {
-			const scheduled = +$(this).attr("data-index");
-      if ( scheduled == hour ) {
-				console.log( 'scheduled :>> ', scheduled );
-				$(this).removeClass("fas fa-hourglass-start");
-				$(this).addClass("fas fa-hourglass-half");
-				$(this).removeClass("text-success");
-				$(this).removeClass("text-secondary");
-        $(this).addClass("text-warning");
-        
-			} else if (scheduled < hour) {
-				$(this).removeClass("fas fa-hourglass-start");
-				$(this).removeClass("fas fa-hourglass-half");
-				$(this).addClass("fas fa-hourglass-end");
-				$(this).removeClass("text-success");
-				$(this).removeClass("text-warning");
-        $(this).addClass("text-light");
-			}
-		});
-  }
-	function update_icons_pre ( hour ) {
-		
-		$.each($(".icon_pre"), function (i, el) {
-			const scheduled = +$(this).attr("data-index");
-      if ( scheduled == hour ) {
-				console.log( 'scheduled :>> ', scheduled );
-				$(this).removeClass("far fa-clock");
-				$(this).addClass("fas fa-clock text-xl");
-				$(this).removeClass("text-success");
-				$(this).removeClass("text-secondary");
-        $(this).addClass("text-warning");
-        
-			} else if (scheduled < hour) {
-				$(this).removeClass("far fa-clock");
-				$(this).removeClass("fas fa-clock");
-				$(this).addClass("fas fa-history");
-				$(this).removeClass("text-success");
-				$(this).removeClass("text-warning");
-        $(this).addClass("text-light");
-			}
-		});
-  }
-  // let current_hour = moment().hour();
-  // update_forms(current_hour);
-	
-	$( "#demo_button" ).on( "click", () => {
-		console.log('test :>> ');
-			let current = start_hour-1;
-			setInterval( () => {
-				current++;
-				update_icons_pre( current );
-				update_icons_app( current );
-				update_forms( current );
-				update_btns( current );
-				$( "#slider" ).val( current );
-		
-				const each_step = 100 / ( finish_hour - start_hour );
-				const current_progress = each_step* (current-start_hour);
-				$("#progress_bar")
-					.attr("aria-valuenow", current_progress)
-					.attr("style", "width: " + current_progress + "%;");
-				
-				
-			}, 500 );
-			
-	});
-	
 } );
-
 
