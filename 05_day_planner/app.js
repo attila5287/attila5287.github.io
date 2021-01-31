@@ -270,7 +270,7 @@ function render () {
 					$(this).removeClass("text-secondary");
 					$(this).removeClass("text-success");
 					$(this).addClass("text-warning");
-				} else if (scheduled < hour) {
+				} else if ( scheduled < hour ) {
 					$(this).removeClass("fa-spin");
 					$(this).text(scheduled);
 					$(this).removeClass("text-2xl");
