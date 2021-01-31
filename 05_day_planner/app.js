@@ -9,16 +9,20 @@ $( document ).ready( function () {
 		start_hour = start_hour - 1;
 		if ( start_hour < 0 ) {
 			start_hour = start_hour + 12;
-		} else if (start_hour>12) {
+		}
+		else if ( start_hour > 12 ) {
 			start_hour = start_hour - 12;
 		}
 		$( "#start" ).text( start_hour );
 		localStorage.setItem( "start", start_hour );
-		// console.log(' locally stored:>> ', localStorage.getItem("start"));
+		console.log(' locally stored:>> ', localStorage.getItem("start"));
 	});
 	$( "#plus_start" ).on( "click", () => {
 		if (start_hour < 0) {
 			start_hour + 12;
+		}
+		else if (start_hour > 12) {
+			start_hour = start_hour - 12;
 		}
 		start_hour = start_hour + 1;
 		$("#start").text(start_hour);
