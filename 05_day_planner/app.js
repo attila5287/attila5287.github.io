@@ -261,23 +261,29 @@ function render () {
 				if (scheduled == hour) {
 					// console.log("icons left hand :>> ", scheduled);
 					$(this).removeClass("far fa-history");
+					$(this).text("");
 					$(this).removeClass("far fa-clock");
-					$(this).addClass("fas fa-clock");
-					$(this).addClass("text-xl");
+					$(this).addClass("fas fas fa-compact-disc");
+					$(this).addClass("fa-spin");
+					$(this).addClass("text-2xl");
 					
 					$(this).removeClass("text-secondary");
 					$(this).removeClass("text-success");
 					$(this).addClass("text-warning");
 				} else if (scheduled < hour) {
-					$(this).removeClass("text-xl");
+					$(this).removeClass("fa-spin");
+					$(this).text(scheduled);
+					$(this).removeClass("text-2xl");
 					$(this).removeClass("text-success");
 					$(this).removeClass("text-warning");
 					$(this).removeClass("far fa-clock");
 					$(this).addClass("fas fa-history");
 					$(this).addClass("text-secondary");
 				} else if (scheduled > hour) {
-					$(this).removeClass("text-xl");
-					$(this).removeClass("fas fa-clock");
+					$(this).text(scheduled);
+					$(this).removeClass("fa-spin");
+					$(this).removeClass("text-2xl");
+					$(this).removeClass("fas fas fa-compact-disc");
 					$(this).removeClass("far fa-history");
 					$(this).addClass("far fa-clock");
 
