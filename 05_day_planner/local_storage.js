@@ -9,26 +9,25 @@ function localstore_total(total) {
 }
 function localstore_blanks () {
   let res = {};
-  for ( let i = 1; i <= 12; i++ ) {
+  for ( let i = 0; i <= 24; i++ ) {
     res[ i ] = '';
-	}
+  }
   window.localStorage.setItem( "all_hours", JSON.stringify( res ) );
   const log = JSON.parse(window.localStorage.getItem("all_hours"));
   console.log('loc str blanks :>> ', log);
 }
-localstore_blanks();
+
 function localstore_saveall () {
   const stored = JSON.parse( window.localStorage.getItem( "all_hours" ) );
-  const length = Object.keys(stored).length;
   const forms = $( ".user_input" );
+  console.log( 'forms :>> ', forms.length );
+  $(".user_input").each(() => {
+    console.log('test');
+  });$( ".user_input" );
   
-  for ( let i = 1; i <= length; i++ ) {
-    stored[ i ] = forms[ i ].attr("value") || stored[i];
-  };
-  
-  window.localStorage.setItem( "all_hours", JSON.stringify( res ) );
+  window.localStorage.setItem( "all_hours", JSON.stringify( stored ) );
   const log = JSON.parse(window.localStorage.getItem("all_hours"));
-  console.log('loc str blanks :>> ', log);
+  console.log('loc save all :>> ', log);
 };
 
 function localstore_save (i, data) {

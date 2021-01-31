@@ -3,12 +3,12 @@
 //   └update: function updates classes of existing
 $(document).ready(render);
 function render () {
-	let start_hour = moment().hour();
 	let current_hour = moment().hour();
-	let total = +window.localStorage.getItem("total");
+	let start_hour = +window.localStorage.getItem( "start" ) || current_hour;
+	let total = +window.localStorage.getItem("total") || 8;
 	let settings_collapsed = true;
 
-	init( current_hour, start_hour + total );
+	init( start_hour, start_hour + total );
 	update_all(current_hour);
 	$( "#start" ).text( start_hour ); // write start on screen
 	$( "#total" ).text( total ); // total
@@ -18,21 +18,24 @@ function render () {
 		if ( start_hour >= 12 ) {
 			start_hour = start_hour - 12;
 			start_hour = start_hour + 1;
-			$("#start").text(start_hour);
+			$( "#start" ).text( start_hour );
+			local_start(start_hour);
 		}
 		else {
 			start_hour = start_hour + 1;
 			$("#start").text(start_hour);
-		}	
 			local_start( start_hour );
+		}	
+		
 	} );
 	$( "#save_all_button" ).on( "click", () => {
 		console.log( 'test save all' );
+		localstore_saveall();
 		
 	});
 	
 	$( "#minus_start" )
-		.on( "click", () => {
+	.on( "click", () => {
 		if (start_hour <= 1) {
 			start_hour = start_hour + 12;
 			start_hour = start_hour - 1;
@@ -121,8 +124,10 @@ function render () {
 				$("#settings_icon").addClass("fa-cogs");
 				$("#settings_icon").removeClass("fa-chevron-down");
 				$("#settings_button").removeClass("border-0");
-				init( start_hour, start_hour + total );
-				update_all(start_hour);
+				start_recent = +window.localStorage.getItem("start") || start_hour;
+				total_recent = +window.localStorage.getItem("total") || total;
+				init( start_recent, start_recent + total_recent );
+				update_all(current_hour);
 	} );
 	
 		
@@ -137,6 +142,7 @@ function render () {
 	}
 
 	function init ( start, finish ) {
+		localstore_blanks();
 		// localstore_blanks();
 		$('#main').html("");
 		for ( let index = start; index < finish; index++ ) {
