@@ -23,11 +23,6 @@
         .opac-50{
           opacity: 50%;
         }
-        .save h1:hover {
-          text-shadow:6px 6px  silver;
-          transition: all .2s ease-out;
-        }
-
         .body{
           font-size: 0.90rem;
         }
@@ -73,6 +68,14 @@
           <i class="fas fa-play-circle"> </i>
           demo
         </button>
+        <button id="settings_button" class="ml-2 btn btn-sm  btn-outline-warning" type="button">
+          <i class="fas fa-cogs"> </i>
+          settings
+        </button>
+        <button id="demo_button" class="ml-2 btn btn-sm btn-outline-light" type="button">
+          <i class="fas fa-save"> </i>
+          save
+        </button>
       </p>
     </header>
     <div class="container mini before mt-0">
@@ -104,12 +107,15 @@
           
       </div>
       <div class="row mx-2">
-        <button class="btn btn-outline-warning btn-block mt-2 rounded-xl text-xl" type="button">
+        <button class="btn btn-outline-warning btn-block mt-2 rounded-xl text-xl" type="button" id="start_a_session">
           start a session
         </button>
       </div>
     </div>
-    <hr class="border-primary border-med mt-1 mb-2 mini">
+
+    <hr class="border-warning border-med mt-2 mb-2 mini opac-50 before">
+    <hr class="border-primary border-med mt-2 mb-2 mini after d-none">
+
     <div class="container mini form-group my-0 after">
       <p class="text-hide text-center text-primary font-italic my-0">test current hour manually via slider below</p>
       <input id="slider" class="mt-1 rounded-xl custom-range" type="range" name="">

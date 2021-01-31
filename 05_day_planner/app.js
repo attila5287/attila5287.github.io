@@ -1,11 +1,18 @@
-$( document ).ready( function () {
+// render: all action waiting the doc loaded
+//   ├init: function append html elements
+//   └update: function updates classes of existing
+$(document).ready(render);
+function render () {
 	let start_hour = moment().hour();
-	let total = 8;
-	let finish_hour = start_hour + total; 
-	init(start_hour, finish_hour);
-	$("#start").text(start_hour);
-	$("#total").text(finish_hour - start_hour);
-	$( "#plus_start" ).on( "click", () => {
+	let current_hour = moment().hour();
+	let total = 3;
+	init( current_hour, start_hour + total );
+	update_all(current_hour);
+	$( "#start" ).text( start_hour ); // write start on screen
+	$( "#total" ).text( total ); // total
+	
+	$( "#plus_start" )
+		.on( "click", () => {
 		if ( start_hour >= 12 ) {
 			start_hour = start_hour - 12;
 			start_hour = start_hour + 1;
@@ -17,8 +24,10 @@ $( document ).ready( function () {
 		}	
 		localStorage.setItem("start", start_hour);
 		console.log(' locally stored:>> ', localStorage.getItem("start"));
-	});
-	$("#minus_start").on("click", () => {
+	} );
+	
+	$( "#minus_start" )
+		.on( "click", () => {
 		if (start_hour <= 1) {
 			start_hour = start_hour + 12;
 			start_hour = start_hour - 1;
@@ -29,57 +38,75 @@ $( document ).ready( function () {
 			$("#start").text(start_hour);
 			local_start( start_hour );
 		}
-	});
-	$( '#demo_button' ).on( "click", () => {
-		console.log( 'id :>> ', $( this ).attr( "id" ) );
-			let current = start_hour-1;
-			setInterval( () => {
-				if (current == finish_hour-1) {
-					$( "#slider" ).val( current );
-				} else {
-					current++;
-					update_all( current );
-					$( "#slider" ).val( current );
-					
-				}
+	} );
+	
+	$( '#demo_button' )
+		.on( "click", () => {
+		let i = start_hour;
+		setInterval( () => {
+			if (i == start_hour + total) {
+				$("#slider").val(start_hour);
+				update_all(current_hour);
+			} else {
+				i++;
+				$("#slider").val(i);
+				update_all(i);
+			}
 		
-				const each_step = 100 / ( finish_hour - start_hour );
-				const current_progress = each_step* (current-start_hour);
-				$("#progress_bar")
-					.attr("aria-valuenow", current_progress)
-					.attr("style", "width: " + current_progress + "%;");
+			
 				
-			}, 750 );
+		}, 750 );
 			
 		
-	} )
-	$( "#minus_total" ).on( "click", () => {
-		if (total <1) {
-			$("#total").text(total);
+	} );
+
+	$( "#minus_total" )
+		.on( "click", () => {
+		if ( total < 1 ) {
+			$( "#total" ).text( total );
 			localstore_total( total );
 		} else {
 			total--;
-			$("#total").text(total);
-			localstore_total(total);
+			$( "#total" ).text( total );
+			localstore_total( total );
 		}
-		} )
-	$( "#plus_total" ).on( "click", () => {
-		if (total >=11) {
-			$("#total").text(total);
-			localstore_total(total);
+	} );
+
+	$( "#plus_total" )
+		.on( "click", () => {
+		if ( total > 11 ) {
+			$( "#total" ).text( total );
+			localstore_total( total );
 			
 		} else {
 			total++;
 			$( "#total" ).text( total );
-			localstore_total(total);
+			localstore_total( total );
 		}
-		} )
+	} );
 
+	$( "#start_a_session" )
+		.on( "click", () => {
+		$(".before").addClass("d-none");
+			$( ".after" ).removeClass( "d-none" );
+			init( start_hour, start_hour + total );
+			update_all(start_hour);
+	} );
 	
+		
   
 	
+	function update_progress ( current ) {
+		const each_step = 100 / total;
+		const current_progress = each_step * ( current - start_hour );
+		$( "#progress_bar" )
+			.attr( "aria-valuenow", current_progress )
+			.attr( "style", "width: " + current_progress + "%;" );
+	}
+
 	function init ( start, finish ) {
-		for ( let index = start; index < finish+1; index++ ) {
+		$('#main').html("");
+		for ( let index = start; index < finish; index++ ) {
 			$( "#slider" ).attr( "min", start );
 			$( "#slider" ).attr("max", finish );
 			let row = $("<div>");
@@ -125,21 +152,23 @@ $( document ).ready( function () {
 		}
 	}
 	function update_all(hr) {
-		console.log( "up all" );
+		console.log( "up all", hr );
+		update_progress(hr);
 		update_icons_pre(hr);
 		update_icons_app(hr);
 		update_forms(hr);
 		update_btns(hr);
 		function update_forms(hour) {
 			// console.log('hour :>> ', hour);
-
 			$.each($(".user_input"), function (i, el) {
 				const scheduled = $(this).attr("data-index");
 				// console.log("data-attr",$(this).attr("data-index"));
 				if (scheduled == hour) {
+					$(this).removeClass("border-0");
 					$(this).addClass("border-warning");
-				} else if (scheduled < hour) {
+				} else  {
 					$(this).removeClass("border-warning");
+					$(this).addClass("border-0");
 				}
 			});
 		}
@@ -149,11 +178,16 @@ $( document ).ready( function () {
 				if (scheduled == hour) {
 					// console.log("scheduled hour styling :>> ", scheduled);
 					$(this).removeClass("btn-outline-success");
+					$(this).removeClass("btn-outline-secondary");
 					$(this).addClass("btn-outline-warning");
 				} else if (scheduled < hour) {
 					$(this).removeClass("btn-outline-success");
 					$(this).removeClass("btn-outline-warning");
 					$(this).addClass("btn-outline-secondary");
+				} else if (scheduled > hour) {
+					$(this).removeClass("btn-outline-warning");
+					$(this).removeClass("btn-outline-secondary");
+					$(this).addClass("btn-outline-success");
 				}
 			});
 		}
@@ -163,17 +197,28 @@ $( document ).ready( function () {
 				if (scheduled == hour) {
 					// console.log("style sch hr append part  :>> ", scheduled);
 					$(this).removeClass("fas fa-hourglass-start");
-					$(this).addClass("fas fa-hourglass-half");
-					$(this).removeClass("text-success");
+					$( this ).addClass( "fas fa-hourglass-half" );
+					
 					$(this).removeClass("text-secondary");
-					$(this).addClass("text-warning");
+					$(this).removeClass("text-success");
+					$( this ).addClass( "text-warning" );
+					
 				} else if (scheduled < hour) {
 					$(this).removeClass("fas fa-hourglass-start");
 					$(this).removeClass("fas fa-hourglass-half");
-					$(this).addClass("fas fa-hourglass-end");
+					$( this ).addClass( "fas fa-hourglass-end" );
+					
 					$(this).removeClass("text-success");
 					$(this).removeClass("text-warning");
-					$(this).addClass("text-light");
+					$(this).addClass("text-secondary");
+				} else if (scheduled > hour) {
+					$(this).removeClass("fas fa-hourglass-half");
+					$(this).removeClass("fas fa-hourglass-end");
+					$(this).addClass("fas fa-hourglass-start");
+					
+					$( this ).removeClass( "text-warning" );
+					$(this).removeClass("text-secondary");
+					$(this).addClass("text-success");
 				}
 			});
 		}
@@ -182,24 +227,36 @@ $( document ).ready( function () {
 				const scheduled = +$(this).attr("data-index");
 				if (scheduled == hour) {
 					// console.log("icons left hand :>> ", scheduled);
+					$(this).removeClass("far fa-history");
 					$(this).removeClass("far fa-clock");
-					$(this).addClass("fas fa-clock text-xl");
-					$(this).removeClass("text-success");
+					$(this).addClass("fas fa-clock");
+					$(this).addClass("text-xl");
+					
 					$(this).removeClass("text-secondary");
+					$(this).removeClass("text-success");
 					$(this).addClass("text-warning");
 				} else if (scheduled < hour) {
-					$(this).removeClass("far fa-clock");
-					$(this).removeClass("fas fa-clock");
-					$(this).addClass("fas fa-history");
-					$(this).removeClass("text-success");
+					$(this).removeClass("text-xl");
 					$(this).removeClass("text-warning");
-					$(this).addClass("text-light");
+					$(this).removeClass("text-secondary");
+					$(this).addClass("far fa-history");
+					$(this).addClass("text-secondary");
+				} else if (scheduled > hour) {
+					$(this).removeClass("text-xl");
+					$(this).removeClass("fas fa-clock");
+					$(this).removeClass("far fa-history");
+					$(this).addClass("far fa-clock");
+
+					$(this).removeClass("text-warning");
+					$(this).removeClass("text-secondary");
+					$(this).addClass("text-success");
 				}
 			});
 		}
 
 	}
 
-} );
+}
+
 
 
