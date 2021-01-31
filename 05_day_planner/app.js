@@ -6,6 +6,8 @@ function render () {
 	let start_hour = moment().hour();
 	let current_hour = moment().hour();
 	let total = 3;
+	let settings_collapsed = false;
+
 	init( current_hour, start_hour + total );
 	update_all(current_hour);
 	$( "#start" ).text( start_hour ); // write start on screen
@@ -42,6 +44,9 @@ function render () {
 	
 	$( '#demo_button' )
 		.on( "click", () => {
+			$("#demo_icon").removeClass("far fa-play-circle");
+			$("#demo_icon").addClass("far fa-check-circle");
+			$("#demo_button").addClass("disabled");
 		let i = start_hour;
 		setInterval( () => {
 			if (i == start_hour + total) {
@@ -59,6 +64,25 @@ function render () {
 			
 		
 	} );
+	$( '#settings_button' )
+		.on( "click", () => {
+			if ( !settings_collapsed ) {
+				settings_collapsed = true;
+				$( "#settings_collapse" ).removeClass("d-none");
+				$("#settings_icon").removeClass("fa-cogs");
+				$("#settings_icon").addClass("fa-chevron-down");
+				$("#settings_button").addClass("border-0");
+			}
+			else {
+				$("#settings_collapse").toggleClass("d-none");
+				$("#settings_icon").toggleClass("fa-cogs");
+				$("#settings_icon").toggleClass("fa-chevron-down");
+				$("#settings_button").removeClass("border-0");
+				
+			}
+
+	} );
+			
 
 	$( "#minus_total" )
 		.on( "click", () => {
@@ -87,10 +111,13 @@ function render () {
 
 	$( "#start_a_session" )
 		.on( "click", () => {
-		$(".before").addClass("d-none");
-			$( ".after" ).removeClass( "d-none" );
-			init( start_hour, start_hour + total );
-			update_all(start_hour);
+				settings_collapsed = true;
+				$("#settings_collapse").addClass("d-none");
+				$("#settings_icon").addClass("fa-cogs");
+				$("#settings_icon").removeClass("fa-chevron-down");
+				$("#settings_button").removeClass("border-0");
+				init( start_hour, start_hour + total );
+				update_all(start_hour);
 	} );
 	
 		
