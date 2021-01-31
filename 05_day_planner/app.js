@@ -45,13 +45,16 @@ function render () {
 	$( '#demo_button' )
 		.on( "click", () => {
 			$("#demo_icon").removeClass("far fa-play-circle");
-			$("#demo_icon").addClass("far fa-check-circle");
-			$("#demo_button").addClass("disabled");
+			$("#demo_icon").addClass("far fa-cog fa-spin");
+			$("#demo_button").addClass("border-0").attr("disabled", true); // button el
 		let i = start_hour;
 		setInterval( () => {
 			if (i == start_hour + total) {
 				$("#slider").val(start_hour);
-				update_all(current_hour);
+				update_all( current_hour );
+				$("#demo_icon").removeClass("fa-spin");
+				$("#demo_icon").removeClass("fa-cog");
+				$("#demo_icon").addClass("fas fa-check-circle opac-50");
 			} else {
 				i++;
 				$("#slider").val(i);
