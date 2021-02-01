@@ -209,10 +209,14 @@ function render () {
 		update_btns(hr);
 		function update_forms(hour) {
 			// console.log('hour :>> ', hour);
-			$.each($(".user_input"), function (i, el) {
+			$.each( $( ".user_input" ), function ( i, el ) {
 				const scheduled = $( this ).attr( "data-index" );
-				 $(this).val(window.localStorage.getItem("content_" + scheduled));
-				if (scheduled == hour) {
+
+				const locally_saved = window.localStorage.getItem( "content_" + scheduled );
+				console.log('locally_saved :>> ', locally_saved);
+				$( this ).val( locally_saved );
+				
+				if ( scheduled == hour ) {
 					$(this).removeClass("border-0");
 					$(this).addClass("border-warning");
 				} else  {
