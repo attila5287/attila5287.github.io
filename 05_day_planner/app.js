@@ -28,10 +28,22 @@ function render () {
 		}	
 		
 	} );
-	$( "#save_all_button" ).on( "click", () => {
-		console.log( 'test save all' );
-		localstore_saveall();
-		
+	$("#save_all_button").on("click", function (i, v) {
+		const stored = JSON.parse(window.localStorage.getItem("all_hours"));
+		const forms = $(".user_input");
+		const start = parseInt($("#start").text());
+		console.log("start :>> ", start);
+		const k = `${i + start}`;
+		stored[k] = console.log(
+			"data-ind :>> ",
+			$(`#textarea_${i + start}`).attr("data-index")
+		);
+		console.log("val :>> ", $(`#textarea_${i + start}`).val());
+		console.log("sblg :>> ", $(this).siblings("textarea").val());
+		window.localStorage.setItem("all_hours", JSON.stringify(stored));
+
+		const log = JSON.parse(window.localStorage.getItem("all_hours"));
+		console.log("loc save all :>> ", log);
 	});
 	
 	$( "#minus_start" )
@@ -144,7 +156,6 @@ function render () {
 	}
 
 	function init ( start, finish ) {
-		localstore_blanks();
 		// localstore_blanks();
 		$('#main').html("");
 		for ( let index = start; index < finish; index++ ) {
@@ -190,7 +201,11 @@ function render () {
       
 		}
 	}
-	function update_all(hr) {
+	function update_all ( hr ) {
+		if ( hr > 12 ) {
+			hr = hr -12
+				}
+
 		console.log( "up all", hr );
 		update_progress(hr);
 		update_icons_pre(hr);
