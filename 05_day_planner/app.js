@@ -1,7 +1,10 @@
 // render: all action waiting the doc loaded
 //   ├init: function append html elements
-//   └update: function updates classes of existing
-$(document).ready(render);
+// 			├check if locally stored
+// 			└pull if stored
+//   └update_all: per current hour 
+// 			├moment.js()  pull curr hr
+// 			└ updates forms btns icons classes for styles
 function render () {
 	let current_hour = moment().hour();
 	let start_hour = +window.localStorage.getItem( "start" ) || current_hour;
@@ -28,8 +31,19 @@ function render () {
 		}	
 		
 	} );
-	
-	$( ".save" ).on( "click", function () {
+	$( ".save_all" ).on( "click", save_all_handler );
+	// save all buttons to store form data with local storage
+	save_all_handler();
+	function save_all_handler () {
+		console.log( 'test save all handler function :>> ' );
+		$.each( $( '.user_input' ), function () { 
+			const k_local = "content_" + $(this).attr("data-index");
+			window.localStorage.setItem(k_local, $(this).val());
+			const just_stored = window.localStorage.getItem( k_local );
+			console.log('just_stored :>> ', just_stored);
+		});
+	}
+	function save_handler() {// uses siblings method! form-btn< row
 		console.log( 'test save btn' );
 
 		const txt_area = $(this).siblings("textarea");
@@ -43,7 +57,8 @@ function render () {
 		localStorage.getItem( `content_${k}` )
 			;
 		console.log('locally_stored :>> ', locally_stored);
-	});
+	}
+	$( ".save" ).on( "click", save_handler);
 
 	$( "#minus_start" )
 	.on( "click", () => {
@@ -157,10 +172,9 @@ function render () {
 		for ( let index = start; index < finish; index++ ) {
 			let locally_prestored = window.localStorage.getItem( "content_" + index );
 			if (locally_prestored != "") {
-				console.log( 'need to pull from local storage' );
-				console.log('locally_prestored :>> ', locally_prestored);
+				// console.log("need to pull locally_prestored :>> ", locally_prestored);
 			} else {
-			console.log('locally_prestored :>> ', locally_prestored);
+				// console.log('locally_prestored :>> ', locally_prestored);
 				window.localStorage.setItem("content_" + index, "");
 				locally_prestored = "";
 			}
@@ -196,12 +210,13 @@ function render () {
 				.attr("data-index", index)
 				.attr(
 					"class",
-					"col-7 form-control form-control-sm form-control-dark user_input"
+					"h-100 col-7 form-control form-control-sm form-control-dark user_input"
 				);
         
       
 			let btn_save = $("<button>");
 			btn_save
+				.attr("type", "button")
 				.attr("data-index", index)
 				.attr("class", "h-100 col-3 btn btn-block btn-outline-success save");
 
@@ -217,9 +232,8 @@ function render () {
 	function update_all ( hr ) {
 		if ( hr > 12 ) {
 			hr = hr - 12;
+			// console.log( "hr fixed by 12-modulus", hr );
 			}
-			
-		console.log( "up all", hr );
 		update_progress( hr );
 		update_icons_pre( hr );
 		update_icons_app( hr );
@@ -227,10 +241,10 @@ function render () {
 		update_btns( hr );
 		
 		function update_forms(hour) {
-			console.log("update_forms hour :>> ", hour);
+			// console.log("update_forms hour :>> ", hour);
 			$.each( $( ".user_input" ), function ( i, el ) {
 				const scheduled = $( this ).attr( "data-index" );
-				console.log('scheduled :>> ', scheduled);
+				// console.log('scheduled :>> ', scheduled);
 				const locally_saved = window.localStorage.getItem( "content_" + scheduled );
 				if (locally_saved != "") {
 					console.log('use locally_saved :>> ', locally_saved);
@@ -338,6 +352,7 @@ function render () {
 	}
 
 }
+$(document).ready(render);
 
 
 
