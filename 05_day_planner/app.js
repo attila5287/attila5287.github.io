@@ -8,7 +8,7 @@ function render () {
 	let total = +window.localStorage.getItem("total") || 8;
 	let settings_collapsed = true;
 
-	init( start_hour, start_hour + total );
+	init( start_hour, total );
 	update_all(current_hour);
 	$( "#start" ).text( start_hour ); // write start on screen
 	$( "#total" ).text( total ); // total
@@ -38,7 +38,11 @@ function render () {
 		let v = txt_area.val();
 		console.log( 'v :>> ', v );
 		console.log( 'k :>> ', k );
-		localStorage.setItem(`content_${k}`, v);
+		window.localStorage.setItem(`content_${k}`, v);
+		const locally_stored = window.
+		localStorage.getItem( `content_${k}` )
+			;
+		console.log('locally_stored :>> ', locally_stored);
 	});
 
 	$( "#minus_start" )
@@ -133,7 +137,7 @@ function render () {
 				$("#settings_button").removeClass("border-0");
 				start_recent = +window.localStorage.getItem("start") || start_hour;
 				total_recent = +window.localStorage.getItem("total") || total;
-				init( start_recent, start_recent + total_recent );
+				init( start_recent, total_recent );
 				update_all(current_hour);
 	} );
 
@@ -146,10 +150,20 @@ function render () {
 			.attr( "style", "width: " + current_progress + "%;" );
 	}
 
-	function init ( start, finish ) {
+	function init ( start, total ) {
+		
+		const finish = start + total;
 		$('#main').html("");
 		for ( let index = start; index < finish; index++ ) {
-			window.localStorage.setItem( "content_" + index, "" );
+			let locally_prestored = window.localStorage.getItem( "content_" + index );
+			if (locally_prestored != "") {
+				console.log( 'need to pull from local storage' );
+				console.log('locally_prestored :>> ', locally_prestored);
+			} else {
+			console.log('locally_prestored :>> ', locally_prestored);
+				window.localStorage.setItem("content_" + index, "");
+				locally_prestored = "";
+			}
 			
 			$( "#slider" ).attr( "min", start );
 			$( "#slider" ).attr("max", finish );
@@ -176,10 +190,14 @@ function render () {
 			let textarea = $("<textarea>");
 			row.append(textarea);
 			textarea
+				.val(window.localStorage.getItem(`content_${index}`))
 				.attr("rows", 2)
 				.attr("id", `textarea_${index}`)
 				.attr("data-index", index)
-				.attr("class", "col-7 form-control form-control-dark user_input");
+				.attr(
+					"class",
+					"col-7 form-control form-control-sm form-control-dark user_input"
+				);
         
       
 			let btn_save = $("<button>");
@@ -202,18 +220,21 @@ function render () {
 			}
 			
 		console.log( "up all", hr );
-		update_progress(hr);
-		update_icons_pre(hr);
-		update_icons_app(hr);
-		update_forms(hr);
-		update_btns(hr);
+		update_progress( hr );
+		update_icons_pre( hr );
+		update_icons_app( hr );
+		update_forms( hr );
+		update_btns( hr );
+		
 		function update_forms(hour) {
-			// console.log('hour :>> ', hour);
+			console.log("update_forms hour :>> ", hour);
 			$.each( $( ".user_input" ), function ( i, el ) {
 				const scheduled = $( this ).attr( "data-index" );
-
+				console.log('scheduled :>> ', scheduled);
 				const locally_saved = window.localStorage.getItem( "content_" + scheduled );
-				console.log('locally_saved :>> ', locally_saved);
+				if (locally_saved != "") {
+					console.log('use locally_saved :>> ', locally_saved);
+				}
 				$( this ).val( locally_saved );
 				
 				if ( scheduled == hour ) {
