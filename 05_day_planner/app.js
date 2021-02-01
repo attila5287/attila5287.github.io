@@ -28,24 +28,19 @@ function render () {
 		}	
 		
 	} );
-	$("#save_all_button").on("click", function (i, v) {
-		const stored = JSON.parse(window.localStorage.getItem("all_hours"));
-		const forms = $(".user_input");
-		const start = parseInt($("#start").text());
-		console.log("start :>> ", start);
-		const k = `${i + start}`;
-		stored[k] = console.log(
-			"data-ind :>> ",
-			$(`#textarea_${i + start}`).attr("data-index")
-		);
-		console.log("val :>> ", $(`#textarea_${i + start}`).val());
-		console.log("sblg :>> ", $(this).siblings("textarea").val());
-		window.localStorage.setItem("all_hours", JSON.stringify(stored));
-
-		const log = JSON.parse(window.localStorage.getItem("all_hours"));
-		console.log("loc save all :>> ", log);
-	});
 	
+	$( ".save" ).on( "click", function () {
+		console.log( 'test save btn' );
+
+		const txt_area = $(this).siblings("textarea");
+
+		let k = txt_area.attr("data-index");
+		let v = txt_area.val();
+		console.log( 'v :>> ', v );
+		console.log( 'k :>> ', k );
+		localStorage.setItem(`content_${k}`, v);
+	});
+
 	$( "#minus_start" )
 	.on( "click", () => {
 		if (start_hour <= 1) {
@@ -141,11 +136,7 @@ function render () {
 				init( start_recent, start_recent + total_recent );
 				update_all(current_hour);
 	} );
-	$( ".user_input" ).each(() => {
-		console.log('$(this) :>> ', $(this).val());
-	});	
-	
-  
+
 	
 	function update_progress ( current ) {
 		const each_step = 100 / total;
@@ -156,14 +147,18 @@ function render () {
 	}
 
 	function init ( start, finish ) {
-		// localstore_blanks();
 		$('#main').html("");
 		for ( let index = start; index < finish; index++ ) {
+			window.localStorage.setItem( "content_" + index, "" );
+			
 			$( "#slider" ).attr( "min", start );
 			$( "#slider" ).attr("max", finish );
 			let row = $("<div>");
 			$("#main").append(row);
-			row.attr("class", "row slot mt-2");
+			row
+				.attr( "class", "row slot mt-2" )
+				.attr( "id", `${index}` )
+				;
 
 			let prepend_div = $("<div>"); // left hand side of form
 			row.append(prepend_div);
@@ -203,9 +198,9 @@ function render () {
 	}
 	function update_all ( hr ) {
 		if ( hr > 12 ) {
-			hr = hr -12
-				}
-
+			hr = hr - 12;
+			}
+			
 		console.log( "up all", hr );
 		update_progress(hr);
 		update_icons_pre(hr);
@@ -215,8 +210,8 @@ function render () {
 		function update_forms(hour) {
 			// console.log('hour :>> ', hour);
 			$.each($(".user_input"), function (i, el) {
-				const scheduled = $(this).attr("data-index");
-				// console.log("data-attr",$(this).attr("data-index"));
+				const scheduled = $( this ).attr( "data-index" );
+				 $(this).val(window.localStorage.getItem("content_" + scheduled));
 				if (scheduled == hour) {
 					$(this).removeClass("border-0");
 					$(this).addClass("border-warning");
