@@ -13,18 +13,21 @@ function weatherStateUp( stateName ) { //display weather of two largest cities
 
   d3.json( url, function ( err, w ) { // openWeatherMap
     // console.log('w :>> ', w);
-    const d = {// display those
-      city: w.name,
-      temperature: `Temperature:  ${w.main.temp}F / ${Math.round((w.main.temp-32)/180*100)}C`,
-      humidity: `Humidity is ${w.main.humidity}%`,
-      description: w.weather[ 0 ].description,
-      iconSrc: `/static/img/ow/${w.weather[0].icon}@2x.png`,
-      // TempFeelsLike: ${w.main.feels_like},
-      // WindDegree: w.wind.deg,
-      // WindSpeed: w.wind.speed,
-      // SunRise: convert2HHMM( w.sys.sunrise ), 
-      // SunSet: convert2HHMM( w.sys.sunset ),
-    };
+    const d = {
+			// display those
+			city: w.name,
+			temperature: `Temperature:  ${w.main.temp}F / ${Math.round(
+				((w.main.temp - 32) / 180) * 100
+			)}C`,
+			humidity: `Humidity is ${w.main.humidity}%`,
+			description: w.weather[0].description,
+			iconSrc: `http://openweathermap.org/img/wn/${w.weather[0].icon}@2x.png`,
+			TempFeelsLike: `${w.main.feels_like}`,
+			WindDegree: w.wind.deg,
+			WindSpeed: w.wind.speed,
+			SunRise: convert2HHMM( w.sys.sunrise ),
+			SunSet: convert2HHMM( w.sys.sunset ),
+		};
 
     // console.log( 'display :>> ', d );
 
@@ -48,8 +51,7 @@ function weatherStateUp( stateName ) { //display weather of two largest cities
       temperature: `Temperature is ${w.main.temp} F / ${Math.round((w.main.temp-32)/180*100)}C`,
       humidity: `Humidity is ${w.main.humidity}%`,
       description: w.weather[ 0 ].description,
-      // iconSrc: `http://openweathermap.org/img/wn/${w.weather[0].icon}@2x.png`,
-      iconSrc: `/static/img/ow/${w.weather[0].icon}@2x.png`,
+      iconSrc: `http://openweathermap.org/img/wn/${w.weather[0].icon}@2x.png`,
       // TempFeelsLike: ${w.main.feels_like},
       // WindDegree: w.wind.deg,
       // WindSpeed: w.wind.speed,
