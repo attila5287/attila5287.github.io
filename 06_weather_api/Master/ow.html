@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/x-icon" class="favicon" href="../static/img/election/favicon.ico" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/styles/theme/cerulean.css"/>
+      <!-- href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.4.1/cerulean/bootstrap.min.css" /> -->
+
+    <link rel="stylesheet" type="text/css" href="/static/styles/main.css">
+
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+      integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.3/d3.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin="" />
+
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin=""></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <!-- set title on route by render_template(... ,title='test') -->
+
+    <!-- FONTS -->
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Baloo+2' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@800&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
+
+    <!-- title -->
+    <title>US States Time Series</title>
+    <style>
+      #map {
+        height: 220px;
+        width: 95%;
+        margin: 8px 8px 22px 8px;
+      }
+    </style>
+  </head>
+
+  <body class="bg-body-mini">
+    <header>
+      <nav class="navbar nav-mini navbar-expand-md navbar-dark fixed-top bg-transparent bg-themy">
+        <a class="navbar-brand bg-transparent border-0 rnd-xl add-anime mx-1 p-0"
+          href="https://electiondataviz.herokuapp.com/"
+          >
+          <img class="m-0 px-0 py-0" src="/static/img/election/navIconTest.png" style="height: 30px;" alt="navbar-icon">
+        </a>
+        <button class="navbar-toggler bg-theme px-3 py-2" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse nav-mini text-center text-comfo mb-1" id="navbarCollapse">
+          <ul class="nav nav-pills nav-fill nav-mini bg-transparent mr-auto align-items-center">
+            <li class="nav-item active">
+              <a class="nav-link add-anime shd-themy rnd-lg mt-1" href="/timeseries">
+                <i class="fas fa-chart-line"></i>
+                <span class="sr-only">(TimeSeries)</span>
+                TimeSeries 
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link add-anime shd-themy rnd-lg mt-1" href="/candidates">
+                <i class="fas fa-users text-sm"></i>
+                Candidates</a>
+            </li>
+            <li class="nav-item"> 
+              <a class="nav-link add-anime shd-themy rnd-lg mt-1" href="/map"> 
+                <i class="fas fa-globe-americas text-sm"></i>
+                Map
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link add-anime rnd-lg text-comfo mt-1" href="https://github.com/attila5287/electiondataviz">
+                <i class="fab fa-github text-sm"></i>
+                attila5287
+                </a>
+            </li>                        
+          </ul>
+          <form class="form-inline align-items-center bg-transparent">
+            <select 
+            id="suggest-menu"
+            class="custom-select custom-select-md text-light text-center bg-themsie add-anime border-themy mx-3"
+            >
+
+            </select>            
+            <select class="mx-3" id="opts2"></select>
+          </form>
+        </div>
+      </nav>
+      <!-- INFO NOTES -->
+      <div class="d-flex flex-row justify-content-between mt-0">
+        <p class="text-light text-italic text-secondary mt-0 mb-0">
+          <i class="fas fa-info-circle text-secondary"></i>
+          Click on table rows below to bring a state on board!
+        </p>
+        <p class="text-light text-italic text-secondary mt-0 mb-0">
+          <i class="fas fa-info-circle text-secondary"></i>
+          Select an option and generate buttons below with state names on the selected listr
+        </p>
+        <p class="text-light text-italic text-secondary mt-0 mb-0">
+          <i class="fas fa-info-circle text-secondary"></i>
+          Use the imaged-dropdown to choose a state to visualize all election historical data!
+        </p>
+        <p class="text-light text-italic text-secondary mt-0 mb-0 mt-0 mb-0">
+          <i class="fas fa-info-circle text-secondary"></i>
+          Click on table rows below to bring a state on board!
+        </p>
+      </div>
+    </header>
+      
+
+    <ul class="nav nav-pills nav-fill form-group text-secondary  rnd-xl" id="suggested-states">
+    </ul>
+    <div class="row no-gutters mt-0">
+      <!-- table -->
+      <div class="col-md-2 text-center">
+        <table class="table table-sm bg-transparent table-borderless text-center text-comfo">
+          <thead class="bg-theme text-comfo text-light">
+            <tr class="thd"></tr>
+          </thead>
+          <tbody class="bg-transparent">
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-md-8">
+
+        <div class="d-flex flex-row justify-content-around mt-0">
+          <!-- main figures classed holder-animated-main  -->
+          <nav class="nav nav-pills nav-fill rnd-xl text-md text-light py-0 my-0">
+            <a class="nav-item bg-transparent py-0">
+              <img class="img-thumbnail bg-transparent border-0 my-0 py-0"
+                src="static/img/ow/04d@2x.png" alt="city01-icon"
+                style="max-height:2rem;max-width:4rem" id="weather-img">
+            </a>
+            <a class="nav-item weather bg-transparent px-2 py-0" id="weather-city">...</a>
+            <a class="nav-item weather bg-transparent px-2 py-0" id="weather-description">...</a>
+            <a class="nav-item weather bg-transparent px-2 py-0" id="weather-temperature">...</a>
+            <a class="nav-item weather bg-transparent px-2 py-0" id="weather-humidity">...</a>
+          </nav>
+          <nav class="nav nav-pills nav-fill rnd-xl text-md text-light py-0 my-0">
+            <a class="nav-item bg-transparent py-0">
+              <i id="weather-description"></i>
+              <img class="img-thumbnail bg-transparent border-0 my-0 py-0"
+                src="static/img/ow/04d@2x.png" alt="city02-icon"
+                style="max-height:2rem;max-width:4rem" id="weather2-img">
+            </a>
+            <a class="nav-item weather bg-transparent px-2 py-0" id="weather2-city">...</a>
+            <a class="nav-item weather bg-transparent px-2 py-0" id="weather2-temperature">...</a>
+            <a class="nav-item weather bg-transparent px-2 py-0" id="weather2-humidity">...</a>
+          </nav>
+        </div>
+        <div class="row justify-content-around no-gutters mt-0">
+          <!-- charts -->
+          <div class="col-md-6">
+            <!-- bars perc -->
+            <div class="card border-0 bg-transparent">
+              <div id="bars-perc" class="text-center bg-glass  rnd-qtr"></div>
+            </div>
+
+            <!-- time series perc -->
+            <div class="card border-0 bg-transparent">
+              <div id="time-series-perc" class="text-center bg-glass  rnd-qtr"></div>
+            </div>
+
+            <!-- time series cnt -->
+            <div class="card border-0 bg-transparent">
+              <div id="bars-count" class="text-center bg-glass  rnd-qtr"></div>
+            </div>
+
+          </div>
+          <!-- flag gauge map-->
+          <div class="col-md-6">
+            <div class="row no-gutters">
+              <!-- state flag and name -->
+              <div class="col-md-4 px-0 mx-0">
+                <div class="text-center bg-glass rnd-xl p-2">
+                  <h6 class="card-title bg-black rnd-md text-comfo text-xl text-bold my-1" id="stName"> ... </h6>
+                </div>
+                <div class="bg-glass rnd-xl p-2">
+                  <!-- main figures classed holder-animated-main  -->
+                  <ul class="list-group
+                 list-group-flush bg-transparent border-0 mb-1 mt-1 py-1" id="hlder-main">
+                  </ul>
+
+                </div>
+              </div>
+              <!--gauge  -->
+              <div class="col-md-8">
+                <div class="card border-0 bg-transparent">
+                  <div class="card-body">
+                    <div id="gauge-swing" class="bg-glass rnd-qtr"></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- demographic figures classed holder-anim-diversity-minority  -->
+            <div class="card bg-transparent">
+              <div class="row">
+                <div class="col-md-4">
+                  <img class="bg-glass card-img ovrly rnd-xl opac-50 p-3" src="../static/img/states/colorado-flag-small.png"
+                    style="width:100%;max-height: 8rem; max-width:16rem;" id="stFlag">
+                </div>
+
+                <div class="col-md-8">
+                  <div class="card-body bg-glass rnd-2xl">
+                    <ul class="nav nav-fill bg-transparent border-0" id="hldr-diversity">
+                    </ul>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- map -->
+            <div class="card border-0 bg-transparent rnd-qtr m-2">
+              <div class="card-body border-0 bg-glass rnd-qtr m-0 p-0">
+                <div class="container bg-transparent rnd-qtr opac-100" id="map"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-2 text-center">
+        <table class="table table-sm bg-transparent table-borderless text-center text-comfo">
+          <thead class="bg-theme text-comfo text-light">
+            <tr class="thd">
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+            <tr class="tbl"></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+    <script src="/static/plugins/ddslick.js"></script>
+
+    <script src="/static/data/json/st-dicts.js"></script>
+
+    <script src="/static/data/geojson/us-states.js"></script>
+
+    <script src="/static/data/prep/st-prepTime.js"></script>
+
+    <script src="/static/assets/dropdowns/stfocus-ddslick.js"></script>
+
+    <script src="/static/assets/timeseries/charts/st-bars.js"></script>
+    <!-- <script src="/static/assets/timeseries/charts/st-weather.js"></script> -->
+
+    <script src="/static/assets/timeseries/charts/st-circles.js"></script>
+
+    <script src="/static/assets/timeseries/charts/st-gauge.js"></script>
+
+    <script src="/static/assets/leaflet/st-focused.js"></script>
+
+    <script src="/static/assets/timeseries/xtra/st-numbers.js"></script>
+    <script src="/static/assets/timeseries/xtra/suggestions.js"></script>
+
+    <script src="/static/assets/tables/tb-lightest.js"></script>
+
+    <script src="/static/plugins/count-up.js"></script>
+
+    <script src="/static/assets/timeseries/init.js"></script>
+
+  </body>
+
+</html>

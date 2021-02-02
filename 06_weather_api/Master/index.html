@@ -5,18 +5,87 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link
+    rel="stylesheet"
+    href="theme/darkly/bootstrap.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+    crossorigin="anonymous"
+  />
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.3/d3.min.js"></script>
   <title>Weather Dashboard</title>
 </head>
+<style>
 
+        /* custom css beyond bootstrap.css*/
+        .text-2xl{
+          font-size: 2.25rem;
+        }
+        .text-xl{
+          font-size: 1.50rem;
+        }
+        .opac-50{
+          opacity: 50%;
+        }
+        .body{
+          font-size: 0.90rem;
+        }
+        .border-med {
+          border-width: 0.25rem;
+        }
+        
+      .mini {
+        /* width:512px; */
+        max-width:512px;
+      }
+      .form-control-dark {
+        color: #fff;
+        background-color: rgba(255, 255, 255, .1);
+        border-color: rgba(255, 255, 255, .1);
+      }
+      
+      .form-control-dark:focus {
+        border-color: transparent;
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+      }
+      .rounded-xl{
+        border-radius: 0.75rem;
+      }
+</style>
 <body>
   <header class="container-fluid text-center text-white bg-dark p-2">
     <h1>Weather Dashboard</h1>
   </header>
-
+  <div class="container mini">      </div>
+  <div class="d-flex flex-row justify-content-around mt-0">
+    <!-- main figures classed holder-animated-main  -->
+    <nav class="nav nav-pills nav-fill rnd-xl text-md text-light py-0 my-0">
+      <a class="nav-item bg-transparent py-0">
+        <img class="img-thumbnail bg-transparent border-0 my-0 py-0"
+          src="static/img/ow/04d@2x.png" alt="city01-icon"
+          style="max-height:2rem;max-width:4rem" id="weather-img">
+      </a>
+      <a class="nav-item weather bg-transparent px-2 py-0" id="weather-city">...</a>
+      <a class="nav-item weather bg-transparent px-2 py-0" id="weather-description">...</a>
+      <a class="nav-item weather bg-transparent px-2 py-0" id="weather-temperature">...</a>
+      <a class="nav-item weather bg-transparent px-2 py-0" id="weather-humidity">...</a>
+    </nav>
+    <nav class="nav nav-pills nav-fill rnd-xl text-md text-light py-0 my-0">
+      <a class="nav-item bg-transparent py-0">
+        <i id="weather-description"></i>
+        <img class="img-thumbnail bg-transparent border-0 my-0 py-0"
+          src="static/img/ow/04d@2x.png" alt="city02-icon"
+          style="max-height:2rem;max-width:4rem" id="weather2-img">
+      </a>
+      <a class="nav-item weather bg-transparent px-2 py-0" id="weather2-city">...</a>
+      <a class="nav-item weather bg-transparent px-2 py-0" id="weather2-temperature">...</a>
+      <a class="nav-item weather bg-transparent px-2 py-0" id="weather2-humidity">...</a>
+    </nav>
+  </div>
   <div class="container-fluid">
     <div class="row">
       <aside class="col-lg-3 bg-light">
@@ -38,6 +107,7 @@
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="script.js"></script>
+  <script src="st-weather.js"></script>
 </body>
 
 </html>
