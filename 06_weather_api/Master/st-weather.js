@@ -9,9 +9,12 @@ function weatherStateUp( stateName ) { //display weather of two largest cities
   const api_key = "42a5a7b661c854194cb0539e5fd1a86f";
   
   // base url that will be used during the iteration by adding city at the end
-  const url = "http://api.openweathermap.org/data/2.5/weather?units=Imperial&APPID=" +api_key +"&q=" +city01;
-
-  d3.json( url, function ( err, w ) { // openWeatherMap
+  const queryURL =
+		"http://api.openweathermap.org/data/2.5/weather?units=Imperial&APPID=" +
+		api_key +
+		"&q=" +
+		city01;
+function fetch_weather( w ) { // openWeatherMap
     // console.log('w :>> ', w);
     const d = {
 			// display those
@@ -28,7 +31,6 @@ function weatherStateUp( stateName ) { //display weather of two largest cities
 			SunRise: convert2HHMM( w.sys.sunrise ),
 			SunSet: convert2HHMM( w.sys.sunset ),
 		};
-
     // console.log( 'display :>> ', d );
 
     d3.select('#weather-city').text(d.city);
@@ -38,35 +40,13 @@ function weatherStateUp( stateName ) { //display weather of two largest cities
     d3.select('#weather-img').attr('src',d.iconSrc);
     
     
-  } );
-  const url2 = "http://api.openweathermap.org/data/2.5/weather?units=Imperial&APPID=" +
-    api_key +
-    "&q=" +
-    city02;
-    
-  d3.json( url2, function ( err, w ) { // openWeatherMap
-    // console.log('w :>> ', w);
-    const d = {// display those
-      city: w.name,
-      temperature: `Temperature is ${w.main.temp} F / ${Math.round((w.main.temp-32)/180*100)}C`,
-      humidity: `Humidity is ${w.main.humidity}%`,
-      description: w.weather[ 0 ].description,
-      iconSrc: `http://openweathermap.org/img/wn/${w.weather[0].icon}@2x.png`,
-      // TempFeelsLike: ${w.main.feels_like},
-      // WindDegree: w.wind.deg,
-      // WindSpeed: w.wind.speed,
-      // SunRise: convert2HHMM( w.sys.sunrise ), 
-      // SunSet: convert2HHMM( w.sys.sunset ),
-    };
-
-    // console.log( 'display :>> ', d );
-
-    d3.select('#weather2-city').text(d.city);
-    d3.select('#weather2-description').text(d.description);
-    d3.select('#weather2-temperature').text(d.temperature);
-    d3.select('#weather2-humidity').text(d.humidity);
-    d3.select('#weather2-img').attr('src',d.iconSrc);
-  } );
+  }
+  $.ajax({
+          url: queryURL,
+          method: "GET"
+  } ).then( fetch_weather );
+  
+  
 }
 
 function convert2HHMM( unix_timestamp ) {// returns string
