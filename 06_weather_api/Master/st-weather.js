@@ -10,7 +10,7 @@ function weatherStateUp( stateName ) { //display weather of two largest cities
   
   // base url that will be used during the iteration by adding city at the end
   const queryURL =
-		"http://api.openweathermap.org/data/2.5/weather?units=Imperial&APPID=" +
+		"https://api.openweathermap.org/data/2.5/weather?units=Imperial&APPID=" +
 		api_key +
 		"&q=" +
 		city01;
