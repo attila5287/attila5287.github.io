@@ -33,11 +33,11 @@ function fetch_weather( w ) { // openWeatherMap
 		};
     // console.log( 'display :>> ', d );
 
-    d3.select('#weather-city').text(d.city);
-    d3.select('#weather-description').text(d.description);
-    d3.select('#weather-temperature').text(d.temperature);
-    d3.select('#weather-humidity').text(d.humidity);
-    d3.select('#weather-img').attr('src',d.iconSrc);
+    $('#weather-city').text(d.city);
+    $('#weather-description').text(d.description);
+    $('#weather-temperature').text(d.temperature);
+    $('#weather-humidity').text(d.humidity);
+    $('#weather-img').attr('src',d.iconSrc);
     
     
   }
