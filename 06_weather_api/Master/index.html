@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="theme/cyborg/bootstrap.css" />
+    <link rel="stylesheet" href="theme/united/bootstrap.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
       integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
       crossorigin="anonymous" />
@@ -13,6 +13,12 @@
   </head>
   <style>
     /* practical css classes beyond bootstrap.css*/
+    .h1-mod {
+  font-size: 4.25rem;
+}
+    .bg-night{
+  background-color: lightslategray;
+}
     .text-2xl {
       font-size: 2.25rem;
     }
@@ -41,7 +47,6 @@
     .form-control-dark {
       color: #fff;
       background-color: rgba(255, 255, 255, .1);
-      border-color: rgba(255, 255, 255, .1);
     }
 
     .form-control-dark:focus {
@@ -50,15 +55,15 @@
     }
 
     .rounded-xl {
-      border-radius: 0.75rem;
+      border-radius: 0.50rem;
     }
   </style>
-  <body>
-    <header class="container-fluid text-center text-white bg-success pt-0 pb-0">
+  <body class="bg-secondary">
+    <header class="container-fluid text-center text-white bg-dark">
       <h5 class="mt-0 mb-1">
-        <span class="fas fa-sun text-warning bg-primary rounded p-1 mx-2"></span>
+        <span class="fas fa-sun text-warning bg-info rounded p-1 mx-2"></span>
         Weather Dashboard
-        <span class="fas fa-cloud-moon text-secondary bg-light rounded p-1 mx-2"></span>
+        <span class="fas fa-cloud-moon text-light bg-secondary rounded p-1 mx-2"></span>
       </h5>
     </header>
     <div class="container mini">
@@ -77,86 +82,108 @@
       </div>
     </div>
     <div class="container mini">
-      <div class="row">
-        <aside class="col-3">
-          <h2 class="bg-info rounded-xl text-center p-3 mt-4">
+      <div class="row mt-2">
+        <aside class="col-3 bg-primary rounded-xl">
+          <h1 class="text-light text-center mt-3 h1-mod">
             <i class="fa fa-search"></i>
-            </h2>
+            </h1>
         </aside>
         <div class="col-9">
-          <div class="form-group">
-            <input class="form-control form-control-lg form-control-dark my-2" type="text" id="search-value" />
-            <button class="btn btn-info mt-2 btn-lg btn-block" id="search-button"> Search City
+          <div class="form-group mt-2">
+            <input class="form-control form-control-lg form-control-dark border-primary shadow=lg rounded-xl my-2" type="text" value="Denver" id="search-value" />
+            <button class="btn btn-primary mt-0 btn-block btn-lg rounded-xl" id="search-button"> Search City
             </button>
           </div>
         </div>
       </div>
     </div>
-    <div class="container mini">
+    <div class="container mini my-2">
       <ul class="list-group list-group-horizontal history">
-        <a class="list-group-item list-group-item-action bg-transparent p-2 font-italic disabled" >History</a>
+        <a class="list-group-item list-group-item-action bg-transparent border-primary p-2 font-italic text-primary disabled" >History</a>
       </ul>
   </div>
-    <div class="container mini row mt-3">
+  <div class="container mini text-center mt-3">
+    <div class="row"> 
       <div id="today" class="col-3 pl-2 pr-0">
-        <div class="card border-success border-med rounded-xl">
-          <img class="card-img-top bg-primary" src="img/01d@2x.png" alt="today-icon">
-          <div class="card-body bg-success text-light">
+        <div class="card bg-dark border-med border-dark text-light rounded-xl">
+          <img class="card-img-top bg-info rounded-xl" src="img/01d@2x.png" alt="today-day-icon">
+          <div class="card-body text-light">
             <h5 class="card-title">Today</h5>
             <p class="card-text">Content</p>
           </div>
-          <img class="card-img-bottom bg-light" src="img/02n@2x.png" alt="today-icon">
+          <img class="card-img-bottom bg-secondary rounded-xl" src="img/02n@2x.png" alt="today-night-icon">
         </div>
       </div>
       <div id="forecast" class="col-9">
-        <ul class="list-group">
-          <a class="list-group-item bg-light border-dark text-right my-2 py-0" >
-            day
-            <img class="img-thumbnail border-warning border-med bg-primary mx-4 my-0 py-0 px-1" src="img/02d@2x.png"
-              alt="city01-icon" style="max-height:4rem;max-width:4rem">
-            night
-            <img class="img-thumbnail border-dark border-med bg-light mx-4 my-0 py-0 px-1" src="img/04n@2x.png"
-              alt="city01-icon" style="max-height:4rem;max-width:4rem">
-          </a>
-          <a class="list-group-item bg-light border-dark text-right my-2 py-0" >
-            day
-            <img class="img-thumbnail border-warning border-med bg-primary mx-4 my-0 py-0 px-1" src="img/02d@2x.png"
-              alt="city01-icon" style="max-height:4rem;max-width:4rem">
-            night
-            <img class="img-thumbnail border-dark border-med bg-light mx-4 my-0 py-0 px-1" src="img/04n@2x.png"
-              alt="city01-icon" style="max-height:4rem;max-width:4rem">
-          </a>
-          <a class="list-group-item bg-light border-dark text-right my-2 py-0" >
-            day
-            <img class="img-thumbnail border-warning border-med bg-primary mx-4 my-0 py-0 px-1" src="img/02d@2x.png"
-              alt="city01-icon" style="max-height:4rem;max-width:4rem">
-            night
-            <img class="img-thumbnail border-dark border-med bg-light mx-4 my-0 py-0 px-1" src="img/04n@2x.png"
-              alt="city01-icon" style="max-height:4rem;max-width:4rem">
-          </a>
-          <a class="list-group-item bg-light border-dark text-right my-2 py-0" >
-            day
-            <img class="img-thumbnail border-warning border-med bg-primary mx-4 my-0 py-0 px-1" src="img/02d@2x.png"
-              alt="city01-icon" style="max-height:4rem;max-width:4rem">
-            night
-            <img class="img-thumbnail border-dark border-med bg-light mx-4 my-0 py-0 px-1" src="img/04n@2x.png"
-              alt="city01-icon" style="max-height:4rem;max-width:4rem">
-          </a>
-          <a class="list-group-item bg-light border-dark text-right my-2 py-0" >
-            day
-            <img class="img-thumbnail border-warning border-med bg-primary mx-4 my-0 py-0 px-1" src="img/02d@2x.png"
-              alt="city01-icon" style="max-height:4rem;max-width:4rem">
-            night
-            <img class="img-thumbnail border-dark border-med bg-light mx-4 my-0 py-0 px-1" src="img/04n@2x.png"
-              alt="city01-icon" style="max-height:4rem;max-width:4rem">
-          </a>
-        </ul>
+        <div class="row no-gutters">
+          <div class="col">
+            <ul class="list-group px-1">
+              <a class="list-group-item bg-info rounded-xl text-right text-dark text-xl py-0 my-1" >
+                day
+                <img class="img-thumbnail border-0 bg-transparent mx-2 my-0 p-0" src="img/02d@2x.png"
+                  alt="city01-icon" style="max-height:4rem;max-width:4rem">
+              </a>
+              <a class="list-group-item bg-info rounded-xl text-right text-dark text-xl py-0 my-1" >
+                day
+                <img class="img-thumbnail border-0 bg-transparent mx-2 my-0 p-0" src="img/02d@2x.png"
+                  alt="city01-icon" style="max-height:4rem;max-width:4rem">
+              </a>
+              <a class="list-group-item bg-info rounded-xl text-right text-dark text-xl py-0 my-1" >
+                day
+                <img class="img-thumbnail border-0 bg-transparent mx-2 my-0 p-0" src="img/02d@2x.png"
+                  alt="city01-icon" style="max-height:4rem;max-width:4rem">
+              </a>
+              <a class="list-group-item bg-info rounded-xl text-right text-dark text-xl py-0 my-1" >
+                day
+                <img class="img-thumbnail border-0 bg-transparent mx-2 my-0 p-0" src="img/02d@2x.png"
+                  alt="city01-icon" style="max-height:4rem;max-width:4rem">
+              </a>
+              <a class="list-group-item bg-info rounded-xl text-right text-dark text-xl py-0 my-1" >
+                day
+                <img class="img-thumbnail border-0 bg-transparent mx-2 my-0 p-0" src="img/02d@2x.png"
+                  alt="city01-icon" style="max-height:4rem;max-width:4rem">
+              </a>
+            </ul>
+          </div>
+          <div class="col">
+          <ul class="list-group px-1">
+              <a class="list-group-item bg-night rounded-xl text-right text-dark text-xl py-0 my-1" >
+                night
+                <img class="img-thumbnail border-0 bg-transparent mx-2 my-0 p-0" src="img/02n@2x.png"
+                  alt="city01-icon" style="max-height:4rem;max-width:4rem">
+              </a>
+              <a class="list-group-item bg-night rounded-xl text-right text-dark text-xl py-0 my-1" >
+                night
+                <img class="img-thumbnail border-0 bg-transparent mx-2 my-0 p-0" src="img/02n@2x.png"
+                  alt="city01-icon" style="max-height:4rem;max-width:4rem">
+              </a>
+              <a class="list-group-item bg-night rounded-xl text-right text-dark text-xl py-0 my-1" >
+                night
+                <img class="img-thumbnail border-0 bg-transparent mx-2 my-0 p-0" src="img/02n@2x.png"
+                  alt="city01-icon" style="max-height:4rem;max-width:4rem">
+              </a>
+              <a class="list-group-item bg-night rounded-xl text-right text-dark text-xl py-0 my-1" >
+                night
+                <img class="img-thumbnail border-0 bg-transparent mx-2 my-0 p-0" src="img/02n@2x.png"
+                  alt="city01-icon" style="max-height:4rem;max-width:4rem">
+              </a>
+              <a class="list-group-item bg-night rounded-xl text-right text-dark text-xl py-0 my-1" >
+                night
+                <img class="img-thumbnail border-0 bg-transparent mx-2 my-0 p-0" src="img/02n@2x.png"
+                  alt="city01-icon" style="max-height:4rem;max-width:4rem">
+              </a>
+            </ul>
+          </div>
+        </div>
       </div>
     </div> 
+  </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="script.js"></script>
-    <script src="st-weather.js"></script>
+    <script src="forecast.js"></script>
+    <script src="today.js"></script>
+    <script src="init.js"></script>
   </body>
 
 </html>
