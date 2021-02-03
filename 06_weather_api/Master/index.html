@@ -58,33 +58,23 @@
       border-radius: 0.50rem;
     }
   </style>
-  <body class="bg-secondary">
-    <header class="container-fluid text-center text-white bg-dark">
-      <h5 class="mt-0 mb-1">
-        <span class="fas fa-sun text-warning bg-info rounded p-1 mx-2"></span>
+  <body class="bg-dark">
+    <header class="container-fluid text-center text-white bg-primary border-bottom border-light border-med mb-2">
+      <h4 class="mt-0 mb-1">
+        <span class="fas fa-sun text-warning bg-info rounded p-1 mx-4"></span>
         Weather Dashboard
-        <span class="fas fa-cloud-moon text-light bg-secondary rounded p-1 mx-2"></span>
-      </h5>
+        <span class="fas fa-cloud-moon text-light bg-secondary rounded p-1 mx-4"></span>
+      </h4>
     </header>
     <div class="container mini">
       <div class="d-flex flex-row justify-content-around mt-0 ">
-        <!-- main figures classed holder-animated-main  -->
-        <nav class="nav nav-pills nav-fill bg-light text-dark text-md text-light py-1 my-0 rounded-xl">
-          <a class="nav-item bg-transparent py-0">
-            <img class="img-thumbnail bg-transparent border-0 my-0 py-0" src="img/04d@2x.png"
-              alt="city01-icon" style="max-height:2rem;max-width:4rem" id="weather-img">
-          </a>
-          <a class="nav-item weather bg-transparent px-2 py-0" id="weather-city">...</a>
-          <a class="nav-item weather bg-transparent px-2 py-0" id="weather-description">...</a>
-          <a class="nav-item weather bg-transparent px-2 py-0" id="weather-temperature">...</a>
-          <a class="nav-item weather bg-transparent px-2 py-0" id="weather-humidity">...</a>
-          </n ..av>
+
       </div>
     </div>
     <div class="container mini">
       <div class="row mt-2">
-        <aside class="col-3 bg-primary rounded-xl">
-          <h1 class="text-light text-center mt-3 h1-mod">
+        <aside class="col-3">
+          <h1 class="bg-primary rounded-xl text-light text-center mt-3 py-2 h1-mod">
             <i class="fa fa-search"></i>
             </h1>
         </aside>
@@ -105,11 +95,18 @@
   <div class="container mini text-center mt-3">
     <div class="row"> 
       <div id="today" class="col-3 pl-2 pr-0">
-        <div class="card bg-dark border-med border-dark text-light rounded-xl">
-          <img class="card-img-top bg-info rounded-xl" src="img/01d@2x.png" alt="today-day-icon">
-          <div class="card-body text-light">
-            <h5 class="card-title">Today</h5>
-            <p class="card-text">Content</p>
+        <div class="card bg-light border-med border-light text-dark rounded-xl">
+          <img class="card-img-top bg-transparent border-0 my-0 py-0" alt="city01-icon" id="weather-img">
+          <div class="card-body">
+                    <!-- main figures classed holder-animated-main  -->
+        <nav class="nav nav-pills nav-fill bg-light text-dark text-md text-light py-1 my-0 rounded-xl">
+          <a class="nav-item weather bg-transparent px-2 py-0" id="weather-city">...</a>
+          <a class="nav-item weather bg-transparent px-2 py-0" id="weather-description">...</a>
+          <a class="nav-item weather bg-transparent px-2 py-0" id="weather-temperature">...</a>
+          <a class="nav-item weather bg-transparent px-2 py-0" id="weather-humidity">...</a>
+          </nav>
+            <!-- <h5 class="card-title">Today</h5>
+            <p class="card-text">Content</p> -->
           </div>
           <img class="card-img-bottom bg-secondary rounded-xl" src="img/02n@2x.png" alt="today-night-icon">
         </div>
