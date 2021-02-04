@@ -12,10 +12,18 @@ $.ajax({
 } ).then( ( w ) => {
   // console.log( 'test ajax forecast');
   console.log( 'w :>> ', w.city );
-  console.log( "w :>> ", convert2HHMM( w.city.sunrise ) );
-  console.log( 'w :>> ', convert2HHMM( w.city.sunset ) );
+  $("#weather-sunrise").text("sunrise " + convert2HHMM(w.city.sunrise));
+	$("#weather-sunset").text("sunset " + convert2HHMM(w.city.sunset));
+  $(".forecast").each(function (i, el) {
+    $( this ).text( w.list[ i * 8 ].weather[ 0 ].main );
+    console.log('i :>> ', i);
+	});
+  $(".forecast-img").each(function (i, el) {
+    $( this ).attr("src", w.list[ i * 8 ].weather[ 0 ].icon );
+    console.log('i :>> ', i);
+	});
+  
+  // console.log( 'w :>> ', w.list[ 0 ].weather[ 0 ] );
+  // console.log( 'w :>> ', w.list[ 0 ].weather[ 0 ] );
 
-  $("#weather-sunrise").text('sunrise ' + convert2HHMM(w.city.sunrise));
-  $("#weather-sunset").text('sunset '+convert2HHMM(w.city.sunset));
-  console.log( 'w :>> ', w.list[ 0 ].weather[ 0 ] );
 });
