@@ -14,5 +14,8 @@ $.ajax({
   console.log( 'w :>> ', w.city );
   console.log( "w :>> ", convert2HHMM( w.city.sunrise ) );
   console.log( 'w :>> ', convert2HHMM( w.city.sunset ) );
+
+  $("#weather-sunrise").text('sunrise ' + convert2HHMM(w.city.sunrise));
+  $("#weather-sunset").text('sunset '+convert2HHMM(w.city.sunset));
   console.log( 'w :>> ', w.list[ 0 ].weather[ 0 ] );
 });
