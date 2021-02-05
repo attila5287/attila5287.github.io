@@ -15,15 +15,19 @@ $.ajax({
   $("#weather-sunrise").text("sunrise " + convert2HHMM(w.city.sunrise));
 	$("#weather-sunset").text("sunset " + convert2HHMM(w.city.sunset));
   $(".forecast").each(function (i, el) {
-    $( this ).text( w.list[ i * 8 ].weather[ 0 ].main );
-    console.log('i :>> ', i);
+    $( this ).text( w.list[ i * 7 ].weather[ 0 ].main );
+    // console.log('forecast main i :>> ', i);
 	});
   $(".forecast-img").each(function (i, el) {
-    $( this ).attr("src", w.list[ i * 8 ].weather[ 0 ].icon );
-    console.log('i :>> ', i);
+    $(this).attr(
+			"src",
+			`http://openweathermap.org/img/wn/${w.list[i * 7].weather[0].icon}@2x.png`
+		);
+    // console.log('i forecast img :>> ', i);  
 	});
   
   // console.log( 'w :>> ', w.list[ 0 ].weather[ 0 ] );
   // console.log( 'w :>> ', w.list[ 0 ].weather[ 0 ] );
-
+$(".forecast-img").each(() => {
+});
 });
