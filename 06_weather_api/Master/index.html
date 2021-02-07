@@ -93,57 +93,62 @@
       </ul>
   </div>
   <div class="container mini text-center mt-3">
-    <div class="row no-gutters"> 
+    <div class="row"> 
+      
       <div id="today" class="col-6">
-        <div class="card bg-primary text-dark rounded-xl">
+        <div class="card bg-info border-secondary border-med rounded-xl">
           <img class="card-img-top bg-transparent border-0 mx-auto mb-0" alt="forecast-icon" id="weather-img" style="max-height:10rem;max-width:10rem">
           <div class="card-body mt-0">
             <!-- main figures classed holder-animated-main  -->
-            <ul class="list-group list-group-flush bg-light text-dark text-md text-light my-0 rounded-xl">
-          <li class="list-group-item list-group-item-action disabled weather" id="weather-city">...</li>
-          <li class="list-group-item list-group-item-action disabled weather" id="weather-description">...</li>
-          <li class="list-group-item list-group-item-action disabled weather" id="weather-temperature">...</li>
-          <li class="list-group-item list-group-item-action disabled weather" id="weather-humidity">...</li>
-          <li class="list-group-item list-group-item-action disabled weather" id="weather-sunrise">...</li>
-          <li class="list-group-item list-group-item-action disabled weather" id="weather-sunset">...</li>
+            <style>
+              .list-group-item-action{
+                padding: 0.5rem 0rem 0.75rem 0rem; 
+              }
+            </style>
+            <ul class="border-med border-light list-group list-group-flush bg-light text-capitalize text-dark text-md text-light my-0 rounded-xl">
+          <li class="list-group-item list-group-item-action weather" id="weather-city">...</li>
+          <li class="list-group-item list-group-item-action weather" id="weather-description">...</li>
+          <li class="list-group-item list-group-item-action weather" id="weather-temperature">...</li>
+          <li class="list-group-item list-group-item-action weather" id="weather-humidity">...</li>
+          <li class="list-group-item list-group-item-action weather" id="weather-sunrise">...</li>
+          <li class="list-group-item list-group-item-action weather" id="weather-sunset">...</li>
           </ul>
           </div>
 
         </div>
       </div>
+      
       <div id="forecast" class="col-6">
         <ul class="list-group px-1">
-          <a class="list-group-item bg-dark text-right text-light border-light text-xl my-1" >
-            <span class="forecast">
-            <span class="forecast">
-            ... C/F
-            </span>
-            </span>
-            <img class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0" src="img/02d@2x.png"
-              alt="forecast-icon" style="max-height:4rem;max-width:4rem">
-          </a>
-          <a class="list-group-item bg-dark text-right text-light border-light text-xl my-1" >
+          <a class="list-group-item bg-dark text-right text-light border-light rounded-xl my-0" >
             <span class="forecast">
             ... C/F
             </span>
             <img class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0" src="img/02d@2x.png"
               alt="forecast-icon" style="max-height:4rem;max-width:4rem">
           </a>
-          <a class="list-group-item bg-dark text-right text-light border-light text-xl my-1" >
+          <a class="list-group-item bg-dark text-right text-light border-light rounded-xl my-0" >
             <span class="forecast">
             ... C/F
             </span>
             <img class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0" src="img/02d@2x.png"
               alt="forecast-icon" style="max-height:4rem;max-width:4rem">
           </a>
-          <a class="list-group-item bg-dark text-right text-light border-light text-xl my-1" >
+          <a class="list-group-item bg-dark text-right text-light border-light rounded-xl my-0" >
             <span class="forecast">
             ... C/F
             </span>
             <img class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0" src="img/02d@2x.png"
               alt="forecast-icon" style="max-height:4rem;max-width:4rem">
           </a>
-          <a class="list-group-item bg-dark text-right text-light border-light text-xl my-1" >
+          <a class="list-group-item bg-dark text-right text-light border-light rounded-xl my-0" >
+            <span class="forecast">
+            ... C/F
+            </span>
+            <img class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0" src="img/02d@2x.png"
+              alt="forecast-icon" style="max-height:4rem;max-width:4rem">
+          </a>
+          <a class="list-group-item bg-dark text-right text-light border-light rounded-xl my-0" >
             <span class="forecast">
             ... C/F
             </span>
@@ -152,14 +157,14 @@
           </a>
         </ul>
       </div>
+      
     </div> 
   </div>
-
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
     <script src="converter_hhmm.js"></script>
     <script src="forecast.js"></script>
-    <script src="today.js"></script>
+    <script src="currently.js"></script>
     <script src="init.js"></script>
   </body>
 

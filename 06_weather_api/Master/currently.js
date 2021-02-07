@@ -3,7 +3,7 @@ function todays_weather(city) {
 	const api_key = "42a5a7b661c854194cb0539e5fd1a86f";
 	const queryURL = `https://api.openweathermap.org/data/2.5/weather?units=Imperial&APPID=${api_key}&q=${city}`;
 
-	console.log("queryURL :>> ", queryURL);
+	// console.log("queryURL :>> ", queryURL);
 
 	function fetch_weather(w) {
 		// openWeatherMap
@@ -23,7 +23,7 @@ function todays_weather(city) {
 			SunRise: convert2HHMM(w.sys.sunrise),
 			SunSet: convert2HHMM(w.sys.sunset)
 		};
-		console.log("display :>> ", d);
+		// console.log("display :>> ", d);
 
 		$("#weather-city").text(d.city);
 		$("#weather-description").text(d.description);
