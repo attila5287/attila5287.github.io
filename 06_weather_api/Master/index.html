@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,11 +15,13 @@
   <style>
     /* practical css classes beyond bootstrap.css*/
     .h1-mod {
-  font-size: 4.25rem;
-}
-    .bg-night{
-  background-color: lightslategray;
-}
+      font-size: 4.25rem;
+    }
+
+    .bg-night {
+      background-color: lightslategray;
+    }
+
     .text-2xl {
       font-size: 2.25rem;
     }
@@ -58,11 +61,13 @@
       border-radius: 0.50rem;
     }
   </style>
+
   <body class="bg-dark">
-    <header class="container-fluid text-center text-white bg-primary border-bottom border-light border-med mb-2">
+    <header
+      class="container-fluid text-center text-white bg-primary border-bottom border-light border-med mb-2">
       <div class=" mt-0 mb-1">
         <span class="fas fa-sun text-warning bg-info rounded p-1 mx-4"></span>
-        Weather Dashboard: 
+        Weather Dashboard:
         <span class="text-xl" id="weather-city"></span>
         <span class="fas fa-cloud-moon text-light bg-secondary rounded p-1 mx-4"></span>
       </div>
@@ -77,12 +82,15 @@
         <aside class="col-3">
           <h1 class="bg-primary rounded-xl text-light text-center mt-3 py-2 h1-mod">
             <i class="fa fa-search"></i>
-            </h1>
+          </h1>
         </aside>
         <div class="col-9">
           <div class="form-group mt-2">
-            <input class="form-control form-control-lg form-control-dark border-light shadow=lg rounded-xl my-2" type="text" value="Denver" id="search-value" />
-            <button class="btn btn-primary mt-0 btn-block btn-lg rounded-xl" id="search-button"> Search City
+            <input
+              class="form-control form-control-lg form-control-dark border-light shadow=lg rounded-xl my-2"
+              type="text" value="Denver" id="search-value" />
+            <button class="btn btn-primary mt-0 btn-block btn-lg rounded-xl" id="search-button">
+              Search City
             </button>
           </div>
         </div>
@@ -90,80 +98,106 @@
     </div>
     <div class="container mini my-2">
       <ul class="list-group list-group-horizontal history">
-        <a class="list-group-item list-group-item-action bg-transparent border-0 p-2 font-italic  text-secondary disabled" >
+        <a
+          class="list-group-item list-group-item-action bg-transparent border-0 p-2 font-italic  text-secondary disabled">
           <i class="fas fa-history text-xl"></i>
           History:
         </a>
       </ul>
-  </div>
-  <div class="container mini mt-3">
-    <div class="row"> 
-      <div id="today" class="col-6">
-        <h6 class="font-italic text-light">Currently:</h6>
-        <div class="card bg-dark text-light border-light rounded-xl">
-          <img class="card-img-top bg-transparent border-0 mx-auto mb-0" alt="forecast-icon" id="weather-img" style="max-height:10rem;max-width:10rem">
-          <div class="card-body my-0">
-            <!-- main figures classed holder-animated-main  -->
-            <style>
-              .list-group-item-action{
-                padding: 0.5rem 0rem 0.75rem 0.75rem; 
-              }
-            </style>
-            <ul class="list-group list-group-flush bg-light text-capitalize text-dark text-md text-light my-0 rounded-xl">
-          <li class="list-group-item list-group-item-action weather" id="weather-description">...</li>
-          <li class="list-group-item list-group-item-action weather" id="weather-temperature">...</li>
-          <li class="list-group-item list-group-item-action weather" id="weather-humidity">...</li>
-          <li class="list-group-item list-group-item-action weather" id="weather-sunrise">...</li>
-          <li class="list-group-item list-group-item-action weather" id="weather-sunset">...</li>
-          </ul>
+    </div>
+    <div class="container mini mt-3">
+      <div class="form-group">
+        <label for="my-input">Text</label>
+        <input id="my-input" class="custom-range" type="range" name="" min="0" max="100">
+      </div>
+    </div>
+    <div class="container mini mt-3">
+      <div class="row no-gutters">
+        <div id="today" class="col-5">
+          <div class="card bg-transparent border-primary text-light rounded-xl py-0 my-0 h-100 mx-1">
+            <div class="card-header bg-primary rounded-xl">
+              Currently:
+            </div>
+            <img class="card-img-top bg-transparent border-0 mx-auto my-0 p-0" alt="forecast-icon"
+              id="weather-img" style="max-height:8rem;max-width:8rem">
+            <div class="card-body my-0 pb-0">
+              <!-- main figures classed holder-animated-main  -->
+              <style>
+                .list-group-item-action {
+                  padding: 0.5rem 0rem 0.75rem 0.75rem;
+                }
+              </style>
+              <ul
+                class="list-group list-group-flush text-capitalize my-0 rounded-xl">
+                <li class="list-group-item list-group-item-action weather" id="weather-description">
+                  ...</li>
+                <li class="list-group-item list-group-item-action weather" id="weather-temperature">
+                  ...</li>
+                <li class="list-group-item list-group-item-action weather" id="weather-humidity">...
+                </li>
+                <li class="list-group-item list-group-item-action weather" id="weather-sunrise">...
+                </li>
+                <li class="list-group-item list-group-item-action weather" id="weather-sunset">...
+                </li>
+              </ul>
+            </div>
           </div>
-
         </div>
+
+        <div id="forecast" class="col-7">
+          <div class="card bg-transparent border-primary text-light rounded-xl py-0 my-0 h-100 mx-1">
+            <div class="card-header bg-primary">
+              Header
+            </div>
+            <div class="card-body my-0 pb-0">
+              <ul class="list-group list-group-flush my-auto">
+                <a
+                  class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
+                  <span class="forecast">
+                    ... C/F
+                  </span>
+                  <img class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0"
+                    src="img/02d@2x.png" alt="forecast-icon" style="max-height:4rem;max-width:4rem">
+                </a>
+                <a
+                  class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
+                  <span class="forecast">
+                    ... C/F
+                  </span>
+                  <img class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0"
+                    src="img/02d@2x.png" alt="forecast-icon" style="max-height:4rem;max-width:4rem">
+                </a>
+                <a
+                  class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
+                  <span class="forecast">
+                    ... C/F
+                  </span>
+                  <img class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0"
+                    src="img/02d@2x.png" alt="forecast-icon" style="max-height:4rem;max-width:4rem">
+                </a>
+                <a
+                  class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
+                  <span class="forecast">
+                    ... C/F
+                  </span>
+                  <img class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0"
+                    src="img/02d@2x.png" alt="forecast-icon" style="max-height:4rem;max-width:4rem">
+                </a>
+                <a
+                  class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
+                  <span class="forecast">
+                    ... C/F
+                  </span>
+                  <img class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0"
+                    src="img/02d@2x.png" alt="forecast-icon" style="max-height:4rem;max-width:4rem">
+                </a>
+              </ul>
+            </div>
+          </div>
+        </div>
+
       </div>
-      
-      <div id="forecast" class="col-6">
-        <h6 class="font-italic text-light">5-Day Forecast:</h6>
-        <ul class="list-group px-1">
-          <a class="list-group-item bg-dark text-right text-light border-primary  rounded-xl my-0" >
-            <span class="forecast">
-            ... C/F
-            </span>
-            <img class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0" src="img/02d@2x.png"
-              alt="forecast-icon" style="max-height:4rem;max-width:4rem">
-          </a>
-          <a class="list-group-item bg-dark text-right text-light border-primary  rounded-xl my-0" >
-            <span class="forecast">
-            ... C/F
-            </span>
-            <img class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0" src="img/02d@2x.png"
-              alt="forecast-icon" style="max-height:4rem;max-width:4rem">
-          </a>
-          <a class="list-group-item bg-dark text-right text-light border-primary  rounded-xl my-0" >
-            <span class="forecast">
-            ... C/F
-            </span>
-            <img class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0" src="img/02d@2x.png"
-              alt="forecast-icon" style="max-height:4rem;max-width:4rem">
-          </a>
-          <a class="list-group-item bg-dark text-right text-light border-primary  rounded-xl my-0" >
-            <span class="forecast">
-            ... C/F
-            </span>
-            <img class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0" src="img/02d@2x.png"
-              alt="forecast-icon" style="max-height:4rem;max-width:4rem">
-          </a>
-          <a class="list-group-item bg-dark text-right text-light border-primary  rounded-xl my-0" >
-            <span class="forecast">
-            ... C/F
-            </span>
-            <img class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0" src="img/02d@2x.png"
-              alt="forecast-icon" style="max-height:4rem;max-width:4rem">
-          </a>
-        </ul>
-      </div>
-      
-    </div> 
-  </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <!-- <script src="script.js"></script> -->
     <script src="converter_hhmm.js"></script>
