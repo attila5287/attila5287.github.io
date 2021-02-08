@@ -105,22 +105,33 @@
         </a>
       </ul>
     </div>
+
     <div class="container mini mt-3">
       <div class="form-group">
-        <label for="my-input">Text</label>
-        <input id="my-input" class="custom-range" type="range" name="" min="0" max="100">
+        <p id="slider_index" class="text-center text-light m-0">slider index</p>
+        <input id="slider" class="custom-range" type="range" name="" min="1" max="40">
+      </div>
+      <div class="card bg-transparent border-med border-primary rounded-xl">
+        <div class="card-header bg-primary text-light rounded-xl">Forecast Slider</div>
+        <div class="card-body row  align-items-center my-0 py-0">
+          <div class="col-4">
+            <img class="card-img-top my-0 p-0" src="img/02d@2x.png" alt="">
+          </div>
+          <div class="col-8">
+            <h1 id="forecast_slider" class="card-title text-light"> Description</h1>
+          </div>
+        </div>
       </div>
     </div>
+    
     <div class="container mini mt-3">
       <div class="row no-gutters">
-        <div id="today" class="col-5">
-          <div class="card bg-transparent border-primary text-light rounded-xl py-0 my-0 h-100 mx-1">
+        <div class="col-5">
+          <div class="card bg-transparent border-primary border-med text-light rounded-xl py-0 my-0 h-100 mx-1">
             <div class="card-header bg-primary rounded-xl">
               Currently:
             </div>
-            <img class="card-img-top bg-transparent border-0 mx-auto my-0 p-0" alt="forecast-icon"
-              id="weather-img" style="max-height:8rem;max-width:8rem">
-            <div class="card-body my-0 pb-0">
+            <div class="card-body">
               <!-- main figures classed holder-animated-main  -->
               <style>
                 .list-group-item-action {
@@ -141,54 +152,50 @@
                 </li>
               </ul>
             </div>
+            <img class="card-img-bottom bg-transparent border-0 mx-auto my-0 p-0" alt="forecast-icon"
+              id="weather-img" style="max-height:8rem;max-width:8rem">
           </div>
         </div>
-
-        <div id="forecast" class="col-7">
+        <div class="col-7">
           <div class="card bg-transparent border-primary text-light rounded-xl py-0 my-0 h-100 mx-1">
             <div class="card-header bg-primary">
-              Header
+              5-Day Forecast
             </div>
             <div class="card-body my-0 pb-0">
               <ul class="list-group list-group-flush my-auto">
                 <a
                   class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
                   <span class="forecast">
-                    ... C/F
                   </span>
-                  <img class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0"
+                  <img class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
                     src="img/02d@2x.png" alt="forecast-icon" style="max-height:4rem;max-width:4rem">
                 </a>
                 <a
                   class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
                   <span class="forecast">
-                    ... C/F
                   </span>
-                  <img class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0"
+                  <img class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
                     src="img/02d@2x.png" alt="forecast-icon" style="max-height:4rem;max-width:4rem">
                 </a>
                 <a
                   class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
                   <span class="forecast">
-                    ... C/F
                   </span>
-                  <img class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0"
+                  <img class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
                     src="img/02d@2x.png" alt="forecast-icon" style="max-height:4rem;max-width:4rem">
                 </a>
                 <a
                   class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
                   <span class="forecast">
-                    ... C/F
                   </span>
-                  <img class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0"
+                  <img class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
                     src="img/02d@2x.png" alt="forecast-icon" style="max-height:4rem;max-width:4rem">
                 </a>
                 <a
                   class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
                   <span class="forecast">
-                    ... C/F
                   </span>
-                  <img class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0"
+                  <img class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
                     src="img/02d@2x.png" alt="forecast-icon" style="max-height:4rem;max-width:4rem">
                 </a>
               </ul>
@@ -198,6 +205,9 @@
 
       </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <!-- <script src="script.js"></script> -->
     <script src="converter_hhmm.js"></script>

@@ -1,5 +1,7 @@
 // console.log( 'test forecast' );
 // forecast_five_days( 'Denver' );
+const todays_date =  moment().format( "MMM Do YY" ) ;
+
 
 function forecast_five_days ( city ) {
   const API_key = "42a5a7b661c854194cb0539e5fd1a86f";
@@ -17,7 +19,7 @@ function forecast_five_days ( city ) {
     $( ".forecast" ).each( function ( i, el ) {
       $(this)
 				.addClass("text-capitalize")
-				.text(`${i + 1}. ${w.list[i * 7].weather[0].description}`);
+				.text(`${i + 1}. ${w.list[(i + 1) * 8 - 1].weather[0].description}`);
       // console.log('forecast main i :>> ', i);
     } );
     $( ".forecast-img" ).each( function ( i, el ) {
