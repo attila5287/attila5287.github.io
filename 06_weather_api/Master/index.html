@@ -96,21 +96,22 @@
         </div>
       </div>
     </div>
+
     <div class="container mini my-2">
-      <ul class="list-group list-group-horizontal history">
-        <a
-          class="list-group-item list-group-item-action bg-transparent border-0 p-2 font-italic  text-secondary disabled">
-          <i class="fas fa-history text-xl"></i>
-          History:
-        </a>
-      </ul>
+      <div class="d-flex flex-row justify-content-around">
+        <i class="fas fa-history text-light locally-stored"> Denver </i>
+        <i class="fas fa-history text-light locally-stored"> Pueblo </i>
+        <i class="fas fa-history text-light locally-stored"> Durango</i>
+      </div>
     </div>
 
     <div class="container mini mt-3">
+      
       <div class="form-group">
-        <p id="slider_index" class="text-center text-light m-0">slider index</p>
+        <p id="slider_index" class="text-center text-light m-0"></p>
         <input id="slider" class="custom-range" type="range" name="" min="1" max="40">
       </div>
+
       <div class="card bg-transparent border-med border-primary rounded-xl">
         <div class="card-header bg-primary text-light rounded-xl">Forecast Slider</div>
         <div class="card-body row  align-items-center my-0 py-0">
@@ -211,6 +212,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <!-- <script src="script.js"></script> -->
     <script src="converter_hhmm.js"></script>
+    <script src="slider.js"></script>
     <script src="forecast.js"></script>
     <script src="currently.js"></script>
     <script src="init.js"></script>

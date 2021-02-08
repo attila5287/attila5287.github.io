@@ -33,4 +33,3 @@ function forecast_five_days ( city ) {
     // console.log( 'w :>> ', w.list[ 0 ].weather[ 0 ] );
   } );
 }
-
