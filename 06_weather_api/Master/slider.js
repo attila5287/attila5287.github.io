@@ -1,3 +1,4 @@
+
 function update_slider(v, city) {
 	const API_key = "42a5a7b661c854194cb0539e5fd1a86f";
 	const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_key}`;
@@ -41,5 +42,4 @@ function update_slider(v, city) {
   
 }
 
-// test run for 24 hrs later
-// update_slider(8, "Denver"); 
+update_slider(8, "Denver"); 
