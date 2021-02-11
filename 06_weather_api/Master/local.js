@@ -10,7 +10,7 @@ function update_history ( city ) {
   .attr("data-name", city)
   .attr(
     "class",
-    "btn btn-outline-secondary btn-sm rounded-xl locally-stored"
+    "btn btn-outline-secondary btn-sm rounded-xl locally-stored mx-2"
     );
     
   hist_btn.text(city);
@@ -28,7 +28,7 @@ function update_history ( city ) {
       todays_weather(clicked);
       update_slider(8, clicked); 
       
-  
+   
     });
     
   });
