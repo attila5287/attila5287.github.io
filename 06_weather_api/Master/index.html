@@ -36,6 +36,8 @@
 
     .body {
       font-size: 0.90rem;
+      padding-bottom: 3rem;
+      margin-bottom: 3rem;
     }
 
     .border-med {
@@ -54,7 +56,7 @@
 
     .form-control-dark:focus {
       border-color: transparent;
-      box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
     }
 
     .rounded-xl {
@@ -64,21 +66,17 @@
 
   <body class="bg-dark">
     <header
-      class="container-fluid text-center text-white bg-primary border-bottom border-light border-med mb-2">
-      <div class=" mt-0 mb-1">
-        <span class="fas fa-sun text-warning bg-info rounded p-1 mx-4"></span>
+      class="container-fluid text-right text-white bg-primary my-0 py-0">
+      <div class="container mini my-0 py-0">
         Weather Dashboard:
-        <span class="text-xl" id="weather-city"></span>
-        <span class="fas fa-cloud-moon text-light bg-secondary rounded p-1 mx-4"></span>
+        <span class="fas fa-sun text-light text-2xl fa-pull-left mt-2"></span>
+        <span class="fas fa-cloud-rain text-light fa-pull-left text-2xl mt-2"></span>
+        <b class="text-uppercase text-2xl mx-2" id="weather-city"></b>
       </div>
     </header>
-    <div class="container mini">
-      <div class="d-flex flex-row justify-content-around mt-0 ">
 
-      </div>
-    </div>
-    <div class="container mini">
-      <div class="row mt-2">
+    <div class="container mini my-0">
+      <div class="row">
         <aside class="col-3">
           <h1 class="bg-primary rounded-xl text-light text-center mt-3 py-2 h1-mod">
             <i class="fa fa-search"></i>
@@ -87,26 +85,25 @@
         <div class="col-9">
           <div class="form-group mt-2">
             <input
-              class="form-control form-control-lg form-control-dark border-light shadow=lg rounded-xl my-2"
+              class="form-control form-control-lg form-control-dark border-primary shadow=lg rounded-xl my-2"
               type="text" value="Denver" id="search-value" />
-            <button class="btn btn-primary mt-0 btn-block btn-lg rounded-xl" id="search-button">
-              Search City
-            </button>
-          </div>
+              <button class="btn btn-primary mt-0 btn-block btn-lg rounded-xl" id="search-button">
+                Search City
+              </button>
+            </div>
         </div>
       </div>
     </div>
 
-    <div class="container mini my-2">
-      <div class="d-flex flex-row justify-content-around">
-        <i class="fas fa-history text-light locally-stored"> Denver </i>
-        <i class="fas fa-history text-light locally-stored"> Pueblo </i>
-        <i class="fas fa-history text-light locally-stored"> Durango</i>
+    <div class="container mini my-0">
+      <div class="d-flex flex-row justify-content-between" id="history_box">
+        
+
       </div>
     </div>
 
     <div class="container mini mt-3">
-      
+
       <div class="form-group">
         <p id="slider_index" class="text-center text-light m-0"></p>
         <!-- // git up -->
@@ -125,11 +122,12 @@
         </div>
       </div>
     </div>
-    
+
     <div class="container mini mt-3">
       <div class="row no-gutters">
         <div class="col-5">
-          <div class="card bg-transparent border-primary border-med text-light rounded-xl py-0 my-0 h-100 mx-1">
+          <div
+            class="card bg-transparent border-primary border-med text-light rounded-xl py-0 my-0 h-100 mx-1">
             <div class="card-header bg-primary rounded-xl">
               Currently:
             </div>
@@ -140,8 +138,7 @@
                   padding: 0.5rem 0rem 0.75rem 0.75rem;
                 }
               </style>
-              <ul
-                class="list-group list-group-flush text-capitalize my-0 rounded-xl">
+              <ul class="list-group list-group-flush text-capitalize my-0 rounded-xl">
                 <li class="list-group-item list-group-item-action weather" id="weather-description">
                   ...</li>
                 <li class="list-group-item list-group-item-action weather" id="weather-temperature">
@@ -154,12 +151,13 @@
                 </li>
               </ul>
             </div>
-            <img class="card-img-bottom bg-transparent border-0 mx-auto my-0 p-0" alt="forecast-icon"
-              id="weather-img" style="max-height:8rem;max-width:8rem">
+            <img class="card-img-bottom bg-transparent border-0 mx-auto my-0 p-0"
+              alt="forecast-icon" id="weather-img" style="max-height:8rem;max-width:8rem">
           </div>
         </div>
         <div class="col-7">
-          <div class="card bg-transparent border-primary text-light rounded-xl py-0 my-0 h-100 mx-1">
+          <div
+            class="card bg-transparent border-primary text-light rounded-xl py-0 my-0 h-100 mx-1">
             <div class="card-header bg-primary">
               5-Day Forecast
             </div>
@@ -169,35 +167,40 @@
                   class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
                   <span class="forecast">
                   </span>
-                  <img class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
+                  <img
+                    class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
                     src="img/02d@2x.png" alt="forecast-icon" style="max-height:4rem;max-width:4rem">
                 </a>
                 <a
                   class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
                   <span class="forecast">
                   </span>
-                  <img class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
+                  <img
+                    class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
                     src="img/02d@2x.png" alt="forecast-icon" style="max-height:4rem;max-width:4rem">
                 </a>
                 <a
                   class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
                   <span class="forecast">
                   </span>
-                  <img class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
+                  <img
+                    class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
                     src="img/02d@2x.png" alt="forecast-icon" style="max-height:4rem;max-width:4rem">
                 </a>
                 <a
                   class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
                   <span class="forecast">
                   </span>
-                  <img class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
+                  <img
+                    class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
                     src="img/02d@2x.png" alt="forecast-icon" style="max-height:4rem;max-width:4rem">
                 </a>
                 <a
                   class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
                   <span class="forecast">
                   </span>
-                  <img class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
+                  <img
+                    class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
                     src="img/02d@2x.png" alt="forecast-icon" style="max-height:4rem;max-width:4rem">
                 </a>
               </ul>
@@ -211,11 +214,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <!-- <script src="script.js"></script> -->
     <script src="converter_hhmm.js"></script>
     <script src="slider.js"></script>
     <script src="forecast.js"></script>
     <script src="currently.js"></script>
+    <script src="local.js"></script>
     <script src="init.js"></script>
   </body>
 

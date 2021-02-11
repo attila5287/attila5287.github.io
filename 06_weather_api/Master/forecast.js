@@ -15,7 +15,9 @@ function forecast_five_days ( city ) {
     // console.log( 'test ajax forecast');
     // console.log( 'w :>> ', w.city );
     $( "#weather-sunrise" ).text( "sunrise " + convert2HHMM( w.city.sunrise ) );
+    
     $( "#weather-sunset" ).text( "sunset " + convert2HHMM( w.city.sunset ) );
+    
     $( ".forecast" ).each( function ( i, el ) {
       $(this)
 				.addClass("text-capitalize")
