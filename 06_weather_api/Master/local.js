@@ -20,19 +20,24 @@ function update_history ( city ) {
 
   const hist = JSON.parse( window.localStorage.getItem( "history" )
   ) || {};
-  
-  // console.log( 'hist :>> ', Object.keys( hist ).map( d => hist[ d ] ) );
+  // console.log( 'loc stored cities :>> ', Object.keys( hist ).map( d => hist[ d ] ) );
   const set = new Set( Object.keys( hist ).map( d => hist[ d ] ) );
   // console.log('set :>> ', set);
-  if ( set.has( city ) ) {
+
+
+
+  const already_in_recents = set.has(city);
+  if ( already_in_recents) {
     
   console.log('city in recents'); 
   } else {
+
     const count = +$( "#history_counter" ).text();
     hist[ count ] = city;
     $( "#history_counter" ).text( count + 1 );
     window.localStorage.setItem( "history", JSON.stringify( hist ) );
-    console.log('hist :>> ', hist);
+
+    console.log( 'hist :>> ', hist );
     append_button( city );
   }
   
