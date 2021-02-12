@@ -11,23 +11,28 @@ function todays_weather(city) {
 		const d = {
 			// display those
 			city: w.name,
-			temperature: `Temperature:  ${w.main.temp}F / ${Math.round(
+			temperature: `Temperature:  ${w.main.temp} F / ${Math.round(
 				((w.main.temp - 32) / 180) * 100
-			)}C`,
+			)} C`,
+			TempFeelsLike: `Feels Like:  ${w.main.feels_like} F / ${Math.round(
+				((w.main.feels_like - 32) / 180) * 100
+			)} C`,
 			humidity: `Humidity is ${w.main.humidity}%`,
 			description: w.weather[0].description,
 			iconSrc: `https://openweathermap.org/img/wn/${w.weather[0].icon}@2x.png`,
-			TempFeelsLike: `${w.main.feels_like}`,
 			WindDegree: w.wind.deg,
 			WindSpeed: w.wind.speed,
 			SunRise: convert2HHMM(w.sys.sunrise),
 			SunSet: convert2HHMM(w.sys.sunset)
 		};
 		// console.log("display :>> ", d);
+    $("#weather-sunrise").text("sunrise " + d.SunRise + " AM");
 
+		$("#weather-sunset").text("sunset " + d.SunSet + " PM");
 		$("#weather-city").text(d.city);
 		$("#weather-description").text(d.description);
-		$("#weather-temperature").text(d.feels_like);
+		$("#weather-feelslike").text(d.TempFeelsLike);
+		$("#weather-temperature").text(d.temperature);
 		$("#weather-humidity").text(d.humidity);
 		$("#weather-img").attr("src", d.iconSrc);
 	}
