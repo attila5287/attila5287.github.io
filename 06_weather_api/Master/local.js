@@ -8,11 +8,11 @@ function reset_button () {
 $( '#reset_button' ).on( "click", reset_button );
 
 function init_history () {
-  [
-     "Pueblo",
-     "Alamosa",
-     "Durango"
-  ].forEach(c => update_history(c));
+  window.localStorage
+    .setItem( "history", JSON.stringify({}) );
+    
+  const def_cities = ["Pueblo", "Alamosa", "Durango", "Denver"];
+  def_cities.forEach( ( c ) => update_history( c ) );
 }
 
 function update_history ( city ) {
@@ -20,24 +20,21 @@ function update_history ( city ) {
 
   const hist = JSON.parse( window.localStorage.getItem( "history" )
   ) || {};
+
   // console.log( 'loc stored cities :>> ', Object.keys( hist ).map( d => hist[ d ] ) );
   const set = new Set( Object.keys( hist ).map( d => hist[ d ] ) );
   // console.log('set :>> ', set);
 
-
-
-  const already_in_recents = set.has(city);
+  const already_in_recents = set.has( city ); // bool
+  
   if ( already_in_recents) {
-    
-  console.log('city in recents'); 
-  } else {
-
+  console.log(`${city} in recents`); 
+  } else {// add button to hist box
     const count = +$( "#history_counter" ).text();
     hist[ count ] = city;
     $( "#history_counter" ).text( count + 1 );
     window.localStorage.setItem( "history", JSON.stringify( hist ) );
-
-    console.log( 'hist :>> ', hist );
+    // console.log( 'hist chk add:>> ', hist );
     append_button( city );
   }
   
