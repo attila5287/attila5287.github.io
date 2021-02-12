@@ -27,7 +27,7 @@ function todays_weather(city) {
 
 		$("#weather-city").text(d.city);
 		$("#weather-description").text(d.description);
-		$("#weather-temperature").text(d.temperature);
+		$("#weather-temperature").text(d.feels_like);
 		$("#weather-humidity").text(d.humidity);
 		$("#weather-img").attr("src", d.iconSrc);
 	}
