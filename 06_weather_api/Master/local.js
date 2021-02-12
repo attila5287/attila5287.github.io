@@ -17,19 +17,20 @@ function init_history () {
 
 function update_history ( city ) {
   city = city.trim();
-  const count = +$( "#history_counter" ).text();
-  $( "#history_counter" ).text( count+ 1 );
 
   const hist = JSON.parse( window.localStorage.getItem( "history" )
   ) || {};
   
   // console.log( 'hist :>> ', Object.keys( hist ).map( d => hist[ d ] ) );
   const set = new Set( Object.keys( hist ).map( d => hist[ d ] ) );
-  console.log('set :>> ', set);
-  if (set.has(city)) {
-   console.log('city in recents'); 
+  // console.log('set :>> ', set);
+  if ( set.has( city ) ) {
+    
+  console.log('city in recents'); 
   } else {
+    const count = +$( "#history_counter" ).text();
     hist[ count ] = city;
+    $( "#history_counter" ).text( count + 1 );
     window.localStorage.setItem( "history", JSON.stringify( hist ) );
     console.log('hist :>> ', hist);
     append_button( city );
