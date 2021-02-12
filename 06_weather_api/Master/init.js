@@ -1,6 +1,7 @@
 // console.log('init test');
 
 const default_city = 'Denver';
+init_history(); 
 forecast_five_days(default_city);
 todays_weather( default_city );
 update_slider( 8, default_city ); 

@@ -95,11 +95,20 @@
       </div>
     </div>
 
-    <div class="container mini my-0">
-      <div class="d-flex flex-row justify-content-start" id="history_box">
-        
-
+    <div class="container mini row my-0">
+       <div class="col-2 text-center text-secondary"> 
+        <button class="btn btn-outline-success btn-block p-0 mb-0" type="button" id="reset_button">
+          <i class="fas fa-undo"></i> 
+        </button>
+          <small class="mt-0">
+            reset
+         </small>
+      </div>     
+      <div class="col-1 text-secondary text-center align-items-start py-0">
+          <small class="mt-0">recents</small>
+          <h5 id="history_counter" class="fas fa-history mb-0"></h5>
       </div>
+      <div class="col-9" id="history_box"></div>
     </div>
 
     <div class="container mini mt-3">
