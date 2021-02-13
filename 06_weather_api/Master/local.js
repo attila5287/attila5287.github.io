@@ -17,8 +17,9 @@ function def_history () {
   $( '#history_box' ).empty();
   
   window.localStorage.setItem( "history", JSON.stringify( {} ) );
-
+  
   const def_cities = [ "Pueblo", "Alamosa", "Durango", "Denver" ];
+  $("#history_counter").text(0);
   for (let i = 0; i < def_cities.length; i++) {
     const c = def_cities[i];
     update_history( c );
@@ -61,26 +62,28 @@ function update_history ( c ) {
 
   const hist = JSON.parse( window.localStorage.getItem( "history" ) );
   const cities = Object.keys( hist ).map( d => hist[ d ] );
-  console.log('cities :>> ', cities);
+  // console.log('cities :>> ', cities);
   const set = new Set( cities ) ;
-  console.log('set :>> ', set);
+  // console.log('set :>> ', set);
 
   const already_in_recents = set.has( city ); // bool
   
-  console.log( 'already in recents :>> ', already_in_recents );
   
   const count = +$( "#history_counter" ).text();
   if ( already_in_recents) {
-    console.log( `${city} in recents` ); 
+    console.log( 'already in recents :>> ', already_in_recents );
+    console.log( `${city} in recents COUNTER CHK` ); 
+    console.log('$( "Hst Ctr:>> ', +$( "#history_counter" ).text( ));
     // console.log('recents hist :>> ', hist);
     $( "#history_counter" ).text( count );
     window.localStorage.setItem( "history", JSON.stringify( hist ) );
   } else {// add button to hist box
+    console.log( 'not already in recents :>> ', already_in_recents );
     append_button( city );
     hist[ count ] = city;
     $( "#history_counter" ).text( count + 1 );
     window.localStorage.setItem( "history", JSON.stringify( hist ) );
-    console.log( 'hist chk add:>> ', hist );
+    // console.log( 'hist chk add:>> ', hist );
 
 
   }
