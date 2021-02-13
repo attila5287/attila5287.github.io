@@ -32,7 +32,13 @@ function init_leaf_navs (city) {
     const this_city = cities[ i ];
     if (this_city == city) {
       console.log('if if if ');
+      $( this )
+        .removeClass('btn-outline-primary')
+        .addClass('btn-primary')
+        .text( this_city );
+    } else {
+      $( this ).text( this_city );
+
     }
-    $( this ).text( this_city );
   } );
 }

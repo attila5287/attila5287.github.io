@@ -29,7 +29,7 @@ function update_slider(v, city) {
       $("#slider_description").text(w.list[changed-1].weather[0].description);
       $("#slider_icon").attr(
         "src",
-        "http://openweathermap.org/img/wn/" +
+        "https://openweathermap.org/img/wn/" +
           w.list[changed-1].weather[0].icon +
           "@2x.png"
       );
