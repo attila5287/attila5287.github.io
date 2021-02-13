@@ -1,4 +1,4 @@
-init_leaf_navs();
+init_leaf_navs('Denver');
 const city = $("#leaf_selected_city").text().trim();
 
 $.each($(".leaflet_city"), function (i, v) {
@@ -19,7 +19,7 @@ $.each($(".leaflet_city"), function (i, v) {
 });
 
 
-function init_leaf_navs () {
+function init_leaf_navs (city) {
   $.each( $( ".leaflet_city" ), function ( i, v ) {
     const cities = [
 			"Denver",
@@ -30,6 +30,9 @@ function init_leaf_navs () {
 			"Durango"
 		];
     const this_city = cities[ i ];
+    if (this_city == city) {
+      console.log('if if if ');
+    }
     $( this ).text( this_city );
   } );
 }
