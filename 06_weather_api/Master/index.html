@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -96,19 +95,25 @@
     </div>
 
     <div class="container mini text-center my-0">
-      <div class="row">
-        <div class="col-2"> 
-          <button class="btn btn-success btn-block p-0 mb-0" type="button" id="reset_button">
-            <i class="fas fa-undo"></i> 
+      <div class="row no-gutters">
+        <div class="col-1"> 
+          <button class="btn btn-warning btn-block p-1 mb-0" type="button" id="defaults_button">
+            <i class="fas fa-list-alt text-xl"></i> 
           </button>
-            <p class="text-success"><b>reset</b></p>
+            <small class="text-warning">defaults</small>
         </div>     
-        <div class="col-1 text-secondary">
-            <small class="mt-0">recents</small>
-            <h5 class="text-nowrap">
-              <span class="fas fa-history"></span>
-              <span id="history_counter"></span>
-            </h5>
+        <div class="col-1"> 
+          <button class="btn btn-success btn-block p-1 mb-0" type="button" id="reset_button">
+            <i class="fas fa-undo-alt text-xl"></i> 
+          </button>
+            <small class="text-success">reset</small>
+        </div>     
+        <div class="col-1">
+          <h4 class="text-nowrap text-secondary bg-transparent px-1 pt-2 pb-0 mb-0 rounded">
+            <span class="fas fa-history"></span>
+            <span id="history_counter"></span>
+          </h4>
+          <small class="text-secondary">recents</small>
         </div>
         <div class="col-9" id="history_box"></div>
         
@@ -119,13 +124,17 @@
     <div class="container mini mt-3">
 
       <div class="form-group">
+        <p id="slider_hour" class="text-white text-xl"> </p>
         <p id="slider_index" class="text-center text-light m-0"></p>
         <!-- // git up -->
         <input id="slider" class="custom-range" type="range" name="" min="1" max="40">
       </div>
 
       <div class="card bg-info border-med border-primary rounded-xl">
-        <div class="card-header bg-primary text-light rounded-xl">Forecast Slider</div>
+        <div class="card-header bg-primary text-light rounded-xl py-1 text-xl">
+          <h2 class="far fas fa-thermometer-half mr-2"></h2>
+          <span id="slider_header"></span>
+        </div>
         <div class="card-body row align-items-center my-0 py-0">
           <div class="col-4">
             <img id="slider_icon" class="card-img-top my-0 p-0" src="img/02d@2x.png" alt="">
@@ -136,7 +145,6 @@
         </div>
       </div>
     </div>
-
     <div class="container mini mt-3">
       <div class="row no-gutters">
         <div class="col-5">
@@ -235,6 +243,7 @@
     <script src="forecast.js"></script>
     <script src="currently.js"></script>
     <script src="local.js"></script>
+    <script src="momento.js"></script>
     <script src="init.js"></script>
   </body>
 
