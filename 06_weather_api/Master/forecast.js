@@ -19,7 +19,7 @@ function forecast_five_days ( city ) {
     $( ".forecast-img" ).each( function ( i, el ) {
       $( this ).attr(
         "src",
-        `http://openweathermap.org/img/wn/${w.list[ i * 7 ].weather[ 0 ].icon}@2x.png`
+        `https://openweathermap.org/img/wn/${w.list[ i * 7 ].weather[ 0 ].icon}@2x.png`
       );
       // console.log('i forecast img :>> ', i);  
     } );
