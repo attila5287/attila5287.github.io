@@ -7,8 +7,9 @@ $.each($(".leaflet_city"), function (i, v) {
     $( this )
     .addClass( 'btn-primary' )
     .addClass( 'text-light' )
-    ;
-    
+      ;
+    $("#leaf_selected_img").attr("src", "img/maps/"+$(this).text().slice(0,4).toLowerCase()+".jpg");
+    console.log("img/maps/" + city.slice(0, 4).toLowerCase() + ".jpg");
     $( this )
       .siblings()
       .removeClass( 'btn-primary' )
