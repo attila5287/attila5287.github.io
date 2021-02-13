@@ -8,11 +8,12 @@ $.each($(".leaflet_city"), function (i, v) {
     .addClass( 'btn-primary' )
     .addClass( 'text-light' )
       ;
-    $("#leaf_selected_img")
-			.attr(
-				"src",
-				"../Master/img/maps/" + $(this).text().slice(0, 4).toLowerCase() + ".jpg"
-			);
+    $("#leaf_selected_img").attr(
+			"src",
+			"https://raw.githubusercontent.com/attila5287/rota-img/main/maps/" +
+				$(this).text().slice(0, 4).toLowerCase() +
+				".JPG"
+		);
     $( this )
       .siblings()
       .removeClass( 'btn-primary' )
