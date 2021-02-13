@@ -2,8 +2,10 @@ init_leaf_navs('Denver');
 const city = $("#leaf_selected_city").text().trim();
 
 $.each($(".leaflet_city"), function (i, v) {
-	$(this).on("click", () => {
-    $( "#leaf_selected_city" ).text( $( this ).text() );
+  $( this ).on( "click", () => {
+    const clicked = $(this).text();
+    $( "#leaf_selected_city" ).text( clicked );
+    $("#search-value").val(clicked);
     const default_city = "Denver";
 		forecast_five_days($(this).text());
 		todays_weather($(this).text());
