@@ -1,8 +1,5 @@
 const default_city = 'Denver';
-forecast_five_days(default_city);
-todays_weather( default_city );
-update_slider( 8, default_city ); 
-update_history(default_city);
+render(default_city);
 // git up
 
 $("#search-value").on("change", function () {
@@ -16,3 +13,10 @@ $("#search-value").on("change", function () {
 } );
 $("#reset_button").on("click", reset_button);
 $("#def_btn").on("click", def_history);
+function render (c) {
+	forecast_five_days( c );
+	todays_weather( c );
+	update_slider( 8, c );
+	update_history( c );
+}
+

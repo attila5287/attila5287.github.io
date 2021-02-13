@@ -162,13 +162,34 @@
 
 </div>
     <div class="container mini mt-3">
-
-      <div class="form-group">
-        <p id="slider_index" class="text-center text-light m-0"></p>
-        <!-- // git up -->
-        <input id="slider" class="custom-range" type="range" name="" min="1" max="40">
+      <div class="form-group row align-items-center">
+        <div class="form-group col-3">
+          <div class="btn-group" role="group" aria-label="Button group">
+            <button data-increment="-3" class="slider_buttons btn btn-warning rounded-xl" type="button">
+              <h3 class="fas fa-angle-double-left my-0"></h3>
+            </button>
+            <button data-increment="-1" class="slider_buttons btn btn-warning rounded-xl" type="button">
+              <h3 class="fas fa-chevron-left my-0"></h3>
+            </button>
+            
+          </div>
+        </div>
+        <div class="form-group col-6 px-0">
+          <p id="slider_index" class="text-center text-light m-0"></p>
+          <!-- // git up -->
+          <input id="slider" class="custom-range" type="range" name="" min="1" max="40">
+        </div>
+        <div class="form-group col-3">
+          <div class="btn-group" role="group" aria-label="Button group">
+            <button data-increment="1" class="slider_buttons btn btn-warning rounded-xl" type="button">
+                <h3 class="fas fa-chevron-right my-0"></h3>
+              </button>
+            <button data-increment="3" class="slider_buttons btn btn-warning rounded-xl" type="button">
+                <h3 class="fas fa-angle-double-right my-0"></h3>
+              </button>
+          </div>
+        </div>
       </div>
-
       <div class="card bg-info border-med border-primary rounded-xl">
         <div class="card-header bg-primary text-light py-1 text-xl">
           <h2 class="far fa-clock mr-2"></h2>
@@ -289,6 +310,7 @@
     <script src="local.js"></script>
     <script src="momento.js"></script>
     <script src="leaf_nav.js"></script>
+    <script src="slider_buttons.js"></script>
     <script src="init.js"></script>
   </body>
 
