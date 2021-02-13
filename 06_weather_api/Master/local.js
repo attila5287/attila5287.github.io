@@ -58,7 +58,7 @@ function append_button ( city ) {
 }
 function update_history ( c ) {
   const city = c.trim();
-  console.log('city :>> ', city);
+  // console.log('city :>> ', city);
 
   const hist = JSON.parse( window.localStorage.getItem( "history" ) );
   const cities = Object.keys( hist ).map( d => hist[ d ] );
@@ -71,14 +71,13 @@ function update_history ( c ) {
   
   const count = +$( "#history_counter" ).text();
   if ( already_in_recents) {
-    console.log( 'already in recents :>> ', already_in_recents );
-    console.log( `${city} in recents COUNTER CHK` ); 
-    console.log('$( "Hst Ctr:>> ', +$( "#history_counter" ).text( ));
-    // console.log('recents hist :>> ', hist);
+    // console.log( 'already in recents :>> ', already_in_recents );
+    // console.log( `${city} in recents COUNTER CHK` ); 
+    // console.log('$( "Hst Ctr:>> ', +$( "#history_counter" ).text( ));
+    // console.log('recents from local:>> ', hist);
     $( "#history_counter" ).text( count );
     window.localStorage.setItem( "history", JSON.stringify( hist ) );
   } else {// add button to hist box
-    console.log( 'not already in recents :>> ', already_in_recents );
     append_button( city );
     hist[ count ] = city;
     $( "#history_counter" ).text( count + 1 );
