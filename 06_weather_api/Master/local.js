@@ -1,3 +1,4 @@
+
 function reset_button () {
   console.log( 'test reset' );
   
@@ -6,7 +7,6 @@ function reset_button () {
   $( '#history_box' ).empty();
 }
 $( '#reset_button' ).on( "click", reset_button );
-
 function init_history () {
   window.localStorage
     .setItem( "history", JSON.stringify({}) );
@@ -14,6 +14,8 @@ function init_history () {
   const def_cities = ["Pueblo", "Alamosa", "Durango", "Denver"];
   def_cities.forEach( ( c ) => update_history( c ) );
 }
+$("#defaults_button").on("click", init_history);
+
 
 function update_history ( city ) {
   city = city.trim();

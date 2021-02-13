@@ -27,8 +27,6 @@ function update_slider_date(val) {
   if (day<1) {
     const date = moment().format('LL');
     $("#slider_date").text(date);
-    console.log("day if :>> ", day);
-    console.log("date else :>> ", date);
     
   } else {
     const date = moment().add(day, "days").calendar();

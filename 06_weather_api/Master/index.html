@@ -97,25 +97,26 @@
     <div class="container mini text-center my-0">
       <div class="row no-gutters">
         <div class="col-1"> 
-          <button class="btn btn-warning btn-block p-1 mb-0" type="button" id="defaults_button">
+          <button class="btn btn-outline-warning btn-block btn-sm p-1 mb-0" type="button" id="defaults_button">
             <i class="fas fa-list-alt text-xl"></i> 
           </button>
             <small class="text-warning">defaults</small>
         </div>     
         <div class="col-1"> 
-          <button class="btn btn-success btn-block p-1 mb-0" type="button" id="reset_button">
+          <button class="btn btn-outline-success btn-block btn-sm p-1 mb-0" type="button" id="reset_button">
             <i class="fas fa-undo-alt text-xl"></i> 
           </button>
             <small class="text-success">reset</small>
         </div>     
+        <div class="col-9 text-center" id="history_box"></div>
         <div class="col-1">
-          <h4 class="text-nowrap text-secondary bg-transparent px-1 pt-2 pb-0 mb-0 rounded">
+          <h4 class="text-nowrap text-secondary bg-transparent px-1 pt-1 pb-1 mb-0 rounded">
             <span class="fas fa-history"></span>
-            <span id="history_counter"></span>
+            <b id="history_counter"></b>
           </h4>
+          <hr class="border-secondary my-0">
           <small class="text-secondary">recents</small>
         </div>
-        <div class="col-9" id="history_box"></div>
         
       </div>
 
