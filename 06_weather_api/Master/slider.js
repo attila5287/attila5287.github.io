@@ -21,9 +21,9 @@ function update_slider(v, city) {
 		);
     const s = $("#slider");
     s.on("change", function () {
-      const changed = $( "#slider" ).val();
+      const changed = +$( "#slider" ).val();
       $("#slider").val(changed);
-      console.log('changed :>> ', changed);
+      // console.log('changed :>> ', changed);
       $("#slider_index").text(`${city}: ${changed * 3} hours later`);
       
       $("#slider_description").text(w.list[changed-1].weather[0].description);

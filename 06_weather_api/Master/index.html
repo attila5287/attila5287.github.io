@@ -124,15 +124,15 @@
     <div class="container mini mt-3">
 
       <div class="form-group">
-        <p id="slider_hour" class="text-white text-xl"> </p>
         <p id="slider_index" class="text-center text-light m-0"></p>
         <!-- // git up -->
         <input id="slider" class="custom-range" type="range" name="" min="1" max="40">
       </div>
 
       <div class="card bg-info border-med border-primary rounded-xl">
-        <div class="card-header bg-primary text-light rounded-xl py-1 text-xl">
-          <h2 class="far fas fa-thermometer-half mr-2"></h2>
+        <div class="card-header bg-primary text-light py-1 text-xl">
+          <h2 class="far fa-clock mr-2"></h2>
+          <span id="slider_hour" class="text-white text-xl"> </>
           <span id="slider_header"></span>
         </div>
         <div class="card-body row align-items-center my-0 py-0">
@@ -142,6 +142,10 @@
           <div class="col-8">
             <h1 id="slider_description" class="card-title text-light"> Description</h1>
           </div>
+        </div>
+        <div class="card-footer bg-primary text-light">
+          <h2 class="far fa-calendar-plus mr-2"></h2>
+          <span id="slider_date" class="text-xl"></span>
         </div>
       </div>
     </div>
