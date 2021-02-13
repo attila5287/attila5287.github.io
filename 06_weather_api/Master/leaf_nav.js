@@ -22,12 +22,12 @@ $.each($(".leaflet_city"), function (i, v) {
 				$(this).text().slice(0, 4).toLowerCase() +
 				".JPG"
 		);
-    $( this )
-      .siblings()
-      .removeClass( 'btn-dark' )
-      .removeClass( 'text-light' )
-      .addClass( 'btn-primary' )
-      ;
+    $(this)
+			.siblings()
+			.removeClass("btn-dark")
+			.removeClass("text-light")
+			.addClass("selected_leaflet")
+			.addClass("btn-primary");
 	});
 });
 
@@ -44,11 +44,12 @@ function init_leaf_navs (city) {
 		];
     const this_city = cities[ i ];
     if (this_city == city) {
-      console.log('if if if ');
-      $( this )
-        .removeClass('btn-primary')
-        .addClass('btn-dark')
-        .text( this_city );
+      // console.log('if this city  ');
+      $(this)
+				.removeClass("selected_leaflet")
+				.removeClass("btn-primary")
+				.addClass("btn-dark")
+				.text(this_city);
     } else {
       $( this ).text( this_city );
 

@@ -124,7 +124,10 @@
         <div class="d-flex flex-row justify-content-between">
 
           <div><i class="fas fa-route"></i>
-          <span>Route</span></div>
+          <span>Route: </span>
+          <span class="text-white" id="vert_index">0</span>/
+          <span class="text-white" id="vert_length"></span>
+        </div>
           <div>
             <span id="leaf_selected_city">Denver</span>
             <i class="fas fa-map-marked"></i>
@@ -133,22 +136,38 @@
           </div>
         </div>
       </h3>
-      <div class="card-body bg-primary rounded p-0 m-0">
-        <div class="row py-2 my-2 bg-dark">
-          <div class="col-5 pl-0 bg-dark">
-            <button class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
+      <div class="card-body bg-primary rounded p-0 m-0 pb-2">
+        <div class="row py-2 my-2 bg-dark rounded-xl">
+          <div class="col-3 pl-0 bg-dark">
+            <button data-vertical_index="0" class="selected_leaflet leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
             </button>
-            <button class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
+            <button  data-vertical_index="1" class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
             </button>
-            <button class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
+            <button  data-vertical_index="2" class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
             </button>
-            <button class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
+            <button  data-vertical_index="3" class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
             </button>
-            <button class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
+            <button data-vertical_index="4" class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
             </button>
-            <button class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
+            <button  data-vertical_index="5"class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
             </button>
             
+          </div>
+          <div class="col-2 pt-2">
+            <div class="btn-group-vertical rounded-xl w-100" role="group" aria-label="Vertical button group">
+              <button data-increment="-2" class="route_btns w-100 rounded-xl btn btn-primary btn-block py-3" type="button">
+                <i class="fas fa-angle-double-up fa-fw"></i> 
+              </button>
+              <button data-increment="-1" class="route_btns w-100 rounded-xl btn btn-primary btn-block py-4" type="button">
+                <i class="fas fas fa-chevron-up fa-fw"></i>
+              </button>
+              <button data-increment="1" class="route_btns w-100 rounded-xl btn btn-primary btn-block py-4" type="button">
+                <i class="fas fa-chevron-down fa-fw"></i> 
+              </button>
+              <button data-increment="2" class="route_btns w-100 rounded-xl btn btn-primary btn-block py-3" type="button">
+                <i class="fas fa-angle-double-down fa-fw"></i> 
+              </button>
+            </div>
           </div>
           <div class="col-7 bg-dark p-0 h-100 text-right">
             <img class="card-img bg-primary p-2 rounded-xl" src="https://raw.githubusercontent.com/attila5287/rota-img/main/maps/denv.JPG" alt="show-on-map"  id="leaf_selected_img" style="max-height: 18rem;max-width: 18rem;">
@@ -311,6 +330,7 @@
     <script src="momento.js"></script>
     <script src="leaf_nav.js"></script>
     <script src="slider_buttons.js"></script>
+    <script src="route_buttons.js"></script>
     <script src="init.js"></script>
   </body>
 
