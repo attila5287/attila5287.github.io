@@ -11,7 +11,7 @@ $.each($(".leaflet_city"), function (i, v) {
     $("#leaf_selected_img")
 			.attr(
 				"src",
-				"img/maps/" + $(this).text().slice(0, 4).toLowerCase() + ".jpg"
+				"../Master/img/maps/" + $(this).text().slice(0, 4).toLowerCase() + ".jpg"
 			);
     $( this )
       .siblings()
