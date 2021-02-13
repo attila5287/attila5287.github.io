@@ -121,40 +121,48 @@
 
     </div>
 <div class="container mini text-center my-0">
-  <div class="row no-gutters">
-    <div class="col-4 bg-primary rounded-xl text-left p-2">
-      <h4 class="ml-2 fas fa-map-signs text-light"> <small>route</small></h4>
-        
-        <hr class="border-light my-0">
-        <div class="btn-group-vertical mt-2" role="group" aria-label="Vertical button group">
-          <button class="leaflet_city rounded-xl py-3 btn btn-light btn-sm border-0 btn-block text-left" type="button">city
-          </button>
-          <button class="leaflet_city rounded-xl py-3 btn btn-light btn-sm border-0 btn-block text-left" type="button">city
-          </button>
-          <button class="leaflet_city rounded-xl py-3 btn btn-light btn-sm border-0 btn-block text-left" type="button">city
-          </button>
-          <button class="leaflet_city rounded-xl py-3 btn btn-light btn-sm border-0 btn-block text-left" type="button">city
-          </button>
-          <button class="leaflet_city rounded-xl py-3 btn btn-light btn-sm border-0 btn-block text-left" type="button">city
-          </button>
-          <button class="leaflet_city rounded-xl py-3 btn btn-light btn-sm border-0 btn-block text-left" type="button">city
-          </button>
-        </div>
-    </div>
-    <div class="col-8 pl-2">
-      <div class="card bg-primary border-med border-primary rounded-xl mt-2 h-100">
-        <h3 class="card-header bg-primary text-light pt-0 pb-1" > 
-          <i class="fas fa-map-marked"></i>
-          <span id="leaf_selected_city">Denver</span>
-        </h3>
-        <div class="card-body bg-dark rounded p-0 m-0">
-          <img class="card-img p-0 m-0 rounded-xl my-2" src="https://raw.githubusercontent.com/attila5287/rota-img/main/maps/denv.JPG" alt="show-on-map"  id="leaf_selected_img" style="max-height: 16rem;max-width: 18rem;">
+    <div class="card bg-primary border-med border-primary rounded-xl mt-2 h-100">
+      <h3 class="card-header bg-primary text-light pt-0 pb-1" > 
+        <div class="d-flex flex-row justify-content-around">
 
+          <div><i class="fas fa-route"></i>
+          <span id="leaf_selected_city">Route:</span></div>
+          <div>
+            <i class="fas fa-map-marked"></i>
+            <span id="leaf_selected_city">Denver</span>
+            
+          
+          </div>
         </div>
-        <img class="card-img-bottom" src="" alt="">
+      </h3>
+      <div class="card-body bg-primary rounded p-0 m-0">
+        <div class="row">
+          <div class="col-5">
+          <button class="leaflet_city my-2  rounded-xl py-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
+          </button>
+          <button class="leaflet_city my-2  rounded-xl py-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
+          </button>
+          <button class="leaflet_city my-2  rounded-xl py-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
+          </button>
+          <button class="leaflet_city my-2  rounded-xl py-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
+          </button>
+          <button class="leaflet_city my-2  rounded-xl py-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
+          </button>
+          <button class="leaflet_city my-2  rounded-xl py-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
+          </button>
+  
+          </div>
+          <div class="col-7">
+            
+            <img class="card-img p-0 m-0 rounded-xl my-2" src="https://raw.githubusercontent.com/attila5287/rota-img/main/maps/denv.JPG" alt="show-on-map"  id="leaf_selected_img" style="max-height: 16rem;max-width: 18rem;">
+          </div>
+        </div>
+
       </div>
+      <img class="card-img-bottom" src="" alt="">
     </div>
-  </div>
+    
+  
 
 </div>
     <div class="container mini mt-3">
