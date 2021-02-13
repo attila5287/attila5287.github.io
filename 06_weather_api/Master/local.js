@@ -32,7 +32,7 @@ function append_button(city) {
 		.attr("data-name", city)
 		.attr(
 			"class",
-			"btn btn-outline-secondary btn-sm rounded-xl locally-stored mx-2"
+			"btn btn-outline-secondary btn-sm border-0 rounded-xl locally-stored mx-2"
 		);
 
 	hist_btn.text(city);
