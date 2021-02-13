@@ -1,7 +1,7 @@
 const current_hour = moment().hour();
 const s = $("#slider_hour");    
-update_slider_hour(current_hour + 24);
-update_slider_date(current_hour + 24);
+update_slider_hour(8);
+update_slider_date(8);
 
 const slider = $( "#slider" ) ;    
 slider.on( "input", () => { 
@@ -13,6 +13,11 @@ slider.on( "input", () => {
 });
 
 function update_slider_hour ( val ) {
+  // console.log('val :>> ', val);
+  val = +val
+  const test = current_hour + ( ( val * 3 ) % 12 ) + " PM";
+  // console.log( 'test :>> ', test );
+  
   if (+current_hour + ((val * 3) % 24) > 12) {
     s.text(current_hour + ((val * 3) % 12) + " PM");
   } else if (+current_hour + ((val * 3) % 24) < 12) {
@@ -20,7 +25,8 @@ function update_slider_hour ( val ) {
   }
 }
 
-function update_slider_date(val) {
+function update_slider_date ( val ) {
+  val= +val
 	const hours_from_now = val * 3;
   const day = Math.floor( hours_from_now / 24 );
   

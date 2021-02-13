@@ -1,8 +1,3 @@
-// console.log( 'test forecast' );
-// forecast_five_days( 'Denver' );
-const todays_date =  moment().format( "MMM Do YY" ) ;
-
-
 function forecast_five_days ( city ) {
   const API_key = "42a5a7b661c854194cb0539e5fd1a86f";
   const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_key}`;
