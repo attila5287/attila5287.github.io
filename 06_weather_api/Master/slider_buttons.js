@@ -3,6 +3,9 @@ $(this).on("click", function () {
   const current_city = $( '#weather-city' ).text( );
   const increment = +$( this ).attr( "data-increment" );
   const current_value = +$( '#slider' ).val();
-  update_slider(current_value + increment, current_city); 
+  const changed = current_value + increment; 
+  update_slider( current_value + increment, current_city ); 
+  update_slider_hour(changed);
+	update_slider_date(changed);
 });
 });
