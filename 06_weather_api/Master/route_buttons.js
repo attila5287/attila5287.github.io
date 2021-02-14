@@ -1,17 +1,26 @@
-console.log( 'route test' );
-$("#vert_length").text(+$(".leaflet_city").length);
+const len = $( ".leaflet_city" ).length; // count
+let vert_index = +$( "#vert_index" ).text();
+$("#vert_length").text(+len);
+
+console.log('len :>> ', len);
 
 $('.route_btns').each(function (index, element) {
 $(this).on("click", function () {
-  const inc = +$(this).attr("data-increment");
-  const vert_index = +$( "#vert_index" ).text();
-  $( "#vert_index" ).text( +vert_index + inc );
+  const inc = +$( this ).attr( "data-increment" );
+  // console.log( 'increment :>> ', inc );
   
-  console.log( inc );
-  console.log('object :>> ', vert_index);
-  
-  const el = $( '.leaflet_city' )[ vert_index + inc ] || $( '.leaflet_city' )[ -1 ];
-    el.click()
+  const fin_idx = vert_index + inc; // final index
+  console.log( 'final index :>> ', fin_idx );
+  console.log('len :>> ', len);
+  if ( fin_idx < len ) {
+    $(".leaflet_city")[fin_idx].click();
+
+    $( "#vert_index" ).text( fin_idx );
+    vert_index = fin_idx  ;
+    
+  } else {
+    console.log('route btn else');
+  }
   
 });
   

@@ -1,4 +1,4 @@
-$(".slider_buttons").each(function (i, el) {
+$(".slider_btn").each(function (i, el) {
 $(this).on("click", function () {
   const current_city = $( '#weather-city' ).text( );
   const increment = +$( this ).attr( "data-increment" );
