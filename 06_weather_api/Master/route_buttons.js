@@ -12,15 +12,14 @@ $(this).on("click", function () {
   const fin_idx = vert_index + inc; // final index
   console.log( 'final index :>> ', fin_idx );
   console.log('len :>> ', len);
-  if ( fin_idx < len ) {
-    $(".leaflet_city")[fin_idx].click();
+  if (fin_idx < len && fin_idx >= 0) {
+		$(".leaflet_city")[fin_idx].click();
 
-    $( "#vert_index" ).text( fin_idx );
-    vert_index = fin_idx  ;
-    
-  } else {
-    console.log('route btn else');
-  }
+		$("#vert_index").text(fin_idx);
+		vert_index = fin_idx;
+	} else {
+		console.log("route btn else");
+	}
   
 });
   
