@@ -221,13 +221,13 @@
 
     </div>
 <div class="container mini text-center my-0">
-    <div class="card bg-primary border-med border-primary rounded-xl mt-2 h-100">
+    <div class="card bg-transparent border-med border-primary rounded-xl mt-2 h-100">
       <h3 class="card-header bg-primary text-light pt-0 pb-1" > 
         <div class="d-flex flex-row justify-content-between">
 
           <div><i class="fas fa-route"></i>
           <span>Route: </span>
-          <span class="text-white" id="vert_index">0</span>/
+          <span class="text-white" id="vert_index">1</span>/
           <span class="text-white" id="vert_length"></span>
         </div>
           <div>
@@ -238,9 +238,12 @@
           </div>
         </div>
       </h3>
-      <div class="card-body bg-primary rounded p-0 m-0 pb-2">
-        <div class="row py-2 my-2 bg-dark rounded-xl">
-          <div class="col-3 pl-0 bg-dark text-center">
+      <div class="card-body">
+        <div class="progress mb-4 mt-0">
+          <div id="route_progress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 10%"></div>
+        </div>        
+        <div class="row">
+          <div class="col-4">
             <button data-vertical_index="0" class="selected_leaflet leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
             </button>
             <button  data-vertical_index="1" class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
@@ -255,7 +258,7 @@
             </button>
             
           </div>
-          <div class="col-3 pt-2">
+          <div class="col-2">
             <div class="btn-group-vertical rounded-xl w-100" role="group" aria-label="Vertical button group">
               <button data-increment="-2" class="route_btns w-100 rounded-xl btn btn-warning btn-block py-3" type="button">
                 <i class="fas fa-angle-double-up fa-fw"></i> 
@@ -271,7 +274,7 @@
               </button>
             </div>
           </div>
-          <div class="col-6 bg-dark p-0 h-100 text-right">
+          <div class="col-6">
             <img class="card-img bg-primary p-2 rounded-xl" src="https://raw.githubusercontent.com/attila5287/rota-img/main/maps/denv.JPG" alt="show-on-map"  id="leaf_selected_img" style="max-height: 18rem;max-width: 18rem;">
           </div>
         </div>
@@ -342,32 +345,50 @@
         <div class="col-5">
           <div
             class="card bg-transparent border-primary border-med text-light rounded-xl py-0 my-0 h-100 mx-1">
-            <div class="card-header bg-primary rounded-xl">
-              Currently:
+            <div class="card-header bg-primary rounded-xl align-items-center">
+                <i class="far fa-clock text-xl mr-2"></i>
+               <b>
+                 <span id="currently"></span>
+               </b>
+              
             </div>
             <div class="card-body">
-              <!-- main figures classed holder-animated-main  -->
-              <style>
-                .list-group-item-action {
-                  padding: 0.5rem 0rem 0.75rem 0.75rem;
-                }
-              </style>
-              <ul class="list-group list-group-flush text-capitalize my-0 rounded-xl">
-                <li class="list-group-item list-group-item-action weather" id="weather-description">
-                  ...</li>
-                <li class="list-group-item list-group-item-action weather" id="weather-temperature">
-                  ...</li>
-                <li class="list-group-item list-group-item-action weather" id="weather-feelslike">
-                  ...</li>
-                <li class="list-group-item list-group-item-action weather" id="weather-humidity">...
-                </li>
-                <li class="list-group-item list-group-item-action weather" id="weather-sunrise">...
-                </li>
-                <li class="list-group-item list-group-item-action weather" id="weather-sunset">...
-                </li>
-              </ul>
+                <p>
+                  <i class="fas fa-chart-bar"></i>
+
+                  <span class="weather" id="weather-description">
+                    ...</span>
+
+                </p>
+              
+              <p>
+                <i class="fas fa-temperature-high"></i>
+                <span class="weather" id="weather-temperature">
+                  ...</span>
+              </p>
+
+                <p>
+                  <i class="fas fa-temperature-high"></i>
+                  <span class="weather" id="weather-feelslike">
+                  </span>
+                </p>
+                  <p>
+                    <i class="fas fa-cloud-rain"></i>
+                    <span class="weather" id="weather-humidity">...
+                    </span>
+                  </p>
+                  <p>
+                    <i class="fas fa-sun"></i>
+                    <span class="weather" id="weather-sunrise">...
+                    </span>
+                  </p>
+                  <p>
+                    <i class="fas fa-cloud-sun"></i>
+                    <span class="weather" id="weather-sunset">...
+                    </span>
+                  </p>
             </div>
-            <img class="card-img-bottom bg-transparent border-0 mx-auto my-0 p-0"
+              <img class="card-img-bottom bg-transparent border-0 mx-auto my-0 p-0"
               alt="forecast-icon" id="weather-img" style="max-height:8rem;max-width:8rem">
           </div>
         </div>

@@ -13,6 +13,7 @@ $.each($(".leaflet_city"), function (i, v) {
 		update_history($(this).text());
     $( this )
     .removeClass( 'btn-primary' )
+    .removeClass( 'selected_leaflet' )
     .addClass( 'btn-dark' )
     .addClass( 'text-light' )
       ;

@@ -1,4 +1,8 @@
 const current_hour = moment().hour();
+
+const c = $( "#currently" );  
+c.text( moment().format('LLLL'));
+
 const s = $("#slider_hour");    
 update_slider_hour(8);
 update_slider_date(8);
