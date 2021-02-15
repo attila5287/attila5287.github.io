@@ -21,25 +21,16 @@ function update_slider(v, city) {
       "@2x.png"
       
     );
-
     const icono = w.list[ v ].weather[ 0 ].icon;
     day_or_night = {
       'd' : 'day',
       'n' : 'night',
     }
     if ( day_or_night[ icono.slice( -1 ) ] == 'night' ) {
-      $("#slider_icon").attr(
-				"class",
-				"img-thumbnail p-0 m-0 bg-secondary border-0"
-			);
-      
-		}
+      $("#slider_bg").attr("class", "card-body bg-secondary");
+    }
     if ( day_or_night[ icono.slice( -1 ) ] == 'day' ) {
-      $("#slider_icon").attr(
-				"class",
-				"img-thumbnail p-0 m-0 bg-info border-0"
-			);
-      
+      $("#slider_bg").attr("class", "card-body bg-info");
 		}
 		
 
