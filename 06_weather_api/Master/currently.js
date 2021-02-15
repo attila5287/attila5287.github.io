@@ -34,7 +34,16 @@ function todays_weather(city) {
 		$("#weather-feelslike").text(d.TempFeelsLike);
 		$("#weather-temperature").text(d.temperature);
 		$("#weather-humidity").text(d.humidity);
-		$("#weather-img").attr("src", d.iconSrc);
+		$( "#weather-img" ).attr( "src", d.iconSrc );
+		
+		if (w.weather[0].icon.slice(-1) == "n") {
+			$("#weather-img").removeClass("bg-info").addClass("bg-secondary p-4");
+		}
+
+		if ( w.weather[0].icon.slice( -1 ) == 'd' ) {
+			$("#weather-img").removeClass("bg-secondary").addClass("bg-info p-4");
+		}
+
 	}
 	$.ajax({
 		url: queryURL,

@@ -14,8 +14,10 @@ $(this).on("click", function () {
   // console.log('len :>> ', len);
   if (fin_idx < len && fin_idx >= 0) {
 		$(".leaflet_city")[fin_idx].click();
-		$("#route_progress").attr("style","width: "+ fin_idx/(len-1)*100+"%");
-		$("#vert_index").text(fin_idx+1);
+    $( "#route_progress" ).attr( "style", "width: " + fin_idx / ( len - 1 ) * 100 + "%" );
+    
+    $( "#vert_index" ).text( fin_idx + 1 );
+    
     vert_index = fin_idx;
     
 	} else {
