@@ -10,31 +10,58 @@ function update_slider(v, city) {
 		// console.log("w :>> ", w.list[v]);
 		// console.log("w :>> ", w.list[v].weather[0]);
 		// console.log("w :>> ", w.list[v].weather[0].main);
-    // console.log( "w :>> ", w.list[ v ].weather[ 0 ].description );
-    
-    $("#slider_description").text(w.list[v].weather[0].description);
-    $("#slider_icon").attr(
+		// console.log( "w :>> ", w.list[ v ].weather[ 0 ].description );
+
+    $( "#slider_description" )
+      .text( w.list[ v ].weather[ 0 ].description );
+		$("#slider_icon").attr(
 			"src",
-			"https://openweathermap.org/img/wn/" +
-				w.list[v].weather[0].icon +
-				"@2x.png"
-		);
-    const s = $("#slider");
-    s.on("change", function () {
-      const changed = +$( "#slider" ).val();
-      $("#slider").val(changed);
-      // console.log('changed :>> ', changed);
-      $("#slider_index").text(`${city}: ${changed * 3} hours later`);
+      "https://openweathermap.org/img/wn/" +
+      w.list[ v ].weather[ 0 ].icon +
+      "@2x.png"
       
-      $("#slider_description").text(w.list[changed-1].weather[0].description);
+    );
+
+    const icono = w.list[ v ].weather[ 0 ].icon;
+    day_or_night = {
+      'd' : 'day',
+      'n' : 'night',
+    }
+    if ( day_or_night[ icono.slice( -1 ) ] == 'night' ) {
       $("#slider_icon").attr(
-        "src",
-        "https://openweathermap.org/img/wn/" +
-          w.list[changed-1].weather[0].icon +
-          "@2x.png"
-      );
-    });
+				"class",
+				"img-thumbnail p-0 m-0 bg-secondary border-0"
+			);
+      
+		}
+    if ( day_or_night[ icono.slice( -1 ) ] == 'day' ) {
+      $("#slider_icon").attr(
+				"class",
+				"img-thumbnail p-0 m-0 bg-info border-0"
+			);
+      
+		}
+		
+
     // $("#slider_icon").attr("src", w[v]);
+    
+		const s = $("#slider");
+
+		s.on("change", function () {
+			const changed = +$("#slider").val();
+			$("#slider").val(changed);
+			// console.log('changed :>> ', changed);
+			$("#slider_index").text(`${city}: ${changed * 3} hours later`);
+
+			$("#slider_description").text(w.list[changed - 1].weather[0].description);
+
+			$("#slider_icon").attr(
+				"src",
+				"https://openweathermap.org/img/wn/" +
+					w.list[changed - 1].weather[0].icon +
+					"@2x.png"
+			);
+		});
 	});
   
   $( "#slider" ).val( v );

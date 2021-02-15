@@ -17,6 +17,8 @@ function forecast_five_days ( city ) {
       // console.log('forecast main git upi :>> ', i);
     } );
     $( ".forecast-img" ).each( function ( i, el ) {
+      const icon = w.list[ i * 7 ].weather[ 0 ].icon;
+      // console.log('icon :>> ', icon);
       $( this ).attr(
         "src",
         `https://openweathermap.org/img/wn/${w.list[ i * 7 ].weather[ 0 ].icon}@2x.png`
