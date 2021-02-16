@@ -221,7 +221,7 @@
 
     </div>
 <div class="container mini text-center my-0">
-    <div class="card bg-transparent border-med border-primary rounded-xl mt-2 h-100">
+    <div class="card bg-transparent border-med border-primary rounded-xl mt-2">
       <h3 class="card-header bg-primary text-light pt-0 pb-1" > 
         <div class="d-flex flex-row justify-content-between">
 
@@ -286,65 +286,10 @@
 
 </div>
     <div class="container mini mt-3">
-      <div class="form-group row align-items-center">
-        <div class="form-group col-3">
-          <div class="btn-group" role="group" aria-label="Button group">
-            <button data-increment="-3" class="slider_btn btn btn-warning rounded-xl" type="button">
-              <h3 class="fas fa-angle-double-left my-0"></h3>
-            </button>
-            <button data-increment="-1" class="slider_btn btn btn-primary rounded-xl" type="button">
-              <h3 class="fas fa-chevron-left my-0"></h3>
-            </button>
-          </div>
-        </div>
-        <div class="form-group col-6 px-0">
-            <p class="text-center text-light">
-              <i class="text-xl fas fa-city mr-2"></i>
-              <span id="slider_index"></span>
-            </p>          
-          <!-- // git up -->
-          <input id="slider" class="custom-range" type="range" name="" min="1" max="40">
-        </div>
-        <div class="form-group col-3">
-          <div class="btn-group" role="group" aria-label="Button group">
-            <button data-increment="1" class="slider_btn btn btn-primary rounded-xl" type="button">
-                <h3 class="fas fa-chevron-right my-0"></h3>
-              </button>
-            <button data-increment="3" class="slider_btn btn btn-warning rounded-xl" type="button">
-                <h3 class="fas fa-angle-double-right my-0"></h3>
-              </button>
-          </div>
-        </div>
-      </div>
-      <div class="row col-8 offset-2 no-gutters text-center">
-        <div class="card bg-transparent border-primary border-med rounded-xl">
-          <h4 class="text-light card-header bg-primary mb-0 py-1">
-            <i class="far fa-clock"></i>
-            <span id="slider_hour" class="text-white"> </span>
-            <i class="far fa-calendar-plus"></i>
-            <span id="slider_date" class="text-white"></span>
-          
-          </h4>
-  
-          <div class="card-body bg-transparent p-0 m-0" id="slider_bg">
-            <div class="row text-primary">
-              <div class="col-6">
-                <h3 id="slider_description" class="text-light mt-5"> Description</h3>
-              </div>
-              <div class="col-6">
-                <img id="slider_icon" class="bg-transparent border-0"alt="">
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <div class="container mini mt-3">
       <div class="row no-gutters">
         <div class="col-5">
           <div
-            class="card bg-transparent border-primary border-med text-light rounded-xl py-0 my-0 h-100 mx-1">
+            class="card bg-transparent border-primary border-med text-light rounded-xl py-0 my-0 mx-1">
             <div class="card-header bg-primary rounded-xl align-items-center">
                 <i class="far fa-clock text-xl mr-2"></i>
                <b>
@@ -352,7 +297,10 @@
                </b>
               
             </div>
+              <img class="card-img-top border-0 mx-auto rounded-xl"
+              alt="forecast-icon" id="weather-img" style="max-height:8rem;max-width:8rem">            
             <div class="card-body">
+              
                 <p>
                   <i class="fas fa-chart-bar"></i>
 
@@ -387,14 +335,66 @@
                     <span class="weather" id="weather-sunset">...
                     </span>
                   </p>
+                  <p>
+                    <i class="fab fa-react"></i>
+                    <span class="weather" id="weather-uv_index">...
+                    </span>
+                  </p>
             </div>
-              <img class="card-img-bottom border-0 mx-auto rounded-xl"
-              alt="forecast-icon" id="weather-img" style="max-height:8rem;max-width:8rem">
+
           </div>
         </div>
         <div class="col-7">
+          <div class="form-group row align-items-center">
+            <div class="form-group col-4 offset-1">
+              <div class="btn-group" role="group" aria-label="Button group">
+                <button data-increment="-3" class="slider_btn btn btn-warning rounded-xl" type="button">
+                  <h3 class="fas fa-angle-double-left my-0"></h3>
+                </button>
+                <button data-increment="-1" class="slider_btn btn btn-primary rounded-xl" type="button">
+                  <h3 class="fas fa-chevron-left my-0"></h3>
+                </button>
+              </div>
+            </div>
+            <div class="form-group col-4 offset-1">
+              <div class="btn-group" role="group" aria-label="Button group">
+                <button data-increment="1" class="slider_btn btn btn-primary rounded-xl" type="button">
+                    <h3 class="fas fa-chevron-right my-0"></h3>
+                  </button>
+                <button data-increment="3" class="slider_btn btn btn-warning rounded-xl" type="button">
+                    <h3 class="fas fa-angle-double-right my-0"></h3>
+                  </button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+              <p class="text-center text-light">
+                <i class="text-xl fas fa-city mr-2"></i>
+                <span id="slider_index"></span>
+              </p>          
+            <!-- // git up -->
+            <input id="slider" class="custom-range" type="range" name="" min="1" max="40">
+          </div>          
+          <div class="card bg-transparent border-primary border-med rounded-xl mb-2">
+            <h4 class="text-light card-header bg-primary mb-0 py-1">
+              <i class="far fa-clock"></i>
+              <span id="slider_hour" class="text-white"> </span>
+              <i class="far fa-calendar-plus"></i>
+              <span id="slider_date" class="text-white"></span>
+            </h4>
+            <div class="card-body bg-transparent p-0 m-0" id="slider_bg">
+              <div class="row text-primary">
+                <div class="col-6">
+                  <h3 id="slider_description" class="text-light mt-5"> Description</h3>
+                </div>
+                <div class="col-6">
+                  <img id="slider_icon" class="bg-transparent border-0"alt="">
+                </div>
+              </div>
+            </div>
+          </div>
           <div
-            class="card bg-transparent border-primary text-light rounded-xl py-0 my-0 h-100 mx-1">
+            class="card bg-transparent border-primary text-light rounded-xl py-0 my-0 mx-1 mb-5">
             <div class="card-header bg-primary">
               5-Day Forecast
             </div>
@@ -406,7 +406,7 @@
                   </span>
                   <img
                     class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
-                     alt="forecast-icon" style="max-height:4rem;max-width:4rem">
+                     alt="forecast-icon" style="max-height:3rem;max-width:3rem">
                 </a>
                 <a
                   class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
@@ -414,7 +414,7 @@
                   </span>
                   <img
                     class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
-                    src="" alt="forecast-icon" style="max-height:4rem;max-width:4rem">
+                    src="" alt="forecast-icon" style="max-height:3rem;max-width:3rem">
                 </a>
                 <a
                   class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
@@ -422,7 +422,7 @@
                   </span>
                   <img
                     class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
-                    alt="forecast-icon" style="max-height:4rem;max-width:4rem">
+                    alt="forecast-icon" style="max-height:3rem;max-width:3rem">
                 </a>
                 <a
                   class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
@@ -430,7 +430,7 @@
                   </span>
                   <img
                     class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
-                     alt="forecast-icon" style="max-height:4rem;max-width:4rem">
+                     alt="forecast-icon" style="max-height:3rem;max-width:3rem">
                 </a>
                 <a
                   class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
@@ -438,14 +438,12 @@
                   </span>
                   <img
                     class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
-                    alt="forecast-icon" style="max-height:4rem;max-width:4rem">
+                    alt="forecast-icon" style="max-height:3rem;max-width:3rem">
                 </a>
               </ul>
             </div>
           </div>
         </div>
-
-      </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>

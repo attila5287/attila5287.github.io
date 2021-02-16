@@ -44,6 +44,22 @@ function todays_weather(city) {
 			$("#weather-img").removeClass("bg-secondary").addClass("bg-info p-4");
 		}
 
+		const url_for_uv =
+			"https://api.openweathermap.org/data/2.5/uvi?lat=" +
+			w.coord.lat +
+			"&lon=" +
+			w.coord.lon +
+			"&appid=45b6598a4a1bd706ba39bf0f2ac2fcf4";
+		
+		$.ajax({
+			url: url_for_uv,
+			method: "GET"
+		} ).then( function (u) {
+			// console.log( 'test uv index', u.value );
+			$("#weather-uv_index").text('UV Index: '+u.value);
+		});
+			
+			
 	}
 	$.ajax({
 		url: queryURL,
