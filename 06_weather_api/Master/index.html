@@ -13,41 +13,31 @@
   </head>
   <style>
     /* practical css classes beyond bootstrap.css*/
+      .card-text i {
+        font-size: 1.75rem;
+        margin-right: 0.75rem;
+      }    
     .h1-mod {
       font-size: 4.25rem;
     }
-
-    .bg-night {
-      background-color: lightslategray;
-    }
-
-    .text-2xl {
-      font-size: 2.25rem;
-    }
-
     .text-xl {
       font-size: 1.50rem;
     }
-
     .opac-50 {
       opacity: 50%;
     }
-
     .body {
       font-size: 0.90rem;
       padding-bottom: 3rem;
       margin-bottom: 3rem;
     }
-
     .border-med {
       border-width: 0.25rem;
     }
-
     .mini {
       /* width:512px; */
       max-width: 512px;
     }
-
     .form-control-dark {
       color: #fff;
       background-color: rgba(255, 255, 255, .1);
@@ -59,113 +49,122 @@
     .rounded-xl {
       border-radius: 0.50rem;
     }
+    .rounded-2xl {
+      border-radius: 1.00rem;
+    }
   </style>
 
   <body class="bg-dark">
     <nav class="navbar navbar-expand navbar-dark bg-primary">
-  <a class="navbar-brand" href="#"> 
-    <img alt="@attila5287" src="https://avatars1.githubusercontent.com/u/42498753?s=60&amp;u=739973fd70454aa533c67bccf17b6aeddcc6361f&amp;v=4" class="rounded my-0 py-0" 
-    width= "36"
-    height="36"
-    >
-     </a>
-  <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-      aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="collapsibleNavId">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item disabled">
-        <a class="nav-link" href="https://attila5287.github.io/">
-          S. Attila TURKOZ
-        </a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-          <h1 class="my-0 fa-fw fab fa-js-square" aria-hidden="true"></h1>
-         </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownId">
-          <a class="dropdown-item disabled" >Full Stack Developer, Trilogy Education (6mo)</a>
-          <a class="dropdown-item dropdown-divider disabled bg-primary border-0 pt-1 pb-0 my-0" ></a>
-          <a class="dropdown-item" href="/06_weather_api/Master">06 Server-side APIs 
-            <span class="float-right">
-              Weather Dashboard
-            </span>
-          </a>
-          <a class="dropdown-item" href="/05_day_planner">05 jQuery  
-            <span class="float-right">Day Planner</span>
-          </a>
-          <a class="dropdown-item" href="/04_hw_quiz">04 Web APIs 
-            <span class="float-right">Coding Quiz</span>
+      <a class="navbar-brand" href="#">
+        <img alt="@attila5287"
+          src="https://avatars1.githubusercontent.com/u/42498753?s=60&amp;u=739973fd70454aa533c67bccf17b6aeddcc6361f&amp;v=4"
+          class="rounded my-0 py-0" width="36" height="36">
+      </a>
+      <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
+        data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item disabled">
+            <a class="nav-link" href="https://attila5287.github.io/">
+              S. Attila TURKOZ
             </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <h1 class="my-0 fa-fw fab fa-js-square" aria-hidden="true"></h1>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+              <a class="dropdown-item disabled">Full Stack Developer, Trilogy Education (6mo)</a>
+              <a
+                class="dropdown-item dropdown-divider disabled bg-primary border-0 pt-1 pb-0 my-0"></a>
+              <a class="dropdown-item" href="/06_weather_api/Master">06 Server-side APIs
+                <span class="float-right">
+                  Weather Dashboard
+                </span>
+              </a>
+              <a class="dropdown-item" href="/05_day_planner">05 jQuery
+                <span class="float-right">Day Planner</span>
+              </a>
+              <a class="dropdown-item" href="/04_hw_quiz">04 Web APIs
+                <span class="float-right">Coding Quiz</span>
+              </a>
 
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdownId3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-          <h1 class="my-0 fa-fw fab fa-docker" aria-hidden="true"></h1> 
-        </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownId3">
-          <a class="dropdown-item disabled" >Deployed Apps</a>
-          <a class="dropdown-item dropdown-divider disabled bg-primary border-0 pt-1 pb-0 my-0" ></a>
-          <a class="dropdown-item" href="https://rotaizmir.herokuapp.com">
-            <i class="fab fa-python"></i>
-            <i class="fas fa-database"></i>
-            Social Youth Club Member Communications App
-          </a>
-          <a class="dropdown-item" href="https://electiondataviz.herokuapp.com">
-            <i class="fab fa-js-square"></i>
-            <i class="fas fa-chart-line"></i>
-            ElectionDataViz: Historial MIT Dataset</a>
-          <a class="dropdown-item" href="https://coronavizdata.herokuapp.com/">
-            <i class="fab fa-js-square"></i>
-            <i class="fas fa-chart-line"></i>
-            CoronaVizData: COVID-19 Daily Updates REST</a>
-          <a class="dropdown-item" href="https://displaytracker.herokuapp.com/">
-            <i class="fab fa-js-square"></i>
-            <i class="fas fa-database"></i>
-            Display Tracker: Dynamic Inventory App</a>
-          <a class="dropdown-item" href="https://nodaysoff.herokuapp.com/">
-            <i class="fab fa-python"></i>
-            <i class="fas fa-database"></i>
-            No Days Off: To-Do App</a>
-          <a class="dropdown-item" href="https://regropoly.herokuapp.com/">
-            <i class="fab fa-python"></i>
-            <i class="fas fa-database"></i>
-           Regropoly: Buy/Sell Houses w/ ZILLOW data, CO only</a>            
-            <a class="dropdown-item" href="https://jampay.herokuapp.com/">
-              <i class="fab fa-python"></i>
-              <i class="fas fa-printer"></i>
-           Jam Pay: Payroll Document Generator</a>
-          <a class="dropdown-item" href="https://regropoly.herokuapp.com/"><i class="fab fa-python"></i>
-           JobVizzy: Indeed Scraper, no ads</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownId3" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <h1 class="my-0 fa-fw fab fa-docker" aria-hidden="true"></h1>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId3">
+              <a class="dropdown-item disabled">Deployed Apps</a>
+              <a
+                class="dropdown-item dropdown-divider disabled bg-primary border-0 pt-1 pb-0 my-0"></a>
+              <a class="dropdown-item" href="https://rotaizmir.herokuapp.com">
+                <i class="fab fa-python"></i>
+                <i class="fas fa-database"></i>
+                Social Youth Club Member Communications App
+              </a>
+              <a class="dropdown-item" href="https://electiondataviz.herokuapp.com">
+                <i class="fab fa-js-square"></i>
+                <i class="fas fa-chart-line"></i>
+                ElectionDataViz: Historial MIT Dataset</a>
+              <a class="dropdown-item" href="https://coronavizdata.herokuapp.com/">
+                <i class="fab fa-js-square"></i>
+                <i class="fas fa-chart-line"></i>
+                CoronaVizData: COVID-19 Daily Updates REST</a>
+              <a class="dropdown-item" href="https://displaytracker.herokuapp.com/">
+                <i class="fab fa-js-square"></i>
+                <i class="fas fa-database"></i>
+                Display Tracker: Dynamic Inventory App</a>
+              <a class="dropdown-item" href="https://nodaysoff.herokuapp.com/">
+                <i class="fab fa-python"></i>
+                <i class="fas fa-database"></i>
+                No Days Off: To-Do App</a>
+              <a class="dropdown-item" href="https://regropoly.herokuapp.com/">
+                <i class="fab fa-python"></i>
+                <i class="fas fa-database"></i>
+                Regropoly: Buy/Sell Houses w/ ZILLOW data, CO only</a>
+              <a class="dropdown-item" href="https://jampay.herokuapp.com/">
+                <i class="fab fa-python"></i>
+                <i class="fas fa-printer"></i>
+                Jam Pay: Payroll Document Generator</a>
+              <a class="dropdown-item" href="https://regropoly.herokuapp.com/"><i
+                  class="fab fa-python"></i>
+                JobVizzy: Indeed Scraper, no ads</a>
 
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdownId2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-          <h1 class="my-0 fa-fw fab fa-python" aria-hidden="true"></h1> 
-        </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownId2">
-          <a class="dropdown-item disabled" >DU Data Analytics
-            , Trilogy Education (6mo)</a>
-          <a class="dropdown-item dropdown-divider disabled bg-primary border-0 pt-1 pb-0 my-0" ></a>
-          <a class="dropdown-item dropdown-divider" ></a>
-          <a class="dropdown-item" href="#">github link</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="https://github.com/attila5287/">
-          <h1 class="my-0 fa-fw fab fa-github" aria-hidden="true"></h1> 
-        </a>
-      </li>      
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-    </form>
-  </div>
-</nav>
-    <header
-      class="container-fluid text-right text-white bg-primary my-0 py-0">
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownId2" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <h1 class="my-0 fa-fw fab fa-python" aria-hidden="true"></h1>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId2">
+              <a class="dropdown-item disabled">DU Data Analytics
+                , Trilogy Education (6mo)</a>
+              <a
+                class="dropdown-item dropdown-divider disabled bg-primary border-0 pt-1 pb-0 my-0"></a>
+              <a class="dropdown-item dropdown-divider"></a>
+              <a class="dropdown-item" href="#">github link</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/attila5287/">
+              <h1 class="my-0 fa-fw fab fa-github" aria-hidden="true"></h1>
+            </a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+        </form>
+      </div>
+    </nav>
+    <header class="container-fluid text-right text-white bg-warning my-0 py-0">
       <div class="container mini my-0 py-0">
         Weather Dashboard:
         <span class="fas fa-sun text-light text-xl fa-pull-left mt-2"></span>
@@ -173,8 +172,7 @@
         <b class="text-uppercase text-xl mx-2" id="weather-city"></b>
       </div>
     </header>
-
-    <div class="container mini my-0">
+    <div class="container mini my-2">
       <div class="row">
         <aside class="col-3">
           <h1 class="bg-primary rounded-xl text-light text-center mt-3 py-2 h1-mod">
@@ -186,28 +184,30 @@
             <input
               class="form-control form-control-lg form-control-dark border-primary shadow=lg rounded-xl my-2"
               type="text" value="Denver" id="search-value" />
-              <button class="btn btn-primary mt-0 btn-block btn-lg rounded-xl" id="search-button">
-                Search City
-              </button>
-            </div>
+            <button class="btn btn-primary mt-0 btn-block btn-lg rounded-xl" id="search-button">
+              Search City
+            </button>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="container mini text-center my-0">
       <div class="row no-gutters">
-        <div class="col-1"> 
-          <button class="btn btn-outline-warning border-0 btn-block btn-sm p-1 mb-0" type="button" id="def_btn">
-            <i class="fas fa-list-alt text-xl"></i> 
+        <div class="col-1">
+          <button class="btn btn-outline-warning border-0 btn-block btn-sm p-1 mb-0" type="button"
+            id="def_btn">
+            <i class="fas fa-list-alt text-xl"></i>
           </button>
-            <small class="text-warning">defaults</small>
-        </div>     
-        <div class="col-1"> 
-          <button class="btn btn-outline-success border-0 btn-block btn-sm p-1 mb-0" type="button" id="reset_button">
-            <i class="fas fa-undo-alt text-xl"></i> 
+          <small class="text-warning">defaults</small>
+        </div>
+        <div class="col-1">
+          <button class="btn btn-outline-success border-0 btn-block btn-sm p-1 mb-0" type="button"
+            id="reset_button">
+            <i class="fas fa-undo-alt text-xl"></i>
           </button>
-            <small class="text-success">reset</small>
-        </div>     
+          <small class="text-success">reset</small>
+        </div>
         <div class="col-9 text-center" id="history_box"></div>
         <div class="col-1">
           <h4 class="text-nowrap text-secondary bg-transparent pt-1 pb-1 mb-0 rounded">
@@ -216,186 +216,214 @@
           </h4>
           <small class="text-secondary">recents</small>
         </div>
-        
+
       </div>
 
     </div>
-<div class="container mini text-center my-0">
-    <div class="card bg-transparent border-med border-primary rounded-xl mt-2">
-      <h3 class="card-header bg-primary text-light pt-0 pb-1" > 
-        <div class="d-flex flex-row justify-content-between">
 
-          <div><i class="fas fa-route"></i>
-          <span>Route: </span>
-          <span class="text-white" id="vert_index">1</span>/
-          <span class="text-white" id="vert_length"></span>
-        </div>
-          <div>
-            <span id="leaf_selected_city">Denver</span>
-            <i class="fas fa-map-marked"></i>
-            
-          
-          </div>
-        </div>
-      </h3>
-      <div class="card-body">
-        <div class="progress mb-4 mt-0">
-          <div id="route_progress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 10%"></div>
-        </div>        
-        <div class="row">
-          <div class="col-4">
-            <button data-vertical_index="0" class="selected_leaflet leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
-            </button>
-            <button  data-vertical_index="1" class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
-            </button>
-            <button  data-vertical_index="2" class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
-            </button>
-            <button  data-vertical_index="3" class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
-            </button>
-            <button data-vertical_index="4" class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
-            </button>
-            <button  data-vertical_index="5"class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left" type="button">city
-            </button>
-            
-          </div>
-          <div class="col-2">
-            <div class="btn-group-vertical rounded-xl w-100" role="group" aria-label="Vertical button group">
-              <button data-increment="-2" class="route_btns w-100 rounded-xl btn btn-warning btn-block py-3" type="button">
-                <i class="fas fa-angle-double-up fa-fw"></i> 
-              </button>
-              <button data-increment="-1" class="route_btns w-100 rounded-xl btn btn-primary btn-block py-4" type="button">
-                <i class="fas fas fa-chevron-up fa-fw"></i>
-              </button>
-              <button data-increment="1" class="route_btns w-100 rounded-xl btn btn-primary btn-block py-4" type="button">
-                <i class="fas fa-chevron-down fa-fw"></i> 
-              </button>
-              <button data-increment="2" class="route_btns w-100 rounded-xl btn btn-warning btn-block py-3" type="button">
-                <i class="fas fa-angle-double-down fa-fw"></i> 
-              </button>
+    <div class="container mini text-center my-2">
+      <div class="card bg-transparent  border-primary rounded-xl mb-2">
+        <div class="card-header text-light pt-0 pb-1">
+          <div class="d-flex flex-row justify-content-between">
+
+            <div><i class="fas fa-route"></i>
+              <span>Route: </span>
+              <span class="text-white" id="vert_index">1</span>/
+              <span class="text-white" id="vert_length"></span>
+            </div>
+            <div>
+              <span id="leaf_selected_city">Denver</span>
+              <i class="fas fa-map-marked"></i>
             </div>
           </div>
-          <div class="col-6">
-            <img class="card-img bg-primary p-2 rounded-xl" src="https://raw.githubusercontent.com/attila5287/rota-img/main/maps/denv.JPG" alt="show-on-map"  id="leaf_selected_img" style="max-height: 18rem;max-width: 18rem;">
+        </div>
+        <div class="card-body">
+          <div class="progress mb-4 mt-0">
+            <div id="route_progress" class="progress-bar progress-bar-striped progress-bar-animated"
+              role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+              style="width: 10%"></div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <button data-vertical_index="0"
+                class="selected_leaflet leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left"
+                type="button">city
+              </button>
+              <button data-vertical_index="1"
+                class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left"
+                type="button">city
+              </button>
+              <button data-vertical_index="2"
+                class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left"
+                type="button">city
+              </button>
+              <button data-vertical_index="3"
+                class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left"
+                type="button">city
+              </button>
+              <button data-vertical_index="4"
+                class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left"
+                type="button">city
+              </button>
+              <button data-vertical_index="5"
+                class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left"
+                type="button">city
+              </button>
+
+            </div>
+            <div class="col-2 pt-3">
+              <div class="btn-group-vertical rounded-xl w-100" role="group"
+                aria-label="Vertical button group">
+                <button data-increment="-2"
+                  class="route_btns w-100 rounded-xl btn btn-warning btn-block py-2" type="button">
+                  <i class="fas fa-angle-double-up fa-fw"></i>
+                </button>
+                <button data-increment="-1"
+                  class="route_btns w-100 rounded-xl btn btn-primary btn-block py-4" type="button">
+                  <i class="fas fas fa-chevron-up fa-fw"></i>
+                </button>
+                <button data-increment="1"
+                  class="route_btns w-100 rounded-xl btn btn-primary btn-block py-4" type="button">
+                  <i class="fas fa-chevron-down fa-fw"></i>
+                </button>
+                <button data-increment="2"
+                  class="route_btns w-100 rounded-xl btn btn-warning btn-block py-2" type="button">
+                  <i class="fas fa-angle-double-down fa-fw"></i>
+                </button>
+              </div>
+            </div>
+            <div class="col-6 pt-2">
+              <img class="card-img-top bg-primary p-2 rounded-xl"
+                src="https://raw.githubusercontent.com/attila5287/rota-img/main/maps/denv.JPG"
+                alt="show-on-map" id="leaf_selected_img"
+                style="max-height: 18rem;max-width: 18rem;">
+            </div>
           </div>
         </div>
-
       </div>
-    </div>
-    
-  
 
-</div>
-    <div class="container mini mt-3">
-      <div class="row no-gutters">
-        <div class="col-5">
-          <div
-            class="card bg-transparent border-primary border-med text-light rounded-xl py-0 my-0 mx-1">
-            <div class="card-header bg-primary rounded-xl align-items-center">
-                <i class="far fa-clock text-xl mr-2"></i>
-               <b>
-                 <span id="currently"></span>
-               </b>
-              
+    <div cass="container mini">
+      <div class="card bg-transparent border-primary  text-light rounded-xl">
+        <div class="card-header text-light pt-0 pb-1">
+          <i class="far fa-clock"></i>
+          <span id="currently"></span>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-5">
+              <img class="card-img-top border-0 mx-auto rounded-xl p-0" alt="forecast-icon" id="weather-img"
+                style="max-height:8rem;max-width:8rem">
+                
+              <p class="card-text text-xl">
+                <span class="weather" id="weather-description">
+                  ...</span>
+              </p>
+              <p class="card-text">
+                <i class="fab fa-react"></i>
+                <span class="weather" id="weather-uv_index">...
+                </span>
+              </p>                
             </div>
-              <img class="card-img-top border-0 mx-auto rounded-xl"
-              alt="forecast-icon" id="weather-img" style="max-height:8rem;max-width:8rem">            
-            <div class="card-body">
-              
-                <p>
-                  <i class="fas fa-chart-bar"></i>
-
-                  <span class="weather" id="weather-description">
-                    ...</span>
-
-                </p>
-              
-              <p>
+            <div class="col-7 text-left">
+              <p class="card-text">
                 <i class="fas fa-temperature-high"></i>
                 <span class="weather" id="weather-temperature">
                   ...</span>
               </p>
-
-                <p>
-                  <i class="fas fa-temperature-high"></i>
-                  <span class="weather" id="weather-feelslike">
-                  </span>
-                </p>
-                  <p>
-                    <i class="fas fa-cloud-rain"></i>
-                    <span class="weather" id="weather-humidity">...
-                    </span>
-                  </p>
-                  <p>
-                    <i class="fas fa-sun"></i>
-                    <span class="weather" id="weather-sunrise">...
-                    </span>
-                  </p>
-                  <p>
-                    <i class="fas fa-cloud-sun"></i>
-                    <span class="weather" id="weather-sunset">...
-                    </span>
-                  </p>
-                  <p>
-                    <i class="fab fa-react"></i>
-                    <span class="weather" id="weather-uv_index">...
-                    </span>
-                  </p>
-            </div>
-
+              <p class="card-text">
+                <i class="fas fa-temperature-high"></i>
+                <span class="weather" id="weather-feelslike">
+                </span>
+              </p>
+              <p class="card-text">
+                <i class="fas fa-cloud-rain"></i>
+                <span class="weather" id="weather-humidity">...
+                </span>
+              </p>
+              <p class="card-text">
+                <i class="fas fa-sun"></i>
+                <span class="weather" id="weather-sunrise">...
+                </span>
+              </p>
+              <p class="card-text">
+                <i class="fas fa-cloud-sun"></i>
+                <span class="weather" id="weather-sunset">...
+                </span>
+              </p>
+    
+            </div>            
           </div>
         </div>
-        <div class="col-7">
-          <div class="form-group row align-items-center">
-            <div class="form-group col-4 offset-1">
-              <div class="btn-group" role="group" aria-label="Button group">
-                <button data-increment="-3" class="slider_btn btn btn-warning rounded-xl" type="button">
-                  <h3 class="fas fa-angle-double-left my-0"></h3>
-                </button>
-                <button data-increment="-1" class="slider_btn btn btn-primary rounded-xl" type="button">
-                  <h3 class="fas fa-chevron-left my-0"></h3>
-                </button>
-              </div>
+      </div>
+    </div>
+    
+    <div class="container mini mt-3">
+      <div class="form-group row align-items-end">
+        <div class="form-group col-3 h-100">
+          <div class="btn-group" role="group" aria-label="Button group">
+            <button data-increment="-3" class="slider_btn btn btn-warning rounded-xl"
+              type="button">
+              <h3 class="fas fa-angle-double-left my-0"></h3>
+            </button>
+            <button data-increment="-1" class="slider_btn btn btn-primary rounded-xl"
+              type="button">
+              <h3 class="fas fa-chevron-left my-0"></h3>
+            </button>
+          </div>
+        </div>
+        <div class="form-group col-6">
+        <p class="text-center text-light">
+          <i class="fas fa-sliders-h mt-2"></i>
+          <span id="slider_index"></span>
+        </p>
+        <!-- // git up -->
+        <input id="slider" class="custom-range" type="range" name="" min="1" max="40">
+      </div>
+        <div class="form-group col-3 h-100">
+          <div class="btn-group" role="group" aria-label="Button group">
+            <button data-increment="1" class="slider_btn btn btn-primary rounded-xl"
+              type="button">
+              <h3 class="fas fa-chevron-right my-0"></h3>
+            </button>
+            <button data-increment="3" class="slider_btn btn btn-warning rounded-xl"
+              type="button">
+              <h3 class="fas fa-angle-double-right my-0"></h3>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container mini mt-3">
+      <div class="row">
+        <div class="col-4">
+         <ul class="list-group">
+           <a class="list-group-item list-group-item-action active" href="#">Text</a>
+         </ul> 
+        </div>
+        <div class="col-4">
+            <i class="far fa-clock"></i>
+            <span id="slider_hour" class="text-white"> </span>
+            <i class="far fa-calendar-plus"></i>
+            <span id="slider_date" class="text-white"></span>
+        </div>
+        <div class="col-4">
+          <div class="card bg-primary border-primary rounded-2xl">
+            <div class="card-header text-light py-1"> 
+              <span id="slider_description">Description</span>
             </div>
-            <div class="form-group col-4 offset-1">
-              <div class="btn-group" role="group" aria-label="Button group">
-                <button data-increment="1" class="slider_btn btn btn-primary rounded-xl" type="button">
-                    <h3 class="fas fa-chevron-right my-0"></h3>
-                  </button>
-                <button data-increment="3" class="slider_btn btn btn-warning rounded-xl" type="button">
-                    <h3 class="fas fa-angle-double-right my-0"></h3>
-                  </button>
-              </div>
+            <div class="card-body rounded-xl" id="slider_bg">
+              <img id="slider_icon" class="card-img border-0" alt="">
             </div>
           </div>
-          <div class="form-group">
-              <p class="text-center text-light">
-                <i class="text-xl fas fa-city mr-2"></i>
-                <span id="slider_index"></span>
-              </p>          
-            <!-- // git up -->
-            <input id="slider" class="custom-range" type="range" name="" min="1" max="40">
-          </div>          
-          <div class="card bg-transparent border-primary border-med rounded-xl mb-2">
-            <h4 class="text-light card-header bg-primary mb-0 py-1">
-              <i class="far fa-clock"></i>
-              <span id="slider_hour" class="text-white"> </span>
-              <i class="far fa-calendar-plus"></i>
-              <span id="slider_date" class="text-white"></span>
-            </h4>
-            <div class="card-body bg-transparent p-0 m-0" id="slider_bg">
-              <div class="row text-primary">
-                <div class="col-6">
-                  <h3 id="slider_description" class="text-light mt-5"> Description</h3>
-                </div>
-                <div class="col-6">
-                  <img id="slider_icon" class="bg-transparent border-0"alt="">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="card bg-transparent border-primary text-light rounded-xl py-0 my-0 mx-1 mb-5">
-            <div class="card-header bg-primary">
+        </div>
+      </div>
+    </div>
+    <div class="container mini mt-3">
+      <div class="row no-gutters">
+        <div class="col-6">
+          <div class="card bg-transparent border-primary text-light rounded-xl py-0 my-0 mx-1 mb-5">
+            <div class="card-header text-light pt-0 pb-1">
+              <i class="fas fa-chart-line"></i>
               5-Day Forecast
             </div>
             <div class="card-body my-0 pb-0">
@@ -406,7 +434,7 @@
                   </span>
                   <img
                     class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
-                     alt="forecast-icon" style="max-height:3rem;max-width:3rem">
+                    alt="forecast-icon" style="max-height:3rem;max-width:3rem">
                 </a>
                 <a
                   class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
@@ -430,7 +458,7 @@
                   </span>
                   <img
                     class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
-                     alt="forecast-icon" style="max-height:3rem;max-width:3rem">
+                    alt="forecast-icon" style="max-height:3rem;max-width:3rem">
                 </a>
                 <a
                   class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
@@ -444,27 +472,32 @@
             </div>
           </div>
         </div>
+      </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>
-    
-    <script src="converter_hhmm.js"></script>
-    <script src="slider.js"></script>
-    <script src="forecast.js"></script>
-    <script src="currently.js"></script>
-    <script src="local.js"></script>
-    <script src="momento.js"></script>
-    <script src="leaf_nav.js"></script>
-    <script src="slider_buttons.js"></script>
-    <script src="route_buttons.js"></script>
-    <script src="init.js"></script>
-  
-  
-  
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js">
+      </script>
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js">
+      </script>
+
+      <script src="converter_hhmm.js"></script>
+      <script src="slider.js"></script>
+      <script src="forecast.js"></script>
+      <script src="currently.js"></script>
+      <script src="local.js"></script>
+      <script src="momento.js"></script>
+      <script src="leaf_nav.js"></script>
+      <script src="slider_buttons.js"></script>
+      <script src="route_buttons.js"></script>
+      <script src="init.js"></script>
+
+
+
   </body>
 
 </html>

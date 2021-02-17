@@ -27,10 +27,16 @@ function update_slider(v, city) {
       'n' : 'night',
     }
     if ( day_or_night[ icono.slice( -1 ) ] == 'night' ) {
-      $("#slider_bg").attr("class", "card-body bg-secondary");
-    }
-    if ( day_or_night[ icono.slice( -1 ) ] == 'day' ) {
-      $("#slider_bg").attr("class", "card-body bg-info");
+			$( "#slider_bg" )
+				.removeClass('bg-info')
+				.removeClass( 'bg-transparent' )
+				.addClass( 'bg-secondary' );
+			}
+			if ( day_or_night[ icono.slice( -1 ) ] == 'day' ) {
+			$( "#slider_bg" )
+				.removeClass('bg-secondary')
+				.removeClass( 'bg-transparent' )
+				.addClass( 'bg-info' );
 		}
 		
 
