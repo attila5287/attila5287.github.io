@@ -427,22 +427,22 @@
         <div class="row">
           <div class="col-4 text-left">
             <ul class="list-group list-group-flush rounded-2xl">
-              <a class="list-group-item list-group-item-action bg-warning text-dark disabled slider_li" tabindex="-1" aria-disabled="true">
+              <a class="list-group-item list-group-item-action bg-light text-dark disabled slider_li text-nowrap" tabindex="-1" aria-disabled="true">
                 <small>Feels</small>
                 <b>
                   <span class="temp_unit_c">
                     <i class="fas fa-temperature-high"></i>
-                    <i data_tempunit="F" data_tempval="32" id="slider_temp_f"></i>
+                    <i id="slider_temp_f"></i>
                   </span>
                 </b>
                 <b>
                   <span class="temp_unit_f">
-                    <i class="d-none"  data_tempunit="C" data_tempval="0" id="slider_temp_c"></i>
+                    <i class="d-none"  id="slider_temp_c"></i>
                   </span>&deg;
                 </b>
                 
               </a>
-              <a class="list-group-item list-group-item-action bg-warning text-dark disabled slider_li" tabindex="-1" aria-disabled="true">
+              <a class="list-group-item list-group-item-action bg-light text-dark disabled slider_li text-nowrap" tabindex="-1" aria-disabled="true">
                 <small>Temp.</small>
                 <b>
                   <span class="temp_unit_f">
@@ -465,34 +465,41 @@
                 </h1>
               </a>
             </ul>
-            <p class="text-white">
-              <i class="fas fa-chevron-up text-warning"></i>
+            <p class="text-warning mt-2" id="slider_note_f">
+              <i class="text-xl fas fa-info-circle text-warning mr-2"></i> F &deg; (fahrenheit) as temp unit
+              </p>
+            <p class="text-secondary mt-2 d-none" id="slider_note_c">
+              <i class="text-xl fas fa-info-circle text-secondary mr-2"></i> C &deg; (celcius) as temp unit
               </p>
           </div>
-          <div class="col-4">
-            <div class="card rounded-2xl bg-transparent border-warning text-warning">
+          <style>
+            .card-text i{
+              font-size: 2rem;
+            }
+          </style>
+          <div class="col-4 align-content-center  p-0">
+            <div class="card rounded-2xl bg-transparent border-primary text-warning h-100 my-auto">
               <div class="card-body text-sm text-left">
                 <p class="card-text">
-                  <i class="fas fa-wind mr-4"></i> 
+                  <i class="fa-pull-left text-light bg-primary p-2 rounded-xl fas fa-wind mr-2"></i> 
                   Wind Speed: 
-                  <span id="slider_windspeed" ></span>
+                  <span class="text-xl" id="slider_windspeed" ></span>
                 </p>
                 <p class="card-text">
-                  <i class="fas fa-compass mr-4"></i> 
+                  <i class="fa-pull-left text-light bg-primary p-2 rounded-xl fas fa-compass mr-2"></i> 
                   Wind Degrees: 
-                  <span id="slider_winddegrees" ></span>
+                  <span class="text-xl" id="slider_winddegrees" ></span>
                 </p>
-
                 <p class="card-text">
-                  <i class="fas fa-cloud-rain mr-4"></i> 
+                  <i class="fa-pull-left text-light bg-primary p-2 rounded-xl fas fa-cloud-rain mr-2"></i> 
                   Humidity: 
-                  <span id="slider_humid" ></span>
+                  <span class="text-xl" id="slider_humid" ></span>
                 </p>
               </div>
             </div>
           </div>
           <div class="col-4">
-            <div class="card bg-primary border-primary rounded-2xl">
+            <div class="card bg-primary border-primary rounded-2xl h-100 ">
               <div class="card-header text-light py-1">
                 <span id="slider_description">Description</span>
               </div>
