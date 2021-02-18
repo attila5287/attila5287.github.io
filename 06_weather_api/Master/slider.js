@@ -24,6 +24,12 @@ function update_slider(v, city) {
 		$("#slider_temp_f").text(
 			+Math.round((+w.list[v].main.temp - 273 + 32) / 1.8) + " F "
 		);
+		$("#slider_feels_c").text(
+			Math.round(+w.list[v].main.feels_like - 273) + " C "
+		);
+		$("#slider_feels_f").text(
+			+Math.round((+w.list[v].main.feels_like - 273 + 32) / 1.8) + " F "
+		);
 			
     $( "#slider_description" )
       .text( w.list[ v ].weather[ 0 ].description );

@@ -7,7 +7,8 @@ function auto_detext_ () {
   
   let new_icon;
   if ( current_mode_f ) {
-    
+    $("#slider_feels_f").addClass("d-none");
+		$("#slider_feels_c").removeClass("d-none");
     $("#slider_temp_c").removeClass("d-none");
     $("#slider_temp_f").addClass("d-none");
     $(".slider_li").removeClass("active");
@@ -19,6 +20,8 @@ function auto_detext_ () {
   }
   if ( current_mode_c ) {
     $("#slider_temp_f").removeClass("d-none");
+    $("#slider_feels_f").removeClass("d-none");
+    $("#slider_feels_c").addClass("d-none");
     $("#slider_temp_c").addClass("d-none");
     console.log('			Math.round((+$("#slider_temp").attr("data_tempval") - 32) / 1.8) :>> ', 			Math.round((+$("#slider_temp").attr("data_tempval") - 32) / 1.8));
     $(".slider_li").addClass("active");
