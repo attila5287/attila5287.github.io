@@ -13,7 +13,7 @@ function forecast_five_days ( city ) {
     $( ".forecast" ).each( function ( i, el ) {
       $(this)
 				.addClass("text-capitalize")
-				.text(`${i + 1}. ${w.list[(i + 1) * 8 - 1].weather[0].description}`);
+				.text(`${w.list[(i + 1) * 8 - 1].weather[0].description}`);
       // console.log('forecast main git upi :>> ', i);
     } );
     $( ".forecast-img" ).each( function ( i, el ) {

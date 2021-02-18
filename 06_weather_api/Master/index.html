@@ -14,7 +14,10 @@
   </head>
   <style>
     /* practical css classes beyond bootstrap.css*/
- 
+ .card-footer{
+   font-size: 0.85rem;
+
+ }
     .slider_li i {
       margin-right: 0.5rem;
       font-size: 1.5rem;
@@ -23,7 +26,7 @@
       font-size: 0.85rem;
     }
     .card-header i {
-      font-size: 2.75rem;
+      font-size: 2.00rem;
       margin-right: 0.75rem;
     }
 
@@ -289,7 +292,7 @@
           </div>
         </div>
         <div class="col-2">
-          <div class="btn-group-vertical rounded-2xl h-100" role="group"
+          <div class="btn-group-vertical rounded-2xl w-100 h-100" role="group"
             aria-label="Vertical button group">
             <button data-increment="-2"
               class="route_btns w-100 rounded-xl btn btn-warning btn-block py-2" type="button">
@@ -326,7 +329,7 @@
         <div class="card bg-primary border-primary text-light rounded-2xl">
           <div class="card-header text-light">
             <i class="far fa-clock"></i>
-            <span id="currently"></span>
+            Currently 
           </div>
           <div class="card-body bg-dark rounded-2xl">
             <div class="row">
@@ -400,7 +403,7 @@
             </p>
             <input id="slider" class="custom-range" type="range" name="" min="1" max="40">
             <p class="text-center text-light">
-              <i class="fas fa-calendar"></i>
+              <i class="fas fa-calendar-alt"></i>
               <span id="slider_datetxt">
               </span>
               <i class="fas fa-clock"></i>
@@ -510,64 +513,81 @@
           </div>
         </div>
       </div>
-      <div class="container mini mt-3">
-        <div class="row no-gutters">
-          <div class="col-6">
-            <div
-              class="card bg-transparent border-primary text-light rounded-xl py-0 my-0 mx-1 mb-5">
-              <div class="card-header text-light pt-0 pb-1">
-                <i class="fas fa-chart-line"></i>
-                5-Day Forecast
+      <div class="container mini mt-3 mb-5">
+        <div
+          class="card bg-primary text-light rounded-xl mx-1 mb-5">
+          <div class="card-header pt-0 pb-1">
+            <i class="fas fa-chart-line"></i>
+            5-Day Forecast
+          </div>
+          <div class="card-body bg-dark">
+            <div class="card-group">
+              <div class="card border-dark border-med rounded-2xl">
+                <div class="card-body bg-dark">
+                  
+                  
+                  <img
+                  class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0"
+                  alt="forecast-icon" style="max-height:3rem;max-width:3rem">
+                </div>
+                <div class="card-footer text-light bg-light text-dark text-bold rounded-xl forecast h-100" >
+                  Footer
+                </div>
               </div>
-              <div class="card-body my-0 pb-0">
-                <ul class="list-group list-group-flush my-auto">
-                  <a
-                    class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
-                    <span class="forecast">
-                    </span>
-                    <img
-                      class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
-                      alt="forecast-icon" style="max-height:3rem;max-width:3rem">
-                  </a>
-                  <a
-                    class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
-                    <span class="forecast">
-                    </span>
-                    <img
-                      class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
-                      src="" alt="forecast-icon" style="max-height:3rem;max-width:3rem">
-                  </a>
-                  <a
-                    class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
-                    <span class="forecast">
-                    </span>
-                    <img
-                      class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
-                      alt="forecast-icon" style="max-height:3rem;max-width:3rem">
-                  </a>
-                  <a
-                    class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
-                    <span class="forecast">
-                    </span>
-                    <img
-                      class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
-                      alt="forecast-icon" style="max-height:3rem;max-width:3rem">
-                  </a>
-                  <a
-                    class="list-group-item bg-dark  text-light border-secondary rounded-xl my-0 py-1">
-                    <span class="forecast">
-                    </span>
-                    <img
-                      class="forecast-img img-thumbnail border-0 bg-transparent float-right mx-2 my-0 p-0"
-                      alt="forecast-icon" style="max-height:3rem;max-width:3rem">
-                  </a>
-                </ul>
+              <div class="card border-dark border-med rounded-2xl">
+                <div class="card-body bg-dark">
+                  
+                  
+                  <img
+                  class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0"
+                  alt="forecast-icon" style="max-height:3rem;max-width:3rem">
+                </div>
+                <div class="card-footer text-light bg-light text-dark text-bold rounded-xl forecast h-100" >
+                  Footer
+                </div>
+              </div>
+              <div class="card border-dark border-med rounded-2xl">
+                <div class="card-body bg-dark">
+                  
+                  
+                  <img
+                  class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0"
+                  alt="forecast-icon" style="max-height:3rem;max-width:3rem">
+                </div>
+                <div class="card-footer text-light bg-light text-dark text-bold rounded-xl forecast h-100" >
+                  Footer
+                </div>
+              </div>
+              <div class="card border-dark border-med rounded-2xl">
+                <div class="card-body bg-dark">
+                  
+                  
+                  <img
+                  class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0"
+                  alt="forecast-icon" style="max-height:3rem;max-width:3rem">
+                </div>
+                <div class="card-footer text-light bg-light text-dark text-bold rounded-xl forecast h-100" >
+                  Footer
+                </div>
+              </div>
+              <div class="card border-dark border-med rounded-2xl">
+                <div class="card-body bg-dark">
+                  
+                  
+                  <img
+                  class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0"
+                  alt="forecast-icon" style="max-height:3rem;max-width:3rem">
+                </div>
+                <div class="card-footer text-light bg-light text-dark text-bold rounded-xl forecast h-100" >
+                  Footer
+                </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
-
+        
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
