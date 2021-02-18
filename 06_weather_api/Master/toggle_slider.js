@@ -23,7 +23,6 @@ function auto_detext_ () {
     $("#slider_feels_f").removeClass("d-none");
     $("#slider_feels_c").addClass("d-none");
     $("#slider_temp_c").addClass("d-none");
-    console.log('			Math.round((+$("#slider_temp").attr("data_tempval") - 32) / 1.8) :>> ', 			Math.round((+$("#slider_temp").attr("data_tempval") - 32) / 1.8));
     $(".slider_li").addClass("active");
     $("#slider_toggle").addClass("active");
     $( "#slider_toggle_mode" ).text( 'F' );

@@ -8,16 +8,14 @@ function update_slider(v, city) {
 		type: "GET",
 		url: url
 	} ).then( ( w ) => {
-		// console.log( 'w :>> ', w );
+		console.log("w :>> ", w.list[v]);
 
+		$( "#slider_windspeed" ).text( w.list[ v ].wind.speed );
+		$( "#slider_winddegrees" ).text( w.list[ v ].wind.deg );
+		
 		$("#slider_datetxt").text(w.list[v].dt_txt);
 
 		$( "#slider_humid" ).text( w.list[ v ].main.humidity );
-		$("#slider_temp").attr("data_tempunit", 'F');
-		$("#slider_temp").attr(
-			"data_tempval",
-			Math.round(+w.list[v].main.temp - 273)
-		);
 		$( "#slider_temp_c" ).text(
 			Math.round( +w.list[ v ].main.temp - 273 ) +
 			" C " );
