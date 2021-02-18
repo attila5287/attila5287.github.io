@@ -8,12 +8,14 @@ function update_slider(v, city) {
 		type: "GET",
 		url: url
 	} ).then( ( w ) => {
-		console.log("w :>> ", w.list[v]);
+		console.log("w :>> ", convert2HHMM(w.list[v].dt));
 
 		$( "#slider_windspeed" ).text( w.list[ v ].wind.speed );
 		$( "#slider_winddegrees" ).text( w.list[ v ].wind.deg );
-		
-		$("#slider_datetxt").text(w.list[v].dt_txt);
+		const recyclable_date = $("<span>");
+		recyclable_date.text( w.list[ v ].dt_txt );
+		$("#slider_datetxt").empty();
+		$("#slider_datetxt").append(recyclable_date);
 
 		$( "#slider_humid" ).text( w.list[ v ].main.humidity );
 		$( "#slider_temp_c" ).text(

@@ -14,7 +14,12 @@
   </head>
   <style>
     /* practical css classes beyond bootstrap.css*/
-    .text-sm{
+ 
+    .slider_li i {
+      margin-right: 0.5rem;
+      font-size: 1.5rem;
+    }
+      .text-sm{
       font-size: 0.85rem;
     }
     .card-header i {
@@ -72,7 +77,6 @@
       border-radius: 1.00rem;
     }
   </style>
-
   <body class="bg-dark">
     <nav class="navbar navbar-expand navbar-dark bg-primary">
       <a class="navbar-brand" href="#">
@@ -285,7 +289,7 @@
           </div>
         </div>
         <div class="col-2">
-          <div class="btn-group-vertical h-100 rounded-xl w-100" role="group"
+          <div class="btn-group-vertical rounded-2xl h-100" role="group"
             aria-label="Vertical button group">
             <button data-increment="-2"
               class="route_btns w-100 rounded-xl btn btn-warning btn-block py-2" type="button">
@@ -397,7 +401,8 @@
             <input id="slider" class="custom-range" type="range" name="" min="1" max="40">
             <p class="text-center text-light">
               <i class="fas fa-calendar"></i>
-              <span id="slider_datetxt"></span>
+              <span id="slider_datetxt">
+              </span>
               <i class="fas fa-clock"></i>
             </p>
           </div>
@@ -415,21 +420,14 @@
           </div>
         </div>
       </div>
+      
+      <span class="text-hide" id="slider_date"></span>
+      <span class="text-hide" id="slider_hour"></span>
       <div class="container mini mt-3">
         <div class="row">
-          <div class="col-4 text-left pl-0">
-            <style>
-              .slider_li i {
-                margin-right: 0.25rem;
-                font-size: 1.5rem;
-              }
-            </style>
-            <span class="text-hide" id="slider_date"></span>
-            <span class="text-hide" id="slider_hour"></span>
-            <ul class="list-group list-group-flush rounded-2xl"
-             id="slider_toggle_bg"
-            >
-              <a class="list-group-item list-group-item-action active disabled slider_li" tabindex="-1" aria-disabled="true">
+          <div class="col-4 text-left">
+            <ul class="list-group list-group-flush rounded-2xl">
+              <a class="list-group-item list-group-item-action bg-warning text-dark disabled slider_li" tabindex="-1" aria-disabled="true">
                 <small>Feels</small>
                 <b>
                   <span class="temp_unit_c">
@@ -444,7 +442,7 @@
                 </b>
                 
               </a>
-              <a class="list-group-item list-group-item-action active disabled slider_li" tabindex="-1" aria-disabled="true">
+              <a class="list-group-item list-group-item-action bg-warning text-dark disabled slider_li" tabindex="-1" aria-disabled="true">
                 <small>Temp.</small>
                 <b>
                   <span class="temp_unit_f">
@@ -456,20 +454,23 @@
                   <b> <i class="d-none"  data_tempunit="C" data_tempval="0" id="slider_feels_c"></i></b> 
                 </span>&deg;
               </a>
-              <hr class="border-light m-0">
+              <hr class="border-dark border-med m-0">
               <a class="list-group-item list-group-item-action text-center py-0 active" id="slider_toggle">
                 <p class="text-hide text-center mb-0" >
                   <i class="" id="slider_toggle_mode"></i>
                   &deg;
                 </p>
-                <h1 id="slider_toggle_iconium" class="h1-mod my-0 py-0">
-                  <span class="fas fa-toggle-off"></span>
+                <h1 id="slider_toggle_iconium" class="my-0 py-0">
+                  <span class="fas fa-toggle-off text-dark"></span>
                 </h1>
               </a>
             </ul>
+            <p class="text-white">
+              <i class="fas fa-chevron-up text-warning"></i>
+              </p>
           </div>
-          <div class="col-4 text-white d-flex flex-column">
-            <div class="card rounded-2xl bg-transparent border-light text-light">
+          <div class="col-4">
+            <div class="card rounded-2xl bg-transparent border-warning text-warning">
               <div class="card-body text-sm text-left">
                 <p class="card-text">
                   <i class="fas fa-wind mr-4"></i> 
