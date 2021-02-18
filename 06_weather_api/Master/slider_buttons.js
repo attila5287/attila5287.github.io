@@ -5,7 +5,5 @@ $(this).on("click", function () {
   const current_value = +$( '#slider' ).val();
   const changed = current_value + increment; 
   update_slider( current_value + increment, current_city ); 
-  update_slider_hour(changed);
-	update_slider_date(changed);
 });
 });

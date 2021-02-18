@@ -7,8 +7,8 @@ function forecast_five_days ( city ) {
     type: "GET",
     url: url,
   } ).then( ( w ) => {
-    // console.log( 'test ajax forecast');
-    // console.log( 'w :>> ', w.city );
+    // console.log( 'w :>> ', w.list[0].main );
+    // console.log( 'w :>> ', w.list[0].main.feels_like );
     
     $( ".forecast" ).each( function ( i, el ) {
       $(this)

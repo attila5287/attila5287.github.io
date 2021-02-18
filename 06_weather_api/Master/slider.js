@@ -2,16 +2,29 @@ function update_slider(v, city) {
 	const API_key = "42a5a7b661c854194cb0539e5fd1a86f";
 	const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_key}`;
 	// console.log('url :>> ', url);
+	
 
 	$.ajax({
 		type: "GET",
 		url: url
-	}).then((w) => {
-		// console.log("w :>> ", w.list[v]);
-		// console.log("w :>> ", w.list[v].weather[0]);
-		// console.log("w :>> ", w.list[v].weather[0].main);
-		// console.log( "w :>> ", w.list[ v ].weather[ 0 ].description );
+	} ).then( ( w ) => {
+		// console.log( 'w :>> ', w );
 
+		$("#slider_datetxt").text(w.list[v].dt_txt);
+
+		$( "#slider_humid" ).text( w.list[ v ].main.humidity );
+		$("#slider_temp").attr("data_tempunit", 'F');
+		$("#slider_temp").attr(
+			"data_tempval",
+			Math.round(+w.list[v].main.temp - 273)
+		);
+		$( "#slider_temp_c" ).text(
+			Math.round( +w.list[ v ].main.temp - 273 ) +
+			" C " );
+		$("#slider_temp_f").text(
+			+Math.round((+w.list[v].main.temp - 273 + 32) / 1.8) + " F "
+		);
+			
     $( "#slider_description" )
       .text( w.list[ v ].weather[ 0 ].description );
 		$("#slider_icon").attr(

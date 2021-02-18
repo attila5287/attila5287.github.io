@@ -2,7 +2,7 @@ const len = $( ".leaflet_city" ).length; // count
 let vert_index = +$( "#vert_index" ).text();
 $("#vert_length").text(+len);
 
-console.log('len :>> ', len);
+// console.log('len :>> ', len);
 
 $('.route_btns').each(function (index, element) {
 $(this).on("click", function () {

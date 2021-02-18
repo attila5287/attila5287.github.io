@@ -26,12 +26,15 @@ function update_slider_hour ( val ) {
   if ( total_hrs % 24 > 12 ) {
     
     const disp_hrs = `${( total_hrs) % 12} PM`;
-    console.log( 'disp_h :>> ', disp_hrs );
+    // console.log( 'disp_h :>> ', disp_hrs );
     s.text( disp_hrs ); 
+
   } else  {
+    
     const disp_hrs = `${total_hrs % 12} AM`;
-    console.log( 'disp_h :>> ', disp_hrs );
+    // console.log( 'disp_h :>> ', disp_hrs );
     s.text( disp_hrs );
+
 	}
 }
 
