@@ -9,6 +9,17 @@ function forecast_five_days ( city ) {
   } ).then( ( w ) => {
     // console.log( 'w :>> ', w.list[0].main );
     // console.log( 'w :>> ', w.list[0].main.feels_like );
+
+    $.each( $( ".fore_temp_c" ), function ( i, v ) {
+      $( this )
+        .attr( "data-temp_unit", 'celcius' )
+        .attr( "data-temp_read", Math.round( +w.list[ i * 7 ].main.temp-273-32 )/1.8 )
+        ;
+      $(this).text(
+				Math.round(Math.round(+w.list[i * 7].main.temp - 273 - 32) / 1.8)
+			);
+      
+    });
     $.each( $( ".fore_temp_f" ), function ( i, v ) {
       $( this )
         .attr( "data-temp_unit", 'fahrenheit' )
@@ -27,7 +38,7 @@ function forecast_five_days ( city ) {
     $( ".forecast-img" ).each( function ( i, el ) {
       
       // console.log( 'w.list[ i * 7 ] :>> ', w.list[ i * 7 ] );
-      console.log( 'w.list[ i * 7 ] :>> ', w.list[ i * 7 ].main );
+      // console.log( 'w.list[ i * 7 ] :>> ', w.list[ i * 7 ].main );
       
       const icon = w.list[ i * 7 ].weather[ 0 ].icon;
       const day_or_night = icon[ icon.length - 1 ];
