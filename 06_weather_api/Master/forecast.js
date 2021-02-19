@@ -9,7 +9,15 @@ function forecast_five_days ( city ) {
   } ).then( ( w ) => {
     // console.log( 'w :>> ', w.list[0].main );
     // console.log( 'w :>> ', w.list[0].main.feels_like );
-    
+    $.each( $( ".fore_temp_f" ), function ( i, v ) {
+      $( this )
+        .attr( "data-temp_unit", 'fahrenheit' )
+        .attr( "data-temp_read", Math.round( +w.list[ i * 7 ].main.temp-273 ) )
+        ;
+      $(this).text(Math.round(w.list[i * 7].main.temp)-273);
+      
+    });
+
     $( ".forecast" ).each( function ( i, el ) {
       $(this)
 				.addClass("text-capitalize")
@@ -17,8 +25,11 @@ function forecast_five_days ( city ) {
       // console.log('forecast main git upi :>> ', i);
     } );
     $( ".forecast-img" ).each( function ( i, el ) {
+      
+      // console.log( 'w.list[ i * 7 ] :>> ', w.list[ i * 7 ] );
+      console.log( 'w.list[ i * 7 ] :>> ', w.list[ i * 7 ].main );
+      
       const icon = w.list[ i * 7 ].weather[ 0 ].icon;
-      console.log('icon :>> ', icon[icon.length-1]  );
       const day_or_night = icon[ icon.length - 1 ];
       const styles = {
         d:'bg-info',

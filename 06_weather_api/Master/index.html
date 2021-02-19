@@ -14,10 +14,17 @@
   </head>
   <style>
     /* practical css classes beyond bootstrap.css*/
+    .text-bold{
+      font-weight:bold;
+    }
+    .forecast-img{
+      max-height:5rem;
+      max-width:5rem;
+    }
     .card-text i{
-              font-size: 2rem;
-            }
- .card-footer{
+      font-size: 2rem;
+      }
+    .card-footer{
    font-size: 0.85rem;
 
  }
@@ -29,8 +36,8 @@
       font-size: 0.85rem;
     }
     .card-header i {
-      font-size: 2.00rem;
-      margin-right: 0.75rem;
+      font-size: 1.50rem;
+      margin-right: 0.25rem;
     }
 
     .card-text i {
@@ -196,8 +203,8 @@
     <header class="container-fluid text-right text-white bg-warning my-0 py-0">
       <div class="container mini my-0 py-0">
         Weather Dashboard:
-        <span class="fas fa-sun text-light text-xl fa-pull-left mt-2"></span>
-        <span class="fas fa-cloud-rain text-light fa-pull-left text-xl mt-2"></span>
+        <span class="fas fa-sun text-light text-xl mt-2"></span>
+        <span class="fas fa-cloud-rain text-light text-xl mt-2"></span>
         <b class="text-uppercase text-xl mx-2" id="weather-city"></b>
       </div>
     </header>
@@ -434,7 +441,7 @@
           <div class="col-4 text-left">
             <ul class="list-group list-group-flush rounded-2xl">
               <a class="list-group-item list-group-item-action bg-light text-dark disabled slider_li text-nowrap" tabindex="-1" aria-disabled="true">
-                <small>Feels</small>
+                <small>Temp.</small>
                 <b>
                   <span class="temp_unit_c">
                     <i class="fas fa-temperature-high"></i>
@@ -449,7 +456,7 @@
                 
               </a>
               <a class="list-group-item list-group-item-action bg-light text-dark disabled slider_li text-nowrap" tabindex="-1" aria-disabled="true">
-                <small>Temp.</small>
+                <small>Feels </small>
                 <b>
                   <span class="temp_unit_f">
                     <i class="fas fa-temperature-high"></i>
@@ -461,7 +468,7 @@
                 </span>&deg;
               </a>
               <hr class="border-dark border-med m-0">
-              <a class="list-group-item list-group-item-action text-center py-0 " id="slider_toggle">
+              <a class="list-group-item list-group-item-action active text-center py-0 " id="slider_toggle">
                 <p class="text-hide text-center mb-0" >
                   <i class="" id="slider_toggle_mode"></i>
                   &deg;
@@ -483,20 +490,20 @@
           <div class="col-4 align-content-center  p-0">
             <div class="card bg-transparent border-0 text-dark rounded-2xl">
               <div class="card-body bg-light text-sm text-left rounded-2xl">
-                <p class="card-text my-0">
-                  <i class="fa-pull-left text-light bg-dark p-2 rounded-xl fas fa-wind mr-2"></i> 
+                <p class="card-text mt-0 mb-2">
+                  <i class="text-light bg-dark p-1 rounded-xl fas fa-wind fa-fw mr-2"></i> 
                   Wind Speed: 
-                  <span class="text-xl" id="slider_windspeed" ></span>
+                  <span class="mb-2" id="slider_windspeed" ></span>
                 </p>
-                <p class="card-text my-0">
-                  <i class="fa-pull-left text-light bg-dark p-2 rounded-xl fas fa-compass mr-2"></i> 
+                <p class="card-text mt-0 mb-2">
+                  <i class="text-light bg-dark p-1 rounded-xl fas fa-compass fa-fw mr-2"></i> 
                   Wind Degrees: 
-                  <span class="text-xl" id="slider_winddegrees" ></span>
+                  <span class="mb-2" id="slider_winddegrees" ></span>
                 </p>
-                <p class="card-text my-0">
-                  <i class="fa-pull-left text-light bg-dark p-2 rounded-xl fas fa-cloud-rain mr-2"></i> 
+                <p class="card-text mt-0 mb-2">
+                  <i class="text-light bg-dark p-1 rounded-xl fas fa-tint fa-fw mr-2"></i> 
                   Humidity: 
-                  <span class="text-xl" id="slider_humid" ></span>
+                  <span class="mb-2" id="slider_humid" ></span>
                 </p>
               </div>
             </div>
@@ -518,56 +525,114 @@
       </div>
       <div class="container mini mt-3 mb-5">
         <div
-          class="card bg-primary text-dark rounded-2xl mx-1 mb-5 border-0">
-          <div class="card-header text-light pt-1 pb-1">
+          class="card bg-primary text-dark rounded-xl mx-1 mb-5 border-0">
+          <div class="card-header bg-dark rounded-2xl text-light pt-1 pb-0">
             <i class="fas fa-chart-line"></i>
             5-Day Forecast
           </div>
-          <style>
-            .forecast-img{
-              max-height:5rem;
-              max-width:5rem;
-            }
-          </style>
-          <div class="card-body bg-dark rounded-xl m-0 p-0 border-0">
-            <div class="card-group border-0 pb-2 ">
+          <div class="card-body bg-dark m-0 p-0 border-0">
+            <div class="card-group mt-2 text-left">
 
               <div class="card rounded-xl border-primary border-med bg-transparent">
+                <div class="card-header h-100 bg-primary rounded-2xl text-light text-bold py-0" >
+                  <span class="forecast"></span>
+                </div>
                 <img
                 class="forecast-img card-img-top border-0 bg-transparent m-0 p-0 rounded-2xl"
                 alt="forecast-icon" >
-                <div class="card-footer h-100 bg-transparent rounded-2xl text-light forecast" >
+                <div class="card-body bg-light text-dark pt-1 pb-5">
+                  <i class="fas fa-temperature-low"></i>
+                  Temp
+                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F&deg;</small>
+                  </div>
+                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C&deg;</small>
+                  </div>
                 </div>
-              </div>
+              </div>            
               <div class="card rounded-xl border-primary border-med bg-transparent">
-                <img
-                class="forecast-img card-img-top border-0 bg-transparent mx-2 my-0 p-0"
-                alt="forecast-icon" >
-                <div class="card-footer h-100 bg-transparent rounded-2xl text-light forecast" >
+                <div class="card-header h-100 bg-primary rounded-2xl text-light text-bold py-0" >
+                  <span class="forecast"></span>
                 </div>
-              </div>
+                <img
+                class="forecast-img card-img-top border-0 bg-transparent m-0 p-0 rounded-2xl"
+                alt="forecast-icon" >
+                <div class="card-body bg-light text-dark pt-1 pb-5">
+                  <i class="fas fa-temperature-low"></i>
+                  Temp
+                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F&deg;</small>
+                  </div>
+                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C&deg;</small>
+                  </div>
+                </div>
+              </div>            
               <div class="card rounded-xl border-primary border-med bg-transparent">
-                <img
-                class="forecast-img card-img-top border-0 bg-transparent mx-2 my-0 p-0"
-                alt="forecast-icon" >
-                <div class="card-footer h-100 bg-transparent rounded-2xl text-light forecast" >
+                <div class="card-header h-100 bg-primary rounded-2xl text-light text-bold py-0" >
+                  <span class="forecast"></span>
                 </div>
-              </div>
-
+                <img
+                class="forecast-img card-img-top border-0 bg-transparent m-0 p-0 rounded-2xl"
+                alt="forecast-icon" >
+                <div class="card-body bg-light text-dark pt-1 pb-5">
+                  <i class="fas fa-temperature-low"></i>
+                  Temp
+                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F&deg;</small>
+                  </div>
+                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C&deg;</small>
+                  </div>
+                </div>
+              </div>            
               <div class="card rounded-xl border-primary border-med bg-transparent">
-                <img
-                class="forecast-img card-img-top border-0 bg-transparent mx-2 my-0 p-0"
-                alt="forecast-icon" >
-                <div class="card-footer h-100 bg-transparent rounded-2xl text-light forecast" >
+                <div class="card-header h-100 bg-primary rounded-2xl text-light text-bold py-0" >
+                  <span class="forecast"></span>
                 </div>
-              </div>
+                <img
+                class="forecast-img card-img-top border-0 bg-transparent m-0 p-0 rounded-2xl"
+                alt="forecast-icon" >
+                <div class="card-body bg-light text-dark pt-1 pb-5">
+                  <i class="fas fa-temperature-low"></i>
+                  Temp
+                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F&deg;</small>
+                  </div>
+                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C&deg;</small>
+                  </div>
+                </div>
+              </div>            
               <div class="card rounded-xl border-primary border-med bg-transparent">
-                <img
-                class="forecast-img card-img-top border-0 bg-transparent mx-2 my-0 p-0"
-                alt="forecast-icon" >
-                <div class="card-footer h-100 bg-transparent rounded-2xl text-light forecast" >
+                <div class="card-header h-100 bg-primary rounded-2xl text-light text-bold py-0" >
+                  <span class="forecast"></span>
                 </div>
-              </div>
+                <img
+                class="forecast-img card-img-top border-0 bg-transparent m-0 p-0 rounded-2xl"
+                alt="forecast-icon" >
+                <div class="card-body bg-light text-dark pt-1 pb-5">
+                  <i class="fas fa-temperature-low"></i>
+                  Temp
+                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F&deg;</small>
+                  </div>
+                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C&deg;</small>
+                  </div>
+                </div>
+              </div>            
 
             </div>
 
