@@ -18,7 +18,14 @@ function forecast_five_days ( city ) {
     } );
     $( ".forecast-img" ).each( function ( i, el ) {
       const icon = w.list[ i * 7 ].weather[ 0 ].icon;
-      // console.log('icon :>> ', icon);
+      console.log('icon :>> ', icon[icon.length-1]  );
+      const day_or_night = icon[ icon.length - 1 ];
+      const styles = {
+        d:'bg-info',
+        n: 'bg-secondary',
+      };
+      $( this ).attr( "class", ""+styles[day_or_night] );
+      
       $( this ).attr(
         "src",
         `https://openweathermap.org/img/wn/${w.list[ i * 7 ].weather[ 0 ].icon}@2x.png`

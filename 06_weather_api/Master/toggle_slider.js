@@ -17,7 +17,7 @@ function auto_detext_ () {
     $("#slider_temp_c").removeClass("d-none");
     $( "#slider_temp_f" ).addClass( "d-none" );
     
-    $(".slider_li").removeClass("text-dark");
+    $( ".slider_li" ).removeClass( "text-dark" );
     $( "#slider_toggle_mode" ).text( 'C' );
     $( "#slider_toggle_iconium" ).empty();
     $( "#slider_toggle_iconium" ).append( new_icon );

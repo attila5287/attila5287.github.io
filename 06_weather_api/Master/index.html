@@ -14,6 +14,9 @@
   </head>
   <style>
     /* practical css classes beyond bootstrap.css*/
+    .card-text i{
+              font-size: 2rem;
+            }
  .card-footer{
    font-size: 0.85rem;
 
@@ -262,7 +265,7 @@
               <span class="text-white" id="vert_index">1</span>/
               <span class="text-white" id="vert_length"></span>
             </div>
-            <div class="card-body bg-dark rounded-2xl">
+            <div class="card-body bg-dark rounded-xl rounded-2xl">
               <button data-vertical_index="0"
                 class="selected_leaflet leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left"
                 type="button">city
@@ -331,17 +334,17 @@
             <i class="far fa-clock"></i>
             Currently 
           </div>
-          <div class="card-body bg-dark rounded-2xl">
+          <div class="card-body bg-dark rounded-xl rounded-2xl">
             <div class="row">
               <div class="col-5">
                 <img class="card-img-top border-0 mx-auto rounded-xl p-0" alt="forecast-icon"
                   id="weather-img" style="max-height:8rem;max-width:8rem">
 
-                <p class="card-text text-xl">
+                <p class="card-text my-2 text-xl">
                   <span class="weather" id="weather-description">
                     ...</span>
                 </p>
-                <p class="card-text">
+                <p class="card-text my-2">
                   <i class="fas fa-temperature-high"></i>
                   <span class="weather" id="weather-temperature">
                     ...</span>
@@ -349,28 +352,28 @@
               </div>
               <div class="col-7 text-left">
 
-                <p class="card-text">
+                <p class="card-text my-2">
                   <i class="fas fa-temperature-high"></i>
                   <span class="weather" id="weather-feelslike">
                   </span>
                 </p>
 
-                <p class="card-text">
+                <p class="card-text my-2">
                   <i class="fab fa-react"></i>
                   <span class="weather" id="weather-uv_index">...
                   </span>
                 </p>
-                <p class="card-text">
+                <p class="card-text my-2">
                   <i class="fas fa-cloud-rain"></i>
                   <span class="weather" id="weather-humidity">...
                   </span>
                 </p>
-                <p class="card-text">
+                <p class="card-text my-2">
                   <i class="fas fa-sun"></i>
                   <span class="weather" id="weather-sunrise">...
                   </span>
                 </p>
-                <p class="card-text">
+                <p class="card-text my-2">
                   <i class="fas fa-cloud-sun"></i>
                   <span class="weather" id="weather-sunset">...
                   </span>
@@ -458,7 +461,7 @@
                 </span>&deg;
               </a>
               <hr class="border-dark border-med m-0">
-              <a class="list-group-item list-group-item-action text-center py-0 active" id="slider_toggle">
+              <a class="list-group-item list-group-item-action text-center py-0 " id="slider_toggle">
                 <p class="text-hide text-center mb-0" >
                   <i class="" id="slider_toggle_mode"></i>
                   &deg;
@@ -468,120 +471,104 @@
                 </h1>
               </a>
             </ul>
-            <p class="text-warning mt-2" id="slider_note_f">
-              <i class="text-xl fas fa-info-circle text-warning mr-2"></i> F &deg; (fahrenheit) as temp unit
+            <p class="text-light mt-2" id="slider_note_f">
+              <i class="fas fa-info text-dark bg-light rounded-xl px-2 py-1 mr-1"></i>
+              Temperatures in F&deg;
               </p>
             <p class="text-secondary mt-2 d-none" id="slider_note_c">
-              <i class="text-xl fas fa-info-circle text-secondary mr-2"></i> C &deg; (celcius) as temp unit
+              <i class="fas fa-info text-dark bg-secondary rounded-xl px-2 py-1 mr-1"></i> 
+              Temperatures in C&deg;
               </p>
           </div>
-          <style>
-            .card-text i{
-              font-size: 2rem;
-            }
-          </style>
           <div class="col-4 align-content-center  p-0">
-            <div class="card rounded-2xl bg-transparent border-primary text-warning h-100 my-auto">
-              <div class="card-body text-sm text-left">
-                <p class="card-text">
-                  <i class="fa-pull-left text-light bg-primary p-2 rounded-xl fas fa-wind mr-2"></i> 
+            <div class="card bg-transparent border-0 text-dark rounded-2xl">
+              <div class="card-body bg-light text-sm text-left rounded-2xl">
+                <p class="card-text my-0">
+                  <i class="fa-pull-left text-light bg-dark p-2 rounded-xl fas fa-wind mr-2"></i> 
                   Wind Speed: 
                   <span class="text-xl" id="slider_windspeed" ></span>
                 </p>
-                <p class="card-text">
-                  <i class="fa-pull-left text-light bg-primary p-2 rounded-xl fas fa-compass mr-2"></i> 
+                <p class="card-text my-0">
+                  <i class="fa-pull-left text-light bg-dark p-2 rounded-xl fas fa-compass mr-2"></i> 
                   Wind Degrees: 
                   <span class="text-xl" id="slider_winddegrees" ></span>
                 </p>
-                <p class="card-text">
-                  <i class="fa-pull-left text-light bg-primary p-2 rounded-xl fas fa-cloud-rain mr-2"></i> 
+                <p class="card-text my-0">
+                  <i class="fa-pull-left text-light bg-dark p-2 rounded-xl fas fa-cloud-rain mr-2"></i> 
                   Humidity: 
                   <span class="text-xl" id="slider_humid" ></span>
                 </p>
               </div>
             </div>
           </div>
-          <div class="col-4">
-            <div class="card bg-primary border-primary rounded-2xl h-100 ">
-              <div class="card-header text-light py-1">
-                <span id="slider_description">Description</span>
+          <div class="col-3">
+            <div class="card border-0 rounded-2xl"  id="slider_bg" >
+              <div class="card-header text-dark border-bottom border-dark border-med py-1">
+                <b>
+                  <span class="text-bold" id="slider_description">Description</span>
+                </b>
               </div>
-              <div class="card-body rounded-xl" id="slider_bg">
+              <hr class="border-0 m-1">
                 <img id="slider_icon" class="card-img border-0" alt="">
-              </div>
+              <div class="card-footer rounded-2xl pt-2 pb-1 border-0"></div>
             </div>
           </div>
+          <div class="col-1"></div>          
         </div>
       </div>
       <div class="container mini mt-3 mb-5">
         <div
-          class="card bg-primary text-light rounded-xl mx-1 mb-5">
-          <div class="card-header pt-0 pb-1">
+          class="card bg-primary text-dark rounded-2xl mx-1 mb-5 border-0">
+          <div class="card-header text-light pt-1 pb-1">
             <i class="fas fa-chart-line"></i>
             5-Day Forecast
           </div>
-          <div class="card-body bg-dark">
-            <div class="card-group">
-              <div class="card border-dark border-med rounded-2xl">
-                <div class="card-body bg-dark">
-                  
-                  
-                  <img
-                  class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0"
-                  alt="forecast-icon" style="max-height:3rem;max-width:3rem">
-                </div>
-                <div class="card-footer text-light bg-light text-dark text-bold rounded-xl forecast h-100" >
-                  Footer
-                </div>
-              </div>
-              <div class="card border-dark border-med rounded-2xl">
-                <div class="card-body bg-dark">
-                  
-                  
-                  <img
-                  class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0"
-                  alt="forecast-icon" style="max-height:3rem;max-width:3rem">
-                </div>
-                <div class="card-footer text-light bg-light text-dark text-bold rounded-xl forecast h-100" >
-                  Footer
+          <style>
+            .forecast-img{
+              max-height:5rem;
+              max-width:5rem;
+            }
+          </style>
+          <div class="card-body bg-dark rounded-xl m-0 p-0 border-0">
+            <div class="card-group border-0 pb-2 ">
+
+              <div class="card rounded-xl border-primary border-med bg-transparent">
+                <img
+                class="forecast-img card-img-top border-0 bg-transparent m-0 p-0 rounded-2xl"
+                alt="forecast-icon" >
+                <div class="card-footer h-100 bg-transparent rounded-2xl text-light forecast" >
                 </div>
               </div>
-              <div class="card border-dark border-med rounded-2xl">
-                <div class="card-body bg-dark">
-                  
-                  
-                  <img
-                  class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0"
-                  alt="forecast-icon" style="max-height:3rem;max-width:3rem">
-                </div>
-                <div class="card-footer text-light bg-light text-dark text-bold rounded-xl forecast h-100" >
-                  Footer
+              <div class="card rounded-xl border-primary border-med bg-transparent">
+                <img
+                class="forecast-img card-img-top border-0 bg-transparent mx-2 my-0 p-0"
+                alt="forecast-icon" >
+                <div class="card-footer h-100 bg-transparent rounded-2xl text-light forecast" >
                 </div>
               </div>
-              <div class="card border-dark border-med rounded-2xl">
-                <div class="card-body bg-dark">
-                  
-                  
-                  <img
-                  class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0"
-                  alt="forecast-icon" style="max-height:3rem;max-width:3rem">
-                </div>
-                <div class="card-footer text-light bg-light text-dark text-bold rounded-xl forecast h-100" >
-                  Footer
+              <div class="card rounded-xl border-primary border-med bg-transparent">
+                <img
+                class="forecast-img card-img-top border-0 bg-transparent mx-2 my-0 p-0"
+                alt="forecast-icon" >
+                <div class="card-footer h-100 bg-transparent rounded-2xl text-light forecast" >
                 </div>
               </div>
-              <div class="card border-dark border-med rounded-2xl">
-                <div class="card-body bg-dark">
-                  
-                  
-                  <img
-                  class="forecast-img img-thumbnail border-0 bg-transparent mx-2 my-0 p-0"
-                  alt="forecast-icon" style="max-height:3rem;max-width:3rem">
-                </div>
-                <div class="card-footer text-light bg-light text-dark text-bold rounded-xl forecast h-100" >
-                  Footer
+
+              <div class="card rounded-xl border-primary border-med bg-transparent">
+                <img
+                class="forecast-img card-img-top border-0 bg-transparent mx-2 my-0 p-0"
+                alt="forecast-icon" >
+                <div class="card-footer h-100 bg-transparent rounded-2xl text-light forecast" >
                 </div>
               </div>
+              <div class="card rounded-xl border-primary border-med bg-transparent">
+                <img
+                class="forecast-img card-img-top border-0 bg-transparent mx-2 my-0 p-0"
+                alt="forecast-icon" >
+                <div class="card-footer h-100 bg-transparent rounded-2xl text-light forecast" >
+                </div>
+              </div>
+
             </div>
 
           </div>
