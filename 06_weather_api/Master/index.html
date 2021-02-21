@@ -20,6 +20,7 @@
     .forecast-img{
       max-height:5rem;
       max-width:5rem;
+      border-radius: 1.00rem;
     }
     .card-text i{
       font-size: 2rem;
@@ -200,7 +201,7 @@
         </form>
       </div>
     </nav>
-    <header class="container-fluid text-right text-white bg-warning my-0 py-0">
+    <header class="container-fluid text-right text-white bg-light my-0 py-0">
       <div class="container mini my-0 py-0">
         Weather Dashboard:
         <span class="fas fa-sun text-light text-xl mt-2"></span>
@@ -211,16 +212,16 @@
     <div class="container mini my-2">
       <div class="row">
         <aside class="col-3">
-          <h1 class="bg-primary rounded-xl text-light text-center mt-3 py-2 h1-mod">
+          <h1 class="bg-light rounded-xl text-dark text-center mt-3 py-2 h1-mod">
             <i class="fa fa-search"></i>
           </h1>
         </aside>
         <div class="col-9">
           <div class="form-group mt-2">
             <input
-              class="form-control form-control-lg form-control-dark border-primary shadow=lg rounded-xl my-2"
+              class="form-control form-control-lg form-control-dark border-light shadow=lg rounded-xl my-2"
               type="text" value="Denver" id="search-value" />
-            <button class="btn btn-primary mt-0 btn-block btn-lg rounded-xl" id="search-button">
+            <button class="btn btn-light text-dark mt-0 btn-block btn-lg rounded-xl" id="search-button">
               Search City
             </button>
           </div>
@@ -231,14 +232,14 @@
     <div class="container mini text-center my-0">
       <div class="row no-gutters">
         <div class="col-1">
-          <button class="btn btn-outline-warning border-0 btn-block btn-sm p-1 mb-0" type="button"
+          <button class="btn btn-outline-dark border-light btn-block btn-sm p-1 mb-0" type="button"
             id="def_btn">
-            <i class="fas fa-list-alt text-xl"></i>
+            <i class="fas fa-list-alt text-xl text-light"></i>
           </button>
-          <small class="text-warning">defaults</small>
+          <small class="text-light">defaults</small>
         </div>
         <div class="col-1">
-          <button class="btn btn-outline-success border-0 btn-block btn-sm p-1 mb-0" type="button"
+          <button class="btn btn-outline-success border-light text-light btn-block btn-sm p-1 mb-0" type="button"
             id="reset_button">
             <i class="fas fa-undo-alt text-xl"></i>
           </button>
@@ -265,36 +266,36 @@
       </div>
       <div class="row mb-5">
         <div class="col-4">
-          <div class="card bg-primary rounded-2xl h-100">
-            <div class="card-header text-light rounded-2xl">
+          <div class="card bg-light text-dark rounded-2xl h-100">
+            <div class="card-header text-bold text-dark rounded-2xl">
               <i class="fas fa-route"></i>
               Route:
-              <span class="text-white" id="vert_index">1</span>/
-              <span class="text-white" id="vert_length"></span>
+              <span class="text-dark" id="vert_index">1</span>/
+              <span class="text-dark" id="vert_length"></span>
             </div>
             <div class="card-body bg-dark rounded-xl rounded-2xl">
               <button data-vertical_index="0"
-                class="selected_leaflet leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left"
+                class="selected_leaflet leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-outline-dark border-0 text-light btn-sm border-0 btn-block text-left"
                 type="button">city
               </button>
               <button data-vertical_index="1"
-                class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left"
+                class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-outline-dark text-light btn-sm border-light btn-block text-left"
                 type="button">city
               </button>
               <button data-vertical_index="2"
-                class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left"
+                class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-outline-dark text-light btn-sm border-light btn-block text-left"
                 type="button">city
               </button>
               <button data-vertical_index="3"
-                class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left"
+                class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-outline-dark text-light btn-sm border-light btn-block text-left"
                 type="button">city
               </button>
               <button data-vertical_index="4"
-                class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left"
+                class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-outline-dark text-light btn-sm border-light btn-block text-left"
                 type="button">city
               </button>
               <button data-vertical_index="5"
-                class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-primary btn-sm border-0 btn-block text-left"
+                class="leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-outline-dark text-light btn-sm border-light btn-block text-left"
                 type="button">city
               </button>
 
@@ -305,26 +306,26 @@
           <div class="btn-group-vertical rounded-2xl w-100 h-100" role="group"
             aria-label="Vertical button group">
             <button data-increment="-2"
-              class="route_btns w-100 rounded-xl btn btn-warning btn-block py-2" type="button">
+              class="route_btns w-100 rounded-xl btn btn-dark border-light btn-block py-2" type="button">
               <i class="fas fa-angle-double-up fa-fw"></i>
             </button>
             <button data-increment="-1"
-              class="route_btns w-100 rounded-xl btn btn-primary btn-block py-4" type="button">
+              class="route_btns w-100 rounded-xl btn btn-dark border-light btn-block py-4" type="button">
               <i class="fas fas fa-chevron-up fa-fw"></i>
             </button>
             <button data-increment="1"
-              class="route_btns w-100 rounded-xl btn btn-primary btn-block py-4" type="button">
+              class="route_btns w-100 rounded-xl btn btn-dark border-light btn-block py-4" type="button">
               <i class="fas fa-chevron-down fa-fw"></i>
             </button>
             <button data-increment="2"
-              class="route_btns w-100 rounded-xl btn btn-warning btn-block py-2" type="button">
+              class="route_btns w-100 rounded-xl btn btn-dark border-light btn-block py-2" type="button">
               <i class="fas fa-angle-double-down fa-fw"></i>
             </button>
           </div>
         </div>
         <div class="col-6">
-          <div class="card bg-primary rounded-2xl h-100">
-            <div class="card-header text-light">
+          <div class="card bg-light text-dark rounded-2xl h-100">
+            <div class="card-header text-bold text-dark">
               <i class="fas fa-map-marked text-xl mr-2"></i>
               <span id="leaf_selected_city">Denver</span>
             </div>
@@ -336,12 +337,12 @@
       </div>
 
       <div cass="container mini">
-        <div class="card bg-primary border-primary text-light rounded-2xl">
-          <div class="card-header text-light">
+        <div class="card bg-light border-light text-dark rounded-2xl">
+          <div class="card-header text-bold">
             <i class="far fa-clock"></i>
             Currently 
           </div>
-          <div class="card-body bg-dark rounded-xl rounded-2xl">
+          <div class="card-body bg-dark text-light rounded-xl rounded-2xl">
             <div class="row">
               <div class="col-5">
                 <img class="card-img-top border-0 mx-auto rounded-xl p-0" alt="forecast-icon"
@@ -396,11 +397,11 @@
         <div class="form-group row align-items-center">
           <div class="form-group col-3 h-100">
             <div class="btn-group" role="group" aria-label="Button group">
-              <button data-increment="-3" class="slider_btn btn btn-warning rounded-xl"
+              <button data-increment="-3" class="slider_btn btn btn-light text-dark rounded-xl"
                 type="button">
                 <h3 class="fas fa-angle-double-left my-0"></h3>
               </button>
-              <button data-increment="-1" class="slider_btn btn btn-primary rounded-xl"
+              <button data-increment="-1" class="slider_btn btn btn-light text-dark rounded-xl"
                 type="button">
                 <h3 class="fas fa-chevron-left my-0"></h3>
               </button>
@@ -421,11 +422,11 @@
           </div>
           <div class="form-group col-3 h-100">
             <div class="btn-group" role="group" aria-label="Button group">
-              <button data-increment="1" class="slider_btn btn btn-primary rounded-xl"
+              <button data-increment="1" class="slider_btn btn btn-light text-dark rounded-xl"
                 type="button">
                 <h3 class="fas fa-chevron-right my-0"></h3>
               </button>
-              <button data-increment="3" class="slider_btn btn btn-warning rounded-xl"
+              <button data-increment="3" class="slider_btn btn btn-light text-dark rounded-xl"
                 type="button">
                 <h3 class="fas fa-angle-double-right my-0"></h3>
               </button>
@@ -468,7 +469,7 @@
                 </span>&deg;
               </a>
               <hr class="border-dark border-med m-0">
-              <a class="list-group-item list-group-item-action active text-center py-0 " id="slider_toggle">
+              <a class="list-group-item list-group-item-action bg-light text-center py-0 " id="slider_toggle">
                 <p class="text-hide text-center mb-0" >
                   <i class="" id="slider_toggle_mode"></i>
                   &deg;
@@ -525,11 +526,11 @@
       </div>
       <div class="container mini mt-3 mb-5">
         <div
-          class="card bg-primary text-dark rounded-xl mx-1 mb-5 border-0">
-          <div class="card-header bg-dark rounded-2xl text-light pt-1 pb-0">
-            <i class="fas fa-chart-line"></i>
-            5-Day Forecast
-            <button class="btn btn-dark border-0 mb-0" type="button" id="fore_toggle" data-tempunit="f">
+          class="card bg-light text-dark rounded-xl mx-1 mb-5 border-0 rounded-2xl">
+          <div class="card-header rounded-2xl py-0 text-nowrap d-flex align-items-center justify-content-center mt-1">
+            <h1 class="fas fa-chart-line px-5"></h1>
+            5-day Forecast
+            <button class="btn btn-outline-dark text-dark border-0 mt-2" type="button" id="fore_toggle" data-tempunit="f">
               <h2 class="fas fa-toggle-off"></h2>
             </button>
             <span id="fore_toggle_mode">
@@ -539,13 +540,12 @@
           </div>
           <div class="card-body bg-dark m-0 p-0 border-0">
             <div class="card-group mt-2 text-left">
-
-              <div class="card rounded-xl border-primary border-med bg-transparent">
-                <div class="card-header h-75 bg-primary rounded-2xl text-light py-0" >
+              <div class="card rounded-xl border-dark border-med bg-transparent">
+                <div class="card-header h-75 bg-dark rounded-2xl text-light text-bold text-center py-0 text-sm" >
                   <span class="forecast"></span>
                 </div>
                 <img
-                class="forecast-img card-img-top border-0 bg-transparent m-0 p-0 rounded-2xl"
+                class="forecast-img  border-0 bg-transparent m-0 p-0 rounded-2xl"
                 alt="forecast-icon" >
                 <div class="card-body bg-light text-dark pt-1 pb-5">
                   <i class="fas fa-temperature-low"></i>
@@ -559,13 +559,14 @@
                     <small class="">C&deg;</small>
                   </div>
                 </div>
+                <div class="forecast_datetime card-footer bg-transparent text-light text-center"></div>
               </div>            
-              <div class="card rounded-xl border-primary border-med bg-transparent">
-                <div class="card-header h-75 bg-primary rounded-2xl text-light text-bold py-0" >
+              <div class="card rounded-xl border-dark border-med bg-transparent">
+                <div class="card-header h-75 bg-dark rounded-2xl text-light text-bold text-center py-0 text-sm" >
                   <span class="forecast"></span>
                 </div>
                 <img
-                class="forecast-img card-img-top border-0 bg-transparent m-0 p-0 rounded-2xl"
+                class="forecast-img  border-0 bg-transparent m-0 p-0 rounded-2xl"
                 alt="forecast-icon" >
                 <div class="card-body bg-light text-dark pt-1 pb-5">
                   <i class="fas fa-temperature-low"></i>
@@ -579,13 +580,14 @@
                     <small class="">C&deg;</small>
                   </div>
                 </div>
+                <div class="forecast_datetime card-footer bg-transparent text-light text-center"></div>
               </div>            
-              <div class="card rounded-xl border-primary border-med bg-transparent">
-                <div class="card-header h-75 bg-primary rounded-2xl text-light text-bold py-0" >
+              <div class="card rounded-xl border-dark border-med bg-transparent">
+                <div class="card-header h-75 bg-dark rounded-2xl text-light text-bold text-center py-0 text-sm" >
                   <span class="forecast"></span>
                 </div>
                 <img
-                class="forecast-img card-img-top border-0 bg-transparent m-0 p-0 rounded-2xl"
+                class="forecast-img  border-0 bg-transparent m-0 p-0 rounded-2xl"
                 alt="forecast-icon" >
                 <div class="card-body bg-light text-dark pt-1 pb-5">
                   <i class="fas fa-temperature-low"></i>
@@ -599,13 +601,14 @@
                     <small class="">C&deg;</small>
                   </div>
                 </div>
+                <div class="forecast_datetime card-footer bg-transparent text-light text-center"></div>
               </div>            
-              <div class="card rounded-xl border-primary border-med bg-transparent">
-                <div class="card-header h-75 bg-primary rounded-2xl text-light text-bold py-0" >
+              <div class="card rounded-xl border-dark border-med bg-transparent">
+                <div class="card-header h-75 bg-dark rounded-2xl text-light text-bold text-center py-0 text-sm" >
                   <span class="forecast"></span>
                 </div>
                 <img
-                class="forecast-img card-img-top border-0 bg-transparent m-0 p-0 rounded-2xl"
+                class="forecast-img  border-0 bg-transparent m-0 p-0 rounded-2xl"
                 alt="forecast-icon" >
                 <div class="card-body bg-light text-dark pt-1 pb-5">
                   <i class="fas fa-temperature-low"></i>
@@ -619,13 +622,14 @@
                     <small class="">C&deg;</small>
                   </div>
                 </div>
+                <div class="forecast_datetime card-footer bg-transparent text-light text-center"></div>
               </div>            
-              <div class="card rounded-xl border-primary border-med bg-transparent">
-                <div class="card-header h-75 bg-primary rounded-2xl text-light text-bold py-0" >
+              <div class="card rounded-xl border-dark border-med bg-transparent">
+                <div class="card-header h-75 bg-dark rounded-2xl text-light text-bold text-center py-0 text-sm" >
                   <span class="forecast"></span>
                 </div>
                 <img
-                class="forecast-img card-img-top border-0 bg-transparent m-0 p-0 rounded-2xl"
+                class="forecast-img  border-0 bg-transparent m-0 p-0 rounded-2xl"
                 alt="forecast-icon" >
                 <div class="card-body bg-light text-dark pt-1 pb-5">
                   <i class="fas fa-temperature-low"></i>
@@ -639,10 +643,121 @@
                     <small class="">C&deg;</small>
                   </div>
                 </div>
+                <div class="forecast_datetime card-footer bg-transparent text-light text-center"></div>
               </div>            
-
+            </div>
+            <hr class="border-light bg-light py-1">
+            <div class="card-group mt-2 text-left">
+              <div class="card rounded-xl border-dark border-med bg-transparent">
+                <div class="card-header h-75 bg-dark rounded-2xl text-light text-bold text-center py-0 text-sm" >
+                  <span class="forecast"></span>
+                </div>
+                <img
+                class="forecast-img  border-0 bg-transparent m-0 p-0 rounded-2xl"
+                alt="forecast-icon" >
+                <div class="card-body bg-light text-dark pt-1 pb-5">
+                  <i class="fas fa-temperature-low"></i>
+                  Temp
+                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F&deg;</small>
+                  </div>
+                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C&deg;</small>
+                  </div>
+                </div>
+                <div class="forecast_datetime card-footer bg-transparent text-light text-center"></div>
+              </div>            
+              <div class="card rounded-xl border-dark border-med bg-transparent">
+                <div class="card-header h-75 bg-dark rounded-2xl text-light text-bold text-center py-0 text-sm" >
+                  <span class="forecast"></span>
+                </div>
+                <img
+                class="forecast-img  border-0 bg-transparent m-0 p-0 rounded-2xl"
+                alt="forecast-icon" >
+                <div class="card-body bg-light text-dark pt-1 pb-5">
+                  <i class="fas fa-temperature-low"></i>
+                  Temp
+                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F&deg;</small>
+                  </div>
+                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C&deg;</small>
+                  </div>
+                </div>
+                <div class="forecast_datetime card-footer bg-transparent text-light text-center"></div>
+              </div>            
+              <div class="card rounded-xl border-dark border-med bg-transparent">
+                <div class="card-header h-75 bg-dark rounded-2xl text-light text-bold text-center py-0 text-sm" >
+                  <span class="forecast"></span>
+                </div>
+                <img
+                class="forecast-img  border-0 bg-transparent m-0 p-0 rounded-2xl"
+                alt="forecast-icon" >
+                <div class="card-body bg-light text-dark pt-1 pb-5">
+                  <i class="fas fa-temperature-low"></i>
+                  Temp
+                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F&deg;</small>
+                  </div>
+                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C&deg;</small>
+                  </div>
+                </div>
+                <div class="forecast_datetime card-footer bg-transparent text-light text-center"></div>
+              </div>            
+              <div class="card rounded-xl border-dark border-med bg-transparent">
+                <div class="card-header h-75 bg-dark rounded-2xl text-light text-bold text-center py-0 text-sm" >
+                  <span class="forecast"></span>
+                </div>
+                <img
+                class="forecast-img  border-0 bg-transparent m-0 p-0 rounded-2xl"
+                alt="forecast-icon" >
+                <div class="card-body bg-light text-dark pt-1 pb-5">
+                  <i class="fas fa-temperature-low"></i>
+                  Temp
+                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F&deg;</small>
+                  </div>
+                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C&deg;</small>
+                  </div>
+                </div>
+                <div class="forecast_datetime card-footer bg-transparent text-light text-center"></div>
+              </div>            
+              <div class="card rounded-xl border-dark border-med bg-transparent">
+                <div class="card-header h-75 bg-dark rounded-2xl text-light text-bold text-center py-0 text-sm" >
+                  <span class="forecast"></span>
+                </div>
+                <img
+                class="forecast-img  border-0 bg-transparent m-0 p-0 rounded-2xl"
+                alt="forecast-icon" >
+                <div class="card-body bg-light text-dark pt-1 pb-5">
+                  <i class="fas fa-temperature-low"></i>
+                  Temp
+                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F&deg;</small>
+                  </div>
+                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C&deg;</small>
+                  </div>
+                </div>
+                <div class="forecast_datetime card-footer bg-transparent text-light text-center"></div>
+              </div>            
             </div>
 
+          </div>
+          <div class="card-footer">
+            <h5 class="fab fa-github-alt my-0 mr-2"> attila5287</h5>
           </div>
         </div>
       </div>

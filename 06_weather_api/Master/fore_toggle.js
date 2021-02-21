@@ -7,7 +7,7 @@ $("#fore_toggle").on(
 			$(".fore_div_c ").removeClass("d-none");
 			$("#fore_toggle_mode").text("C");
 			$("#fore_toggle").empty();
-			const new_icon = $("<i>").attr("class", "fas fa-toggle-on");
+			const new_icon = $("<h2>").attr("class", "fas fa-toggle-on");
 			$("#fore_toggle").append(new_icon);
 		}
     if ($("#fore_toggle").attr("data-tempunit") == "c") {

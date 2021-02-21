@@ -12,10 +12,9 @@ $.each($(".leaflet_city"), function (i, v) {
 		update_slider(8, $(this).text());
 		update_history($(this).text());
     $( this )
-    .removeClass( 'btn-primary' )
-    .removeClass( 'selected_leaflet' )
-    .addClass( 'btn-dark' )
-    .addClass( 'text-light' )
+    .addClass( 'selected_leaflet' )
+    .addClass( 'border-0' )
+    .removeClass( 'border-light' )
       ;
     $("#leaf_selected_img").attr(
 			"src",
@@ -23,12 +22,11 @@ $.each($(".leaflet_city"), function (i, v) {
 				$(this).text().slice(0, 4).toLowerCase() +
 				".JPG"
 		);
-    $(this)
+		$(this)
 			.siblings()
-			.removeClass("btn-dark")
-			.removeClass("text-light")
-			.addClass("selected_leaflet")
-			.addClass("btn-primary");
+			.removeClass("selected_leaflet")
+			.removeClass("border-0")
+			.addClass("border-light");
 	});
 });
 
@@ -48,8 +46,8 @@ function init_leaf_navs (city) {
       // console.log('if this city  ');
       $(this)
 				.removeClass("selected_leaflet")
-				.removeClass("btn-primary")
-				.addClass("btn-dark")
+				.removeClass("border-light")
+				.addClass("border-0")
 				.text(this_city);
     } else {
       $( this ).text( this_city );

@@ -8,7 +8,7 @@ function update_slider(v, city) {
 		type: "GET",
 		url: url
 	} ).then( ( w ) => {
-		// console.log("w :>> ", w.list[v].dt);
+		// console.log("w slider :>> ", w.list[v].main);
 
 		$( "#slider_windspeed" ).text( w.list[ v ].wind.speed );
 		$( "#slider_winddegrees" ).text( w.list[ v ].wind.deg );
