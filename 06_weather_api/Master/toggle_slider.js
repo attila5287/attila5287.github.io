@@ -7,8 +7,7 @@ function auto_detext_ () {
   
   let new_icon;
   if ( current_mode_f ) {
-    $("#slider_note_c").remove("d-none");
-    $("#slider_note_f").addClass("d-none");
+    
     $("#slider_note_c").removeClass("d-none");
     $("#slider_note_f").addClass("d-none");
     $("#slider_feels_f").addClass("d-none");

@@ -209,6 +209,7 @@
         <b class="text-uppercase text-xl mx-2" id="weather-city"></b>
       </div>
     </header>
+    
     <div class="container mini my-2">
       <div class="row">
         <aside class="col-3">
@@ -219,9 +220,9 @@
         <div class="col-9">
           <div class="form-group mt-2">
             <input
-              class="form-control form-control-lg form-control-dark border-light shadow=lg rounded-xl my-2"
+              class="form-control form-control-lg form-control-dark border-light rounded-xl my-2"
               type="text" value="Denver" id="search-value" />
-            <button class="btn btn-light text-dark mt-0 btn-block btn-lg rounded-xl" id="search-button">
+            <button class="btn btn-primary text-light mt-0 btn-block btn-lg rounded-xl" id="search-button">
               Search City
             </button>
           </div>
@@ -232,20 +233,20 @@
     <div class="container mini text-center my-0">
       <div class="row no-gutters">
         <div class="col-1">
-          <button class="btn btn-outline-dark border-light btn-block btn-sm p-1 mb-0" type="button"
+          <button class="btn btn-primary border-0 btn-block btn-sm p-1 mb-0" type="button"
             id="def_btn">
             <i class="fas fa-list-alt text-xl text-light"></i>
           </button>
           <small class="text-light">defaults</small>
         </div>
         <div class="col-1">
-          <button class="btn btn-outline-success border-light text-light btn-block btn-sm p-1 mb-0" type="button"
+          <button class="btn btn-primary border-0     text-light btn-block btn-sm p-1 mb-0" type="button"
             id="reset_button">
             <i class="fas fa-undo-alt text-xl"></i>
           </button>
           <small class="text-success">reset</small>
         </div>
-        <div class="col-9 text-center" id="history_box"></div>
+        <div class="col-9" id="history_box"></div>
         <div class="col-1">
           <h4 class="text-nowrap text-secondary bg-transparent pt-1 pb-1 mb-0 rounded">
             <span class="fas fa-history"></span>
@@ -306,19 +307,19 @@
           <div class="btn-group-vertical rounded-2xl w-100 h-100" role="group"
             aria-label="Vertical button group">
             <button data-increment="-2"
-              class="route_btns w-100 rounded-xl btn btn-dark border-light btn-block py-2" type="button">
+              class="route_btns w-100 rounded-xl btn btn-primary text-light btn-block py-2" type="button">
               <i class="fas fa-angle-double-up fa-fw"></i>
             </button>
             <button data-increment="-1"
-              class="route_btns w-100 rounded-xl btn btn-dark border-light btn-block py-4" type="button">
+              class="route_btns w-100 rounded-xl btn btn-primary text-light btn-block py-4" type="button">
               <i class="fas fas fa-chevron-up fa-fw"></i>
             </button>
             <button data-increment="1"
-              class="route_btns w-100 rounded-xl btn btn-dark border-light btn-block py-4" type="button">
+              class="route_btns w-100 rounded-xl btn btn-primary text-light btn-block py-4" type="button">
               <i class="fas fa-chevron-down fa-fw"></i>
             </button>
             <button data-increment="2"
-              class="route_btns w-100 rounded-xl btn btn-dark border-light btn-block py-2" type="button">
+              class="route_btns w-100 rounded-xl btn btn-primary text-light btn-block py-2" type="button">
               <i class="fas fa-angle-double-down fa-fw"></i>
             </button>
           </div>
@@ -335,7 +336,8 @@
           </div>
         </div>
       </div>
-
+    </div>
+      
       <div cass="container mini">
         <div class="card bg-light border-light text-dark rounded-2xl">
           <div class="card-header text-bold">
@@ -397,11 +399,11 @@
         <div class="form-group row align-items-center">
           <div class="form-group col-3 h-100">
             <div class="btn-group" role="group" aria-label="Button group">
-              <button data-increment="-3" class="slider_btn btn btn-light text-dark rounded-xl"
+              <button data-increment="-3" class="slider_btn btn btn-primary text-light rounded-xl"
                 type="button">
                 <h3 class="fas fa-angle-double-left my-0"></h3>
               </button>
-              <button data-increment="-1" class="slider_btn btn btn-light text-dark rounded-xl"
+              <button data-increment="-1" class="slider_btn btn btn-primary text-light rounded-xl"
                 type="button">
                 <h3 class="fas fa-chevron-left my-0"></h3>
               </button>
@@ -422,11 +424,11 @@
           </div>
           <div class="form-group col-3 h-100">
             <div class="btn-group" role="group" aria-label="Button group">
-              <button data-increment="1" class="slider_btn btn btn-light text-dark rounded-xl"
+              <button data-increment="1" class="slider_btn btn btn-primary text-light rounded-xl"
                 type="button">
                 <h3 class="fas fa-chevron-right my-0"></h3>
               </button>
-              <button data-increment="3" class="slider_btn btn btn-light text-dark rounded-xl"
+              <button data-increment="3" class="slider_btn btn btn-primary text-light rounded-xl"
                 type="button">
                 <h3 class="fas fa-angle-double-right my-0"></h3>
               </button>
@@ -435,10 +437,9 @@
         </div>
       </div>
       
-      <span class="text-hide" id="slider_date"></span>
-      <span class="text-hide" id="slider_hour"></span>
       <div class="container mini mt-3">
         <div class="row">
+          <div class="col-1"></div> 
           <div class="col-4 text-left">
             <ul class="list-group list-group-flush rounded-2xl">
               <a class="list-group-item list-group-item-action bg-light text-dark disabled slider_li text-nowrap" tabindex="-1" aria-disabled="true">
@@ -469,7 +470,7 @@
                 </span>&deg;
               </a>
               <hr class="border-dark border-med m-0">
-              <a class="list-group-item list-group-item-action bg-light text-center py-0 " id="slider_toggle">
+              <a class="list-group-item list-group-item-action text-center py-0 active" id="slider_toggle">
                 <p class="text-hide text-center mb-0" >
                   <i class="" id="slider_toggle_mode"></i>
                   &deg;
@@ -479,12 +480,12 @@
                 </h1>
               </a>
             </ul>
-            <p class="text-light mt-2" id="slider_note_f">
-              <i class="fas fa-info text-dark bg-light rounded-xl px-2 py-1 mr-1"></i>
+            <p class="text-center text-light mt-2" id="slider_note_f">
+              <i class="fas fa-info text-dark bg-light rounded-xl px-1 py-0 mr-1"></i>
               Temperatures in F&deg;
               </p>
-            <p class="text-secondary mt-2 d-none" id="slider_note_c">
-              <i class="fas fa-info text-dark bg-secondary rounded-xl px-2 py-1 mr-1"></i> 
+            <p class="text-center text-secondary mt-2 d-none" id="slider_note_c">
+              <i class="fas fa-info text-dark bg-secondary rounded-xl px-1 py-0 mr-1"></i> 
               Temperatures in C&deg;
               </p>
           </div>
@@ -516,21 +517,20 @@
                   <span class="text-bold" id="slider_description">Description</span>
                 </b>
               </div>
-              <hr class="border-0 m-1">
-                <img id="slider_icon" class="card-img border-0" alt="">
-              <div class="card-footer rounded-2xl pt-2 pb-1 border-0"></div>
+                <img id="slider_icon" class="card-img-bottom border-0" alt="">
             </div>
           </div>
-          <div class="col-1"></div>          
         </div>
       </div>
       <div class="container mini mt-3 mb-5">
         <div
-          class="card bg-light text-dark rounded-xl mx-1 mb-5 border-0 rounded-2xl">
-          <div class="card-header rounded-2xl py-0 text-nowrap d-flex align-items-center justify-content-center mt-1">
-            <h1 class="fas fa-chart-line px-5"></h1>
+          class="card bg-light text-dark mx-1 mb-5 pt-0 border-0 rounded-2xl">
+          <div class="card-header rounded-2xl text-nowrap d-flex align-items-center justify-content-center">
+            
+            <h1 class="text-capitalize fas fa-chart-line mr-4"></h1>
             5-day Forecast
-            <button class="btn btn-outline-dark text-dark border-0 mt-2" type="button" id="fore_toggle" data-tempunit="f">
+
+            <button class="btn btn-primary rounded-xl shadow-lg px-2 py-0 text-dark border-0 mx-2" type="button" id="fore_toggle" data-tempunit="f">
               <h2 class="fas fa-toggle-off"></h2>
             </button>
             <span id="fore_toggle_mode">
@@ -538,9 +538,9 @@
             </span>
               &deg;
           </div>
-          <div class="card-body bg-dark m-0 p-0 border-0">
-            <div class="card-group mt-2 text-left">
-              <div class="card">
+          <div class="card-body bg-light m-0 p-0 border-0">
+            <div class="d-flex flex-row mt-2 text-left">
+              <div class="card bg-transparent">
                 <img class="card-img forecast-img" src="" alt="">
                 <div class="card-img-overlay h-100">
                   <h5 class="card-title h-100">
@@ -553,7 +553,31 @@
                     <span class="fore_temp_f"></span>
                     <small class="">F&deg;</small>
                   </div>
-                  <div class="bg-light text-dark text-xl rounded-xl p-1 text-center border-dark border-med fore_div_c  d-none">
+                  <div class="text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center border-dark border-med fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C&deg;</small>
+                  </div>
+                  </span>
+                  <p class="card-text text-center forecast_datetime">
+                    00AM
+
+                  </p>
+                </div>
+              </div>
+              <div class="card bg-transparent">
+                <img class="card-img forecast-img" src="" alt="">
+                <div class="card-img-overlay h-100">
+                  <h5 class="card-title h-100">
+                    <span class="forecast"></span>
+                  </h5>
+                  <span class="text-dark pt-1 pb-5">
+                  <i class="fas fa-temperature-low"></i>
+                  Temp
+                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F&deg;</small>
+                  </div>
+                  <div class="text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center border-dark border-med fore_div_c d-none">
                     <span class="fore_temp_c"></span>
                     <small class="">C&deg;</small>
                   </div>
@@ -564,7 +588,7 @@
                   </p>
                 </div>
               </div>
-              <div class="card">
+              <div class="card bg-transparent">
                 <img class="card-img forecast-img" src="" alt="">
                 <div class="card-img-overlay h-100">
                   <h5 class="card-title h-100">
@@ -577,7 +601,7 @@
                     <span class="fore_temp_f"></span>
                     <small class="">F&deg;</small>
                   </div>
-                  <div class="bg-light text-dark text-xl rounded-xl p-1 text-center border-dark border-med fore_div_c  d-none">
+                  <div class="text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center border-dark border-med fore_div_c d-none">
                     <span class="fore_temp_c"></span>
                     <small class="">C&deg;</small>
                   </div>
@@ -588,7 +612,7 @@
                   </p>
                 </div>
               </div>
-              <div class="card">
+              <div class="card bg-transparent">
                 <img class="card-img forecast-img" src="" alt="">
                 <div class="card-img-overlay h-100">
                   <h5 class="card-title h-100">
@@ -601,7 +625,7 @@
                     <span class="fore_temp_f"></span>
                     <small class="">F&deg;</small>
                   </div>
-                  <div class="bg-light text-dark text-xl rounded-xl p-1 text-center border-dark border-med fore_div_c  d-none">
+                  <div class="text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center border-dark border-med fore_div_c d-none">
                     <span class="fore_temp_c"></span>
                     <small class="">C&deg;</small>
                   </div>
@@ -612,7 +636,7 @@
                   </p>
                 </div>
               </div>
-              <div class="card">
+              <div class="card bg-transparent">
                 <img class="card-img forecast-img" src="" alt="">
                 <div class="card-img-overlay h-100">
                   <h5 class="card-title h-100">
@@ -623,35 +647,11 @@
                   Temp
                   <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_f">
                     <span class="fore_temp_f"></span>
-                    <small class="">F&deg;</small>
+                    <small class="">F &deg;</small>
                   </div>
-                  <div class="bg-light text-dark text-xl rounded-xl p-1 text-center border-dark border-med fore_div_c  d-none">
+                  <div class="text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center border-dark border-med fore_div_c d-none">
                     <span class="fore_temp_c"></span>
-                    <small class="">C&deg;</small>
-                  </div>
-                  </span>
-                  <p class="text-center card-text forecast_datetime">
-                    00AM
-
-                  </p>
-                </div>
-              </div>
-              <div class="card">
-                <img class="card-img forecast-img" src="" alt="">
-                <div class="card-img-overlay h-100">
-                  <h5 class="card-title h-100">
-                    <span class="forecast"></span>
-                  </h5>
-                  <span class="text-dark pt-1 pb-5">
-                  <i class="fas fa-temperature-low"></i>
-                  Temp
-                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_f">
-                    <span class="fore_temp_f"></span>
-                    <small class="">F&deg;</small>
-                  </div>
-                  <div class="bg-light text-dark text-xl rounded-xl p-1 text-center border-dark border-med fore_div_c  d-none">
-                    <span class="fore_temp_c"></span>
-                    <small class="">C&deg;</small>
+                    <small class="">C &deg; </small>
                   </div>
                   </span>
                   <p class=" text-center card-text forecast_datetime">
@@ -662,8 +662,10 @@
               </div>
             </div>
           </div>
-          <hr class=" border-dark border-med mt-5">
-          <p class="text-center mini mt-0 text-bold">
+          <hr class=" border-dark border-med mt-5" id="slider_hr_f">
+          <hr class=" border-secondary border-med mt-5 d-none" id="slider_hr_c">
+
+          <p class="text-center mini mt-5 text-bold">
             <a class="text-dark fab fa-github my-0" href="https://github.com/attila5287/"
             data-target=""
             data-toggle="collapse"
