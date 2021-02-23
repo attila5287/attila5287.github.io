@@ -6,8 +6,6 @@ mode_c = false;// def temp vals Fahrenheit
 $("#fore_toggle").on(
 	"click", () => {
 		if ( mode_c == false ) {
-			$("#slider_hr_c").removeClass("d-none");
-			$("#slider_hr_f").addClass("d-none");
 			$(this).attr("data_tempunit", "C");
 			$(".fore_div_f ").addClass("d-none");
 			$(".fore_div_c ").removeClass("d-none");
@@ -21,8 +19,6 @@ $("#fore_toggle").on(
 			mode_c = true;
 			console.log('mode_c :>> ', mode_c);
 		} else if ( mode_c == true ) {
-			$("#slider_hr_c").addClass("d-none");
-			$("#slider_hr_f").removeClass("d-none");
 			mode_c = false;
 			$(this).attr("data_tempunit", "F");
 			$(".fore_div_f ").removeClass("d-none");

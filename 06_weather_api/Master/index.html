@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -91,7 +92,7 @@
       border-radius: 1.00rem;
     }
   </style>
-  <body class="bg-dark">
+  <body class="bg-info">
     <nav class="navbar navbar-expand navbar-dark bg-primary">
       <a class="navbar-brand" href="#">
         <img alt="@attila5287"
@@ -124,7 +125,7 @@
                   Weather Dashboard
                 </span>
               </a>
-              <a class="dropdown-item" href="/05_day_planner">05 jQuery
+              <a class="dropdown-item" href="/s05_day_planner">05 jQuery
                 <span class="float-right">Day Planner</span>
               </a>
               <a class="dropdown-item" href="/04_hw_quiz">04 Web APIs
@@ -201,27 +202,34 @@
         </form>
       </div>
     </nav>
-    <header class="container-fluid text-left text-white bg-primary my-0 py-0">
+    <header class="container-fluid text-left text-white bg-dark my-0 py-0">
       <div class="container mini my-0 py-0">
-        <span class="fas fa-sun text-light text-xl mt-2"></span>
-        <span class="fas fa-cloud-rain text-light text-xl mt-2 mr-2"></span>
-        06. Weather Dashboard:
+              <a class="navbar-brand" href="#">
+        <img alt="@attila5287"
+          src="https://icons.iconarchive.com/icons/custom-icon-design/lovely-weather-2/48/Lightshowers-day-icon.png"
+          class="rounded m-0 p-0" width="36" height="36">
+        </a>
+          
+        Weather Dashboard (now on board) : 
         <b class="text-uppercase text-xl mx-2" id="weather-city"></b>
       </div>
     </header>
-    
+
     <div class="container mini my-2">
       <div class="row">
         <aside class="col-3">
-          <h1 class="bg-light rounded-xl text-dark text-center mt-3 py-2 h1-mod">
-            <i class="fa fa-search"></i>
-          </h1>
+          <div class="p-2 bg-light rounded-2xl">
+            <h1 class="bg-dark text-warning rounded-xl text-center h1-mod mb-0">
+              <i class="fa fa-search"></i>
+            </h1>
+
+          </div>
         </aside>
         <div class="col-9">
-          <div class="form-group mt-2">
+          <div class="form-group mt-2 bg-dark p-4 rounded-2xl">
             <input
-              class="form-control form-control-lg form-control-dark border-light rounded-xl my-2"
-              type="text" value="Denver" id="search-value" />
+              class="form-control form-control-lg form-control-dark border-primary rounded-xl my-2"
+            type="text" value="Denver" id="search-value" />
             <button class="btn btn-primary text-light mt-0 btn-block btn-lg rounded-xl" id="search-button">
               Search City
             </button>
@@ -231,7 +239,7 @@
     </div>
 
     <div class="container mini text-center my-0">
-      <div class="row no-gutters">
+      <div class="row no-gutters bg-dark rounded-xl p-2">
         <div class="col-1">
           <button class="btn btn-primary border-0 btn-block btn-sm p-1 mb-0" type="button"
             id="def_btn">
@@ -260,21 +268,24 @@
     </div>
 
     <div class="container mini text-center my-2">
-      <div class="progress mb-4 mt-0 mx-5">
-        <div id="route_progress" class="progress-bar progress-bar-striped progress-bar-animated"
-          role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
-          style="width: 10%"></div>
+      <div class="bg-dark rounded-2xl p-3 my-3">
+        <div class="progress">
+          <div id="route_progress" class="progress-bar progress-bar-striped progress-bar-animated"
+            role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+            style="width: 10%"></div>
+        </div>
+
       </div>
-      <div class="row mb-5">
+      <div class="row my-5">
         <div class="col-4">
-          <div class="card bg-light text-dark rounded-2xl h-100">
+          <div class="card bg-light text-dark rounded-2xl h-100 border-info border-med">
             <div class="card-header text-bold text-dark rounded-2xl">
               <i class="fas fa-route"></i>
               Route:
               <span class="text-dark" id="vert_index">1</span>/
               <span class="text-dark" id="vert_length"></span>
             </div>
-            <div class="card-body bg-dark rounded-xl rounded-2xl">
+            <div class="card-body bg-dark rounded-xl rounded-2xl m-0">
               <button data-vertical_index="0"
                 class="selected_leaflet leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-outline-dark border-0 text-light btn-sm border-0 btn-block text-left"
                 type="button">city
@@ -338,342 +349,441 @@
       </div>
     </div>
       
-      <div cass="container mini">
-        <div class="card bg-light border-light text-dark rounded-2xl">
-          <div class="card-header text-bold">
-            <i class="far fa-clock"></i>
-            Currently 
-          </div>
-          <div class="card-body bg-dark text-light rounded-xl rounded-2xl">
-            <div class="row">
-              <div class="col-5">
-                <img class="card-img-top border-0 mx-auto rounded-xl p-0" alt="forecast-icon"
-                  id="weather-img" style="max-height:8rem;max-width:8rem">
-
-                <p class="card-text my-2 text-xl">
-                  <span class="weather" id="weather-description">
-                    ...</span>
-                </p>
-                <p class="card-text my-2">
-                  <i class="fas fa-temperature-high"></i>
-                  <span class="weather" id="weather-temperature">
-                    ...</span>
-                </p>
-              </div>
-              <div class="col-7 text-left">
-
-                <p class="card-text my-2">
-                  <i class="fas fa-temperature-high"></i>
-                  <span class="weather" id="weather-feelslike">
-                  </span>
-                </p>
-
-                <p class="card-text my-2">
-                  <i class="fab fa-react"></i>
-                  <span class="weather" id="weather-uv_index">...
-                  </span>
-                </p>
-                <p class="card-text my-2">
-                  <i class="fas fa-cloud-rain"></i>
-                  <span class="weather" id="weather-humidity">...
-                  </span>
-                </p>
-                <p class="card-text my-2">
-                  <i class="fas fa-sun"></i>
-                  <span class="weather" id="weather-sunrise">...
-                  </span>
-                </p>
-                <p class="card-text my-2">
-                  <i class="fas fa-cloud-sun"></i>
-                  <span class="weather" id="weather-sunset">...
-                  </span>
-                </p>
-
-              </div>
-            </div>
-          </div>
+    <div class="container mini text-center">
+      <div class="card bg-light border-light text-dark rounded-2xl">
+        <div class="card-header text-bold">
+          <i class="far fa-clock"></i>
+          Currently 
         </div>
-      </div>
+        <div class="card-body bg-dark text-light rounded-xl rounded-2xl">
+          <div class="row">
+            <div class="col-5">
+              <img class="card-img-top border-0 mx-auto rounded-xl p-0" alt="forecast-icon"
+                id="weather-img" style="max-height:8rem;max-width:8rem">
 
-      <div class="container mini mt-3">
-        <div class="form-group row align-items-center">
-          <div class="form-group col-3 h-100">
-            <div class="btn-group" role="group" aria-label="Button group">
-              <button data-increment="-3" class="slider_btn btn btn-primary text-light rounded-xl"
-                type="button">
-                <h3 class="fas fa-angle-double-left my-0"></h3>
-              </button>
-              <button data-increment="-1" class="slider_btn btn btn-primary text-light rounded-xl"
-                type="button">
-                <h3 class="fas fa-chevron-left my-0"></h3>
-              </button>
-            </div>
-          </div>
-          <div class="form-group col-6">
-            <p class="text-center text-light">
-              <i class="fas fa-sliders-h mt-2"></i>
-              <span id="slider_index"></span>
-            </p>
-            <input id="slider" class="custom-range" type="range" name="" min="1" max="40">
-            <p class="text-center text-light">
-              <i class="fas fa-calendar-alt"></i>
-              <span id="slider_datetxt">
-              </span>
-              <i class="fas fa-clock"></i>
-            </p>
-          </div>
-          <div class="form-group col-3 h-100">
-            <div class="btn-group" role="group" aria-label="Button group">
-              <button data-increment="1" class="slider_btn btn btn-primary text-light rounded-xl"
-                type="button">
-                <h3 class="fas fa-chevron-right my-0"></h3>
-              </button>
-              <button data-increment="3" class="slider_btn btn btn-primary text-light rounded-xl"
-                type="button">
-                <h3 class="fas fa-angle-double-right my-0"></h3>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="container mini mt-3">
-        <div class="row">
-          <div class="col-1"></div> 
-          <div class="col-4 text-left">
-            <ul class="list-group list-group-flush rounded-2xl">
-              <a class="list-group-item list-group-item-action bg-light text-dark disabled slider_li text-nowrap" tabindex="-1" aria-disabled="true">
-                <small>Temp.</small>
-                <b>
-                  <span class="temp_unit_c">
-                    <i class="fas fa-temperature-high"></i>
-                    <i id="slider_temp_f"></i>
-                  </span>
-                </b>
-                <b>
-                  <span class="temp_unit_f">
-                    <i class="d-none"  id="slider_temp_c"></i>
-                  </span>&deg;
-                </b>
-                
-              </a>
-              <a class="list-group-item list-group-item-action bg-light text-dark disabled slider_li text-nowrap" tabindex="-1" aria-disabled="true">
-                <small>Feels </small>
-                <b>
-                  <span class="temp_unit_f">
-                    <i class="fas fa-temperature-high"></i>
-                    <i data_tempunit="F" data_tempval="32" id="slider_feels_f"></i>
-                  </span>
-                </b>
-                <span class="temp_unit_c">
-                  <b> <i class="d-none"  data_tempunit="C" data_tempval="0" id="slider_feels_c"></i></b> 
-                </span>&deg;
-              </a>
-              <hr class="border-dark border-med m-0">
-              <a class="list-group-item list-group-item-action text-center py-0 active" id="slider_toggle">
-                <p class="text-hide text-center mb-0" >
-                  <i class="" id="slider_toggle_mode"></i>
-                  &deg;
-                </p>
-                <h1 id="slider_toggle_iconium" class="my-0 py-0">
-                  <span class="fas fa-toggle-off text-dark"></span>
-                </h1>
-              </a>
-            </ul>
-            <p class="text-center text-light mt-2" id="slider_note_f">
-              <i class="fas fa-info text-dark bg-light rounded-xl px-1 py-0 mr-1"></i>
-              Temperatures in F&deg;
+              <p class="card-text my-2 text-xl">
+                <span class="weather" id="weather-description">
+                  ...</span>
               </p>
-            <p class="text-center text-secondary mt-2 d-none" id="slider_note_c">
-              <i class="fas fa-info text-dark bg-secondary rounded-xl px-1 py-0 mr-1"></i> 
-              Temperatures in C&deg;
+              <p class="card-text my-2">
+                <i class="fas fa-temperature-high"></i>
+                <span class="weather" id="weather-temperature">
+                  ...</span>
               </p>
-          </div>
-          <div class="col-4 align-content-center  p-0">
-            <div class="card bg-transparent border-0 text-dark rounded-2xl">
-              <div class="card-body bg-light text-sm text-left rounded-2xl">
-                <p class="card-text mt-0 mb-2">
-                  <i class="text-light bg-dark p-1 rounded-xl fas fa-wind fa-fw mr-2"></i> 
-                  Wind Speed: 
-                  <span class="mb-2" id="slider_windspeed" ></span>
-                </p>
-                <p class="card-text mt-0 mb-2">
-                  <i class="text-light bg-dark p-1 rounded-xl fas fa-compass fa-fw mr-2"></i> 
-                  Wind Degrees: 
-                  <span class="mb-2" id="slider_winddegrees" ></span>
-                </p>
-                <p class="card-text mt-0 mb-2">
-                  <i class="text-light bg-dark p-1 rounded-xl fas fa-tint fa-fw mr-2"></i> 
-                  Humidity: 
-                  <span class="mb-2" id="slider_humid" ></span>
-                </p>
-              </div>
             </div>
-          </div>
-          <div class="col-3">
-            <div class="card border-0 rounded-2xl"  id="slider_bg" >
-              <div class="card-header text-dark border-bottom border-dark border-med py-1">
-                <b>
-                  <span class="text-bold" id="slider_description">Description</span>
-                </b>
-              </div>
-                <img id="slider_icon" class="card-img-bottom border-0" alt="">
+            <div class="col-7 text-left">
+
+              <p class="card-text my-2">
+                <i class="fas fa-temperature-high"></i>
+                <span class="weather" id="weather-feelslike">
+                </span>
+              </p>
+
+              <p class="card-text my-2">
+                <i class="fab fa-react"></i>
+                <span class="weather" id="weather-uv_index">...
+                </span>
+              </p>
+              <p class="card-text my-2">
+                <i class="fas fa-cloud-rain"></i>
+                <span class="weather" id="weather-humidity">...
+                </span>
+              </p>
+              <p class="card-text my-2">
+                <i class="fas fa-sun"></i>
+                <span class="weather" id="weather-sunrise">...
+                </span>
+              </p>
+              <p class="card-text my-2">
+                <i class="fas fa-cloud-sun"></i>
+                <span class="weather" id="weather-sunset">...
+                </span>
+              </p>
+
             </div>
           </div>
         </div>
       </div>
-      <div class="container mini mt-3 mb-5">
-        <div
-          class="card bg-light text-dark mx-1 mb-5 pt-0 border-0 rounded-2xl">
-          <div class="card-header rounded-2xl text-nowrap d-flex align-items-center justify-content-center">
-            
-            <h1 class="text-capitalize fas fa-chart-line mr-4"></h1>
-            5-day Forecast
-
-            <button class="btn btn-primary rounded-xl shadow-lg px-2 py-0 text-dark border-0 mx-2" type="button" id="fore_toggle" data-tempunit="f">
-              <h2 class="fas fa-toggle-off"></h2>
+    </div>
+    
+    <div class="container mini mt-3">
+      <div class="form-group row align-items-center">
+        <div class="form-group col-3 h-100">
+          <div class="btn-group" role="group" aria-label="Button group">
+            <button data-increment="-3" class="slider_btn btn btn-primary text-light rounded-xl"
+              type="button">
+              <h3 class="fas fa-angle-double-left my-0"></h3>
             </button>
-            <span id="fore_toggle_mode">
-              F 
+            <button data-increment="-1" class="slider_btn btn btn-primary text-light rounded-xl"
+              type="button">
+              <h3 class="fas fa-chevron-left my-0"></h3>
+            </button>
+          </div>
+        </div>
+        <div class="form-group col-6">
+          <p class="text-center text-light">
+            <i class="fas fa-sliders-h mt-2"></i>
+            <span id="slider_index"></span>
+          </p>
+          <input id="slider" class="custom-range" type="range" name="" min="1" max="40">
+          <p class="text-center text-light">
+            <i class="fas fa-calendar-alt"></i>
+            <span id="slider_datetxt">
             </span>
-              &deg;
-          </div>
-          <div class="card-body bg-light m-0 p-0 border-0">
-            <div class="d-flex flex-row mt-2 text-left">
-              <div class="card bg-transparent">
-                <img class="card-img forecast-img" src="" alt="">
-                <div class="card-img-overlay h-100">
-                  <h5 class="card-title h-100">
-                    <span class="forecast"></span>
-                  </h5>
-                  <span class="text-dark pt-1 pb-5">
-                  <i class="fas fa-temperature-low"></i>
-                  Temp
-                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_f">
-                    <span class="fore_temp_f"></span>
-                    <small class="">F&deg;</small>
-                  </div>
-                  <div class="text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center border-dark border-med fore_div_c d-none">
-                    <span class="fore_temp_c"></span>
-                    <small class="">C&deg;</small>
-                  </div>
-                  </span>
-                  <p class="card-text text-center forecast_datetime">
-                    00AM
-
-                  </p>
-                </div>
-              </div>
-              <div class="card bg-transparent">
-                <img class="card-img forecast-img" src="" alt="">
-                <div class="card-img-overlay h-100">
-                  <h5 class="card-title h-100">
-                    <span class="forecast"></span>
-                  </h5>
-                  <span class="text-dark pt-1 pb-5">
-                  <i class="fas fa-temperature-low"></i>
-                  Temp
-                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_f">
-                    <span class="fore_temp_f"></span>
-                    <small class="">F&deg;</small>
-                  </div>
-                  <div class="text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center border-dark border-med fore_div_c d-none">
-                    <span class="fore_temp_c"></span>
-                    <small class="">C&deg;</small>
-                  </div>
-                  </span>
-                  <p class="text-center card-text forecast_datetime">
-                    00AM
-
-                  </p>
-                </div>
-              </div>
-              <div class="card bg-transparent">
-                <img class="card-img forecast-img" src="" alt="">
-                <div class="card-img-overlay h-100">
-                  <h5 class="card-title h-100">
-                    <span class="forecast"></span>
-                  </h5>
-                  <span class="text-dark pt-1 pb-5">
-                  <i class="fas fa-temperature-low"></i>
-                  Temp
-                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_f">
-                    <span class="fore_temp_f"></span>
-                    <small class="">F&deg;</small>
-                  </div>
-                  <div class="text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center border-dark border-med fore_div_c d-none">
-                    <span class="fore_temp_c"></span>
-                    <small class="">C&deg;</small>
-                  </div>
-                  </span>
-                  <p class="text-center card-text forecast_datetime">
-                    00AM
-
-                  </p>
-                </div>
-              </div>
-              <div class="card bg-transparent">
-                <img class="card-img forecast-img" src="" alt="">
-                <div class="card-img-overlay h-100">
-                  <h5 class="card-title h-100">
-                    <span class="forecast"></span>
-                  </h5>
-                  <span class="text-dark pt-1 pb-5">
-                  <i class="fas fa-temperature-low"></i>
-                  Temp
-                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_f">
-                    <span class="fore_temp_f"></span>
-                    <small class="">F&deg;</small>
-                  </div>
-                  <div class="text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center border-dark border-med fore_div_c d-none">
-                    <span class="fore_temp_c"></span>
-                    <small class="">C&deg;</small>
-                  </div>
-                  </span>
-                  <p class="text-center card-text forecast_datetime">
-                    00AM
-
-                  </p>
-                </div>
-              </div>
-              <div class="card bg-transparent">
-                <img class="card-img forecast-img" src="" alt="">
-                <div class="card-img-overlay h-100">
-                  <h5 class="card-title h-100">
-                    <span class="forecast"></span>
-                  </h5>
-                  <span class="text-dark pt-1 pb-5">
-                  <i class="fas fa-temperature-low"></i>
-                  Temp
-                  <div class="bg-dark text-light text-xl rounded-xl p-1 text-center fore_div_f">
-                    <span class="fore_temp_f"></span>
-                    <small class="">F &deg;</small>
-                  </div>
-                  <div class="text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center border-dark border-med fore_div_c d-none">
-                    <span class="fore_temp_c"></span>
-                    <small class="">C &deg; </small>
-                  </div>
-                  </span>
-                  <p class=" text-center card-text forecast_datetime">
-                    00AM
-
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <hr class=" border-dark border-med mt-5" id="slider_hr_f">
-          <hr class=" border-secondary border-med mt-5 d-none" id="slider_hr_c">
-
-          <p class="text-center mini mt-5 text-bold">
-            <a class="text-dark fab fa-github my-0" href="https://github.com/attila5287/"
-            data-target=""
-            data-toggle="collapse"
-            > @attila5287</a>
+            <i class="fas fa-clock"></i>
           </p>
         </div>
+        <div class="form-group col-3 h-100">
+          <div class="btn-group" role="group" aria-label="Button group">
+            <button data-increment="1" class="slider_btn btn btn-primary text-light rounded-xl"
+              type="button">
+              <h3 class="fas fa-chevron-right my-0"></h3>
+            </button>
+            <button data-increment="3" class="slider_btn btn btn-primary text-light rounded-xl"
+              type="button">
+              <h3 class="fas fa-angle-double-right my-0"></h3>
+            </button>
+          </div>
+        </div>
       </div>
-        
+    </div>
+    
+    <div class="container mini mt-3">
+      <div class="row">
+        <div class="col-1"></div> 
+        <div class="col-4 text-left">
+          <ul class="list-group list-group-flush rounded-2xl">
+            <a class="list-group-item list-group-item-action bg-light text-dark disabled slider_li text-nowrap" tabindex="-1" aria-disabled="true">
+              <small>Temp.</small>
+              <b>
+                <span class="temp_unit_c">
+                  <i class="fas fa-temperature-high"></i>
+                  <i id="slider_temp_f"></i>
+                </span>
+              </b>
+              <b>
+                <span class="temp_unit_f">
+                  <i class="d-none"  id="slider_temp_c"></i>
+                </span>&deg;
+              </b>
+              
+            </a>
+            <a class="list-group-item list-group-item-action bg-light text-dark disabled slider_li text-nowrap" tabindex="-1" aria-disabled="true">
+              <small>Feels </small>
+              <b>
+                <span class="temp_unit_f">
+                  <i class="fas fa-temperature-high"></i>
+                  <i data_tempunit="F" data_tempval="32" id="slider_feels_f"></i>
+                </span>
+              </b>
+              <span class="temp_unit_c">
+                <b> <i class="d-none"  data_tempunit="C" data_tempval="0" id="slider_feels_c"></i></b> 
+              </span>&deg;
+            </a>
+            <hr class="border-dark border-med m-0">
+            <a class="list-group-item list-group-item-action text-center py-0 active" id="slider_toggle">
+              <p class="text-hide text-center mb-0" >
+                <i class="" id="slider_toggle_mode"></i>
+                &deg;
+              </p>
+              <h1 id="slider_toggle_iconium" class="my-0 py-0">
+                <span class="fas fa-toggle-off text-dark"></span>
+              </h1>
+            </a>
+          </ul>
+          <p class="text-center text-light mt-2" id="slider_note_f">
+            <i class="fas fa-info text-info bg-light rounded-xl px-2 py-1 mr-1"></i>
+            Temperatures in F&deg;
+            </p>
+          <p class="text-center text-secondary mt-2 d-none" id="slider_note_c">
+            <i class="fas fa-info text-info bg-secondary rounded-xl px-2 py-1 mr-1"></i> 
+            Temperatures in C&deg;
+            </p>
+        </div>
+        <div class="col-4 align-content-center  p-0">
+          <div class="card bg-transparent border-0 text-dark rounded-2xl">
+            <div class="card-body bg-light text-sm text-left rounded-2xl">
+              <p class="card-text mt-0 mb-2">
+                <i class="text-light bg-dark p-1 rounded-xl fas fa-wind fa-fw mr-2"></i> 
+                Wind Speed: 
+                <span class="mb-2" id="slider_windspeed" ></span>
+              </p>
+              <p class="card-text mt-0 mb-2">
+                <i class="text-light bg-dark p-1 rounded-xl fas fa-compass fa-fw mr-2"></i> 
+                Wind Degrees: 
+                <span class="mb-2" id="slider_winddegrees" ></span>
+              </p>
+              <p class="card-text mt-0 mb-2">
+                <i class="text-light bg-dark p-1 rounded-xl fas fa-tint fa-fw mr-2"></i> 
+                Humidity: 
+                <span class="mb-2" id="slider_humid" ></span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card border-0 rounded-2xl"  id="slider_bg" >
+            <div class="card-header text-dark border-bottom border-dark border-med py-1">
+              <b>
+                <span class="text-bold" id="slider_description">Description</span>
+              </b>
+            </div>
+              <img id="slider_icon" class="card-img-bottom border-0" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container mini mt-3 mb-5">
+      <div
+        class="card bg-light text-dark mx-1 mb-5 pt-0 border-0 rounded-2xl">
+        <div class="card-header rounded-2xl text-nowrap d-flex align-items-center justify-content-center">
+          
+          <h1 class="text-capitalize fas fa-chart-line mr-4"></h1>
+          5-day Forecast
+
+          <button class="btn btn-primary rounded-xl shadow-lg px-2 py-0 text-dark border-0 mx-2" type="button" id="fore_toggle" data-tempunit="f">
+            <h2 class="fas fa-toggle-off"></h2>
+          </button>
+          <span id="fore_toggle_mode">
+            F 
+          </span>
+            &deg;
+        </div>
+        <div class="card-body bg-light">
+          <div class="card-group d-flex flex-row text-center mb-5">
+            <div class="card bg-light rounded-2xl">
+              <img class="card-img forecast-img" src="" alt="">
+              <div class="card-img-overlay h-100">
+                <h5 class="card-title h-100">
+                  <span class="forecast"></span>
+                </h5>
+                  <p class="card-text text-bold bg-dark  text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F &deg; </small>
+                  </p>
+                  <p class="card-text text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C &deg; </small>
+                  </p>
+              </div>
+              <div class="card-footer text-center">
+                <i class="far fa-clock"> </i>
+                <span class="forecast_datetime">
+                  00AM
+                </span>
+              </div>
+            </div>
+            <div class="card bg-light rounded-2xl">
+              <img class="card-img forecast-img" src="" alt="">
+              <div class="card-img-overlay h-100">
+                <h5 class="card-title h-100">
+                  <span class="forecast"></span>
+                </h5>
+                  <p class="card-text text-bold bg-dark  text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F &deg; </small>
+                  </p>
+                  <p class="card-text text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C &deg; </small>
+                  </p>
+              </div>
+              <div class="card-footer text-center">
+                <i class="far fa-clock"> </i>
+                <span class="forecast_datetime">
+                  00AM
+                </span>
+              </div>
+            </div>
+            <div class="card bg-light rounded-2xl">
+              <img class="card-img forecast-img" src="" alt="">
+              <div class="card-img-overlay h-100">
+                <h5 class="card-title h-100">
+                  <span class="forecast"></span>
+                </h5>
+                  <p class="card-text text-bold bg-dark  text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F &deg; </small>
+                  </p>
+                  <p class="card-text text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C &deg; </small>
+                  </p>
+              </div>
+              <div class="card-footer text-center">
+                <i class="far fa-clock"> </i>
+                <span class="forecast_datetime">
+                  00AM
+                </span>
+              </div>
+            </div>
+            <div class="card bg-light rounded-2xl">
+              <img class="card-img forecast-img" src="" alt="">
+              <div class="card-img-overlay h-100">
+                <h5 class="card-title h-100">
+                  <span class="forecast"></span>
+                </h5>
+                  <p class="card-text text-bold bg-dark  text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F &deg; </small>
+                  </p>
+                  <p class="card-text text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C &deg; </small>
+                  </p>
+              </div>
+              <div class="card-footer text-center">
+                <i class="far fa-clock"> </i>
+                <span class="forecast_datetime">
+                  00AM
+                </span>
+              </div>
+            </div>
+            <div class="card bg-light rounded-2xl">
+              <img class="card-img forecast-img" src="" alt="">
+              <div class="card-img-overlay h-100">
+                <h5 class="card-title h-100">
+                  <span class="forecast"></span>
+                </h5>
+                  <p class="card-text text-bold bg-dark  text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F &deg; </small>
+                  </p>
+                  <p class="card-text text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C &deg; </small>
+                  </p>
+              </div>
+              <div class="card-footer text-center">
+                <i class="far fa-clock"> </i>
+                <span class="forecast_datetime">
+                  00AM
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="card-group d-flex flex-row text-center">
+            <div class="card bg-light rounded-2xl">
+              <img class="card-img forecast-img" src="" alt="">
+              <div class="card-img-overlay h-100">
+                <h5 class="card-title h-100">
+                  <span class="forecast"></span>
+                </h5>
+                <p class="card-text">
+                  <span class="text-bold bg-dark  text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F &deg; </small>
+                  </span>
+                  <span class="text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C &deg; </small>
+                  </span>
+                </p>
+              </div>
+              <div class="card-footer text-center">
+                <i class="far fa-clock"> </i>
+                <span class="forecast_datetime">
+                  00AM
+                </span>
+              </div>
+            </div>
+            <div class="card bg-light rounded-2xl">
+              <img class="card-img forecast-img" src="" alt="">
+              <div class="card-img-overlay h-100">
+                <h5 class="card-title h-100">
+                  <span class="forecast"></span>
+                </h5>
+                  <p class="card-text text-bold bg-dark  text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F &deg; </small>
+                  </p>
+                  <p class="card-text text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C &deg; </small>
+                  </p>
+              </div>
+              <div class="card-footer text-center">
+                <i class="far fa-clock"> </i>
+                <span class="forecast_datetime">
+                  00AM
+                </span>
+              </div>
+            </div>
+            <div class="card bg-light rounded-2xl">
+              <img class="card-img forecast-img" src="" alt="">
+              <div class="card-img-overlay h-100">
+                <h5 class="card-title h-100">
+                  <span class="forecast"></span>
+                </h5>
+                  <p class="card-text text-bold bg-dark  text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F &deg; </small>
+                  </p>
+                  <p class="card-text text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C &deg; </small>
+                  </p>
+              </div>
+              <div class="card-footer text-center">
+                <i class="far fa-clock"> </i>
+                <span class="forecast_datetime">
+                  00AM
+                </span>
+              </div>
+            </div>
+            <div class="card bg-light rounded-2xl">
+              <img class="card-img forecast-img" src="" alt="">
+              <div class="card-img-overlay h-100">
+                <h5 class="card-title h-100">
+                  <span class="forecast"></span>
+                </h5>
+                  <p class="card-text text-bold bg-dark  text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F &deg; </small>
+                  </p>
+                  <p class="card-text text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C &deg; </small>
+                  </p>
+              </div>
+              <div class="card-footer text-center">
+                <i class="far fa-clock"> </i>
+                <span class="forecast_datetime">
+                  00AM
+                </span>
+              </div>
+            </div>
+            <div class="card bg-light rounded-2xl">
+              <img class="card-img forecast-img" src="" alt="">
+              <div class="card-img-overlay h-100">
+                <h5 class="card-title h-100">
+                  <span class="forecast"></span>
+                </h5>
+                  <p class="card-text text-bold bg-dark  text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F &deg; </small>
+                  </p>
+                  <p class="card-text text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C &deg; </small>
+                  </p>
+              </div>
+              <div class="card-footer text-center">
+                <i class="far fa-clock"> </i>
+                <span class="forecast_datetime">
+                  00AM
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer rounded-2xl text-center mini mt-5 text-bold">
+          <a class="text-dark fab fa-github my-0" href="https://github.com/attila5287/"
+          > @attila5287</a>
+        </div>
+      </div>
+    </div>
+      
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
