@@ -1,18 +1,19 @@
 // console.log('test tox');
 $(document).ready(function () {
-  const sections = [ "search",
-  "currently",
-  "slider",
-  "forecast",
-  "route",
-  ];
-  const icons = [
-    'fas fa-search',
-    'fas fa-clock',
-    'fas fa-sliders-h',
-    'fas fa-chart-line',
-    'fas fa-route',
-  ]
+  const sections = [];
+  const icons = [];
+  $.each(
+		$(".section_div"),
+    function ( i, v ) {
+      const nm = $(this).attr('data-toc_name');
+      const icn = $( this ).attr( "data-toc_icon" );
+      
+      sections.push( nm );
+      icons.push( icn );
+      
+    }
+	);
+  console.log('sections :>> ', sections);
 	// console.log('sections :>> ', sections);
 	append_sections(sections);
 
