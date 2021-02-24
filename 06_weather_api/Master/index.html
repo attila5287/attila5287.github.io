@@ -15,6 +15,9 @@
   </head>
   <style>
     /* practical css classes beyond bootstrap.css*/
+    .text-nonbold{
+      font-weight:normal;
+    }
     .text-bold{
       font-weight:bold;
     }
@@ -204,36 +207,55 @@
     </nav>
     <header class="container-fluid text-left text-white bg-dark my-0 py-0">
       <div class="container mini my-0 py-0">
-              <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="#">
         <img alt="@attila5287"
           src="https://icons.iconarchive.com/icons/custom-icon-design/lovely-weather-2/48/Lightshowers-day-icon.png"
           class="rounded m-0 p-0" width="36" height="36">
         </a>
-          
-        Weather Dashboard (now on board) : 
-        <b class="text-uppercase text-xl mx-2" id="weather-city"></b>
+        Weather Dashboard
       </div>
     </header>
-
+    <div class="container mini my-2">
+      <nav class="nav nav-fill">
+        <li class="nav-item text-light">
+          <a class="nav-link active" href="#">Item 1</a>
+        </li>
+        <li class="nav-item text-light">
+          <a class="nav-link" href="#">Item 1</a>
+        </li>
+      </nav>
+    </div>
+    
     <div class="container mini my-2">
       <div class="row">
         <aside class="col-3">
-          <div class="p-2 bg-light rounded-2xl">
+          <div class="p-1 bg-light rounded-2xl">
             <h1 class="bg-dark text-warning rounded-xl text-center h1-mod mb-0">
               <i class="fa fa-search"></i>
             </h1>
-
+            <p class="text-dark">
+              <i class="fas fa-info-circle text-dark"></i>
+              <small>
+                Search a city, use slider for a specific hour within next five days
+              </small>
+            </p>
           </div>
         </aside>
-        <div class="col-9">
+        <div class="col-9 bg-light rounded-2xl">
           <div class="form-group mt-2 bg-dark p-4 rounded-2xl">
             <input
-              class="form-control form-control-lg form-control-dark border-primary rounded-xl my-2"
+              class="form-control form-control-lg form-control-dark border-primary rounded-xl my-2 "
             type="text" value="Denver" id="search-value" />
             <button class="btn btn-primary text-light mt-0 btn-block btn-lg rounded-xl" id="search-button">
               Search City
             </button>
           </div>
+          <p class="text-dark">
+              <i class="fas fa-info-circle text-dark"></i>
+              <small>
+                 ...or try suggested or recently searched cities below:
+              </small>
+            </p>
         </div>
       </div>
     </div>
@@ -279,7 +301,7 @@
       <div class="row my-5">
         <div class="col-4">
           <div class="card bg-light text-dark rounded-2xl h-100 border-info border-med">
-            <div class="card-header text-bold text-dark rounded-2xl">
+            <div class="card-header text-bold text-dark">
               <i class="fas fa-route"></i>
               Route:
               <span class="text-dark" id="vert_index">1</span>/
@@ -350,10 +372,13 @@
     </div>
       
     <div class="container mini text-center">
-      <div class="card bg-light border-light text-dark rounded-2xl">
+      <div class="card bg-light border-info text-dark rounded-2xl">
         <div class="card-header text-bold">
           <i class="far fa-clock"></i>
-          Currently 
+          Currently in <b class="text-capitalize mx-1" id="weather-city"></b> 
+          <span class="text-nonbold">
+            (selected)
+          </span>
         </div>
         <div class="card-body bg-dark text-light rounded-xl rounded-2xl">
           <div class="row">
@@ -407,42 +432,51 @@
     </div>
     
     <div class="container mini mt-3">
-      <div class="form-group row align-items-center">
-        <div class="form-group col-3 h-100">
-          <div class="btn-group" role="group" aria-label="Button group">
-            <button data-increment="-3" class="slider_btn btn btn-primary text-light rounded-xl"
-              type="button">
-              <h3 class="fas fa-angle-double-left my-0"></h3>
-            </button>
-            <button data-increment="-1" class="slider_btn btn btn-primary text-light rounded-xl"
-              type="button">
-              <h3 class="fas fa-chevron-left my-0"></h3>
-            </button>
-          </div>
-        </div>
-        <div class="form-group col-6">
-          <p class="text-center text-light">
-            <i class="fas fa-sliders-h mt-2"></i>
-            <span id="slider_index"></span>
-          </p>
-          <input id="slider" class="custom-range" type="range" name="" min="1" max="40">
-          <p class="text-center text-light">
-            <i class="fas fa-calendar-alt"></i>
-            <span id="slider_datetxt">
-            </span>
-            <i class="fas fa-clock"></i>
-          </p>
-        </div>
-        <div class="form-group col-3 h-100">
-          <div class="btn-group" role="group" aria-label="Button group">
-            <button data-increment="1" class="slider_btn btn btn-primary text-light rounded-xl"
-              type="button">
-              <h3 class="fas fa-chevron-right my-0"></h3>
-            </button>
-            <button data-increment="3" class="slider_btn btn btn-primary text-light rounded-xl"
-              type="button">
-              <h3 class="fas fa-angle-double-right my-0"></h3>
-            </button>
+      <div class="card rounded-2xl border-0 border-med">
+        <div class="card-header text-bold text-dark text-center">
+          <i class="fas fa-sliders-h"></i>
+          <span>Slider </span>
+          <span class="text-nonbold">(Three-Hour Periods) </span>
+        </div> 
+        <div class="card-body bg-dark rounded-xl">
+          <div class="form-group row align-items-center">
+            <div class="form-group col-3">
+              <div class="btn-group" role="group" aria-label="Button group">
+                <button data-increment="-3" class="slider_btn btn btn-primary text-light rounded-xl"
+                  type="button">
+                  <h3 class="fas fa-angle-double-left my-0"></h3>
+                </button>
+                <button data-increment="-1" class="slider_btn btn btn-primary text-light rounded-xl"
+                  type="button">
+                  <h3 class="fas fa-chevron-left my-0"></h3>
+                </button>
+              </div>
+            </div>
+            <div class="form-group col-6 mt-4">
+              <p class="text-center text-light mb-0">
+                <i class="fas fa-sliders-h"></i>
+                <span id="slider_index"></span>
+              </p>
+              <input id="slider" class="custom-range" type="range" name="" min="1" max="40">
+              <p class="text-center text-light mb-0">
+                <i class="fas fa-calendar-alt"></i>
+                <span id="slider_datetxt">
+                </span>
+                <i class="fas fa-clock"></i>
+              </p>
+            </div>
+            <div class="form-group col-3">
+              <div class="btn-group" role="group" aria-label="Button group">
+                <button data-increment="1" class="slider_btn btn btn-primary text-light rounded-xl"
+                  type="button">
+                  <h3 class="fas fa-chevron-right my-0"></h3>
+                </button>
+                <button data-increment="3" class="slider_btn btn btn-primary text-light rounded-xl"
+                  type="button">
+                  <h3 class="fas fa-angle-double-right my-0"></h3>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -500,7 +534,7 @@
             Temperatures in C&deg;
             </p>
         </div>
-        <div class="col-4 align-content-center  p-0">
+        <div class="col-4 align-content-center p-0">
           <div class="card bg-transparent border-0 text-dark rounded-2xl">
             <div class="card-body bg-light text-sm text-left rounded-2xl">
               <p class="card-text mt-0 mb-2">
@@ -522,21 +556,23 @@
           </div>
         </div>
         <div class="col-3">
-          <div class="card border-0 rounded-2xl"  id="slider_bg" >
-            <div class="card-header text-dark border-bottom border-dark border-med py-1">
-              <b>
-                <span class="text-bold" id="slider_description">Description</span>
-              </b>
+          <div class="card border-light border-med rounded-2xl"  id="slider_bg" >
+            <div class="card-img-overlay">
+              <div class="card-title text-center text-dark">
+                  <span class="text-bold" id="slider_description">Description</span>
+              </div>
+
             </div>
-              <img id="slider_icon" class="card-img-bottom border-0" alt="">
+            <img id="slider_icon" class="card-img border-0" alt="">
+            <div class="card-footer border-light border-top border-med"></div>
           </div>
         </div>
       </div>
     </div>
     <div class="container mini mt-3 mb-5">
       <div
-        class="card bg-light text-dark mx-1 mb-5 pt-0 border-0 rounded-2xl">
-        <div class="card-header rounded-2xl text-nowrap d-flex align-items-center justify-content-center">
+        class="card bg-light text-dark mx-1 mb-5 pt-0 rounded-2xl border-0"> 
+        <div class="card-header rounded-2xl d-flex align-items-center justify-content-center text-bold">
           
           <h1 class="text-capitalize fas fa-chart-line mr-4"></h1>
           5-day Forecast
@@ -669,16 +705,14 @@
                 <h5 class="card-title h-100">
                   <span class="forecast"></span>
                 </h5>
-                <p class="card-text">
-                  <span class="text-bold bg-dark  text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                  <p class="card-text text-bold bg-dark  text-light text-xl rounded-xl p-1 text-center fore_div_f">
                     <span class="fore_temp_f"></span>
                     <small class="">F &deg; </small>
-                  </span>
-                  <span class="text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                  </p>
+                  <p class="card-text text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center fore_div_c d-none">
                     <span class="fore_temp_c"></span>
                     <small class="">C &deg; </small>
-                  </span>
-                </p>
+                  </p>
               </div>
               <div class="card-footer text-center">
                 <i class="far fa-clock"> </i>
@@ -777,7 +811,7 @@
             </div>
           </div>
         </div>
-        <div class="card-footer rounded-2xl text-center mini mt-5 text-bold">
+        <div class="card-footer text-center mini mt-5 text-bold">
           <a class="text-dark fab fa-github my-0" href="https://github.com/attila5287/"
           > @attila5287</a>
         </div>
