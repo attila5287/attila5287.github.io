@@ -24,7 +24,7 @@ $(document).ready(function () {
 			li.attr("data-index", i);
 			li.attr("data-name", arr[i]);
       li.attr( "id", "nav_" + arr[ i ] );
-			li.attr("class", "sec_name nav-item text-capitalize mr-2");
+			li.attr("class", "sec_name nav-item text-capitalize pr-3");
       
       let a = $( '<a>' );
       a.attr( 'class', 'nav-link' );
@@ -72,7 +72,7 @@ $(document).ready(function () {
   function highlight_active_section() {//listener scroll
     // console.log( "scroll handler" );
     $.each( $( ".section_div" ), function ( i, v ) {
-      const curr_t = Math.round( +$( window ).scrollTop()+200 );
+      const curr_t = Math.round( +$( window ).scrollTop()+204 );
       console.log( 'curr_t :>> ', curr_t );
       const t = +$( this ).attr( 'data-coord-top' );
       const b = +$( this ).attr( 'data-coord-bottom' );
@@ -82,11 +82,11 @@ $(document).ready(function () {
         console.log( 't :>> ', t );
         console.log( 'b :>> ', b );
         console.log(nav.attr("id"));
-        nav.addClass("text-xl");
+        nav.addClass("text-lg");
         nav.addClass("text-uppercase");
         nav.removeClass( "text-capitalize" );
       } else {
-        nav.removeClass( "text-xl" );
+        nav.removeClass( "text-lg" );
         nav.removeClass("text-uppercase");
         nav.addClass("text-capitalize");
       }
