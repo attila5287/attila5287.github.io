@@ -774,8 +774,38 @@
       </div>
 
       <div class="container mini section_div" data-toc_name="route" data-toc_icon="fas fa-route">
-        <div class="row my-2">
-          <div class="col-4">
+        <div class="">
+            <div class="btn-group rounded-2xl w-100 h-100" role="group"
+              >
+              <button data-increment="-2"
+                class="route_btns w-100 rounded-xl btn btn-primary btn-sm text-light"
+                type="button">
+                <i class="fas fa-fast-backward fa-fw"></i>
+              </button>
+              <button data-increment="-1"
+                class="route_btns w-100 rounded-xl btn btn-primary btn-sm text-light"
+                type="button">
+                <i class="fas fa-backward fa-fw"></i>
+              </button>
+              <button data-increment="1"
+                class="route_btns w-100 rounded-xl btn btn-primary btn-sm text-light"
+                type="button">
+                <i class="fas fa-forward fa-fw"></i>
+              </button>
+              <button data-increment="2"
+                class="route_btns w-100 rounded-xl btn btn-primary btn-sm text-light"
+                type="button">
+                <i class="fas fa-fast-forward fa-fw"></i>
+              </button>
+            </div>
+          </div>
+        <div class="progress m-3">
+          <div id="route_progress" class="progress-bar progress-bar-striped progress-bar-animated"
+            role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+            style="width: 10%"></div>
+        </div>          
+        <div class="row my-2 no-gutters">
+          <div class="col-6 px-1">
             <div class="card bg-light text-dark rounded-2xl h-100 border-0 border-med">
               <div class="card-header text-bold text-dark">
                 <i class="fas fa-route"></i>
@@ -783,7 +813,7 @@
                 <span class="text-dark" id="vert_index">1</span>/
                 <span class="text-dark" id="vert_length"></span>
               </div>
-              <div class="card-body bg-dark rounded-xl rounded-2xl m-0">
+              <div class="card-body bg-dark rounded-xl rounded-2xl m-1">
                 <button data-vertical_index="0"
                   class="selected_leaflet leaflet_city my-2 rounded-xl pt-1 pb-2 btn btn-outline-dark border-0 text-light btn-sm border-0 btn-block text-left"
                   type="button">city
@@ -812,47 +842,21 @@
               </div>
             </div>
           </div>
-          <div class="col-2">
-            <div class="btn-group-vertical rounded-2xl w-100 h-100" role="group"
-              aria-label="Vertical button group">
-              <button data-increment="-2"
-                class="route_btns w-100 rounded-xl btn btn-primary text-light btn-block py-2"
-                type="button">
-                <i class="fas fa-angle-double-up fa-fw"></i>
-              </button>
-              <button data-increment="-1"
-                class="route_btns w-100 rounded-xl btn btn-primary text-light btn-block py-4"
-                type="button">
-                <i class="fas fas fa-chevron-up fa-fw"></i>
-              </button>
-              <button data-increment="1"
-                class="route_btns w-100 rounded-xl btn btn-primary text-light btn-block py-4"
-                type="button">
-                <i class="fas fa-chevron-down fa-fw"></i>
-              </button>
-              <button data-increment="2"
-                class="route_btns w-100 rounded-xl btn btn-primary text-light btn-block py-2"
-                type="button">
-                <i class="fas fa-angle-double-down fa-fw"></i>
-              </button>
-            </div>
-          </div>
           <div class="col-6">
             <div class="card bg-light text-dark rounded-2xl h-100">
               <div class="card-header text-bold text-dark">
                 <i class="fas fa-map-marked text-xl mr-2"></i>
                 <span id="leaf_selected_city">Denver</span>
               </div>
-              <img class="card-img-top p-0 rounded-2xl"
+              <img class="card-img-top rounded-2xl bg-dark p-1"
                 src="https://raw.githubusercontent.com/attila5287/rota-img/main/maps/denv.JPG"
                 alt="show-on-map" id="leaf_selected_img">
+                <div class="card-footer text-center mini mt-0 text-bold">
+            <a class="text-dark fab fa-github my-0" href="https://github.com/attila5287/">
+              @attila5287</a>
+          </div>
             </div>
           </div>
-        </div>
-        <div class="progress mx-5">
-          <div id="route_progress" class="progress-bar progress-bar-striped progress-bar-animated"
-            role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
-            style="width: 10%"></div>
         </div>
       </div>
 
