@@ -31,10 +31,10 @@ $(document).ready(function () {
       a.attr( 'class', 'nav-link' );
 
       let a_icon = $( '<i>' );
-      a_icon.attr( 'class', icons[ i ] + ' text-xl mr-2' );
+      a_icon.attr( 'class', icons[ i ] + ' text-lg mr-2' );
       
       let a_text = $( '<span>' );
-      a_text.attr( 'class', 'text-bold' );
+      a_text.attr( 'class', '' );
       a_text.text( arr[ i ] );
       
       
@@ -83,11 +83,11 @@ $(document).ready(function () {
         console.log( 't :>> ', t );
         console.log( 'b :>> ', b );
         console.log(nav.attr("id"));
-        nav.addClass("text-lg");
+        nav.addClass("text-bold");
         nav.addClass("text-uppercase");
         nav.removeClass( "text-capitalize" );
       } else {
-        nav.removeClass( "text-lg" );
+        nav.removeClass( "text-bold" );
         nav.removeClass("text-uppercase");
         nav.addClass("text-capitalize");
       }
