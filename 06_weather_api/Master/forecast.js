@@ -42,19 +42,25 @@ function forecast_five_days ( city ) {
     $( ".forecast-img" ).each( function ( i, el ) {
       
       // console.log('w.list[i*7]:>>',w.list[Math.floor(i*3.99) ]);
-      
-      const icon = w.list[ Math.floor(i*3.99) ].weather[ 0 ].icon;
-      const day_or_night = icon[ icon.length - 1 ];
-      const styles = {
-        d:'bg-info',
-        n: 'bg-secondary',
-      };
-      $( this ).attr( "class", `${styles[ day_or_night ]}` );
-      
+      $(this).attr("class", "card-img forecast-img");
       $( this ).attr(
         "src",
         `https://openweathermap.org/img/wn/${w.list[ Math.floor(i*3.99) ].weather[ 0 ].icon}@2x.png`
       );
+      // console.log('i forecast img :>> ', i);  
+    } );
+    $( ".forecast-bg" ).each( function ( i, el ) {
+      
+      // console.log('w.list[i*7]:>>',w.list[Math.floor(i*3.99) ]);
+      
+      const icon = w.list[ Math.floor(i*3.99) ].weather[ 0 ].icon;
+      const day_or_night = icon[ icon.length - 1 ];
+      const styles = {
+        d:'card bg-info',
+        n: 'card bg-secondary',
+      };
+      $( this ).attr( "class", `${styles[ day_or_night ]}` );
+      
       // console.log('i forecast img :>> ', i);  
     } );
 

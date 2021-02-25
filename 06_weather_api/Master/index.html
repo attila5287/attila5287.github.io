@@ -29,9 +29,8 @@
     }
 
     .forecast-img {
-      max-height: 5rem;
-      max-width: 5rem;
-      border-radius: 1.00rem;
+      max-height: 10rem;
+      max-width: 10rem;
     }
 
     .card-text i {
@@ -44,8 +43,8 @@
     }
 
     .slider_li i {
-      margin-right: 0.5rem;
-      font-size: 1.5rem;
+      /* margin-right: 0.5rem; */
+      font-size: 1.25rem;
     }
 
     .text-sm {
@@ -407,8 +406,29 @@
         </div>
         <div class="mt-3">
           <div class="row">
-            <div class="col-5 text-left">
-              <ul class="list-group list-group-flush rounded-2xl">
+            <div class="col-4 p-0">
+              <div class="card bg-transparent border-0 text-dark rounded-2xl">
+                <div class="card-body bg-light text-sm text-left rounded-2xl">
+                  <p class="card-text mt-0 mb-2">
+                    <i class="text-light bg-dark p-1 rounded-xl fas fa-wind fa-fw mr-2"></i>
+                    Wind Speed:
+                    <span class="mb-2" id="slider_windspeed"></span>
+                  </p>
+                  <p class="card-text mt-0 mb-2">
+                    <i class="text-light bg-dark p-1 rounded-xl fas fa-compass fa-fw mr-2"></i>
+                    Wind Degrees:
+                    <span class="mb-2" id="slider_winddegrees"></span>
+                  </p>
+                  <p class="card-text mt-0 mb-2">
+                    <i class="text-light bg-dark p-1 rounded-xl fas fa-tint fa-fw mr-2"></i>
+                    Humidity:
+                    <span class="mb-2" id="slider_humid"></span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4 text-center">
+              <ul class="list-group list-group-flush rounded-2xl text-sm">
                 <a class="list-group-item list-group-item-action bg-light text-dark disabled slider_li"
                   tabindex="-1" aria-disabled="true">
                   <small>Temp.</small>
@@ -460,28 +480,7 @@
                 Temperatures in C&deg;
               </p>
             </div>
-            <div class="col-4 align-content-center p-0">
-              <div class="card bg-transparent border-0 text-dark rounded-2xl">
-                <div class="card-body bg-light text-sm text-left rounded-2xl">
-                  <p class="card-text mt-0 mb-2">
-                    <i class="text-light bg-dark p-1 rounded-xl fas fa-wind fa-fw mr-2"></i>
-                    Wind Speed:
-                    <span class="mb-2" id="slider_windspeed"></span>
-                  </p>
-                  <p class="card-text mt-0 mb-2">
-                    <i class="text-light bg-dark p-1 rounded-xl fas fa-compass fa-fw mr-2"></i>
-                    Wind Degrees:
-                    <span class="mb-2" id="slider_winddegrees"></span>
-                  </p>
-                  <p class="card-text mt-0 mb-2">
-                    <i class="text-light bg-dark p-1 rounded-xl fas fa-tint fa-fw mr-2"></i>
-                    Humidity:
-                    <span class="mb-2" id="slider_humid"></span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-3">
+            <div class="col-4">
               <div class="card border-light border-med rounded-2xl" id="slider_bg">
                 <div class="card-img-overlay">
                   <div class="card-title text-center text-dark">
@@ -515,122 +514,50 @@
             </span>
             &deg;
           </div>
-          <div class="card-body bg-light">
-            <div class="card-group d-flex flex-row text-center mb-5">
-              <div class="card bg-light rounded-2xl">
+          <div class="card-body bg-dark m-1 rounded-xl">
+            <div class="card-group text-center mb-5">
+              <div class="card rounded-2xl forecast-bg mb-5">
                 <img class="card-img forecast-img" src="" alt="">
-                <div class="card-img-overlay h-100">
-                  <h5 class="card-title h-100">
+                <div class="card-img-overlay rounded-2xl h-100">
+                  <h5 class="card-title h-100 text-right">
                     <span class="forecast"></span>
                   </h5>
                   <p
-                    class="card-text text-bold bg-dark  text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    class="card-text text-bold bg-light text-dark text-xl rounded-xl p-1 text-center fore_div_f">
                     <span class="fore_temp_f"></span>
                     <small class="">F &deg; </small>
                   </p>
                   <p
-                    class="card-text text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    class="card-text text-bold bg-danger text-light text-xl rounded-xl p-1 text-center fore_div_c d-none">
                     <span class="fore_temp_c"></span>
                     <small class="">C &deg; </small>
                   </p>
                 </div>
-                <div class="card-footer text-center">
+                <div class="card-footer text-center text-xl">
                   <i class="far fa-clock"> </i>
                   <span class="forecast_datetime">
                     00AM
                   </span>
                 </div>
               </div>
-              <div class="card bg-light rounded-2xl">
+              <div class="card rounded-2xl forecast-bg mb-5">
                 <img class="card-img forecast-img" src="" alt="">
-                <div class="card-img-overlay h-100">
-                  <h5 class="card-title h-100">
+                <div class="card-img-overlay rounded-2xl h-100">
+                  <h5 class="card-title h-100 text-right">
                     <span class="forecast"></span>
                   </h5>
                   <p
-                    class="card-text text-bold bg-dark  text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    class="card-text text-bold bg-light text-dark text-xl rounded-xl p-1 text-center fore_div_f">
                     <span class="fore_temp_f"></span>
                     <small class="">F &deg; </small>
                   </p>
                   <p
-                    class="card-text text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    class="card-text text-bold bg-danger text-light text-xl rounded-xl p-1 text-center fore_div_c d-none">
                     <span class="fore_temp_c"></span>
                     <small class="">C &deg; </small>
                   </p>
                 </div>
-                <div class="card-footer text-center">
-                  <i class="far fa-clock"> </i>
-                  <span class="forecast_datetime">
-                    00AM
-                  </span>
-                </div>
-              </div>
-              <div class="card bg-light rounded-2xl">
-                <img class="card-img forecast-img" src="" alt="">
-                <div class="card-img-overlay h-100">
-                  <h5 class="card-title h-100">
-                    <span class="forecast"></span>
-                  </h5>
-                  <p
-                    class="card-text text-bold bg-dark  text-light text-xl rounded-xl p-1 text-center fore_div_f">
-                    <span class="fore_temp_f"></span>
-                    <small class="">F &deg; </small>
-                  </p>
-                  <p
-                    class="card-text text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center fore_div_c d-none">
-                    <span class="fore_temp_c"></span>
-                    <small class="">C &deg; </small>
-                  </p>
-                </div>
-                <div class="card-footer text-center">
-                  <i class="far fa-clock"> </i>
-                  <span class="forecast_datetime">
-                    00AM
-                  </span>
-                </div>
-              </div>
-              <div class="card bg-light rounded-2xl">
-                <img class="card-img forecast-img" src="" alt="">
-                <div class="card-img-overlay h-100">
-                  <h5 class="card-title h-100">
-                    <span class="forecast"></span>
-                  </h5>
-                  <p
-                    class="card-text text-bold bg-dark  text-light text-xl rounded-xl p-1 text-center fore_div_f">
-                    <span class="fore_temp_f"></span>
-                    <small class="">F &deg; </small>
-                  </p>
-                  <p
-                    class="card-text text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center fore_div_c d-none">
-                    <span class="fore_temp_c"></span>
-                    <small class="">C &deg; </small>
-                  </p>
-                </div>
-                <div class="card-footer text-center">
-                  <i class="far fa-clock"> </i>
-                  <span class="forecast_datetime">
-                    00AM
-                  </span>
-                </div>
-              </div>
-              <div class="card bg-light rounded-2xl">
-                <img class="card-img forecast-img" src="" alt="">
-                <div class="card-img-overlay h-100">
-                  <h5 class="card-title h-100">
-                    <span class="forecast"></span>
-                  </h5>
-                  <p
-                    class="card-text text-bold bg-dark  text-light text-xl rounded-xl p-1 text-center fore_div_f">
-                    <span class="fore_temp_f"></span>
-                    <small class="">F &deg; </small>
-                  </p>
-                  <p
-                    class="card-text text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center fore_div_c d-none">
-                    <span class="fore_temp_c"></span>
-                    <small class="">C &deg; </small>
-                  </p>
-                </div>
-                <div class="card-footer text-center">
+                <div class="card-footer text-center text-xl">
                   <i class="far fa-clock"> </i>
                   <span class="forecast_datetime">
                     00AM
@@ -638,121 +565,199 @@
                 </div>
               </div>
             </div>
-            <div class="card-group d-flex flex-row text-center">
-              <div class="card bg-light rounded-2xl">
+            <div class="card-group text-center mb-5">
+              <div class="card rounded-2xl forecast-bg mb-5">
                 <img class="card-img forecast-img" src="" alt="">
-                <div class="card-img-overlay h-100">
-                  <h5 class="card-title h-100">
+                <div class="card-img-overlay rounded-2xl h-100">
+                  <h5 class="card-title h-100 text-right">
                     <span class="forecast"></span>
                   </h5>
                   <p
-                    class="card-text text-bold bg-dark  text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    class="card-text text-bold bg-light text-dark text-xl rounded-xl p-1 text-center fore_div_f">
                     <span class="fore_temp_f"></span>
                     <small class="">F &deg; </small>
                   </p>
                   <p
-                    class="card-text text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    class="card-text text-bold bg-danger text-light text-xl rounded-xl p-1 text-center fore_div_c d-none">
                     <span class="fore_temp_c"></span>
                     <small class="">C &deg; </small>
                   </p>
                 </div>
-                <div class="card-footer text-center">
+                <div class="card-footer text-center text-xl">
                   <i class="far fa-clock"> </i>
                   <span class="forecast_datetime">
                     00AM
                   </span>
                 </div>
               </div>
-              <div class="card bg-light rounded-2xl">
+              <div class="card rounded-2xl forecast-bg mb-5">
                 <img class="card-img forecast-img" src="" alt="">
-                <div class="card-img-overlay h-100">
-                  <h5 class="card-title h-100">
+                <div class="card-img-overlay rounded-2xl h-100">
+                  <h5 class="card-title h-100 text-right">
                     <span class="forecast"></span>
                   </h5>
                   <p
-                    class="card-text text-bold bg-dark  text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    class="card-text text-bold bg-light text-dark text-xl rounded-xl p-1 text-center fore_div_f">
                     <span class="fore_temp_f"></span>
                     <small class="">F &deg; </small>
                   </p>
                   <p
-                    class="card-text text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    class="card-text text-bold bg-danger text-light text-xl rounded-xl p-1 text-center fore_div_c d-none">
                     <span class="fore_temp_c"></span>
                     <small class="">C &deg; </small>
                   </p>
                 </div>
-                <div class="card-footer text-center">
+                <div class="card-footer text-center text-xl">
                   <i class="far fa-clock"> </i>
                   <span class="forecast_datetime">
                     00AM
                   </span>
                 </div>
               </div>
-              <div class="card bg-light rounded-2xl">
+            </div>
+            <div class="card-group text-center mb-5">
+              <div class="card rounded-2xl forecast-bg mb-5">
                 <img class="card-img forecast-img" src="" alt="">
-                <div class="card-img-overlay h-100">
-                  <h5 class="card-title h-100">
+                <div class="card-img-overlay rounded-2xl h-100">
+                  <h5 class="card-title h-100 text-right">
                     <span class="forecast"></span>
                   </h5>
                   <p
-                    class="card-text text-bold bg-dark  text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    class="card-text text-bold bg-light text-dark text-xl rounded-xl p-1 text-center fore_div_f">
                     <span class="fore_temp_f"></span>
                     <small class="">F &deg; </small>
                   </p>
                   <p
-                    class="card-text text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    class="card-text text-bold bg-danger text-light text-xl rounded-xl p-1 text-center fore_div_c d-none">
                     <span class="fore_temp_c"></span>
                     <small class="">C &deg; </small>
                   </p>
                 </div>
-                <div class="card-footer text-center">
+                <div class="card-footer text-center text-xl">
                   <i class="far fa-clock"> </i>
                   <span class="forecast_datetime">
                     00AM
                   </span>
                 </div>
               </div>
-              <div class="card bg-light rounded-2xl">
+              <div class="card rounded-2xl forecast-bg mb-5">
                 <img class="card-img forecast-img" src="" alt="">
-                <div class="card-img-overlay h-100">
-                  <h5 class="card-title h-100">
+                <div class="card-img-overlay rounded-2xl h-100">
+                  <h5 class="card-title h-100 text-right">
                     <span class="forecast"></span>
                   </h5>
                   <p
-                    class="card-text text-bold bg-dark  text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    class="card-text text-bold bg-light text-dark text-xl rounded-xl p-1 text-center fore_div_f">
                     <span class="fore_temp_f"></span>
                     <small class="">F &deg; </small>
                   </p>
                   <p
-                    class="card-text text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    class="card-text text-bold bg-danger text-light text-xl rounded-xl p-1 text-center fore_div_c d-none">
                     <span class="fore_temp_c"></span>
                     <small class="">C &deg; </small>
                   </p>
                 </div>
-                <div class="card-footer text-center">
+                <div class="card-footer text-center text-xl">
                   <i class="far fa-clock"> </i>
                   <span class="forecast_datetime">
                     00AM
                   </span>
                 </div>
               </div>
-              <div class="card bg-light rounded-2xl">
+            </div>
+            <div class="card-group text-center mb-5">
+              <div class="card rounded-2xl forecast-bg mb-5">
                 <img class="card-img forecast-img" src="" alt="">
-                <div class="card-img-overlay h-100">
-                  <h5 class="card-title h-100">
+                <div class="card-img-overlay rounded-2xl h-100">
+                  <h5 class="card-title h-100 text-right">
                     <span class="forecast"></span>
                   </h5>
                   <p
-                    class="card-text text-bold bg-dark  text-light text-xl rounded-xl p-1 text-center fore_div_f">
+                    class="card-text text-bold bg-light text-dark text-xl rounded-xl p-1 text-center fore_div_f">
                     <span class="fore_temp_f"></span>
                     <small class="">F &deg; </small>
                   </p>
                   <p
-                    class="card-text text-bold bg-secondary text-dark text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    class="card-text text-bold bg-danger text-light text-xl rounded-xl p-1 text-center fore_div_c d-none">
                     <span class="fore_temp_c"></span>
                     <small class="">C &deg; </small>
                   </p>
                 </div>
-                <div class="card-footer text-center">
+                <div class="card-footer text-center text-xl">
+                  <i class="far fa-clock"> </i>
+                  <span class="forecast_datetime">
+                    00AM
+                  </span>
+                </div>
+              </div>
+              <div class="card rounded-2xl forecast-bg mb-5">
+                <img class="card-img forecast-img" src="" alt="">
+                <div class="card-img-overlay rounded-2xl h-100">
+                  <h5 class="card-title h-100 text-right">
+                    <span class="forecast"></span>
+                  </h5>
+                  <p
+                    class="card-text text-bold bg-light text-dark text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F &deg; </small>
+                  </p>
+                  <p
+                    class="card-text text-bold bg-danger text-light text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C &deg; </small>
+                  </p>
+                </div>
+                <div class="card-footer text-center text-xl">
+                  <i class="far fa-clock"> </i>
+                  <span class="forecast_datetime">
+                    00AM
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="card-group text-center mb-5">
+              <div class="card rounded-2xl forecast-bg mb-5">
+                <img class="card-img forecast-img" src="" alt="">
+                <div class="card-img-overlay rounded-2xl h-100">
+                  <h5 class="card-title h-100 text-right">
+                    <span class="forecast"></span>
+                  </h5>
+                  <p
+                    class="card-text text-bold bg-light text-dark text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F &deg; </small>
+                  </p>
+                  <p
+                    class="card-text text-bold bg-danger text-light text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C &deg; </small>
+                  </p>
+                </div>
+                <div class="card-footer text-center text-xl">
+                  <i class="far fa-clock"> </i>
+                  <span class="forecast_datetime">
+                    00AM
+                  </span>
+                </div>
+              </div>
+              <div class="card rounded-2xl forecast-bg mb-5">
+                <img class="card-img forecast-img" src="" alt="">
+                <div class="card-img-overlay rounded-2xl h-100">
+                  <h5 class="card-title h-100 text-right">
+                    <span class="forecast"></span>
+                  </h5>
+                  <p
+                    class="card-text text-bold bg-light text-dark text-xl rounded-xl p-1 text-center fore_div_f">
+                    <span class="fore_temp_f"></span>
+                    <small class="">F &deg; </small>
+                  </p>
+                  <p
+                    class="card-text text-bold bg-danger text-light text-xl rounded-xl p-1 text-center fore_div_c d-none">
+                    <span class="fore_temp_c"></span>
+                    <small class="">C &deg; </small>
+                  </p>
+                </div>
+                <div class="card-footer text-center text-xl">
                   <i class="far fa-clock"> </i>
                   <span class="forecast_datetime">
                     00AM
