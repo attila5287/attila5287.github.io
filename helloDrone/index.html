@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+            #instructions {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            max-width: 300px;
+        }
+    </style>
+<script  type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.174.0/build/three.module.js",
+            "three/examples/jsm/loaders/GLTFLoader.js": "https://unpkg.com/three@0.174.0/examples/jsm/loaders/GLTFLoader.js",
+            "three/examples/jsm/controls/OrbitControls.js": "https://unpkg.com/three@0.174.0/examples/jsm/controls/OrbitControls.js",
+            "three/examples/jsm/loaders/DRACOLoader.js": "https://unpkg.com/three@0.174.0/examples/jsm/loaders/DRACOLoader.js"
+        }
+    }
+</script>
+    <script src="starter.js" type="module"></script>
+    
+    <!-- <script src="main.js" type="module"></script> -->
+
+    <div id="instructions">
+        <h3>Hello Drone</h3>
+        <p>three-js &dotsquare; object-3d-model &dotsquare; GLTF import</p>
+        <p>https://sketchfab.com/3d-models/bionic-dragonfly-four-axis-uav-aircraft-8cbb6bf372794b38897c112f8420f2e7</p>
+    </div>
+
+</body>
+</html>
