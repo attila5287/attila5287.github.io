@@ -1,0 +1,1 @@
+= Table.SelectColumns(Source,{"JobStop1", "JobStop2"})
