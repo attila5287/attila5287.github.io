@@ -71,7 +71,7 @@ const init = () => {
         39: () => camera.rotation.y -= 0.01, // ArrowRight
         38: () => camera.rotation.x -= 0.01, // ArrowUp 
         40: () => camera.rotation.x += 0.01, // ArrowDown 
-        82: () => camera.rotation.set(-0.3,0,0), // R
+        82: () => camera.rotation.set(0,0,0), // R
     }
 
     let isKeyPressed = false  // s3.2 to handle continuous keys
