@@ -1,14 +1,13 @@
-// 4.1 add obstacle -another object- to the scene
 import * as THREE from 'three' // add importmap to HTML to avoid errors
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 // three.js snippets vs code extension -> tinit STEP-1
-
-
+let cube;
+let ADD = 0.2;
 const init = () => {
     const scene = new THREE.Scene()
     // create a camera, which defines where we're looking at
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100)
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.2, 100)
     // create a render and set the size
     const sizes = {
         width: window.innerWidth,
@@ -19,8 +18,8 @@ const init = () => {
     // add the output of the render function to the HTML
     document.body.appendChild(renderer.domElement)
     // tell the camera where to look
-    camera.rotation.set(-0.3, 0, 0)
-    camera.position.set(0, 10, 15)
+    camera.rotation.set(0, 0, 0)
+    camera.position.set(0, 9.5, 18)
     // #endregion
 
     // --------------- CODE START-------(ttinit above)-------------
@@ -45,7 +44,7 @@ const init = () => {
     // #region Add another mesh: floor, PlaneGeometry -- s2.3
     const geoFloor = new THREE.PlaneGeometry(800, 1200, 1, 1) // GEO
     // (width = 800, height = 1200, widthSegments = 1, heightSegments = 1)
-    const colorFloor = new THREE.Color().setRGB(.1, .99, .01) //  MAT- need a color
+    const colorFloor = new THREE.Color().setRGB(.2, .99, .01) //  MAT- need a color
     let matFloor = new THREE.MeshBasicMaterial({
         color: colorFloor,
         side: THREE.DoubleSide
@@ -58,20 +57,24 @@ const init = () => {
 
 
     // #region Helper funcs and vars for keyboard events - s3.3
-    const keyActionsMapping = { // s3.1
-        65: () => meshChar.translateX(  -0.1), // A
-        68: () => meshChar.translateX(  0.1), // D
-        87: () => meshChar.translateZ( -0.2), // W 
-        83: () => meshChar.translateZ(  0.1), // S 
-        16: () => meshChar.translateY(  0.2),  // Shift
-        32: () => meshChar.translateY( -0.1),  // Space
-        81: () => meshChar.rotation.y+= 0.01, // Q
-        69: () => meshChar.rotation.y-= 0.01, // E
-        37: () => camera.rotation.y += 0.01, // ArrowLeft
-        39: () => camera.rotation.y -= 0.01, // ArrowRight
-        38: () => camera.rotation.x -= 0.01, // ArrowUp 
-        40: () => camera.rotation.x += 0.01, // ArrowDown 
-        82: () => camera.rotation.set(0,0,0), // R
+    const keyMap = { // s3.1
+        ANGLE: 0.02, // A
+        MOVE: 0.2, // A
+        65: () => meshChar.translateX(-2 * keyMap.MOVE), // A
+        68: () => meshChar.translateX(2 * keyMap.MOVE), // D
+        87: () => meshChar.translateZ(-2 * keyMap.MOVE), // W 
+        83: () => meshChar.translateZ(2 * keyMap.MOVE), // S 
+        16: () => meshChar.translateY(2 * keyMap.MOVE),  // Shift
+        32: () => meshChar.translateY(-2 * keyMap.MOVE),  // Space
+        81: () => meshChar.rotation.y += 0.2 * keyMap.MOVE, // Q
+        69: () => meshChar.rotation.y -= 0.2 * keyMap.MOVE, // E
+        37: () => camera.rotation.y += keyMap.ANGLE, // ArrowLeft
+        39: () => camera.rotation.y -= keyMap.ANGLE, // ArrowRight
+        38: () => camera.rotation.x += keyMap.ANGLE, // ArrowUp 
+        40: () => camera.rotation.x -= keyMap.ANGLE, // ArrowDown 
+        34: () => camera.rotation.z -= keyMap.ANGLE, // PgUp
+        33: () => camera.rotation.z += keyMap.ANGLE, // PgDn
+        82: () => camera.rotation.set(0, 0, 0), // R
     }
 
     let isKeyPressed = false  // s3.2 to handle continuous keys
@@ -80,9 +83,9 @@ const init = () => {
     function updateIfKeyAction(e) { // s3.2
         if (isKeyPressed) {
             console.log('UPDATE: A key pressed ' + e.keyCode)
-            if (keyActionsMapping[e.keyCode]) {
+            if (keyMap[e.keyCode]) {
                 console.log('UPDATE: An action key pressed ' + e.keyCode)
-                keyActionsMapping[e.keyCode]()
+                keyMap[e.keyCode]()
                 console.log(`meshChar.position: x,y,z ${meshChar.position.x} ${meshChar.position.y} ${meshChar.position.z} `
                 )
             }
@@ -102,7 +105,81 @@ const init = () => {
 
     window.addEventListener('keydown', keydownListener, false)
     window.addEventListener('keyup', keyupListener, false)
+    let createCube = function (position) {
+        console.log(`3. Creating cube at:  ${position.x} ${position.y} ${position.z}`)
+        let material = new THREE.MeshPhongMaterial({
+            color: 0Xaf62ff,
+            shininess: 100, side: THREE.DoubleSide
+        });
+        let geometry = new THREE.BoxGeometry(1, 1, 1);
+        cube = new THREE.Mesh(geometry, material);
+        cube.position.set(
+            position.x,
+            position.y,
+            position.z
+        );
+        scene.add(cube);
+        console.log('Create cube: Success!!')
+    };
+    let rayCast = new THREE.Raycaster()
+    let mouse = new THREE.Vector2();
+    // const matLine = new THREE.LineBasicMaterial({ color: 0x0000ff });
+    const matLine = new THREE.LineDashedMaterial({
+        color: "#ff37e2",
+        linewidth: 6,
+        scale: 2,
+        dashSize: 6,
+        gapSize: 2,
+    });
+    const pointArrays = [];
+    const points = [];
+    let geoLine;
+    let line;
+
+    mouse.x = mouse.y = -1;
+    // #region mouseClick s42
+    let onMouseClick = function (e) {
+        mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = - (e.clientY / window.innerHeight) * 2 + 1;
+
+        rayCast.setFromCamera(mouse, camera);
+        let intersects = rayCast.intersectObjects(scene.children);
+
+        console.log('intersects.length ' + intersects.length)
+        console.log('intersect coords ' + intersects[0].point)
+
+
+        intersects.forEach(obj => {
+            createCube(intersects[0].point)
+
+            for (let i = 0; i < 10; i++) {
+                pointArrays.push([])
+            }
+
+            for (let i = 0; i < 10; i++) {
+                pointArrays[i].push(
+                    new THREE.Vector3(
+                        intersects[0].point.x,
+                        intersects[0].point.y + i * 2,
+                        intersects[0].point.z,
+                    )
+                );
+                geoLine = new THREE.BufferGeometry().setFromPoints(pointArrays[i]);
+                console.log(pointArrays[i])
+                line = new THREE.Line(geoLine, matLine);
+                scene.add(line)
+            }
+            console.log(pointArrays)
+        }
+        );
+    }
+    document.addEventListener("click", onMouseClick, false)
     // #endregion
+    //create a blue LineBasicMaterial
+
+
+
+
 
     // #region Add obstacle: geometry + material = mesh - s4.1
     const geoObstacle = new THREE.BoxGeometry(10, 25, 10)  // width, height, depth
@@ -155,33 +232,32 @@ const init = () => {
         meshChar.material.needsUpdate = true;
 
         meshChar.material.map = texture;
-    const Loader = new GLTFLoader();
-    Loader.setDRACOLoader(dracoLoader);
-    Loader.load("uav/scene.gltf",
-        
-        // onLoad callback
-        (data) => {
-            // do something with robot
-            console.log("loaded successfully");
-            // use below function
-            data.scene.traverse((object) => {
-                if (object.isMesh) {
-                    // object.material.envMap = cubeTexture;
-                    object.position.set(0, 5, 0);
-                    object.rotation.set(9.5, 0, 0);
-                    object.scale.set(1, 1);
-                    console.log(object)
-                    meshChar.add(object) // s3.3 
-                }
-            });
-            // data has scene prpty itself so data-dot-scene
-            // scene.add(data.scene);
-        },
-        // onError callback
-        (err) => {
-            console.log('An error happened');
-        }
-    );
+        const Loader = new GLTFLoader();
+        Loader.setDRACOLoader(dracoLoader);
+        Loader.load("uav/scene.gltf",
+
+            // onLoad callback
+            (data) => {
+                // do something with robot
+                console.log("loaded successfully");
+                // use below function
+                data.scene.traverse((object) => {
+                    if (object.isMesh) {
+                        // object.material.envMap = cubeTexture;
+                        object.position.set(0, 5, 0);
+                        object.rotation.set(9.50, 0, 0);
+                        object.scale.set(1, 1);
+                        meshChar.add(object) // s3.3 
+                    }
+                });
+                // data has scene prpty itself so data-dot-scene
+                // scene.add(data.scene);
+            },
+            // onError callback
+            (err) => {
+                console.log('An error happened');
+            }
+        );
     });
 
     const ambientLight = new THREE.AmbientLight();
