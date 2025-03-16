@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title> 
+      droneQube
+    </title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <script src="mapbox-gl.js"></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.2/slate/bootstrap.min.css"
+      integrity="sha512-s45Cp6qBZtDBpgMOVpm2GiA2SPPUCxOjNPNpQuUR0Hn/xEUvDESaR1qMFBJXGdT42VlYfMZoiPGG9xXoxYMaVw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
+      integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <div class="form-group m-1" style="position: fixed; z-index: 2">
+    <div class="custom-control custom-checkbox">
+      <input class="custom-control-input" id="showCamControls" type="checkbox" class="camCheckBox" checked="checked"/>
+      <label class="custom-control-label" for="showCamControls">
+        <i class="fa fa-camera"></i>
+      </label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input id ="disableCamControls"  class="custom-control-input"   type="checkbox"/>
+      <label for="disableCamControls" class="custom-control-label" >
+        <i class="fa fa-ban" aria-hidden="true"></i>
+      </label>
+    </div>
+  </div>
+  
+  <body>
+    <p id="info" style="z-index: 2" positionX="0" positionY="0" lng="0" lat="0"></p>
+    <!-- <pre id="info" style="z-index: 2"></pre> -->
+    <nav id="listing-group" class="listing-group">
+      <input type="checkbox" class="camCheckBox" checked="checked" id="scrollZoom" />
+      <label for="scrollZoom">ScrollZoom</label>
+      <input type="checkbox" class="camCheckBox" checked="checked" id="boxZoom" />
+      <label for="boxZoom">BoxZoom</label>
+      <input type="checkbox" class="camCheckBox" checked="checked" id="dragRotate" />
+      <label for="dragRotate">DragRotate</label>
+      <input type="checkbox" class="camCheckBox" checked="checked" id="dragPan" />
+      <label for="dragPan">DragPan</label>
+      <input type="checkbox" class="camCheckBox" checked="checked" id="keyboard" />
+      <label for="keyboard">Keyboard</label>
+      <input type="checkbox" class=""  />
+      <label for="doubleClickZoom">DblClkZoom</label>
+      <input type="checkbox" class="camCheckBox" checked="checked" id="touchZoomRotate" />
+      <label for="touchZoomRotate">TouchCtrls</label>
+    </nav>
+    <div id="map"></div>
+    
+    <!-- <script src="turf.min.js"></script> -->
+    <!-- <script src="tween.esm.js"></script> -->
+    <script src="three.min.js"></script>
+    <script src="GLTFLoader.js"></script>
+    <script src="DRACOLoader.js"></script>
+    <script type="module" src="script.js"></script>
+  </body>
+</html>

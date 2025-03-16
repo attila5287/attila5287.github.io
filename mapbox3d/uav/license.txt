@@ -1,0 +1,8 @@
+Model Information:
+* title:	Bionic dragonfly four-axis UAV aircraft
+* source:	https://sketchfab.com/3d-models/bionic-dragonfly-four-axis-uav-aircraft-8cbb6bf372794b38897c112f8420f2e7
+* author:	boxgizmo (https://sketchfab.com/boxgizmo)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works
