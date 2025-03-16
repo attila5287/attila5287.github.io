@@ -6,12 +6,43 @@ const map = new mapboxgl.Map({
     zoom: 18.75,
     // center: [-104.985302, 39.740326], // St Services Bldg
     // center: [-104.98863682037847, 39.74349648343346], // rep plaza
-    center: [-104.98887493053121, 39.73899257929499], // Sheraton Denver
+    center: [-104.98887493053121, 39.73899257929499], // civic
     pitch: 65,
     antialias: true // create the gl context with MSAA antialiasing, so custom layers are antialiased
 });
 
 
+const draw = new MapboxDraw({
+    displayControlsDefault: true,
+    // Select which mapbox-gl-draw control buttons to add to the map.
+    controls: {
+        polygon: true,
+        trash: true
+    },
+    // Set mapbox-gl-draw to draw by default.
+    // The user does not have to click the polygon control button first.
+    defaultMode: 'draw_polygon'
+});
+map.addControl(draw);
+
+map.on('draw.create', updateArea);
+map.on('draw.delete', updateArea);
+map.on('draw.update', updateArea);
+
+function updateArea(e) {
+    const data = draw.getAll();
+    const answer = document.getElementById('calculated-area');
+    if (data.features.length > 0) {
+        const area = turf.area(data);
+        // Restrict the area to 2 decimal points.
+        const rounded_area = Math.round(area * 100) / 100;
+        answer.innerHTML = `<p><strong>${rounded_area}</strong></p><p>square meters</p>`;
+    } else {
+        answer.innerHTML = '';
+        if (e.type !== 'draw.delete')
+            alert('Click the map to draw a polygon.');
+    }
+}
 // #region EVENT HANDLERS in Chkboxes
 const handlers = [
     "scrollZoom",
@@ -171,22 +202,6 @@ const customLayer = {
         let posX, posY;
         let lngPoint, latPoint, coordsPoint;
         
-        let createCube = function (position) {
-            console.log(`3. Creating cube at:  ${position.x} ${position.y} ${position.z}`)
-            let material = new THREE.MeshPhongMaterial({
-                color: 0Xaf62ff,
-                shininess: 100, side: THREE.DoubleSide
-            });
-            let geometry = new THREE.BoxGeometry(1, 1, 1);
-            cube = new THREE.Mesh(geometry, material);
-            cube.position.set(
-                position.x,
-                position.y,
-                position.z
-            );
-            this.scene.add(cube);
-            console.log('Create cube: Success!!')
-        };
         document.addEventListener('dblclick', e => {
             posX = $info.getAttribute("positionX")
             posY = $info.getAttribute("positionY")

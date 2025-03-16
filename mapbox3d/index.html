@@ -9,7 +9,8 @@
       name="viewport"
       content="initial-scale=1,maximum-scale=1,user-scalable=no"
     />
-    <script src="mapbox-gl.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js"></script>
+
     <link
       href="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css"
       rel="stylesheet"
@@ -22,6 +23,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
@@ -66,7 +68,14 @@
       <input type="checkbox" class="camCheckBox" checked="checked" id="touchZoomRotate" />
       <label for="touchZoomRotate">TouchCtrls</label>
     </nav>
-    <div id="map"></div>
+    <div id="map"></  <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.5.0/mapbox-gl-draw.js"></script>
+  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.5.0/mapbox-gl-draw.css" type="text/css">
+  <div id="map"></div>
+  <div class="calculation-box">
+      <p>Click the map to draw a polygon.</p>
+      <div id="calculated-area"></div>
+  </div>div>
     
     <!-- <script src="turf.min.js"></script> -->
     <!-- <script src="tween.esm.js"></script> -->
