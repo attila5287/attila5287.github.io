@@ -112,9 +112,9 @@ map.on('mousemove', (e) => {
     $info.setAttribute('positionY', e.point.y)
     $info.setAttribute('lng', e.lngLat.lng)
     $info.setAttribute('lat', e.lngLat.lat)
-    
+
     // console.log(e.lngLat.lng + " " + e.lngLat.lat)
-    $info.innerHTML =`${JSON.stringify(e.point)}<br />${JSON.stringify(e.lngLat.wrap())}`;
+    $info.innerHTML = `${JSON.stringify(e.point)}<br />${JSON.stringify(e.lngLat.wrap())}`;
 });
 // #endregion
 
@@ -201,7 +201,7 @@ const customLayer = {
         }
         let posX, posY;
         let lngPoint, latPoint, coordsPoint;
-        
+
         document.addEventListener('dblclick', e => {
             posX = $info.getAttribute("positionX")
             posY = $info.getAttribute("positionY")
@@ -210,7 +210,7 @@ const customLayer = {
             coordsPoint = merCoords(lngPoint, latPoint)
             // console.log(coordsPoint)
 
-        },false);
+        }, false);
 
         // document.addEventListener('dblclick', e => {
         //     const lngLat = map.unproject([e.clientX, e.clientY]);
@@ -256,13 +256,13 @@ const customLayer = {
             .multiply(rotationX)
             .multiply(rotationY)
             .multiply(rotationZ);
-            this.camera.projectionMatrix = m.multiply(l);
-            this.renderer.resetState();
-            this.scene.rotation.z += (Math.random() - 0.5) * 0.005
-            this.scene.position.y += (Math.random() - 0.5) * 0.2
-            this.renderer.render(this.scene, this.camera);
-            gl.flush()
-            this.map.triggerRepaint();
+        this.camera.projectionMatrix = m.multiply(l);
+        this.renderer.resetState();
+        this.scene.rotation.z += (Math.random() - 0.5) * 0.005
+        this.scene.position.y += (Math.random() - 0.5) * 0.2
+        this.renderer.render(this.scene, this.camera);
+        gl.flush()
+        this.map.triggerRepaint();
         // console.log(this)
     }
 };
