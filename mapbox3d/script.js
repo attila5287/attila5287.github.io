@@ -104,11 +104,14 @@ $showCam
         console.log(`ShowCamControls: ${e.target.checked}`)
         if (!e.target.checked) {
             $camControls.classList.toggle("hidden");
+            $camControls.classList.toggle("animate__slideInDown");
             // $camControls.style.display = "none"; // removes layout
             // $camControls.style.visibility = "hidden"; // keeps layout
             console.log('camControls display: NONE')
+            
         } else {
             $camControls.classList.toggle("hidden");
+            $camControls.classList.toggle("animate__slideInDown");
             $camControls.style.display = "block";
             // $camControls.style.visibility = "visible";
             console.log('camControls display: BLOCK')
