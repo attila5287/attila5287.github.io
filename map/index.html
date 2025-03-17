@@ -1,106 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="Description" content="attila turkoz's github.io web page'" />
-  <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
-    integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous" />
-    <link href="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css" rel="stylesheet">
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title> 
+      droneQube
+    </title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js"></script>
-    <style>
-    body { margin: 0; padding: 0; }
-    #map { position: absolute; top: 0; bottom: 0; width: 100%; }
-    </style>
-    <title>Draw Polygon</title>
 
-</head>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.2/slate/bootstrap.min.css"
+      integrity="sha512-s45Cp6qBZtDBpgMOVpm2GiA2SPPUCxOjNPNpQuUR0Hn/xEUvDESaR1qMFBJXGdT42VlYfMZoiPGG9xXoxYMaVw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
 
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
+      integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-  <style>
-    .calculation-box {
-        height: 75px;
-        width: 150px;
-        position: absolute;
-        bottom: 40px;
-        left: 10px;
-        background-color: rgba(255, 255, 255, 0.9);
-        padding: 15px;
-        text-align: center;
-    }
-
-    p {
-        font-family: 'Open Sans';
-        margin: 0;
-        font-size: 13px;
-    }
-</style>
-
-<div> 
-  <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+  <div class="form-group m-1" style="position: fixed; z-index: 2">
+    <div class="custom-control custom-checkbox">
+      <input class="custom-control-input" id="showCamControls" type="checkbox" class="camCheckBox" checked="checked"/>
+      <label class="custom-control-label" for="showCamControls">
+        <i class="fa fa-camera"></i>
+      </label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input id ="disableCamControls"  class="custom-control-input"   type="checkbox"/>
+      <label for="disableCamControls" class="custom-control-label" >
+        <i class="fa fa-ban" aria-hidden="true"></i>
+      </label>
+    </div>
+  </div>
+  
+  <body>
+    <p id="info" style="z-index: 2" positionX="0" positionY="0" lng="0" lat="0"></p>
+    <!-- <pre id="info" style="z-index: 2"></pre> -->
+    <nav id="listing-group" class="listing-group">
+      <input type="checkbox" class="camCheckBox" checked="checked" id="scrollZoom" />
+      <label for="scrollZoom">ScrollZoom</label>
+      <input type="checkbox" class="camCheckBox" checked="checked" id="boxZoom" />
+      <label for="boxZoom">BoxZoom</label>
+      <input type="checkbox" class="camCheckBox" checked="checked" id="dragRotate" />
+      <label for="dragRotate">DragRotate</label>
+      <input type="checkbox" class="camCheckBox" checked="checked" id="dragPan" />
+      <label for="dragPan">DragPan</label>
+      <input type="checkbox" class="camCheckBox" checked="checked" id="keyboard" />
+      <label for="keyboard">Keyboard</label>
+      <input type="checkbox" class=""  />
+      <label for="doubleClickZoom">DblClkZoom</label>
+      <input type="checkbox" class="camCheckBox" checked="checked" id="touchZoomRotate" />
+      <label for="touchZoomRotate">TouchCtrls</label>
+    </nav>
+    <div id="map"></  <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
   <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.5.0/mapbox-gl-draw.js"></script>
   <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.5.0/mapbox-gl-draw.css" type="text/css">
   <div id="map"></div>
   <div class="calculation-box">
       <p>Click the map to draw a polygon.</p>
       <div id="calculated-area"></div>
-  </div>
-  
-   
-</div> 
-<script>
-	// TO MAKE THE MAP APPEAR YOU MUST
-	// ADD YOUR ACCESS TOKEN FROM
-	// https://account.mapbox.com
-	mapboxgl.accessToken = 'pk.eyJ1IjoiYXR0aWxhNTIiLCJhIjoiY2thOTE3N3l0MDZmczJxcjl6dzZoNDJsbiJ9.bzXjw1xzQcsIhjB_YoAuEw';
-    const map = new mapboxgl.Map({
-        container: 'map', // container ID
-        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-        style: 'mapbox://styles/mapbox/standard', // style URL
-    center: [-104.988937, 39.739319], // Denver, CO
-    zoom: 17,
-    pitch: 65,
-    });
-
-    const draw = new MapboxDraw({
-        displayControlsDefault: false,
-        // Select which mapbox-gl-draw control buttons to add to the map.
-        controls: {
-            polygon: true,
-            trash: true
-        },
-        // Set mapbox-gl-draw to draw by default.
-        // The user does not have to click the polygon control button first.
-        defaultMode: 'draw_polygon'
-    });
-    map.addControl(draw);
-
-    map.on('draw.create', updateArea);
-    map.on('draw.delete', updateArea);
-    map.on('draw.update', updateArea);
-
-    function updateArea(e) {
-        const data = draw.getAll();
-        const answer = document.getElementById('calculated-area');
-        if (data.features.length > 0) {
-            const area = turf.area(data);
-            // Restrict the area to 2 decimal points.
-            const rounded_area = Math.round(area * 100) / 100;
-            answer.innerHTML = `<p><strong>${rounded_area}</strong></p><p>square meters</p>`;
-        } else {
-            answer.innerHTML = '';
-            if (e.type !== 'draw.delete')
-                alert('Click the map to draw a polygon.');
-        }
-    }
-</script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>
-</body>
-
+  </div>div>
+    
+    <!-- <script src="turf.min.js"></script> -->
+    <!-- <script src="tween.esm.js"></script> -->
+    <script src="three.min.js"></script>
+    <script src="GLTFLoader.js"></script>
+    <script src="DRACOLoader.js"></script>
+    <script type="module" src="script.js"></script>
+  </body>
 </html>

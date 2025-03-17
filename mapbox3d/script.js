@@ -34,9 +34,17 @@ function updateArea(e) {
     const answer = document.getElementById('calculated-area');
     if (data.features.length > 0) {
         const area = turf.area(data);
+        const length = turf.length(data, { units: "meters" });
         // Restrict the area to 2 decimal points.
-        const rounded_area = Math.round(area * 100) / 100;
-        answer.innerHTML = `<p><strong>${rounded_area}</strong></p><p>square meters</p>`;
+        const roundedArea = Math.round(area * 100) / 100;
+        const roundedLength = Math.round(length * 100) / 100;
+        // turf.length(line, { units: "miles" });
+        answer.innerHTML = `
+          <strong>
+            ${roundedLength} meters <br>
+            ${roundedArea} sq-meters  
+          </strong>
+        `;
     } else {
         answer.innerHTML = '';
         if (e.type !== 'draw.delete')
@@ -95,10 +103,12 @@ $showCam
     .addEventListener("change", (e) => {
         console.log(`ShowCamControls: ${e.target.checked}`)
         if (!e.target.checked) {
-            $camControls.style.display = "none"; // removes layout
+            $camControls.classList.toggle("hidden");
+            // $camControls.style.display = "none"; // removes layout
             // $camControls.style.visibility = "hidden"; // keeps layout
             console.log('camControls display: NONE')
         } else {
+            $camControls.classList.toggle("hidden");
             $camControls.style.display = "block";
             // $camControls.style.visibility = "visible";
             console.log('camControls display: BLOCK')
@@ -201,16 +211,33 @@ const customLayer = {
         }
         let posX, posY;
         let lngPoint, latPoint, coordsPoint;
-
+        // #region DOUBLE CLICK EVENT ON THE MAP
         document.addEventListener('dblclick', e => {
-            posX = $info.getAttribute("positionX")
-            posY = $info.getAttribute("positionY")
-            lngPoint = $info.getAttribute("lng")
-            latPoint = $info.getAttribute("lat")
-            coordsPoint = merCoords(lngPoint, latPoint)
-            // console.log(coordsPoint)
+            const rect = map.getCanvas().getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const lngLat = map.unproject([x, y]);
+            const mercatorCoordinate = mapboxgl.MercatorCoordinate.fromLngLat(lngLat);
 
-        }, false);
+            this.scene.position.set(mercatorCoordinate.x, mercatorCoordinate.y, this.scene.position.z);
+            console.log('New scene position:', this.scene.position);
+        }, false);        
+
+
+
+
+        // document.addEventListener('dblclick', e => {
+        //     posX = $info.getAttribute("positionX")
+        //     posY = $info.getAttribute("positionY")
+        //     lngPoint = $info.getAttribute("lng")
+        //     latPoint = $info.getAttribute("lat")
+        //     coordsPoint = merCoords(lngPoint, latPoint)
+        //     // console.log(coordsPoint)
+
+        // }, false);
+
+        // #endregion
+
 
         // document.addEventListener('dblclick', e => {
         //     const lngLat = map.unproject([e.clientX, e.clientY]);
