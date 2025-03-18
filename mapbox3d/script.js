@@ -26,13 +26,34 @@ map.on('draw.create', updateArea);
 map.on('draw.delete', updateArea);
 map.on('draw.update', updateArea);
 
-// "type": "FeatureCollection",
-// "features": [{
-//      "type": "Feature",
-//      "properties": {},
-//      "geometry": {
-//          "coordinates": [[]],
-//          "type": "Polygon" }]
+function autoGenerateLine(poly) {
+    let buffered, simplified, smoother, featureColl;
+    buffered = turf.buffer(poly, 0.006, { units: "kilometers" })
+    simplified = turf.simplify(buffered, { tolerance: 0.00001, highQuality: true });
+    smoother = turf.polygonSmooth(simplified, { iterations: 3 })
+    // console.log(poly)
+    let coords = [];
+    let result = [];
+    for (let index = 0; index < 5; index++) {
+        coords.push(smoother.features[0].geometry.coordinates.flatMap(d => d) )
+    }
+    console.log(coords.flatMap(d => d))
+    result = coords.flatMap(d => d)
+    console.log(result)
+    let JSON = {
+        "type": "Feature",
+        "properties": {
+            "elevation": [1, 15]
+        },
+        "geometry": {
+            "coordinates": result,
+            "type": "LineString"
+        }
+    }
+;
+    return JSON;
+}
+
 
 // #region AUTO-GENERATING -  GREEN EXTRUSION
 function autoGenerate(poly) {
@@ -44,10 +65,10 @@ function autoGenerate(poly) {
     let temp ;
     const colors = [
         'green',
-        'blue',
+        'cyan',
         'pink',
         'purple',
-        'teal',
+        'yellow',
     ];
 
     for (let index = 0; index < 5; index++) {
@@ -58,24 +79,14 @@ function autoGenerate(poly) {
         temp.features[0].properties['color'] = colors[index];
         // temp.features[0].properties['opacity'] = index*0.2;
         temp.features[0]['id'] = 'green' + index
-        
-        
-        console.log(temp)
-        console.log(index)
-        console.log(temp)
-        console.log(temp.features[0].properties['base'])
-        console.log(temp.features[0].properties['height'])
-        console.log(temp.features[0].properties.id)
-        console.log(temp.features[0].properties.base)
-        console.log(temp.features[0].properties.height)
         feats.push(temp.features[0]);
     };
-    console.log(feats)
+    // console.log(feats)
     featureColl = {
         "features": feats,
         "type": "FeatureCollection"
     };
-    console.log(featureColl)
+    // console.log(featureColl)
     return featureColl;
     // console.log('smoother')
     // console.log(smoother)
@@ -88,7 +99,8 @@ function updateArea(e) {
     const polygon = draw.getAll();
     const answer = document.getElementById('calculated-area');
     map.getSource('user-drawn-polygon').setData(polygon)
-    map.getSource('auto-generated-polygon').setData(autoGenerate(polygon))
+    // map.getSource('auto-generated-polygon').setData(autoGenerate(polygon))
+    map.getSource('auto-generated-line').setData(autoGenerateLine(polygon))
 
     if (polygon.features.length > 0) {
         const area = turf.area(polygon);
@@ -103,12 +115,9 @@ function updateArea(e) {
           </strong>
         `;
 
-        // console.log('user drawn polygon: ')
-        // console.log(polygon)
-        // console.log(polygon.features[0].geometry.coordinates)
-
         map.getSource('user-drawn-polygon').setData(polygon)
-        map.getSource('auto-generated-polygon').setData(autoGenerate(polygon))
+        // map.getSource('auto-generated-polygon').setData(autoGenerate(polygon))
+        map.getSource('auto-generated-line').setData(autoGenerateLine(polygon))
 
     } else {
         answer.innerHTML = '';
@@ -348,16 +357,7 @@ const customLayer = {
 // #region blank JSON to load when there is no polygon
 let blankJSON = {
     "type": "FeatureCollection",
-    "features": [
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "coordinates": [[]],
-                "type": "Polygon"
-            }
-        }
-    ]
+    "features": []
 };
 
 // #endregion
@@ -370,29 +370,81 @@ map.on('style.load', () => {
         'type': 'geojson',
         'data': blankJSON,
     });
-
+    map.addSource("auto-generated-line", {
+        type: "geojson",
+        lineMetrics: true,
+        data: {
+            type: "Feature",
+            properties: {
+                elevation: [1, 15],
+            },
+            geometry: {
+                coordinates: [],
+                type: "LineString",
+            },
+        },
+    });
     map.addLayer(customLayer);
 
-    map.addLayer({
-        'id': 'generated-layer',
-        'type': 'fill-extrusion',
-        'source': 'auto-generated-polygon',
-        'paint': {
-            'fill-extrusion-color': ['get', 'color'],
-            'fill-extrusion-height': ['get', 'height'],
-            'fill-extrusion-base':   ['get', 'base'],
-            'fill-extrusion-opacity': 0.7
-        }
-    });
+    // map.addLayer({
+    //     'id': 'generated-layer',
+    //     'type': 'fill-extrusion',
+    //     'source': 'auto-generated-polygon',
+    //     'paint': {
+    //         'fill-extrusion-color': ['get', 'color'],
+    //         'fill-extrusion-height': ['get', 'height'],
+    //         'fill-extrusion-base':   ['get', 'base'],
+    //         'fill-extrusion-opacity': 0.1
+    //     }
+    // });
     map.addLayer({
         'id': 'user-extrude-layer',
         'type': 'fill-extrusion',
         'source': 'user-drawn-polygon',
         'paint': {
             'fill-extrusion-color': 'blue',
-            'fill-extrusion-height': 10,
+            'fill-extrusion-height': 15,
             'fill-extrusion-base': 0,
-            'fill-extrusion-opacity': 0.5
+            'fill-extrusion-opacity': 0.3
         }
+    });
+    map.addLayer({
+        id: "elevated-line",
+        type: "line",
+        source: "auto-generated-line",
+        layout: {
+            "line-z-offset": [
+                "at",
+                [
+                    "*",
+                    ["line-progress"],
+                    ["-", ["length", ["get", "elevation"]], 1],
+                ],
+                ["get", "elevation"],
+            ],
+            "line-elevation-reference": "sea",
+            "line-cap": "round",
+            "line-join": "round",
+        },
+        paint: {
+            "line-emissive-strength": 2.0,
+            "line-width": 4,
+            "line-color": "green",
+            "line-gradient": [
+                "interpolate",
+                ["linear"],
+                ["line-progress"],
+                0.0,
+                "cyan",
+                0.5,
+                "lime",
+                0.7,
+                "yellow",
+                1,
+                "pink",
+            ],
+            // 'line-trim-offset' : [0.2, 0.8],
+            'line-gap-width' :3,
+        },
     });
 });
