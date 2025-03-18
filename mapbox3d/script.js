@@ -177,7 +177,7 @@ const customLayer = {
         this.scene.add(directionalLight3);
 
         // use the three.js GLTF loader to add the 3D model to the three.js scene
-        const modelGroup = new THREE.Group();
+        // const modelGroup = new THREE.Group();
         const loader = new THREE.GLTFLoader();
         loader.load(
             'uav/scene.gltf',
