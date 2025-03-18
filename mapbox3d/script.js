@@ -1,3 +1,35 @@
+let myData = {
+    "type": "FeatureCollection",
+
+    "features": [
+
+        {
+
+            "id": "tO49V48UD09ynJcFJyH20aXWtaFqJ5Km",
+
+            "type": "Feature",
+
+            "properties": {},
+
+            "geometry": {
+
+                "coordinates": [
+
+                    [
+
+                    ]
+
+                ],
+
+                "type": "Polygon"
+
+            }
+
+        }
+
+    ]
+
+};
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXR0aWxhNTIiLCJhIjoiY2thOTE3N3l0MDZmczJxcjl6dzZoNDJsbiJ9.bzXjw1xzQcsIhjB_YoAuEw';
 const map = new mapboxgl.Map({
     container: 'map',
@@ -10,25 +42,24 @@ const map = new mapboxgl.Map({
     pitch: 65,
     antialias: true // create the gl context with MSAA antialiasing, so custom layers are antialiased
 });
-
-
 const draw = new MapboxDraw({
     displayControlsDefault: true,
     // Select which mapbox-gl-draw control buttons to add to the map.
-    controls: {
-        polygon: true,
-        trash: true
-    },
+    // controls: {
+    //     polygon: true,
+    //     trash: true
+    // },
     // Set mapbox-gl-draw to draw by default.
     // The user does not have to click the polygon control button first.
-    defaultMode: 'draw_polygon'
+    // defaultMode: 'draw_polygon'
 });
 map.addControl(draw);
-
 map.on('draw.create', updateArea);
 map.on('draw.delete', updateArea);
 map.on('draw.update', updateArea);
+// map.on('style.load', updateArea);
 
+// #region UPDATE-AREA -main function-
 function updateArea(e) {
     const data = draw.getAll();
     const answer = document.getElementById('calculated-area');
@@ -38,19 +69,23 @@ function updateArea(e) {
         // Restrict the area to 2 decimal points.
         const roundedArea = Math.round(area * 100) / 100;
         const roundedLength = Math.round(length * 100) / 100;
-        // turf.length(line, { units: "miles" });
         answer.innerHTML = `
           <strong>
             ${roundedLength} meters <br>
-            ${roundedArea} sq-meters  
+            ${roundedArea} sq-meters  /
           </strong>
         `;
+        console.log(data)
+        console.log(data.features[0].geometry.coordinates)
+        myData = data;
+        map.getSource('base-polygon').setData(data)
     } else {
         answer.innerHTML = '';
         if (e.type !== 'draw.delete')
             alert('Click the map to draw a polygon.');
     }
 }
+// #endregion
 // #region EVENT HANDLERS in Chkboxes
 const handlers = [
     "scrollZoom",
@@ -61,7 +96,6 @@ const handlers = [
     "doubleClickZoom",
     "touchZoomRotate",
 ];
-map["doubleClickZoom"].disable() // let's use double'click for 
 
 // #region CAM-CONTROLS
 let $camControls = document.querySelector("#listing-group");
@@ -82,7 +116,7 @@ $disableCamControls
     .addEventListener("change", (e) => {
         console.log(`e.target.checked ${e.target.checked}`)
         document.querySelectorAll(".camCheckBox").forEach(h => {
-            console.log(`h: ${h.id}`)
+            // console.log(`h: ${h.id}`)
             tempElement = document.getElementById(h.id)
             if (e.target.checked) {
                 map[h.id].disable()
@@ -95,13 +129,12 @@ $disableCamControls
             }
         });
     });
-
-
+// #endregion
 // #region CHECKBOX- SHOW/HIDE CAM CONTROLS
 let $showCam = document.querySelector("#showCamControls");
 $showCam
     .addEventListener("change", (e) => {
-        console.log(`ShowCamControls: ${e.target.checked}`)
+        // console.log(`ShowCamControls: ${e.target.checked}`)
         if (!e.target.checked) {
             $camControls.classList.toggle("hidden");
             $camControls.classList.toggle("animate__slideInDown");
@@ -118,8 +151,8 @@ $showCam
         }
     });
 // #endregion
-let $info = document.getElementById('info');
 // #region SHOW COORDINATES OF MOUSE
+let $info = document.getElementById('info');
 map.on('mousemove', (e) => {
     $info.setAttribute('positionX', e.point.x)
     $info.setAttribute('positionY', e.point.y)
@@ -130,21 +163,15 @@ map.on('mousemove', (e) => {
     $info.innerHTML = `${JSON.stringify(e.point)}<br />${JSON.stringify(e.lngLat.wrap())}`;
 });
 // #endregion
-
-
+// #region MODEL TRANSFORMATION
 // parameters to ensure the model is georeferenced correctly on the map
-const modelOrigin =
-    // [-104.98863682037847, 39.74349648343346]  // rep plaza
-    [-104.98887493053121, 39.73899257929499]  // Sheraton Denver
-    ;
+const modelOrigin = [-104.98887493053121, 39.73899257929499]; // Denver Civic Center
 const modelAltitude = 10;
 const modelRotate = [Math.PI / 2, 0, 0];
-
 const modelAsMercatorCoordinate = mapboxgl.MercatorCoordinate.fromLngLat(
     modelOrigin,
     modelAltitude
 );
-
 // transformation parameters to position, rotate and scale the 3D model onto the map
 const modelTransform = {
     translateX: modelAsMercatorCoordinate.x,
@@ -158,10 +185,9 @@ const modelTransform = {
      */
     scale: modelAsMercatorCoordinate.meterInMercatorCoordinateUnits()
 };
-
+// #endregion
+// #region  configuration of the custom layer for a 3D model per the CustomLayerInterface
 const THREE = window.THREE;
-
-// configuration of the custom layer for a 3D model per the CustomLayerInterface
 const customLayer = {
     id: 'threeJS',
     type: 'custom',
@@ -200,34 +226,32 @@ const customLayer = {
             antialias: true
         });
 
+        // #region DOUBLE CLICK EVENT ON THE MAP
+        let posX, posY;
+        let lngPoint, latPoint, coordsPoint;
         function merCoords(ln, lt) {
             let tempJSON = {
                 lng: ln,
                 lat: lt
             };
-            console.log('tempJSON')
+            console.log('merCoords: tempJSON')
             console.log(tempJSON)
             let res = mapboxgl.MercatorCoordinate.fromLngLat(tempJSON);
-            console.log('res merc')
+            console.log('merCoords: res merc')
             console.log(res)
             return res;
         }
-        let posX, posY;
-        let lngPoint, latPoint, coordsPoint;
-        // #region DOUBLE CLICK EVENT ON THE MAP
-        document.addEventListener('dblclick', e => {
+        function dblClkHandlerMoveScene(e) {
             const rect = map.getCanvas().getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             const lngLat = map.unproject([x, y]);
             const mercatorCoordinate = mapboxgl.MercatorCoordinate.fromLngLat(lngLat);
 
+            console.log('New scene position1:', this.scene.position);
             this.scene.position.set(mercatorCoordinate.x, mercatorCoordinate.y, this.scene.position.z);
-            console.log('New scene position:', this.scene.position);
-        }, false);        
-
-
-
+            console.log('New scene position2:', this.scene.position);
+        };        
 
         // document.addEventListener('dblclick', e => {
         //     posX = $info.getAttribute("positionX")
@@ -239,7 +263,6 @@ const customLayer = {
 
         // }, false);
 
-        // #endregion
 
 
         // document.addEventListener('dblclick', e => {
@@ -251,8 +274,9 @@ const customLayer = {
         //     console.log('New scene position:', JSON.stringify(this.scene.position));
         // }, false);
 
+        // #endregion
 
-
+        
         this.renderer.autoClear = false;
     },
     render: function (gl, matrix) {
@@ -296,7 +320,32 @@ const customLayer = {
         // console.log(this)
     }
 };
+// #endregion
 
 map.on('style.load', () => {
     map.addLayer(customLayer);
+
+    map.addSource('base-polygon', {
+        'type': 'geojson',
+        'data': myData,
+    });
+
+    map.addLayer({
+        'id': 'extrude-layer',
+        'type': 'fill-extrusion',
+        'source': 'base-polygon',
+        'paint': {
+            // Get the `fill-extrusion-color` from the source `color` property.
+            'fill-extrusion-color': 'blue',
+
+            // Get `fill-extrusion-height` from the source `height` property.
+            'fill-extrusion-height': 10,
+
+            // Get `fill-extrusion-base` from the source `base_height` property.
+            'fill-extrusion-base': 0,
+
+            // Make extrusions slightly opaque to see through indoor walls.
+            'fill-extrusion-opacity': 0.5
+        }
+    });
 });

@@ -30,10 +30,10 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="style.css" />
-      <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
   </head>
 
   <div class="form-group m-1" style="position: fixed; z-index: 2">
@@ -65,13 +65,16 @@
     <p
       id="info"
       style="z-index: 2"
-      positionX="0" 
+      positionX="0"
       positionY="0"
       lng="0"
       lat="0"
     ></p>
     <!-- <pre id="info" style="z-index: 2"></pre> -->
-    <nav id="listing-group" class="listing-group animate__animated animate__slideInDown ">
+    <nav
+      id="listing-group"
+      class="listing-group animate__animated animate__slideInDown"
+    >
       <input
         type="checkbox"
         class="camCheckBox show"
@@ -107,8 +110,15 @@
         id="keyboard"
       />
       <label for="keyboard">Keyboard</label>
-      <input type="checkbox" class="" />
+
+      <input 
+        type="checkbox" 
+        class="camCheckBox show"
+        checked="checked"
+        id="doubleClickZoom"
+      />
       <label for="doubleClickZoom">DblClkZoom</label>
+
       <input
         type="checkbox"
         class="camCheckBox show"
@@ -124,10 +134,18 @@
       href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.5.0/mapbox-gl-draw.css"
       type="text/css"
     />
+
+<script src="https://unpkg.com/three@0.126.0/build/three.min.js"></script>
+<script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://unpkg.com/three@0.126.0/examples/js/controls/TransformControls.js"></script>
+
     <div id="map"></div>
 
-    <div class="calculation-box animate__animated animate__pulse  animate__infinite"style="z-index:2; position:fixed;"> 
-      <i style="font-size: 0.75em;"> Click the map to start drawing.</i>
+    <div
+      class="py-0 calculation-box animate__animated animate__pulse animate__infinite"
+      style="z-index: 2; position: fixed"
+    >
+      <i class="py-0" style="font-size: 0.75em;"> Click line or polygon icon to  start drawing.</i>
       <div id="calculated-area"></div>
       <div id="calculated-distance"></div>
     </div>
@@ -135,8 +153,6 @@
     <!-- <script src="turf.min.js"></script> -->
     <!-- <script src="tween.esm.js"></script> -->
     <!-- <script src="DRACOLoader.js"></script> -->
-    <script src="three.min.js"></script>
-    <script src="GLTFLoader.js"></script>
     <script type="module" src="script.js"></script>
   </body>
 </html>
