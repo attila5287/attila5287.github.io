@@ -31,6 +31,8 @@ map.on('draw.update', updateArea);
 function updateArea(e) {
     const data = draw.getAll();
     const answer = document.getElementById('calculated-area');
+    map.getSource('base-polygon').setData(data)
+
     if (data.features.length > 0) {
         const area = turf.area(data);
         const length = turf.length(data, { units: "meters" });
@@ -53,7 +55,8 @@ function updateArea(e) {
     }
 }
 // #endregion
-// #region EVENT HANDLERS in Chkboxes
+
+// #region EVENT HANDL3RS in Chkboxes
 const handlers = [
     "scrollZoom",
     "boxZoom",
@@ -64,11 +67,13 @@ const handlers = [
     "touchZoomRotate",
 ];
 
-// #region CAM-CONTROLS
-let $camControls = document.querySelector("#listing-group");
+// #region CAM-CONTROLS disable-enable EACH
+let $camControls = document.querySelector("#navCamControls");
 $camControls
     .addEventListener("change", (e) => {
         const handler = e.target.id;
+        console.log(handler)
+        console.log(e.target.checked)
         if (e.target.checked) {
             map[handler].enable();
         } else {
@@ -76,23 +81,24 @@ $camControls
         }
     });
 // #endregion
+
 let $disableCamControls = document.querySelector("#disableCamControls");
 let isDisabled = false;
-let tempElement;
 $disableCamControls
     .addEventListener("change", (e) => {
         console.log(`e.target.checked ${e.target.checked}`)
         document.querySelectorAll(".camCheckBox").forEach(h => {
-            // console.log(`h: ${h.id}`)
-            tempElement = document.getElementById(h.id)
-            if (e.target.checked) {
-                map[h.id].disable()
-                document.getElementById(h.id).removeAttribute("checked")
-                isDisabled = true
-            } else {
-                document.getElementById(h.id).setAttribute("checked", "checked")
-                map[h.id].enable()
-                isDisabled = false
+            console.log(`h: ${h.id}`)
+            if (h.id != "") {
+                if (e.target.checked) {
+                    map[h.id].disable()
+                    document.getElementById(h.id).removeAttribute("checked")
+                    isDisabled = true
+                } else {
+                    document.getElementById(h.id).setAttribute("checked", "checked")
+                    map[h.id].enable()
+                    isDisabled = false
+                }
             }
         });
     });
@@ -103,17 +109,13 @@ $showCam
     .addEventListener("change", (e) => {
         // console.log(`ShowCamControls: ${e.target.checked}`)
         if (!e.target.checked) {
-            $camControls.classList.toggle("hidden");
             $camControls.classList.toggle("animate__slideInDown");
-            // $camControls.style.display = "none"; // removes layout
-            // $camControls.style.visibility = "hidden"; // keeps layout
+            $camControls.style.display = "none"; // removes layout
             console.log('camControls display: NONE')
             
         } else {
-            $camControls.classList.toggle("hidden");
             $camControls.classList.toggle("animate__slideInDown");
             $camControls.style.display = "block";
-            // $camControls.style.visibility = "visible";
             console.log('camControls display: BLOCK')
         }
     });
@@ -170,9 +172,9 @@ const customLayer = {
         const directionalLight2 = new THREE.DirectionalLight(0xffffff);
         directionalLight2.position.set(0, 70, 100).normalize();
         this.scene.add(directionalLight2);
-        // const directionalLight3 = new THREE.DirectionalLight(0xffffff);
-        // directionalLight3.position.set(10, 50, 0).normalize();
-        // this.scene.add(directionalLight3);
+        const directionalLight3 = new THREE.DirectionalLight(0xffffff);
+        directionalLight3.position.set(10, 50, 0).normalize();
+        this.scene.add(directionalLight3);
 
         // use the three.js GLTF loader to add the 3D model to the three.js scene
         const modelGroup = new THREE.Group();
@@ -193,7 +195,7 @@ const customLayer = {
             antialias: true
         });
 
-        // #region DOUBLE CLICK EVENT ON THE MAP
+        // #region DOUBLE CLICK EVENT = not used
         let posX, posY;
         let lngPoint, latPoint, coordsPoint;
         function merCoords(ln, lt) {
@@ -218,32 +220,23 @@ const customLayer = {
             console.log('New scene position1:', this.scene.position);
             this.scene.position.set(mercatorCoordinate.x, mercatorCoordinate.y, this.scene.position.z);
             console.log('New scene position2:', this.scene.position);
+            //     posX = $info.getAttribute("positionX")
+            //     posY = $info.getAttribute("positionY")
+            //     lngPoint = $info.getAttribute("lng")
+            //     latPoint = $info.getAttribute("lat")
+            //     coordsPoint = merCoords(lngPoint, latPoint)
+            //     const lngLat = map.unproject([e.clientX, e.clientY]);
+            //     const mercatorCoordinate = mapboxgl.MercatorCoordinate.fromLngLat(lngLat);
+            //     this.scene.position.set(mercatorCoordinate.x, mercatorCoordinate.y, this.scene.position.z);
+            //     this.scene.position.set(10,0,0)
         };        
 
-        // document.addEventListener('dblclick', e => {
-        //     posX = $info.getAttribute("positionX")
-        //     posY = $info.getAttribute("positionY")
-        //     lngPoint = $info.getAttribute("lng")
-        //     latPoint = $info.getAttribute("lat")
-        //     coordsPoint = merCoords(lngPoint, latPoint)
-        //     // console.log(coordsPoint)
-
-        // }, false);
-
-
-
-        // document.addEventListener('dblclick', e => {
-        //     const lngLat = map.unproject([e.clientX, e.clientY]);
-        //     const mercatorCoordinate = mapboxgl.MercatorCoordinate.fromLngLat(lngLat);
-        //     console.log(mercatorCoordinate)
-        //     this.scene.position.set(mercatorCoordinate.x, mercatorCoordinate.y, this.scene.position.z);
-        //     this.scene.position.set(10,0,0)
-        //     console.log('New scene position:', JSON.stringify(this.scene.position));
-        // }, false);
+        
+        
+        
 
         // #endregion
 
-        
         this.renderer.autoClear = false;
     },
     render: function (gl, matrix) {
@@ -289,6 +282,7 @@ const customLayer = {
 };
 // #endregion
 
+// #region blank JSON to load when there is no polygon
 let blankJSON = {
     "type": "FeatureCollection",
     "features": [
@@ -303,6 +297,8 @@ let blankJSON = {
         }
     ]
 };
+
+// #endregion
 map.on('style.load', () => {
     map.addLayer(customLayer);
 
