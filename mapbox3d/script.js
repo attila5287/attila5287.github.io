@@ -25,17 +25,74 @@ map.addControl(draw);
 map.on('draw.create', updateArea);
 map.on('draw.delete', updateArea);
 map.on('draw.update', updateArea);
-// map.on('style.load', updateArea);
 
-// #region UPDATE-AREA -main function-
+// "type": "FeatureCollection",
+// "features": [{
+//      "type": "Feature",
+//      "properties": {},
+//      "geometry": {
+//          "coordinates": [[]],
+//          "type": "Polygon" }]
+
+// #region AUTO-GENERATING -  GREEN EXTRUSION
+function autoGenerate(poly) {
+    let buffered, simplified, smoother, featureColl;
+    buffered = turf.buffer(poly, 0.006, { units: "kilometers" })
+    simplified = turf.simplify(buffered, { tolerance: 0.00001, highQuality: true });
+    smoother = turf.polygonSmooth(simplified, { iterations: 3 })
+    let feats = [];
+    let temp ;
+    const colors = [
+        'green',
+        'blue',
+        'pink',
+        'purple',
+        'teal',
+    ];
+
+    for (let index = 0; index < 5; index++) {
+        temp = {};
+        temp = JSON.parse(JSON.stringify(smoother)); // Create a deep copy of smoother
+        temp.features[0].properties['base'] =index*2;
+        temp.features[0].properties['height'] = (index *2) + 0.5;
+        temp.features[0].properties['color'] = colors[index];
+        // temp.features[0].properties['opacity'] = index*0.2;
+        temp.features[0]['id'] = 'green' + index
+        
+        
+        console.log(temp)
+        console.log(index)
+        console.log(temp)
+        console.log(temp.features[0].properties['base'])
+        console.log(temp.features[0].properties['height'])
+        console.log(temp.features[0].properties.id)
+        console.log(temp.features[0].properties.base)
+        console.log(temp.features[0].properties.height)
+        feats.push(temp.features[0]);
+    };
+    console.log(feats)
+    featureColl = {
+        "features": feats,
+        "type": "FeatureCollection"
+    };
+    console.log(featureColl)
+    return featureColl;
+    // console.log('smoother')
+    // console.log(smoother)
+    // return smoother;
+}
+// #endregion
+
+// #region USER-UPDATE-AREA -BLUE EXTRUSION
 function updateArea(e) {
-    const data = draw.getAll();
+    const polygon = draw.getAll();
     const answer = document.getElementById('calculated-area');
-    map.getSource('base-polygon').setData(data)
+    map.getSource('user-drawn-polygon').setData(polygon)
+    map.getSource('auto-generated-polygon').setData(autoGenerate(polygon))
 
-    if (data.features.length > 0) {
-        const area = turf.area(data);
-        const length = turf.length(data, { units: "meters" });
+    if (polygon.features.length > 0) {
+        const area = turf.area(polygon);
+        const length = turf.length(polygon, { units: "meters" });
         // Restrict the area to 2 decimal points.
         const roundedArea = Math.round(area * 100) / 100;
         const roundedLength = Math.round(length * 100) / 100;
@@ -45,9 +102,14 @@ function updateArea(e) {
             ${roundedArea} sq-meters  /
           </strong>
         `;
-        console.log(data)
-        console.log(data.features[0].geometry.coordinates)
-        map.getSource('base-polygon').setData(data)
+
+        // console.log('user drawn polygon: ')
+        // console.log(polygon)
+        // console.log(polygon.features[0].geometry.coordinates)
+
+        map.getSource('user-drawn-polygon').setData(polygon)
+        map.getSource('auto-generated-polygon').setData(autoGenerate(polygon))
+
     } else {
         answer.innerHTML = '';
         if (e.type !== 'draw.delete')
@@ -82,6 +144,7 @@ $camControls
     });
 // #endregion
 
+// #region CAM-CONTROLS disable-enable ALL
 let $disableCamControls = document.querySelector("#disableCamControls");
 let isDisabled = false;
 $disableCamControls
@@ -107,12 +170,12 @@ $disableCamControls
 let $showCam = document.querySelector("#showCamControls");
 $showCam
     .addEventListener("change", (e) => {
-        // console.log(`ShowCamControls: ${e.target.checked}`)
+        console.log(`ShowCamControls: ${e.target.checked}`)
         if (!e.target.checked) {
             $camControls.classList.toggle("animate__slideInDown");
             $camControls.style.display = "none"; // removes layout
             console.log('camControls display: NONE')
-            
+
         } else {
             $camControls.classList.toggle("animate__slideInDown");
             $camControls.style.display = "block";
@@ -229,11 +292,11 @@ const customLayer = {
             //     const mercatorCoordinate = mapboxgl.MercatorCoordinate.fromLngLat(lngLat);
             //     this.scene.position.set(mercatorCoordinate.x, mercatorCoordinate.y, this.scene.position.z);
             //     this.scene.position.set(10,0,0)
-        };        
+        };
 
-        
-        
-        
+
+
+
 
         // #endregion
 
@@ -287,7 +350,6 @@ let blankJSON = {
     "type": "FeatureCollection",
     "features": [
         {
-            "id": "tO49V48UD09ynJcFJyH20aXWtaFqJ5Km",
             "type": "Feature",
             "properties": {},
             "geometry": {
@@ -300,28 +362,36 @@ let blankJSON = {
 
 // #endregion
 map.on('style.load', () => {
-    map.addLayer(customLayer);
-
-    map.addSource('base-polygon', {
+    map.addSource('auto-generated-polygon', {
+        'type': 'geojson',
+        'data': blankJSON,
+    });
+    map.addSource('user-drawn-polygon', {
         'type': 'geojson',
         'data': blankJSON,
     });
 
+    map.addLayer(customLayer);
+
     map.addLayer({
-        'id': 'extrude-layer',
+        'id': 'generated-layer',
         'type': 'fill-extrusion',
-        'source': 'base-polygon',
+        'source': 'auto-generated-polygon',
         'paint': {
-            // Get the `fill-extrusion-color` from the source `color` property.
+            'fill-extrusion-color': ['get', 'color'],
+            'fill-extrusion-height': ['get', 'height'],
+            'fill-extrusion-base':   ['get', 'base'],
+            'fill-extrusion-opacity': 0.7
+        }
+    });
+    map.addLayer({
+        'id': 'user-extrude-layer',
+        'type': 'fill-extrusion',
+        'source': 'user-drawn-polygon',
+        'paint': {
             'fill-extrusion-color': 'blue',
-
-            // Get `fill-extrusion-height` from the source `height` property.
             'fill-extrusion-height': 10,
-
-            // Get `fill-extrusion-base` from the source `base_height` property.
             'fill-extrusion-base': 0,
-
-            // Make extrusions slightly opaque to see through indoor walls.
             'fill-extrusion-opacity': 0.5
         }
     });

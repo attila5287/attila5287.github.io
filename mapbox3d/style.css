@@ -90,3 +90,7 @@ body {
   z-index: 2;
   margin: 10px;
 }
+.show-hide-cam-controls input[type="checkbox"]:checked+label:before {
+  content: "✔";
+  margin-right: 5px;
+}
