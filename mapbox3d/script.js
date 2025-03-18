@@ -1,35 +1,3 @@
-let myData = {
-    "type": "FeatureCollection",
-
-    "features": [
-
-        {
-
-            "id": "tO49V48UD09ynJcFJyH20aXWtaFqJ5Km",
-
-            "type": "Feature",
-
-            "properties": {},
-
-            "geometry": {
-
-                "coordinates": [
-
-                    [
-
-                    ]
-
-                ],
-
-                "type": "Polygon"
-
-            }
-
-        }
-
-    ]
-
-};
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXR0aWxhNTIiLCJhIjoiY2thOTE3N3l0MDZmczJxcjl6dzZoNDJsbiJ9.bzXjw1xzQcsIhjB_YoAuEw';
 const map = new mapboxgl.Map({
     container: 'map',
@@ -77,7 +45,6 @@ function updateArea(e) {
         `;
         console.log(data)
         console.log(data.features[0].geometry.coordinates)
-        myData = data;
         map.getSource('base-polygon').setData(data)
     } else {
         answer.innerHTML = '';
@@ -322,12 +289,26 @@ const customLayer = {
 };
 // #endregion
 
+let blankJSON = {
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "id": "tO49V48UD09ynJcFJyH20aXWtaFqJ5Km",
+            "type": "Feature",
+            "properties": {},
+            "geometry": {
+                "coordinates": [[]],
+                "type": "Polygon"
+            }
+        }
+    ]
+};
 map.on('style.load', () => {
     map.addLayer(customLayer);
 
     map.addSource('base-polygon', {
         'type': 'geojson',
-        'data': myData,
+        'data': blankJSON,
     });
 
     map.addLayer({
