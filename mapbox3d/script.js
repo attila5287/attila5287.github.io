@@ -2,7 +2,6 @@ let userExtrusionHeight = 16;
 let userStepCount = 4;
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXR0aWxhNTIiLCJhIjoiY2thOTE3N3l0MDZmczJxcjl6dzZoNDJsbiJ9.bzXjw1xzQcsIhjB_YoAuEw';
 let baseConfig = {
-    // Configuration for the Mapbox Standard style
     basemap: {
         lightPreset: 'day'
     }
@@ -20,11 +19,11 @@ const map = new mapboxgl.Map({
 let $duskMode = document.querySelector("#duskModeCkbox");
 let isDusk = false;
 $duskMode.addEventListener('change', (e) => {
-    if (!e.target.checked) {
+    if (!isDusk) {
         map.setConfigProperty('basemap', 'lightPreset', 'dusk');
         isDusk = true;
         $duskMode.setAttribute("checked", "checked")
-    } else { 
+    } else {
         map.setConfigProperty('basemap', 'lightPreset', 'day');
         isDusk = false;
         $duskMode.removeAttribute("checked")
@@ -73,7 +72,7 @@ function autoGenerateLine(poly) {
                 feat.geometry.coordinates.push(
                     ...c.flatMap(d => d)
                 )
-                
+
             }
             console.log(index)
             console.log(feat)
@@ -101,7 +100,7 @@ map.on('draw.update', updateArea);
 // #endregion
 // #region helper functions: round
 function roundByN(floatNum, numDecimals) {
-    const tenExp = 10^numDecimals;
+    const tenExp = 10 ^ numDecimals;
     const res = Math.round(floatNum * tenExp) / tenExp;
     // console.log(`${res}: ${floatNum} rnd by ${numDecimals}`)
     return res;
@@ -111,7 +110,7 @@ function roundByN(floatNum, numDecimals) {
 function updateArea(e) {
     const polygon = draw.getAll();
     const answer = document.getElementById('calculated-area');
-    map.getSource('user-drawn-polygon').setData(polygon)
+    map.getSource('user-poly-src').setData(polygon)
     map.getSource('line-src').setData(autoGenerateLine(polygon))
 
     if (polygon.features.length > 0) {
@@ -119,7 +118,7 @@ function updateArea(e) {
         const length = turf.length(polygon, { units: "meters" });
         answer.innerHTML = `${roundByN(length, 2)} mt <br>${roundByN(area, 2)} sq-mt`;
 
-        map.getSource('user-drawn-polygon').setData(polygon)
+        map.getSource('user-poly-src').setData(polygon)
         map.getSource('line-src').setData(autoGenerateLine(polygon))
 
     } else {
@@ -155,10 +154,10 @@ $camControls
         }
     });
 // #endregion
-
-// #region CAM-CONTROLS disable-enable ALL
+// #region cam-controls-checkbox disable-enable ALL
 let $disableCamControls = document.querySelector("#disableCamControls");
 let isDisabledAll = false;
+$disableCamControls.removeAttribute('checked');
 $disableCamControls
     .addEventListener("change", (e) => {
         // console.log(`e.target.checked ${e.target.checked}`)
@@ -178,8 +177,9 @@ $disableCamControls
         });
     });
 // #endregion
-// #region CHECKBOX- SHOW/HIDE CAM CONTROLS
+// #region cam-control-checkboxes disable/enable EACH
 let $showCam = document.querySelector("#showCamControls");
+$showCam.setAttribute('checked', 'checked');
 $showCam
     .addEventListener("change", (e) => {
         // console.log(`ShowCamControls: ${e.target.checked}`)
@@ -195,7 +195,7 @@ $showCam
         }
     });
 // #endregion
-// #region SHOW COORDINATES OF MOUSE
+// #region info box with 'lng and lat' vs 'x and y'
 let $info = document.getElementById('info');
 map.on('mousemove', (e) => {
     $info.setAttribute('positionX', e.point.x)
@@ -207,7 +207,7 @@ map.on('mousemove', (e) => {
     $info.innerHTML = `${JSON.stringify(e.point)}<br/> ${JSON.stringify(e.lngLat.wrap())}`;
 });
 // #endregion
-// #region MODEL TRANSFORMATION
+// #region MODEL TRANSFORMATION: from documentation
 // parameters to ensure the model is georeferenced correctly on the map
 const modelOrigin = [-104.98887493053121, 39.73899257929499]; // Denver Civic Center
 const modelAltitude = 10;
@@ -319,14 +319,12 @@ const customLayer = {
 };
 // #endregion
 // #region blank geoJSON data to load when there is no polygon
-let blankJSON = {
+const polyData = {
     "type": "FeatureCollection",
     "features": []
 };
-
 // #endregion
-
-const lineGeoJSON = {
+const lineData = {
     type: "Feature",
     properties: {
         elevation: [],
@@ -336,18 +334,29 @@ const lineGeoJSON = {
         type: "LineString",
     },
 };
-
 map.on('style.load', () => {
     map.addLayer(customLayer);
-    map.addSource('user-drawn-polygon', {
-        'type': 'geojson',
-        'data': blankJSON,
-    });
     map.addSource("line-src", {
         type: "geojson",
         lineMetrics: true,
-        data: lineGeoJSON,
+        data: lineData,
     });
+    map.addSource('user-poly-src', {
+        'type': 'geojson',
+        'data': polyData,
+    });
+    map.addLayer({
+        'id': 'user-extrude-layer',
+        'type': 'fill-extrusion',
+        'source': 'user-poly-src',
+        'paint': {
+            'fill-extrusion-color': 'blue',
+            'fill-extrusion-height': 15,
+            'fill-extrusion-base': 0,
+            'fill-extrusion-opacity': 0.3
+        }
+    });
+
     const paintLine = {
         "line-emissive-strength": 1.0,
         "line-blur": 2,
@@ -383,36 +392,23 @@ map.on('style.load', () => {
         "line-elevation-reference": "sea",
         "line-cap": "round",
     };
-    
-    
-    map.addLayer({
-        'id': 'user-extrude-layer',
-        'type': 'fill-extrusion',
-        'source': 'user-drawn-polygon',
-        'paint': {
-            'fill-extrusion-color': 'blue',
-            'fill-extrusion-height': 15,
-            'fill-extrusion-base': 0,
-            'fill-extrusion-opacity': 0.3
-        }
-    });
 
-    layoutLine['line-cross-slope']= 0
+    layoutLine['line-cross-slope'] = 0
     map.addLayer({
-        id: "elevated-line1",
+        id: "elevated-line-horizontal",
         type: "line",
         source: "line-src",
-        layout: 
-        layoutLine,
+        layout:
+            layoutLine,
         paint: paintLine,
     });
-    
+
     layoutLine['line-cross-slope'] = 1
     map.addLayer({
-        id: "elevated-line2",
+        id: "elevated-line-vertical",
         type: "line",
         source: "line-src",
-        layout:layoutLine,
+        layout: layoutLine,
         paint: paintLine,
     });
 });

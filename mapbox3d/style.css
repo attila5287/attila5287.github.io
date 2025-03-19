@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  font-size: 10px;
   padding: 0;
 }
 #map {
@@ -11,14 +12,13 @@ body {
 #info {
   display: table;
   position: relative;
-  margin: 0px auto;
+  margin: 1px auto;
   word-wrap: anywhere;
   white-space: pre-wrap;
-  padding: 2px;
+  padding: 1px;
   border: none;
   border-radius: 3px;
-  font-family: Tahoma;
-  font-size: 10px;
+  font-family: Ubuntu;
   text-align: center;
   color: #222;
   /* background: #fff; */
@@ -26,11 +26,12 @@ body {
 
 .navCamControls {
   font-family: "Ubuntu", sans-serif;
+  font-size: 10px;
   font-weight: 400;
   font-style: normal;
   font-weight: 400;
   position: absolute;
-  top: 5px;
+  top: 10px;
   right: 45px;
   z-index: 1;
   border-radius: 1px;
@@ -143,4 +144,13 @@ body {
   font-family: "Ubuntu", sans-serif;
   font-weight: 700;
   font-style: italic;
+}
+
+.text-small{
+font-size: 0.75em;;
+}
+
+.fa{
+  margin-top: 3px;
+  font-size: 1.00rem;;
 }
