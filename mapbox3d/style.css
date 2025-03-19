@@ -23,10 +23,12 @@ body {
   color: #222;
   /* background: #fff; */
 }
+
 .navCamControls {
-  font: 11px/16px "Ubuntu", Arial, Helvetica, sans-serif;
+  font-family: "Ubuntu", sans-serif;
   font-weight: 400;
-  font-style: italic;
+  font-style: normal;
+  font-weight: 400;
   position: absolute;
   top: 5px;
   right: 45px;
@@ -40,11 +42,11 @@ body {
 }
 
 .navCamControls input[type="checkbox"]:first-child + label {
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .navCamControls label:last-child {
-  border-radius: 0 0 3px 3px;
+  border-radius: 0 0 4px 4px;
   border: none;
 }
 
@@ -62,6 +64,7 @@ body {
 }
 
 .navCamControls input[type="checkbox"] + label {
+  font-style: italic;
   background-color: #b4bfc1;
   text-transform: capitalize;
 }
@@ -90,7 +93,54 @@ body {
   z-index: 2;
   margin: 10px;
 }
-.show-hide-cam-controls input[type="checkbox"]:checked+label:before {
+.main-check-box input[type="checkbox"]:checked+label:before {
   content: "✔";
-  margin-right: 5px;
+}
+
+.ubuntu-light {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.ubuntu-regular {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.ubuntu-medium {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.ubuntu-bold {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.ubuntu-light-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.ubuntu-regular-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.ubuntu-medium-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.ubuntu-bold-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: italic;
 }

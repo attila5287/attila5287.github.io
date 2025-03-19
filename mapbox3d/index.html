@@ -3,6 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <title>droneQube</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <meta
       name="viewport"
       content="initial-scale=1,maximum-scale=1,user-scalable=no"
@@ -29,22 +32,32 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <div class="form-group m-1" style="position: fixed; z-index: 2">
     <div class="custom-control custom-checkbox">
       <input
-        class="custom-control-input show-hide-cam-controls"
+        class="custom-control-input"
+        id="duskModeCkbox"
+        type="checkbox"
+      />
+      <label class="custom-control-label main-check-box" for="duskModeCkbox">
+        <i class="fa fa-adjust"></i>
+      </label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input
+        class="custom-control-input main-check-box"
         id="showCamControls"
         type="checkbox"
         checked="checked"
       />
-      <label class="custom-control-label show-hide-cam-controls" for="showCamControls">
+      <label class="custom-control-label main-check-box" for="showCamControls">
         <i class="fa fa-camera"></i>
       </label>
     </div>
@@ -114,11 +127,11 @@
         type="checkbox" 
         class="camCheckBox show"
         checked="checked"
-        id=""
+        id="" 
         />
         <!-- id="doubleClickZoom" -->
       <label for="doubleClickZoom">DblClkZoom</label>
-
+    <!-- // plz note that double click zoom can not be disabled per draw's controls -->
       <input
         type="checkbox"
         class="camCheckBox show"
@@ -144,7 +157,7 @@
       class="py-0 calculation-box animate__animated animate__pulse animate__infinite"
       style="z-index: 2; position: fixed"
     >
-      <i class="py-0" style="font-size: 0.5em;"> Click line or polygon icon to  start drawing.</i>
+      <p class="py-0 my-0" style="font-size: 0.75em;"> Click line or polygon icon</p>
       <div id="calculated-area"></div>
       <div id="calculated-distance"></div>
     </div>
