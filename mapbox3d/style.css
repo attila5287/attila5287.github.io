@@ -11,8 +11,10 @@ body {
 }
 #info {
   display: table;
-  position: relative;
-  margin: 1px auto;
+  position: fixed;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
   word-wrap: anywhere;
   white-space: pre-wrap;
   padding: 1px;
@@ -21,7 +23,7 @@ body {
   font-family: Ubuntu;
   text-align: center;
   color: #222;
-  /* background: #fff; */
+  /* background: rgba(255, 255, 255, 0.8); */
 }
 
 .navCamControls {
