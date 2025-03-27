@@ -2,10 +2,21 @@ let userStepCount = 4;
 let userMaxHeight = 26;
 let userBaseHeight = 2;
 const calcStep = (userMaxHeight - userBaseHeight) / userStepCount;
-// console.log(`calcStep ${calcStep} is the height of the parabola `);
+// 5 html elements including info box bottom left corner
+let $duskMode = document.querySelector( "#duskModeCkbox" );
+let $camControls = document.querySelector("#navCamControls");
+let $disableCamControls = document.querySelector( "#disableCamControls" );
+let $showCam = document.querySelector("#showCamControls");
+let $info = document.getElementById("info");
+
+// global 
+let isDusk = true;
+let isHiddenCamControls = false;
+let isDisabledCamControls = false;
+
+// #region base config and public key token
 mapboxgl.accessToken =
   "pk.eyJ1IjoiYXR0aWxhNTIiLCJhIjoiY2thOTE3N3l0MDZmczJxcjl6dzZoNDJsbiJ9.bzXjw1xzQcsIhjB_YoAuEw";
-// #region base config for
 let baseConfig = {
   basemap: {
     lightPreset: "night",
@@ -48,7 +59,7 @@ const testpoly = {
   ],
 };
 // #endregion
-// #region autoGenerateLin3 bkup for spiral
+// #region autoGenerateLine bkup for spiral
 function roundByN(floatNum, numDecimals) {
   const tenExp = 10 ** numDecimals;
   const res = Math.round(floatNum * tenExp) / tenExp;
@@ -161,10 +172,7 @@ const autoGenerateLine = (poly) => {
             feat.properties.ELEVMIN
           )
         );
-
         // console.log( feat.properties.elevation );
-        
-
       } else {
         // 2nd RING
         feat.geometry.coordinates = [];
@@ -205,8 +213,6 @@ map.on("draw.delete", updateArea);
 map.on("draw.update", updateArea);
 // #endregion
 // #region enable disable dusk mode
-let $duskMode = document.querySelector("#duskModeCkbox");
-let isDusk = false;
 $duskMode.addEventListener("change", (e) => {
   if (!isDusk) {
     map.setConfigProperty("basemap", "lightPreset", "dusk");
@@ -242,17 +248,7 @@ function updateArea(e) {
   }
 }
 // #endregion
-// #region map camera control events: map[handl3r]-dis4ble()
-const handlers = [
-  "scrollZoom",
-  "boxZoom",
-  "dragRotate",
-  "dragPan",
-  "keyboard",
-  "doubleClickZoom", // can not be disabled per draw controls
-  "touchZoomRotate",
-];
-let $camControls = document.querySelector("#navCamControls");
+// #region map camera control events: HANDLER DISABLE
 $camControls.addEventListener("change", (e) => {
   const handler = e.target.id;
   // console.log('handler')
@@ -266,47 +262,63 @@ $camControls.addEventListener("change", (e) => {
 });
 // #endregion
 // #region cam-controls-checkbox disable-enable ALL
-let $disableCamControls = document.querySelector("#disableCamControls");
-let isDisabledAll = false;
+
+
 $disableCamControls.removeAttribute("checked");
 $disableCamControls.addEventListener("change", (e) => {
   // console.log(`e.target.checked ${e.target.checked}`)
+  // document.querySelectorAll(".camCheckBox").forEach((h) => {
+  const handlers = [
+    "scrollZoom",
+    "boxZoom",
+    "dragRotate",
+    "dragPan",
+    "keyboard",
+    "doubleClickZoom", // can not be disabled per draw controls
+    "touchZoomRotate",
+  ];
   document.querySelectorAll(".camCheckBox").forEach((h) => {
     // console.log(`h: ${h.id}`)
     if (h.id != "") {
       if (e.target.checked) {
         map[h.id].disable();
         document.getElementById(h.id).removeAttribute("checked");
-        isDisabledAll = true;
+        isDisabledCamControls = true;
       } else {
         document.getElementById(h.id).setAttribute("checked", "checked");
         map[h.id].enable();
-        isDisabledAll = false;
+        isDisabledCamControls = false;
       }
     }
   });
 });
 // #endregion
+
+// TODO - ADD SHOW-HIDE ROUTE OPTIONS CONTROL PANEL
+// TODO - ADD SHOW-HIDE EXTRUSION CONTROL PANEL
+
+// FIXME CAMERA ANIMATION BRING IT BACK!!!!
 // #region show panel for cam-control-checkboxes    (from documentation)
-let $showCam = document.querySelector("#showCamControls");
-$showCam.removeAttribute("checked");
-$camControls.style.display = "none"; // removes layout
-// $showCam.setAttribute("checked", "checked");
+
+// $camControls.style.display = "none"; // removes layout
 $showCam.addEventListener("change", (e) => {
   // console.log(`ShowCamControls: ${e.target.checked}`)
   if (!e.target.checked) {
     $camControls.classList.toggle("animate__slideInDown");
-    $camControls.style.display = "none"; // removes layout
-    // console.log('camControls display: NONE')
+    $showCam.removeAttribute("checked");
+    $camControls.classList.toggle("animate__fadeOutDownBig");
+    // $camControls.style.display = "none"; // removes layout
+    console.log('camControls: HIDDEN')
   } else {
-    $camControls.classList.toggle("animate__slideInDown");
-    $camControls.style.display = "block";
-    // console.log('camControls display: BLOCK')
+    $camControls.classList.toggle( "animate__slideInDown" );
+    $camControls.classList.toggle("animate__fadeOutDownBig");
+    $showCam.setAttribute("checked", "checked");
+    // $camControls.style.display = "block";
+    console.log('camControlsl DISPLAYED')
   }
 });
 // #endregion
 // #region info box with 'lng and lat' vs 'x and y' (from documentation)
-let $info = document.getElementById("info");
 map.on("mousemove", (e) => {
   $info.setAttribute("positionX", e.point.x);
   $info.setAttribute("positionY", e.point.y);
@@ -445,18 +457,24 @@ const lineData = {
   },
 };
 // #endregion
-// #region  MAP ON LOAD: LAYERS
+// #region  MAP ON LOAD: LAYERS and DATA SOURCEs
 map.on("style.load", () => {
-  map.addLayer(customLayer);
+  map.addLayer( customLayer );
+  // ZERO: user draw polygon or we feed for test purposes (ex: testpoly)
+
+  // Extrude layer data
+  map.addSource("user-extrude-src", {
+    type: "geojson",
+    data: testpoly,
+  });
+  // Line layer data
   map.addSource("line-src", {
     type: "geojson",
     lineMetrics: true,
     data: autoGenerateLine(testpoly),
   });
-  map.addSource("user-extrude-src", {
-    type: "geojson",
-    data: testpoly,
-  });
+
+  // Render id: "user-extrude-layer", 
   map.addLayer({
     id: "user-extrude-layer",
     type: "fill-extrusion",
@@ -466,13 +484,22 @@ map.on("style.load", () => {
       "fill-extrusion-height": userMaxHeight,
       "fill-extrusion-base": 0,
       "fill-extrusion-opacity": 0.3,
+      "fill-emissive-strength" :0.9,
     },
   });
 
+  map.on("dblclick", "user-extrude-layer", function (ob) {
+    if (ob && ob.features && ob.features.length > 0) {
+      // alert("test");
+      console.log("test");
+    }
+  });
+
+  // base config for 2 line layers hrz/vert
   const paintLine = {
     "line-emissive-strength": 1.0,
-    "line-blur": 2,
-    "line-width": 5,
+    "line-blur": 0,
+    "line-width": 3,
     "line-color": "green",
     "line-gradient": [
       "interpolate",
@@ -501,10 +528,10 @@ map.on("style.load", () => {
     "line-elevation-reference": "sea",
     "line-cap": "round",
   };
-  layoutLine["line-cross-slope"] = 0;
 
+  // id: "elevated-line-horizontal",
+  layoutLine["line-cross-slope"] = 0;
   map.addLayer({
-    // elevated-line-hrz
     id: "elevated-line-horizontal",
     type: "line",
     source: "line-src",
@@ -512,16 +539,14 @@ map.on("style.load", () => {
     paint: paintLine,
   });
 
+  // elevated-line-vert
   layoutLine["line-cross-slope"] = 1;
-
   map.addLayer({
-    // elevated-line-vert
     id: "elevated-line-vertical",
     type: "line",
     source: "line-src",
     layout: layoutLine,
     paint: paintLine,
-  } );
-  
+  });
 });
 // #endregion

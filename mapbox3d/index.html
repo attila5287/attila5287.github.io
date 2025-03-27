@@ -63,8 +63,8 @@
         />
         <label class="custom-control-label" for="showCamControls">
           <i class="fa fa-camera"></i>
-          </label>
-        </div>
+        </label>
+      </div>
       <div class="custom-checkbox custom-control">
         <input
           id="disableCamControls"
@@ -77,54 +77,57 @@
       </div>
     </div>
 
-    
+    <nav id="extrusionControls" class="extrusionControls">
+      <p>test</p>
+    </nav>
+
     <nav
       id="navCamControls"
-      class="navCamControls animate__animated animate__slideInDown"
+      class="navCamControls animate__animated animate__slideInDown hidden"
     >
       <input
         type="checkbox"
-        class="camCheckBox show"
+        class="camCheckBox"
         checked="checked"
         id="scrollZoom"
       />
       <label for="scrollZoom">ScrollZoom</label>
       <input
         type="checkbox"
-        class="camCheckBox show"
+        class="camCheckBox"
         checked="checked"
         id="boxZoom"
       />
       <label for="boxZoom">BoxZoom</label>
       <input
         type="checkbox"
-        class="camCheckBox show"
+        class="camCheckBox"
         checked="checked"
         id="dragRotate"
       />
       <label for="dragRotate">DragRotate</label>
       <input
         type="checkbox"
-        class="camCheckBox show"
+        class="camCheckBox"
         checked="checked"
         id="dragPan"
       />
       <label for="dragPan">DragPan</label>
       <input
         type="checkbox"
-        class="camCheckBox show"
+        class="camCheckBox"
         checked="checked"
         id="keyboard"
       />
       <label for="keyboard">Keyboard</label>
 
-      <input type="checkbox" class="camCheckBox show" checked="checked" id="" />
+      <input type="checkbox" class="camCheckBox" checked="checked" id="" />
       <!-- id="doubleClickZoom" -->
       <label for="doubleClickZoom">DblClkZoom</label>
       <!-- // plz note that double click zoom can not be disabled per draw's controls -->
       <input
         type="checkbox"
-        class="camCheckBox show"
+        class="camCheckBox"
         checked="checked"
         id="touchZoomRotate"
       />
@@ -139,7 +142,7 @@
       lng="0"
       lat="0"
     ></nav>
-    
+
     <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.5.0/mapbox-gl-draw.js"></script>
     <link
@@ -153,7 +156,7 @@
 
     <div id="map"></div>
 
-    <div 
+    <div
       class="animate__animated animate__infinite animate__pulse calculation-box py-0"
       style="z-index: 2; position: fixed"
     >

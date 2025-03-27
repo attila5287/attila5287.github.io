@@ -12,7 +12,7 @@ body {
 #info {
   display: table;
   position: fixed;
-  bottom: 4px;
+  bottom: 4px; 
   left: 50%;
   transform: translateX(-50%);
   word-wrap: anywhere;
@@ -26,12 +26,11 @@ body {
   /* background: rgba(255, 255, 255, 0.8); */
 }
 
-.navCamControls {
+.extrusionControls {
   font-family: "Ubuntu", sans-serif;
   font-size: 10px;
   font-weight: 400;
   font-style: normal;
-  font-weight: 400;
   position: absolute;
   top: 10px;
   right: 45px;
@@ -42,6 +41,22 @@ body {
   margin: 0px;
   padding: 0px;
 
+}
+.navCamControls {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  position: absolute;
+  top: 10px;
+  right: 45px;
+  z-index: 2;
+  border-radius: 1px;
+  max-width: 20%;
+  color: #fff;
+  margin: 0px;
+  padding: 0px;
+  /* transition: opacity 0.5s ease-in-out; */
 }
 
 .navCamControls input[type="checkbox"]:first-child + label {
@@ -80,14 +95,6 @@ body {
 .navCamControls input[type="checkbox"]:checked + label:before {
   content: "✔";
   margin-right: 5px;
-}
-
-.navCamControls {
-  transition: opacity 0.5s ease-in-out;
-}
-
-.hidden {
-  opacity: 0;
 }
 .calculation-box {
   position: fixed;
