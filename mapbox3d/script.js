@@ -1,18 +1,29 @@
-let userStepCount = 4;
-let userMaxHeight = 26;
-let userBaseHeight = 2;
-const calcStep = (userMaxHeight - userBaseHeight) / userStepCount;
-// 5 html elements including info box bottom left corner
-let $duskMode = document.querySelector( "#duskModeCkbox" );
-let $camControls = document.querySelector("#navCamControls");
-let $disableCamControls = document.querySelector( "#disableCamControls" );
-let $showCam = document.querySelector("#showCamControls");
-let $info = document.getElementById("info");
+let userBaseHeight = document.querySelector("#user-base-height").value * 1;
+let userTopHeight =  document.querySelector("#user-top-height").value  * 1;
+let userStepCount =  document.querySelector("#user-step-count").value  * 1;
+let userOpeningWidth =
+  document.querySelector("#user-opening-width").value * 1;
+const calcStep = (userTopHeight - userBaseHeight) / userStepCount;
 
-// global 
-let isDusk = true;
-let isHiddenCamControls = false;
-let isDisabledCamControls = false;
+// nav-bar HTML elements
+let $duskMode = document.querySelector("#duskModeCkbox");
+let $camControls = document.querySelector("#navCamControls");
+let $disableCamControls = document.querySelector("#disableCamControls");
+let $showCam = document.querySelector("#show-panel-cam");
+let $showGeo = document.querySelector("#show-panel-geo");
+
+
+
+
+let $info = document.getElementById( "info" );
+$showGeo.addEventListener(
+  "change",
+  (e) => {
+    console.log(e.target);
+    console.log(e.target.dataset.target);
+  },
+  false
+);
 
 // #region base config and public key token
 mapboxgl.accessToken =
@@ -59,14 +70,14 @@ const testpoly = {
   ],
 };
 // #endregion
-// #region autoGenerateLine bkup for spiral
+// #region geometric route
 function roundByN(floatNum, numDecimals) {
   const tenExp = 10 ** numDecimals;
   const res = Math.round(floatNum * tenExp) / tenExp;
   // console.log(res)
   return res;
 }
-const autoGenerateLine = (poly) => {
+const geometricRoute = (poly) => {
   const features = []; // output of the function with geoJSON feats
   function elevateFromDistance(
     XfromStart, // distance From Start: X-bar
@@ -101,20 +112,20 @@ const autoGenerateLine = (poly) => {
     return calculatedY + inElevMin;
   }
   // console.log(poly.features[0].geometry.coordinates)
-  function smootherPoly( polygon ) {
-    const buffered = turf.buffer(polygon, 6.0, { units: "meters" });
+  function smootherPoly(polygon) {
+    const buffered = turf.buffer(polygon, userOpeningWidth, { units: "meters" });
     const simplified = turf.simplify(buffered, {
       tolerance: 0.000001,
       highQuality: false,
     });
     return turf.polygonSmooth(simplified, { iterations: 3 });
   }
-  const smoother = smootherPoly( poly )
-  
+  const smoother = smootherPoly(poly);
+
   for (let indxLoop = 0; indxLoop < userStepCount; indxLoop++) {
     let elevBase = indxLoop * calcStep + userBaseHeight;
-    const loopLen2d = turf.length( smoother, { units: "meters" } );
-    if ( smoother.features.length > 0 ) {
+    const loopLen2d = turf.length(smoother, { units: "meters" });
+    if (smoother.features.length > 0) {
       // console.log(smoother.features[0].geometry.coordinates);
       const feat = {
         // feat for Line - flight Path
@@ -137,22 +148,22 @@ const autoGenerateLine = (poly) => {
       let rev = [];
       let coords = [];
       let distArray = [];
-      coords = smoother.features[0].geometry.coordinates.flatMap(d=>d);
+      coords = smoother.features[0].geometry.coordinates.flatMap((d) => d);
       rev = [...coords].reverse();
-      function distanceFromCoords( cors ) {
+      function distanceFromCoords(cors) {
         // console.log( cors )
         const distArr = [];
-        distArr.push( 0 ); //first distance
+        distArr.push(0); //first distance
         let sum = 0;
         for (let i = 1; i < cors.length; i++) {
-          const seg = turf.distance( cors[i - 1], cors[i], { units: "meters" } );
-          sum=sum+seg;
+          const seg = turf.distance(cors[i - 1], cors[i], { units: "meters" });
+          sum = sum + seg;
           distArr.push(sum);
         }
         return distArr;
       }
-      
-      for ( let idxCord = 0; idxCord < coords.length; idxCord++ ) {
+
+      for (let idxCord = 0; idxCord < coords.length; idxCord++) {
         const cord = coords[idxCord];
         feat.geometry.coordinates.push(cord);
       }
@@ -161,7 +172,7 @@ const autoGenerateLine = (poly) => {
         smoother.features[0].geometry.coordinates.flatMap((d) => d)
       );
       distArray = feat.properties.distFromStart;
-      
+
       if (indxLoop % 2 === 0) {
         // 1st RING
         feat.properties.elevation = distArray.map((distanceFromStart) =>
@@ -194,7 +205,7 @@ const autoGenerateLine = (poly) => {
       console.log("generate lines: no feats in geojson smoother polygon");
     }
   }
-  console.log(...features)
+  console.log(...features);
 
   return {
     type: "FeatureCollection",
@@ -214,13 +225,14 @@ map.on("draw.update", updateArea);
 // #endregion
 // #region enable disable dusk mode
 $duskMode.addEventListener("change", (e) => {
-  if (!isDusk) {
-    map.setConfigProperty("basemap", "lightPreset", "dusk");
-    isDusk = true;
-    $duskMode.setAttribute("checked", "checked");
+  console.log("before");
+  console.log(e.target.checked);
+  if (e.target.checked) {
+    console.log("night mode");
+    map.setConfigProperty("basemap", "lightPreset", "night");
+    $duskMode.setAttribute("checked", "");
   } else {
     map.setConfigProperty("basemap", "lightPreset", "day");
-    isDusk = false;
     $duskMode.removeAttribute("checked");
   }
 });
@@ -230,7 +242,7 @@ function updateArea(e) {
   const polygon = draw.getAll();
   const answer = document.getElementById("calculated-area");
   map.getSource("user-extrude-src").setData(polygon);
-  map.getSource("line-src").setData(autoGenerateLine(polygon));
+  map.getSource("line-src").setData(geometricRoute(polygon));
 
   if (polygon.features.length > 0) {
     const area = turf.area(polygon);
@@ -241,7 +253,7 @@ function updateArea(e) {
     )} sq-mt`;
 
     map.getSource("user-extrude-src").setData(polygon);
-    map.getSource("line-src").setData(autoGenerateLine(polygon));
+    map.getSource("line-src").setData(geometricRoute(polygon));
   } else {
     answer.innerHTML = "";
     if (e.type !== "draw.delete") alert("Click the map to draw a polygon.");
@@ -262,8 +274,6 @@ $camControls.addEventListener("change", (e) => {
 });
 // #endregion
 // #region cam-controls-checkbox disable-enable ALL
-
-
 $disableCamControls.removeAttribute("checked");
 $disableCamControls.addEventListener("change", (e) => {
   // console.log(`e.target.checked ${e.target.checked}`)
@@ -283,38 +293,31 @@ $disableCamControls.addEventListener("change", (e) => {
       if (e.target.checked) {
         map[h.id].disable();
         document.getElementById(h.id).removeAttribute("checked");
-        isDisabledCamControls = true;
       } else {
         document.getElementById(h.id).setAttribute("checked", "checked");
         map[h.id].enable();
-        isDisabledCamControls = false;
       }
     }
   });
 });
 // #endregion
 
-// TODO - ADD SHOW-HIDE ROUTE OPTIONS CONTROL PANEL
 // TODO - ADD SHOW-HIDE EXTRUSION CONTROL PANEL
-
 // FIXME CAMERA ANIMATION BRING IT BACK!!!!
-// #region show panel for cam-control-checkboxes    (from documentation)
-
-// $camControls.style.display = "none"; // removes layout
 $showCam.addEventListener("change", (e) => {
-  // console.log(`ShowCamControls: ${e.target.checked}`)
+  // console.log(`show-panel-cam: ${e.target.checked}`)
   if (!e.target.checked) {
     $camControls.classList.toggle("animate__slideInDown");
     $showCam.removeAttribute("checked");
-    $camControls.classList.toggle("animate__fadeOutDownBig");
+    $camControls.classList.toggle("animate__fadeOutUpBig");
     // $camControls.style.display = "none"; // removes layout
-    console.log('camControls: HIDDEN')
+    console.log("camControls: HIDDEN");
   } else {
-    $camControls.classList.toggle( "animate__slideInDown" );
-    $camControls.classList.toggle("animate__fadeOutDownBig");
-    $showCam.setAttribute("checked", "checked");
+    $camControls.classList.toggle("animate__slideInDown");
+    $camControls.classList.toggle("animate__fadeOutUpBig");
+    $showCam.setAttribute("checked", "");
     // $camControls.style.display = "block";
-    console.log('camControlsl DISPLAYED')
+    console.log("camControlsl DISPLAYED");
   }
 });
 // #endregion
@@ -459,7 +462,7 @@ const lineData = {
 // #endregion
 // #region  MAP ON LOAD: LAYERS and DATA SOURCEs
 map.on("style.load", () => {
-  map.addLayer( customLayer );
+  map.addLayer(customLayer);
   // ZERO: user draw polygon or we feed for test purposes (ex: testpoly)
 
   // Extrude layer data
@@ -471,49 +474,60 @@ map.on("style.load", () => {
   map.addSource("line-src", {
     type: "geojson",
     lineMetrics: true,
-    data: autoGenerateLine(testpoly),
+    data: geometricRoute(testpoly),
   });
 
-  // Render id: "user-extrude-layer", 
+  // Render id: "user-extrude-layer",
   map.addLayer({
     id: "user-extrude-layer",
     type: "fill-extrusion",
     source: "user-extrude-src",
+    layout: {
+      "fill-extrusion-edge-radius": 0.75,
+    },
     paint: {
-      "fill-extrusion-color": "blue",
-      "fill-extrusion-height": userMaxHeight,
-      "fill-extrusion-base": 0,
-      "fill-extrusion-opacity": 0.3,
-      "fill-emissive-strength" :0.9,
+      "fill-extrusion-height": userTopHeight,
+      "fill-extrusion-base": userBaseHeight,
+      "fill-extrusion-emissive-strength": 0.1,
+      "fill-extrusion-color": "aqua",
+      "fill-extrusion-flood-light-color": "royalblue",
+      "fill-extrusion-ambient-occlusion-wall-radius": 5,
+      "fill-extrusion-opacity": 0.7,
+      "fill-emissive-strength": 0.9,
+      "fill-extrusion-ambient-occlusion-ground-attenuation": 0.9,
+      "fill-extrusion-vertical-gradient": true,
+      "fill-extrusion-line-width": 0, //outwards like a wall
+      "fill-extrusion-flood-light-wall-radius": 10,
+      "fill-extrusion-flood-light-intensity": 1,
+      "fill-extrusion-flood-light-ground-radius": 10,
+      "fill-extrusion-cutoff-fade-range": 1,
+      "fill-extrusion-rounded-roof": true,
+      // "":,
     },
   });
 
   map.on("dblclick", "user-extrude-layer", function (ob) {
     if (ob && ob.features && ob.features.length > 0) {
       // alert("test");
-      console.log("test");
+      console.log("test event on ext feature");
     }
   });
 
   // base config for 2 line layers hrz/vert
   const paintLine = {
     "line-emissive-strength": 1.0,
-    "line-blur": 0,
-    "line-width": 3,
-    "line-color": "green",
-    "line-gradient": [
-      "interpolate",
-      ["linear"],
-      ["line-progress"],
-      0.0,
-      "cyan",
-      0.5,
-      "lime",
-      0.7,
-      "yellow",
-      1,
-      "lightpink",
-    ],
+    "line-blur": 0.2,
+    "line-width": 1.25,
+    "line-color": "limegreen",
+    // "line-gradient": [
+    //   "interpolate",
+    //   ["linear"],
+    //   ["line-progress"],
+    //   0.02, "skyblue",
+    //   0.04, "aqua",
+    //   0.06, "limegreen",
+    //   1.00, "lime",
+    // ],
     // "line-trim-color": "red",
     // "line-trim-offset": [0.0, 0.005],
     // 'line-gap-width': 1,
@@ -547,6 +561,16 @@ map.on("style.load", () => {
     source: "line-src",
     layout: layoutLine,
     paint: paintLine,
+  });
+
+  map.on("load", function () {
+    map.addControl(
+      new mapboxgl.Minimap({
+        center: [-104.9889, 39.7394], // Civic
+        zoom: 12,
+      }),
+      "bottom-right"
+    );
   });
 });
 // #endregion
