@@ -22,10 +22,8 @@
       integrity="sha512-s45Cp6qBZtDBpgMOVpm2GiA2SPPUCxOjNPNpQuUR0Hn/xEUvDESaR1qMFBJXGdT42VlYfMZoiPGG9xXoxYMaVw=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
-      integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw=="
-      crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://kit.fontawesome.com/5ddf6e0dc7.js"
+      crossorigin="anonymous"></script>
   <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link rel="stylesheet" href="style.css" />
@@ -63,7 +61,7 @@
           <input class="custom-control-input" id="show-panel-cam"
               type="checkbox" checked="" />
           <label class="custom-control-label" for="show-panel-cam">
-            <i class="fa fa-camera nav-icon"></i>
+            <i class="fa fa-camera-retro nav-icon"></i>
           </label>
         </div>
       </li>
@@ -76,30 +74,125 @@
           </label>
         </div>
       </li>
-      <li class="nav-item nav-link py-1 text-uppercase text-warning animate__animated animate__slideInDown border-warning">
-        test mode only
-      </li>
-      <li class="nav-item nav-link py-1 animate__animated animate__fadeIn animate__delay-1s">
-        refresh page after setting
-      </li>
-
     </ul>
-
   </nav>
-  
-  <div id="geo-route-panel" class="flex-column bg-transparent" style="position: fixed; z-index: 1;display: flex;">
-    <input class="form-control-lg text-info bg-transparent border-info w-25 m-1 p-1" type="number" id="user-base-height"    value="5"   >
-    <input class="form-control-lg text-info bg-transparent border-info w-25 m-1 p-1" type="number" id="user-top-height"    value="25"   >
-    <input class="form-control-lg text-success bg-transparent border-success w-25 m-1 p-1" type="number" id="user-step-count"    value="4"   >
-    <input class="form-control-lg text-success bg-transparent border-success w-25 m-1 p-1" type="number" id="user-opening-width" value="6"   >
+
+  <div id="geo-route-panel" class="animate__animated animate__slideInLeft">
+    <span class="geo-route-row">
+          <p class="text-info mb-0">
+            Base Height
+            <i class="text-secondary">(start elevation of the route)</i>
+          </p>
+          <div class="input-group input-group-sm">
+            <div class="input-group-prepend">
+              <button class="btn btn-primary text-info" type="button">
+                <i class="fa fa-angle-left text-xl"></i>
+              </button>
+              <a class="btn btn-info disabled text-primary opac" type="">
+                <i class="geo-icons fa fa-fw fa-arrow-up-from-bracket"></i>
+              </a>
+            </div>
+            <input 
+            id="user-base-height" value="0"            
+            type="number"
+                class="px-0 text-center form-control text-info bg-light border-primary"
+                >
+            <div class="input-group-append">
+              <button class="btn btn-primary text-info" type="button">
+                <i class="fa fa-angle-right text-xl"></i>
+              </button>
+            </div>
+          </div>
+    </span>
+    <span class="geo-route-row">
+          <p class="text-info mb-0">
+            Top Height
+            <i class="text-secondary">(final elevation of the route)</i>
+          </p>
+          <div class="input-group input-group-sm">
+            <div class="input-group-prepend">
+              <button class="btn btn-primary text-info" type="button">
+                <i class="fa fa-angle-left text-xl"></i>
+              </button>
+              <a class="btn btn-info disabled text-primary opac" type="">
+                <i class="geo-icons fa fa-fw fa-arrows-up-to-line"></i>
+              </a>
+            </div>
+            <input 
+            id="user-top-height"            
+            type="number"
+                class="px-0 text-center form-control text-info bg-light border-primary"
+                value="20">
+            <div class="input-group-append">
+              <button class="btn btn-primary text-info" type="button">
+                <i class="fa fa-angle-right text-xl"></i>
+              </button>
+            </div>
+          </div>
+    </span>
+    <span class="geo-route-row">
+          <p class="text-success mb-0">
+            Step Count
+            <i class="text-secondary">(count of loops up the route)</i>
+          </p>
+          <div class="input-group input-group-sm">
+            <div class="input-group-prepend">
+              <button class="btn btn-primary text-success" type="button">
+                <i class="fa fa-angle-left text-xl"></i>
+              </button>
+              <a class="btn btn-success disabled text-primary opac" type="">
+                <i class="geo-icons fa fa-fw fa-arrows-turn-to-dots"></i>
+              </a>
+            </div>
+            <input 
+            id="user-step-count"            
+            type="number"
+                class="px-0 text-center form-control text-success bg-light border-primary"
+                value="4">
+            <div class="input-group-append">
+              <button class="btn btn-primary text-success" type="button">
+                <i class="fa fa-angle-right text-xl"></i>
+              </button>
+            </div>
+          </div>
+    </span>
+    <span class="geo-route-row">
+          <p class="text-success mb-0">
+            Tolerance Width
+            <i class="text-secondary">(opening for the route)</i>
+          </p>
+          <div class="input-group input-group-sm">
+            <div class="input-group-prepend">
+              <button class="btn btn-primary text-success" type="button">
+                <i class="fa fa-angle-left text-xl"></i>
+              </button>
+              <a class="btn btn-success disabled text-primary opac" type="">
+                <i class="geo-icons fa fa-fw fa-text-width"></i>
+              </a>
+            </div>
+            <input 
+            id="user-tolerance-w"            
+            type="number"
+                class="px-0 text-center form-control text-success bg-light border-primary"
+                value="6">
+            <div class="input-group-append">
+              <button class="btn btn-primary text-success" type="button">
+                <i class="fa fa-angle-right text-xl"></i>
+              </button>
+            </div>
+          </div>
+    </span>
   </div>
-  <div class="geo-icons flex-column p-2" style="position: fixed; z-index: 1;display: flex;left:60px">
-    <i class="text-info fa fa-ruler-horizontal py-3"></i>
-    <i class="text-info fa fa-ruler-combined   py-3"></i>
-    <i class="text-success fa fa-sliders-h     py-3"></i>
-    <i class="text-success fa fa-arrows-alt-h py-3"></i>
+  <div class="d-none">
+    <!-- <input type="number" id="user-base-height" value="0"> -->
+    <!-- <input type="number" id="user-top-height" value="20"> -->
+    <!-- <input type="number" id="user-step-count" value="4"> -->
+    <!-- <input type="number" id="user-tolerance-w" value="6"> -->
+    <!-- <label for="user-top-height"><i class="fa fa-info"></i> </label>
+    <label for="user-step-count"><i class="fa fa-info"></i> </label>
+    <label for="user-tolerance-w"><i class="fa fa-info"></i> </label> -->
   </div>
-  
+
   <nav id="navCamControls"
       class="navCamControls animate__animated animate__slideInDown">
     <input type="checkbox" class="camCheckBox" checked="checked"
@@ -116,16 +209,17 @@
         id="keyboard" />
     <label for="keyboard">Keyboard</label>
 
-    <input type="checkbox" class="camCheckBox text-dark" checked="checked" id="" />
-    <label for="doubleClickZoom" class="text-dark font-italic" >DblClkZoom</label>
+    <input type="checkbox" class="camCheckBox" checked="checked" id="" />
+    <label for="doubleClickZoom"
+        class="text-dark font-italic">DblClkZoom</label>
     <!-- // plz note that double click zoom can not be disabled per draw's controls -->
-    
+
     <input type="checkbox" class="camCheckBox" checked="checked"
         id="touchZoomRotate" />
     <label for="touchZoomRotate">TouchCtrls</label>
   </nav>
 
-  <nav id="info" class="text-small fixed-bottom sticky-bottom text-success"
+  <nav id="info" class="text-small fixed-bottom sticky-bottom text-secondary"
       style="z-index:1;" positionX="0" positionY="0" lng="0" lat="0"></nav>
 
   <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>

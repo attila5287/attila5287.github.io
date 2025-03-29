@@ -1,8 +1,8 @@
-
-let userBaseHeight=document.querySelector("#user-base-height" ).value*1;
-let userTopHeight =document.querySelector("#user-top-height").value  *1;
-let userStepCount =document.querySelector("#user-step-count").value  *1;
-let useropenWidth =document.querySelector("#user-tolerance-w").value *1;
+let userBaseHeight = document.querySelector("#user-base-height").value * 1;
+let userTopHeight =  document.querySelector("#user-top-height").value  * 1;
+let userStepCount =  document.querySelector("#user-step-count").value  * 1;
+let userOpeningWidth =
+  document.querySelector("#user-opening-width").value * 1;
 const calcStep = (userTopHeight - userBaseHeight) / userStepCount;
 
 // nav-bar HTML elements
@@ -12,25 +12,15 @@ let $disableCamControls = document.querySelector("#disableCamControls");
 let $showCam = document.querySelector("#show-panel-cam");
 let $showGeo = document.querySelector("#show-panel-geo");
 
+
+
+
 let $info = document.getElementById( "info" );
-
-
 $showGeo.addEventListener(
   "change",
   (e) => {
-    console.log('clk target:>> '+ e.target.dataset.target );
-    console.log( "clk on>> " + e.target.id + " chk stat>> " + e.target.checked );
-    const isChecked = e.target.checked;
-    // el is the TARGET ELEMENT
-    const el = document.querySelector(e.target.dataset.target);
-    if (!isChecked) {
-          el.classList.remove("animate__slideInLeft");
-          el.classList.add("animate__slideOutLeft");
-        } else {
-      el.classList.remove("animate__slideOutLeft");
-      el.classList.add("animate__slideInLeft");
-    }
-
+    console.log(e.target);
+    console.log(e.target.dataset.target);
   },
   false
 );
@@ -40,7 +30,7 @@ mapboxgl.accessToken =
   "pk.eyJ1IjoiYXR0aWxhNTIiLCJhIjoiY2thOTE3N3l0MDZmczJxcjl6dzZoNDJsbiJ9.bzXjw1xzQcsIhjB_YoAuEw";
 let baseConfig = {
   basemap: {
-    lightPreset: "dusk",
+    lightPreset: "night",
   },
 };
 // #endregion
@@ -123,7 +113,7 @@ const geometricRoute = (poly) => {
   }
   // console.log(poly.features[0].geometry.coordinates)
   function smootherPoly(polygon) {
-    const buffered = turf.buffer(polygon, useropenWidth, { units: "meters" });
+    const buffered = turf.buffer(polygon, userOpeningWidth, { units: "meters" });
     const simplified = turf.simplify(buffered, {
       tolerance: 0.000001,
       highQuality: false,
@@ -238,8 +228,8 @@ $duskMode.addEventListener("change", (e) => {
   console.log("before");
   console.log(e.target.checked);
   if (e.target.checked) {
-    console.log("dusk mode");
-    map.setConfigProperty("basemap", "lightPreset", "dusk");
+    console.log("night mode");
+    map.setConfigProperty("basemap", "lightPreset", "night");
     $duskMode.setAttribute("checked", "");
   } else {
     map.setConfigProperty("basemap", "lightPreset", "day");
@@ -339,11 +329,13 @@ map.on("mousemove", (e) => {
   $info.setAttribute("lat", e.lngLat.lat);
   // TODO lets make this a table with rounded numbers so it wouldn't take so much space
   // console.log(e.lngLat.lng + " " + e.lngLat.lat)
-  $info.innerHTML = `x ${roundByN(JSON.stringify(e.point.x), 4)} y ${roundByN(
-    JSON.stringify(e.point.y),
-    4  )}
-    lng: ${roundByN( JSON.stringify( e.lngLat.wrap().lng ), 6 ) } lat: ${roundByN(
-    JSON.stringify(e.lngLat.wrap().lat),6) }`;
+  $info.innerHTML = `x ${JSON.stringify(e.point.x)} y ${JSON.stringify(
+    e.point.y
+  )}
+    lng: ${JSON.stringify(e.lngLat.wrap().lng)} | lat: ${JSON.stringify(
+    e.lngLat.wrap().lat
+  )}
+    `;
 });
 // #endregion
 // #region Object-3d model transformation: (from documentation)
@@ -497,9 +489,9 @@ map.on("style.load", () => {
       "fill-extrusion-height": userTopHeight,
       "fill-extrusion-base": userBaseHeight,
       "fill-extrusion-emissive-strength": 0.1,
-      "fill-extrusion-color": "lightblue",
-      "fill-extrusion-flood-light-color": "DarkTurquoise",
-      "fill-extrusion-ambient-occlusion-wall-radius": 1,
+      "fill-extrusion-color": "aqua",
+      "fill-extrusion-flood-light-color": "royalblue",
+      "fill-extrusion-ambient-occlusion-wall-radius": 5,
       "fill-extrusion-opacity": 0.7,
       "fill-emissive-strength": 0.9,
       "fill-extrusion-ambient-occlusion-ground-attenuation": 0.9,

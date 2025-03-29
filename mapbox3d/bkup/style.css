@@ -51,6 +51,17 @@ body {
   font-style: italic;
 }
 
+.text-small {
+  font-size: 0.75em;
+  ;
+}
+
+
+.static-icons {
+  margin-top: 2px;
+  font-size: 1.00rem;
+  ;
+}
 #map {
   position: absolute;
   top: 0;
@@ -75,7 +86,7 @@ body {
 }
 .navCamControls {
   font-family: "Ubuntu", sans-serif;
-  position: fixed;
+  position: absolute;
   top: 20px;
   right: 44px;
   z-index: 1;
@@ -163,6 +174,12 @@ body {
   box-shadow: white 0px 0px 0px; /* Increased blur radius */
 }
 
+#geo-route-panel {
+  top: 36px;
+  left: 0px;
+  z-index: 1;
+}
+
 .btn-icon {
   font-size: 1.50rem;
 }
@@ -176,44 +193,18 @@ body {
   transform: scale(1.03, 1.03);
   box-shadow: DarkTurquoise 0px 2px 8px; /* Increased blur radius */
 }
-#geo-route-panel {
-  position: fixed;
-  z-index: 1;
-  max-width: 180px;
-  margin: 2px;
-  border-radius: 8px;
-  padding: 0px;
-  top: 36px;
-  left: 0px;
-  z-index: 1;
+.shadow-logo {
+  margin-right:2px;
+  padding-right:8px;
+  box-shadow: darkgrey 0px 2px 10px; 
 }
-#geo-route-panel input{
-  font-size: 2.00em;
+.no-shadow {
+  box-shadow: white 0px 0px 0px; 
 }
-#geo-route-panel button{
-  min-width: 35px;
+.no-shadow:hover {
+  box-shadow: white 0px 0px 0px; 
 }
 
-.text-xs {
-  font-size: 0.60em;
-}
-
-.text-lg {
-  font-size: 1.25em;
-}
-.text-xl {
-  font-size: 1.50em;
-}
-.text-sm {
-  font-size: 0.80em;
-}
-.opac{
-  opacity: 1;
-}
 .geo-icons{
-  font-size: 2em;
-}
-.geo-route-row{
-  margin-top:    10px;
-  margin-bottom: 10px;
+  font-size: 2.0em;
 }
