@@ -1,9 +1,11 @@
+import { geometricRoute } from "./geometricRoute.js";
+import { testpoly } from "./testdata.js";
 
-let userBaseHeight=document.querySelector("#user-base-height" ).value*1;
-let userTopHeight =document.querySelector("#user-top-height").value  *1;
-let userStepCount =document.querySelector("#user-step-count").value  *1;
-let useropenWidth =document.querySelector("#user-tolerance-w").value *1;
-const calcStep = (userTopHeight - userBaseHeight) / userStepCount;
+let userBaseHeight= document.querySelector("#user-base-height").value * 1;
+let userTopHeight = document.querySelector("#user-top-height").value * 1;
+let userStepCount = document.querySelector("#user-step-count").value * 1;
+let useropenWidth = document.querySelector("#user-tolerance-w").value * 1;
+let calcStep = (userTopHeight - userBaseHeight) / userStepCount;
 
 // nav-bar HTML elements
 let $duskMode = document.querySelector("#duskModeCkbox");
@@ -11,26 +13,68 @@ let $camControls = document.querySelector("#navCamControls");
 let $disableCamControls = document.querySelector("#disableCamControls");
 let $showCam = document.querySelector("#show-panel-cam");
 let $showGeo = document.querySelector("#show-panel-geo");
-
 let $info = document.getElementById( "info" );
+// ----------------
+let fetchInputVals= () => {return {
+  inBaseHi:document.querySelector("#user-base-height").value * 1,
+  inTopHi: document.querySelector("#user-top-height").value * 1,
+  inStepCount:document.querySelector("#user-step-count").value * 1,
+  inToleranceWidth:document.querySelector("#user-tolerance-w").value * 1,
+}};
 
+const handlerGeo = (e) => {
+
+  if (map.getLayer("user-extrude-layer")) {
+    map.setPaintProperty(
+      "user-extrude-layer",
+      "fill-extrusion-base",
+      + fetchInputVals().inBaseHi 
+    );
+
+  }
+
+  if (map.getLayer("user-extrude-layer")) {
+    map.setPaintProperty(
+      "user-extrude-layer",
+      "fill-extrusion-height",
+      +fetchInputVals().inTopHi
+    );
+  }
+  if (draw.getAll().features.length) {
+    map
+      .getSource("line-src")
+      .setData( geometricRoute( draw.getAll(), fetchInputVals() ) );
+    map.triggerRepaint()
+  } else {
+    map
+      .getSource("line-src")
+      .setData( geometricRoute(testpoly, fetchInputVals() ) );
+    map.triggerRepaint()
+
+  }
+};
+
+document
+  .querySelectorAll(".geo-input-el")
+  .forEach((inputEl) => inputEl.addEventListener("change", handlerGeo));
 
 $showGeo.addEventListener(
   "change",
   (e) => {
-    console.log('clk target:>> '+ e.target.dataset.target );
-    console.log( "clk on>> " + e.target.id + " chk stat>> " + e.target.checked );
+    // e.target is the SWITCH element
+    console.log("clk target:>> " + e.target.dataset.target);
+    console.log("clk on>> " + e.target.id + " chk stat>> " + e.target.checked);
+
     const isChecked = e.target.checked;
-    // el is the TARGET ELEMENT
+    // el is the DATA-TARGET ELEMENT that needs to be
     const el = document.querySelector(e.target.dataset.target);
     if (!isChecked) {
-          el.classList.remove("animate__slideInLeft");
-          el.classList.add("animate__slideOutLeft");
-        } else {
-      el.classList.remove("animate__slideOutLeft");
+      el.classList.remove("animate__slideInLeft");
+      el.classList.add("animate__fadeOutLeftBig");
+    } else {
+      el.classList.remove("animate__fadeOutLeftBig");
       el.classList.add("animate__slideInLeft");
     }
-
   },
   false
 );
@@ -57,28 +101,6 @@ const map = new mapboxgl.Map({
 });
 // #endregion
 // #region TEST data to draw an initial polygon
-const testpoly = {
-  type: "FeatureCollection",
-  features: [
-    {
-      id: "v7XuciFKLZeXdki1exROc9FYF5380cyJ",
-      type: "Feature",
-      properties: {},
-      geometry: {
-        coordinates: [
-          [
-            [-104.98889877496177, 39.739474389236506],
-            [-104.98890000860759, 39.73931432060394],
-            [-104.98880577159332, 39.73931234424225],
-            [-104.9888047909794, 39.739474425443774],
-            [-104.98889877496177, 39.739474389236506],
-          ],
-        ],
-        type: "Polygon",
-      },
-    },
-  ],
-};
 // #endregion
 // #region geometric route
 function roundByN(floatNum, numDecimals) {
@@ -87,141 +109,6 @@ function roundByN(floatNum, numDecimals) {
   // console.log(res)
   return res;
 }
-const geometricRoute = (poly) => {
-  const features = []; // output of the function with geoJSON feats
-  function elevateFromDistance(
-    XfromStart, // distance From Start: X-bar
-    inLoopLength, // length of base ring: totalX
-    inStepHeight, // height is 2r
-    inElevMin // base height
-  ) {
-    const r = inStepHeight * 0.5; // radius of the circular segments
-    const x = XfromStart;
-
-    // 3 SEGMENTS OF THE LINE
-    const isInSeg1ConcaveDown = x < r; // First segment (circular, concave down)
-    const isInSeg3ConcaveUp = inLoopLength - x < r; // Third segment (circular, concave up)
-
-    let calculatedY; // result
-
-    if (isInSeg1ConcaveDown) {
-      // First segment: quarter circle (0 to π/2) moving upward
-      // calculatedY = r - Math.sqrt(r * r - x * x);
-      calculatedY = Math.sqrt(r * r - (x - r) * (x - r));
-      // console.log(calculatedY);
-    } else if (isInSeg3ConcaveUp) {
-      // Third segment: quarter circle (π to 3π/2) moving downward
-      const xFromEnd = inLoopLength - x;
-      calculatedY = r - Math.sqrt(r * r - (xFromEnd - r) * (xFromEnd - r));
-      calculatedY += inStepHeight * 0.5;
-    } else {
-      // Second segment: straight line at maximum height (2r)
-      calculatedY = inStepHeight * 0.5;
-    }
-    // Add the base elevation
-    return calculatedY + inElevMin;
-  }
-  // console.log(poly.features[0].geometry.coordinates)
-  function smootherPoly(polygon) {
-    const buffered = turf.buffer(polygon, useropenWidth, { units: "meters" });
-    const simplified = turf.simplify(buffered, {
-      tolerance: 0.000001,
-      highQuality: false,
-    });
-    return turf.polygonSmooth(simplified, { iterations: 3 });
-  }
-  const smoother = smootherPoly(poly);
-
-  for (let indxLoop = 0; indxLoop < userStepCount; indxLoop++) {
-    let elevBase = indxLoop * calcStep + userBaseHeight;
-    const loopLen2d = turf.length(smoother, { units: "meters" });
-    if (smoother.features.length > 0) {
-      // console.log(smoother.features[0].geometry.coordinates);
-      const feat = {
-        // feat for Line - flight Path
-        type: "Feature",
-        properties: {
-          id: indxLoop,
-          LOOPLENGTH: loopLen2d,
-          STEPHEIGHT: calcStep,
-          ELEVMIN: elevBase,
-          ELEVMAX: elevBase + calcStep,
-          distFromStart: [],
-          elevation: [],
-          coordsRev: [],
-        },
-        geometry: {
-          coordinates: [],
-          type: "LineString",
-        },
-      };
-      let rev = [];
-      let coords = [];
-      let distArray = [];
-      coords = smoother.features[0].geometry.coordinates.flatMap((d) => d);
-      rev = [...coords].reverse();
-      function distanceFromCoords(cors) {
-        // console.log( cors )
-        const distArr = [];
-        distArr.push(0); //first distance
-        let sum = 0;
-        for (let i = 1; i < cors.length; i++) {
-          const seg = turf.distance(cors[i - 1], cors[i], { units: "meters" });
-          sum = sum + seg;
-          distArr.push(sum);
-        }
-        return distArr;
-      }
-
-      for (let idxCord = 0; idxCord < coords.length; idxCord++) {
-        const cord = coords[idxCord];
-        feat.geometry.coordinates.push(cord);
-      }
-      // FIXME ZERO INDEX ONLY TAKES THE OUTER RING, USE MAP() AND MULTI-LINE
-      feat.properties.distFromStart = distanceFromCoords(
-        smoother.features[0].geometry.coordinates.flatMap((d) => d)
-      );
-      distArray = feat.properties.distFromStart;
-
-      if (indxLoop % 2 === 0) {
-        // 1st RING
-        feat.properties.elevation = distArray.map((distanceFromStart) =>
-          elevateFromDistance(
-            distanceFromStart,
-            feat.properties.LOOPLENGTH,
-            feat.properties.STEPHEIGHT,
-            feat.properties.ELEVMIN
-          )
-        );
-        // console.log( feat.properties.elevation );
-      } else {
-        // 2nd RING
-        feat.geometry.coordinates = [];
-        feat.geometry.coordinates.push(...rev);
-        feat.properties.elevation = feat.properties.distFromStart.map(
-          (distanceFromStart) =>
-            elevateFromDistance(
-              distanceFromStart,
-              feat.properties.LOOPLENGTH,
-              feat.properties.STEPHEIGHT,
-              feat.properties.ELEVMIN
-            )
-        );
-
-        // console.log(feat.properties.elevation);
-      }
-      features.push(feat);
-    } else {
-      console.log("generate lines: no feats in geojson smoother polygon");
-    }
-  }
-  console.log(...features);
-
-  return {
-    type: "FeatureCollection",
-    features: features,
-  };
-};
 // #endregion
 // #region mapbox GL Draw Controls
 const draw = new MapboxDraw({
@@ -252,7 +139,7 @@ function updateArea(e) {
   const polygon = draw.getAll();
   const answer = document.getElementById("calculated-area");
   map.getSource("user-extrude-src").setData(polygon);
-  map.getSource("line-src").setData(geometricRoute(polygon));
+  map.getSource("line-src").setData(geometricRoute(polygon, fetchInputVals()));
 
   if (polygon.features.length > 0) {
     const area = turf.area(polygon);
@@ -263,7 +150,7 @@ function updateArea(e) {
     )} sq-mt`;
 
     map.getSource("user-extrude-src").setData(polygon);
-    map.getSource("line-src").setData(geometricRoute(polygon));
+    map.getSource("line-src").setData(geometricRoute(polygon, fetchInputVals()));
   } else {
     answer.innerHTML = "";
     if (e.type !== "draw.delete") alert("Click the map to draw a polygon.");
@@ -341,9 +228,12 @@ map.on("mousemove", (e) => {
   // console.log(e.lngLat.lng + " " + e.lngLat.lat)
   $info.innerHTML = `x ${roundByN(JSON.stringify(e.point.x), 4)} y ${roundByN(
     JSON.stringify(e.point.y),
-    4  )}
-    lng: ${roundByN( JSON.stringify( e.lngLat.wrap().lng ), 6 ) } lat: ${roundByN(
-    JSON.stringify(e.lngLat.wrap().lat),6) }`;
+    4
+  )}
+    lng: ${roundByN(JSON.stringify(e.lngLat.wrap().lng), 6)} lat: ${roundByN(
+    JSON.stringify(e.lngLat.wrap().lat),
+    6
+  )}`;
 });
 // #endregion
 // #region Object-3d model transformation: (from documentation)
@@ -482,7 +372,7 @@ map.on("style.load", () => {
   map.addSource("line-src", {
     type: "geojson",
     lineMetrics: true,
-    data: geometricRoute(testpoly),
+    data: geometricRoute(testpoly, fetchInputVals()),
   });
 
   // Render id: "user-extrude-layer",
@@ -496,18 +386,18 @@ map.on("style.load", () => {
     paint: {
       "fill-extrusion-height": userTopHeight,
       "fill-extrusion-base": userBaseHeight,
-      "fill-extrusion-emissive-strength": 0.1,
+      "fill-extrusion-emissive-strength": 0.9,
       "fill-extrusion-color": "lightblue",
       "fill-extrusion-flood-light-color": "DarkTurquoise",
-      "fill-extrusion-ambient-occlusion-wall-radius": 1,
+      // "fill-extrusion-ambient-occlusion-wall-radius": 1,
       "fill-extrusion-opacity": 0.7,
       "fill-emissive-strength": 0.9,
       "fill-extrusion-ambient-occlusion-ground-attenuation": 0.9,
-      "fill-extrusion-vertical-gradient": true,
+      // "fill-extrusion-vertical-gradient": true,
       "fill-extrusion-line-width": 0, //outwards like a wall
       "fill-extrusion-flood-light-wall-radius": 10,
       "fill-extrusion-flood-light-intensity": 1,
-      "fill-extrusion-flood-light-ground-radius": 10,
+      "fill-extrusion-flood-light-ground-radius": 20,
       "fill-extrusion-cutoff-fade-range": 1,
       "fill-extrusion-rounded-roof": true,
       // "":,

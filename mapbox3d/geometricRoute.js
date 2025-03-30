@@ -45,7 +45,6 @@ export const geometricRoute = (poly, userInput) => {
   }
   // console.log(poly.features[0].geometry.coordinates)
   function smootherPoly(polygon) {
-    console.log(polygon);
     const buffered = turf.buffer(polygon, inToleranceWidth, {
       units: "meters",
     });

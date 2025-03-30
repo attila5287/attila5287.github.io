@@ -30,6 +30,8 @@
 </head>
 
 <body>
+<script
+    src="https://cdn.jsdelivr.net/npm/module-require@1.4.5/index.min.js"></script>
   <nav class="navbar navbar-expand navbar-dark bg-primary py-0 sticky-top pl-1"
       style="z-index: 2;">
     <ul class="navbar-nav">
@@ -95,7 +97,7 @@
             <input 
             id="user-base-height" value="0"            
             type="number"
-                class="px-0 text-center form-control text-info bg-light border-primary"
+                class="geo-input-el px-0 text-center form-control text-info bg-light border-primary"
                 >
             <div class="input-group-append">
               <button class="btn btn-primary text-info" type="button">
@@ -121,7 +123,7 @@
             <input 
             id="user-top-height"            
             type="number"
-                class="px-0 text-center form-control text-info bg-light border-primary"
+                class="geo-input-el px-0 text-center form-control text-info bg-light border-primary"
                 value="20">
             <div class="input-group-append">
               <button class="btn btn-primary text-info" type="button">
@@ -147,7 +149,7 @@
             <input 
             id="user-step-count"            
             type="number"
-                class="px-0 text-center form-control text-success bg-light border-primary"
+                class="geo-input-el px-0 text-center form-control text-success bg-light border-primary"
                 value="4">
             <div class="input-group-append">
               <button class="btn btn-primary text-success" type="button">
@@ -173,7 +175,7 @@
             <input 
             id="user-tolerance-w"            
             type="number"
-                class="px-0 text-center form-control text-success bg-light border-primary"
+                class="geo-input-el px-0 text-center form-control text-success bg-light border-primary"
                 value="6">
             <div class="input-group-append">
               <button class="btn btn-primary text-success" type="button">
@@ -182,15 +184,6 @@
             </div>
           </div>
     </span>
-  </div>
-  <div class="d-none">
-    <!-- <input type="number" id="user-base-height" value="0"> -->
-    <!-- <input type="number" id="user-top-height" value="20"> -->
-    <!-- <input type="number" id="user-step-count" value="4"> -->
-    <!-- <input type="number" id="user-tolerance-w" value="6"> -->
-    <!-- <label for="user-top-height"><i class="fa fa-info"></i> </label>
-    <label for="user-step-count"><i class="fa fa-info"></i> </label>
-    <label for="user-tolerance-w"><i class="fa fa-info"></i> </label> -->
   </div>
 
   <nav id="navCamControls"
