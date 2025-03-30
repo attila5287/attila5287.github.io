@@ -14,6 +14,8 @@ let $disableCamControls = document.querySelector("#disableCamControls");
 let $showCam = document.querySelector("#show-panel-cam");
 let $showGeo = document.querySelector("#show-panel-geo");
 let $info = document.getElementById( "info" );
+let $infoTop = document.getElementById("info-top");
+
 // ----------------
 let fetchInputVals= () => {return {
   inBaseHi:document.querySelector("#user-base-height").value * 1,
@@ -22,7 +24,45 @@ let fetchInputVals= () => {return {
   inToleranceWidth:document.querySelector("#user-tolerance-w").value * 1,
 }};
 
-const handlerGeo = (e) => {
+let initRouteLen = geometricRoute(testpoly, fetchInputVals())
+  .features.map((d) => d.properties.LOOPLENGTH + d.properties.STEPHEIGHT)
+  .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+console.log("routeLen " + initRouteLen);
+$infoTop.innerText = "";
+$infoTop.innerText = "" + roundByN( initRouteLen, 2 ) + " m";
+
+
+function handlerGeoBtn( e ) {
+  const deltaMapping = {
+    plus: +1,
+    minus: -1,
+  }
+  console.log( e.target.dataset.target )
+  console.log( e.target.dataset.delta )
+  let temp = document.getElementById( e.target.dataset.target );
+  if (temp.value > temp.min) {
+    console.log(temp.min);
+    temp.value = +temp.value + deltaMapping[e.target.dataset.delta];
+    handlerGeo()
+  } else if ( temp.value === temp.min ) {
+    console.log(temp.min);
+    if (e.target.dataset.delta==='plus') {
+      temp.value = +temp.value + deltaMapping[e.target.dataset.delta];
+    } else {
+      console.log('MIN LIMIT REACHED')
+    }
+    handlerGeo();
+  } else {
+    console.log("MIN LIMIT REACHED");
+  }
+
+}
+document
+  .querySelectorAll(".geo-btn")
+  .forEach((button) => button.addEventListener("click", handlerGeoBtn));
+
+
+const handlerGeo = () => {
 
   if (map.getLayer("user-extrude-layer")) {
     map.setPaintProperty(
@@ -45,12 +85,24 @@ const handlerGeo = (e) => {
       .getSource("line-src")
       .setData( geometricRoute( draw.getAll(), fetchInputVals() ) );
     map.triggerRepaint()
-  } else {
+    let routeLen = geometricRoute(draw.getAll(), fetchInputVals())
+      .features.map((d) => d.properties.LOOPLENGTH + d.properties.STEPHEIGHT)
+      .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    console.log( "routeLen " + routeLen );
+    $infoTop.innerText = "";
+    $infoTop.innerText = "" + roundByN(routeLen, 2)+ " m";
+    
+  } else { // TEST RUN WITH NO DRAW DATA 
     map
       .getSource("line-src")
       .setData( geometricRoute(testpoly, fetchInputVals() ) );
     map.triggerRepaint()
-
+    let routeLen = geometricRoute(testpoly, fetchInputVals())
+      .features.map((d) => d.properties.LOOPLENGTH + d.properties.STEPHEIGHT)
+      .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    console.log( "routeLen " + routeLen );
+    $infoTop.innerText = "";
+    $infoTop.innerText = "" + roundByN(routeLen, 2)+ " m";
   }
 };
 
@@ -150,7 +202,14 @@ function updateArea(e) {
     )} sq-mt`;
 
     map.getSource("user-extrude-src").setData(polygon);
-    map.getSource("line-src").setData(geometricRoute(polygon, fetchInputVals()));
+    map.getSource( "line-src" ).setData( geometricRoute( polygon, fetchInputVals() ) );
+    let routeL3n = geometricRoute(polygon, fetchInputVals())
+      .features.map((d) => d.properties.LOOPLENGTH + d.properties.STEPHEIGHT)
+      .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    console.log("routeLen " + routeL3n);
+    $infoTop.innerText = "";
+    $infoTop.innerText = "" + roundByN(routeL3n, 2) + " m";
+    
   } else {
     answer.innerHTML = "";
     if (e.type !== "draw.delete") alert("Click the map to draw a polygon.");
@@ -381,25 +440,27 @@ map.on("style.load", () => {
     type: "fill-extrusion",
     source: "user-extrude-src",
     layout: {
-      "fill-extrusion-edge-radius": 0.75,
+      "fill-extrusion-edge-radius": 0.0,
     },
     paint: {
       "fill-extrusion-height": userTopHeight,
       "fill-extrusion-base": userBaseHeight,
       "fill-extrusion-emissive-strength": 0.9,
-      "fill-extrusion-color": "lightblue",
+      "fill-extrusion-color": "SkyBlue",
       "fill-extrusion-flood-light-color": "DarkTurquoise",
-      // "fill-extrusion-ambient-occlusion-wall-radius": 1,
-      "fill-extrusion-opacity": 0.7,
-      "fill-emissive-strength": 0.9,
+      "fill-extrusion-opacity": 0.5,
+      "fill-extrusion-ambient-occlusion-wall-radius": 0,
+      "fill-extrusion-ambient-occlusion-radius": 6.0,
+      "fill-extrusion-ambient-occlusion-intensity": 0.9,
       "fill-extrusion-ambient-occlusion-ground-attenuation": 0.9,
-      // "fill-extrusion-vertical-gradient": true,
+      "fill-extrusion-vertical-gradient": false,
       "fill-extrusion-line-width": 0, //outwards like a wall
-      "fill-extrusion-flood-light-wall-radius": 10,
-      "fill-extrusion-flood-light-intensity": 1,
+      "fill-extrusion-flood-light-wall-radius": 20,
+      "fill-extrusion-flood-light-intensity": 0.9,
       "fill-extrusion-flood-light-ground-radius": 20,
-      "fill-extrusion-cutoff-fade-range": 1,
+      "fill-extrusion-cutoff-fade-range": 0,
       "fill-extrusion-rounded-roof": true,
+      "fill-extrusion-cast-shadows": false,
       // "":,
     },
   });
