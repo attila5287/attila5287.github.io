@@ -234,11 +234,6 @@
         id="keyboard" />
     <label for="keyboard">Keyboard</label>
 
-    <input type="checkbox" class="camCheckBox" checked="checked" id="" />
-    <label for="doubleClickZoom"
-        class="text-dark font-italic">DblClkZoom</label>
-    <!-- // plz note that double click zoom can not be disabled per draw's controls -->
-
     <input type="checkbox" class="camCheckBox" checked="checked"
         id="touchZoomRotate" />
     <label for="touchZoomRotate">TouchCtrls</label>
@@ -247,8 +242,9 @@
   <nav id="info" class="text-small fixed-bottom sticky-bottom text-secondary"
       style="z-index:1;" positionX="0" positionY="0" lng="0" lat="0"></nav>
 
-  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/6.5.0/turf.min.js"
+    integrity="sha512-Q7HOppxoH0L2M7hreVoFCtUZimR2YaY0fBewIYzkCgmNtgOOZ5IgMNYxHgfps0qrO1ef5m7L1FeHrhXlq1I9HA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script
       src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.5.0/mapbox-gl-draw.js"></script>
   <link rel="stylesheet"
@@ -262,14 +258,26 @@
   <div id="map"></div>
 
 
-  <div class="animate__animated animate__infinite animate__pulse calculation-box py-0"
-      style="z-index: 2; position: fixed">
-    <p class="my-1 py-1" style="font-size: 0.75em;">Click polygon icon to draw
-    </p>
-    <div id="calculated-area"></div>
-    <div id="calculated-distance"></div>
+  <div class="calculation-box py-0"
+      style="z-index: 2; position: fixed;">
+    <div class="animate__animated animate__infinite animate__pulse" style="vertical-align: middle;">
+      <i> Click polygon icon to draw </i>
+      <i class="fas fa-vector-square text-xl text-primary"></i>
+    </div>
+    <div class="list-group">
+      <a href="#" class="text-info p-1 list-group-item list-group-item-action disabled">
+        <i class="fas fa-chart-area fa-fw text-xl"></i>
+        <span id="calculated-area">140</span>
+         m<sup>2</sup>
+      </a>
+      <a href="#" class="text-info p-1 list-group-item list-group-item-action disabled">
+        <i class="fas fa-arrows-alt-h fa-fw text-xl"></i>
+        <span id="calculated-distance">51.39</span>
+         m
+      </a>
+    </div>
   </div>
-
+  
 
   <script type="module" src="mapboxgl-control-minimap.js"></script>
   <script type="module" src="script.js"></script>

@@ -76,7 +76,7 @@ body {
 .navCamControls {
   font-family: "Ubuntu", sans-serif;
   position: fixed;
-  top: 20px;
+  top: 30px;
   right: 44px;
   z-index: 1;
   max-width: 20%;
@@ -134,10 +134,12 @@ body {
 }
 .calculation-box {
   position: fixed;
+  width: 90px;
   bottom: 20px;
-  left: 10px;
+  left: 5px;
   z-index: 2;
   margin: 10px;
+  margin-left: 0px;
 }
 
 .bring-front{
@@ -216,4 +218,11 @@ body {
 .geo-route-row{
   margin-top:    10px;
   margin-bottom: 10px;
+}
+
+.round-sm {
+  border-radius: 3px;
+}
+.round-lg {
+  border-radius: 6px;
 }

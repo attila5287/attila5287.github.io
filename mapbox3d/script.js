@@ -34,7 +34,9 @@ $infoTop.innerText = "" + roundByN( initRouteLen, 0 ) + " m";
 function handlerSatellite( e ) {
   console.log( e.target.id + " " + e.target.checked );
   if ( e.target.checked ) {
-    map.setStyle("mapbox://styles/mapbox/standard-satellite");
+    map.setStyle( "mapbox://styles/mapbox/standard-satellite" );
+    map.setConfigProperty("basemap", "lightPreset", "dusk");
+    console.log(map.getLight());
   } else {
     map.setStyle("mapbox://styles/mapbox/standard");
   }
@@ -199,17 +201,16 @@ $duskMode.addEventListener("change", (e) => {
 // #region ** updateArea()-** -blue extrusion - main function
 function updateArea(e) {
   const polygon = draw.getAll();
-  const answer = document.getElementById("calculated-area");
+  const $area = document.getElementById("calculated-area");
+  const $distance = document.getElementById("calculated-distance");
   map.getSource("user-extrude-src").setData(polygon);
   map.getSource("line-src").setData(geometricRoute(polygon, fetchInputVals()));
   
   if (polygon.features.length > 0) {
     const area = turf.area(polygon);
     const length = turf.length(polygon, { units: "meters" });
-    answer.innerHTML = `${roundByN(length, 2)} mt <br>${roundByN(
-      area,
-      0
-    )} sq-mt`;
+    $area.innerText = `${roundByN(area,0)}`;
+    $distance.innerText = `${roundByN(length, 2)}`;
 
     map.getSource("user-extrude-src").setData(polygon);
     map.getSource( "line-src" ).setData( geometricRoute( polygon, fetchInputVals() ) );
@@ -221,7 +222,7 @@ function updateArea(e) {
     $infoTop.innerText = "" + roundByN(routeL3n, 0) + " m";
     
   } else {
-    answer.innerHTML = "";
+    $area.innerHTML = "";
     if (e.type !== "draw.delete") alert("Click the map to draw a polygon.");
   }
 }
