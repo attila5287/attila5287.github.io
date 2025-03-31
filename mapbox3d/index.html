@@ -76,6 +76,15 @@
           </label>
         </div>
       </li>
+      <li class="nav-item nav-link py-1">
+        <div class="custom-checkbox custom-control">
+          <input id="enableSatellite" class="custom-control-input"
+              type="checkbox" />
+          <label for="enableSatellite" class="custom-control-label">
+            <i class="fa fa-satellite nav-icon" aria-hidden="true"></i>
+          </label>
+        </div>
+      </li>
       <li class="nav-item nav-link disabled text-success py-1 fa-2xl">
         <i class="fas fa-route"></i>
         <i id="info-top"></i>
@@ -193,7 +202,7 @@
                     class="fa fa-minus text-xl"></i>
               </div>
               <div class="btn btn-success disabled text-primary opac">
-                <i class="geo-icons fa fa-fw fa-arrows-turn-to-dots"></i>
+                <i class="geo-icons fa fa-fw fa-text-width"></i>
               </div>
             </div>
             <input id="user-tolerance-w" value="6" min="1" type="number"
@@ -238,7 +247,8 @@
   <nav id="info" class="text-small fixed-bottom sticky-bottom text-secondary"
       style="z-index:1;" positionX="0" positionY="0" lng="0" lat="0"></nav>
 
-  <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+
   <script
       src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.5.0/mapbox-gl-draw.js"></script>
   <link rel="stylesheet"
@@ -250,7 +260,6 @@
       src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
 
   <div id="map"></div>
-  <!-- <div id="map" style="width: 1280px; height: 720px;"></div> -->
 
 
   <div class="animate__animated animate__infinite animate__pulse calculation-box py-0"
