@@ -45,7 +45,7 @@ export const geometricRoute = (poly, userInput) => {
   }
   // console.log(poly.features[0].geometry.coordinates)
   function smootherPoly(polygon) {
-    console.log(polygon);
+    // console.log(polygon);
     const buffered = turf.buffer(polygon, inToleranceWidth, {
       units: "meters",
     });
@@ -141,7 +141,7 @@ export const geometricRoute = (poly, userInput) => {
       console.log("generate lines: no feats in geojson smoother polygon");
     }
   }
-  console.log(...features);
+  console.log(features);
 
   return {
     type: "FeatureCollection",

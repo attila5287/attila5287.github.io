@@ -29,7 +29,20 @@ let initRouteLen = geometricRoute(testpoly, fetchInputVals())
   .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 console.log("routeLen " + initRouteLen);
 $infoTop.innerText = "";
-$infoTop.innerText = "" + roundByN( initRouteLen, 2 ) + " m";
+$infoTop.innerText = "" + roundByN( initRouteLen, 0 ) + " m";
+
+function handlerSatellite( e ) {
+  console.log( e.target.id + " " + e.target.checked );
+  if ( e.target.checked ) {
+    map.setStyle("mapbox://styles/mapbox/standard-satellite");
+  } else {
+    map.setStyle("mapbox://styles/mapbox/standard");
+  }
+}
+
+document
+  .querySelector("#enableSatellite")
+  .addEventListener("change", handlerSatellite);
 
 
 function handlerGeoBtn( e ) {
@@ -90,7 +103,7 @@ const handlerGeo = () => {
       .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
     console.log( "routeLen " + routeLen );
     $infoTop.innerText = "";
-    $infoTop.innerText = "" + roundByN(routeLen, 2)+ " m";
+    $infoTop.innerText = "" + roundByN(routeLen, 0)+ " m";
     
   } else { // TEST RUN WITH NO DRAW DATA 
     map
@@ -102,10 +115,9 @@ const handlerGeo = () => {
       .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
     console.log( "routeLen " + routeLen );
     $infoTop.innerText = "";
-    $infoTop.innerText = "" + roundByN(routeLen, 2)+ " m";
+    $infoTop.innerText = "" + roundByN(routeLen, 0)+ " m";
   }
 };
-
 document
   .querySelectorAll(".geo-input-el")
   .forEach((inputEl) => inputEl.addEventListener("change", handlerGeo));
@@ -179,10 +191,8 @@ $duskMode.addEventListener("change", (e) => {
   if (e.target.checked) {
     console.log("dusk mode");
     map.setConfigProperty("basemap", "lightPreset", "dusk");
-    $duskMode.setAttribute("checked", "");
   } else {
     map.setConfigProperty("basemap", "lightPreset", "day");
-    $duskMode.removeAttribute("checked");
   }
 });
 // #endregion
@@ -192,7 +202,7 @@ function updateArea(e) {
   const answer = document.getElementById("calculated-area");
   map.getSource("user-extrude-src").setData(polygon);
   map.getSource("line-src").setData(geometricRoute(polygon, fetchInputVals()));
-
+  
   if (polygon.features.length > 0) {
     const area = turf.area(polygon);
     const length = turf.length(polygon, { units: "meters" });
@@ -208,7 +218,7 @@ function updateArea(e) {
       .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
     console.log("routeLen " + routeL3n);
     $infoTop.innerText = "";
-    $infoTop.innerText = "" + roundByN(routeL3n, 2) + " m";
+    $infoTop.innerText = "" + roundByN(routeL3n, 0) + " m";
     
   } else {
     answer.innerHTML = "";
@@ -230,7 +240,6 @@ $camControls.addEventListener("change", (e) => {
 });
 // #endregion
 // #region cam-controls-checkbox disable-enable ALL
-$disableCamControls.removeAttribute("checked");
 $disableCamControls.addEventListener("change", (e) => {
   // console.log(`e.target.checked ${e.target.checked}`)
   // document.querySelectorAll(".camCheckBox").forEach((h) => {
@@ -257,21 +266,17 @@ $disableCamControls.addEventListener("change", (e) => {
   });
 });
 // #endregion
-
-// TODO - ADD SHOW-HIDE EXTRUSION CONTROL PANEL
-// FIXME CAMERA ANIMATION BRING IT BACK!!!!
-$showCam.addEventListener("change", (e) => {
+// #region show Camera Control Panel
+$showCam.addEventListener( "change", ( e ) => {
   // console.log(`show-panel-cam: ${e.target.checked}`)
   if (!e.target.checked) {
     $camControls.classList.toggle("animate__slideInDown");
-    $showCam.removeAttribute("checked");
     $camControls.classList.toggle("animate__fadeOutUpBig");
     // $camControls.style.display = "none"; // removes layout
     console.log("camControls: HIDDEN");
   } else {
     $camControls.classList.toggle("animate__slideInDown");
     $camControls.classList.toggle("animate__fadeOutUpBig");
-    $showCam.setAttribute("checked", "");
     // $camControls.style.display = "block";
     console.log("camControlsl DISPLAYED");
   }
@@ -421,17 +426,20 @@ const lineData = {
 map.on("style.load", () => {
   map.addLayer(customLayer);
   // ZERO: user draw polygon or we feed for test purposes (ex: testpoly)
-
+  let fetchData = () => ( draw.getAll().features.length ? draw.getAll() : testpoly );
+  console.log(fetchData())
+  
   // Extrude layer data
   map.addSource("user-extrude-src", {
     type: "geojson",
-    data: testpoly,
+    data:fetchData(),
+    // data:testpoly,
   });
   // Line layer data
   map.addSource("line-src", {
     type: "geojson",
     lineMetrics: true,
-    data: geometricRoute(testpoly, fetchInputVals()),
+    data: geometricRoute( fetchData(), fetchInputVals()),
   });
 
   // Render id: "user-extrude-layer",
