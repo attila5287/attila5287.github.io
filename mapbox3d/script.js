@@ -1,12 +1,6 @@
 import { geometricRoute } from "./geometricRoute.js";
 import { testpoly } from "./testdata.js";
 
-let userBaseHeight= document.querySelector("#user-base-height").value * 1;
-let userTopHeight = document.querySelector("#user-top-height").value * 1;
-let userStepCount = document.querySelector("#user-step-count").value * 1;
-let useropenWidth = document.querySelector("#user-tolerance-w").value * 1;
-let calcStep = (userTopHeight - userBaseHeight) / userStepCount;
-
 // nav-bar HTML elements
 let $duskMode = document.querySelector("#duskModeCkbox");
 let $camControls = document.querySelector("#navCamControls");
@@ -14,7 +8,6 @@ let $disableCamControls = document.querySelector("#disableCamControls");
 let $showCam = document.querySelector("#show-panel-cam");
 let $showGeo = document.querySelector("#show-panel-geo");
 let $info = document.getElementById( "info" );
-let $infoTop = document.getElementById("info-top");
 
 // ----------------
 let fetchInputVals= () => {return {
@@ -24,12 +17,33 @@ let fetchInputVals= () => {return {
   inToleranceWidth:document.querySelector("#user-tolerance-w").value * 1,
 }};
 
-let initRouteLen = geometricRoute(testpoly, fetchInputVals())
-  .features.map((d) => d.properties.LOOPLENGTH + d.properties.STEPHEIGHT)
-  .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-console.log("routeLen " + initRouteLen);
-$infoTop.innerText = "";
-$infoTop.innerText = "" + roundByN( initRouteLen, 0 ) + " m";
+function renderRouteDistance(poly, elementId) {
+  function geoRouteDistance( poly ) {
+    return geometricRoute(poly, fetchInputVals())
+    .features.map((d) => d.properties.LOOPLENGTH + d.properties.STEPHEIGHT)
+    .reduce( ( accumulator, currentValue ) => accumulator + currentValue, 0 )
+  }
+  let routeDistance = geoRouteDistance(poly);
+  console.log("routeLen " + routeDistance);
+  const $el = document.getElementById( elementId )
+  $el.innerText = "";
+  $el.innerText = "" + roundByN(routeDistance, 0) + " m";
+}
+function renderLoopLength(poly, elementID) {
+  function geoLoopLength(poly) {
+  return geometricRoute(poly, fetchInputVals())
+      .features.map((d) => d.properties.LOOPLENGTH)
+      .reduce((accumulator, currentValue) => currentValue, 0);
+  }
+  const loopLength = geoLoopLength(poly);
+  const $el = document.getElementById(elementID);
+  $el.innerText = "";
+  $el.innerText = "" + roundByN(loopLength, 0) + " m";
+  
+}
+
+renderLoopLength( testpoly, "calc-loop-length" );
+renderRouteDistance( testpoly, "calc-route-dist" );
 
 function handlerSatellite( e ) {
   console.log( e.target.id + " " + e.target.checked );
@@ -45,7 +59,6 @@ function handlerSatellite( e ) {
 document
   .querySelector("#enableSatellite")
   .addEventListener("change", handlerSatellite);
-
 
 function handlerGeoBtn( e ) {
   const deltaMapping = {
@@ -72,6 +85,7 @@ function handlerGeoBtn( e ) {
   }
 
 }
+
 document
   .querySelectorAll(".geo-btn")
   .forEach((button) => button.addEventListener("click", handlerGeoBtn));
@@ -100,24 +114,16 @@ const handlerGeo = () => {
       .getSource("line-src")
       .setData( geometricRoute( draw.getAll(), fetchInputVals() ) );
     map.triggerRepaint()
-    let routeLen = geometricRoute(draw.getAll(), fetchInputVals())
-      .features.map((d) => d.properties.LOOPLENGTH + d.properties.STEPHEIGHT)
-      .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    console.log( "routeLen " + routeLen );
-    $infoTop.innerText = "";
-    $infoTop.innerText = "" + roundByN(routeLen, 0)+ " m";
+    renderRouteDistance(draw.getAll(), "calc-route-dist");
+    renderLoopLength(draw.getAll(), "calc-loop-length");
     
   } else { // TEST RUN WITH NO DRAW DATA 
     map
       .getSource("line-src")
       .setData( geometricRoute(testpoly, fetchInputVals() ) );
     map.triggerRepaint()
-    let routeLen = geometricRoute(testpoly, fetchInputVals())
-      .features.map((d) => d.properties.LOOPLENGTH + d.properties.STEPHEIGHT)
-      .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    console.log( "routeLen " + routeLen );
-    $infoTop.innerText = "";
-    $infoTop.innerText = "" + roundByN(routeLen, 0)+ " m";
+    renderRouteDistance(testpoly, "calc-route-dist")
+    renderLoopLength(testpoly, "calc-loop-length")
   }
 };
 document
@@ -210,16 +216,12 @@ function updateArea(e) {
     const area = turf.area(polygon);
     const length = turf.length(polygon, { units: "meters" });
     $area.innerText = `${roundByN(area,0)}`;
-    $distance.innerText = `${roundByN(length, 2)}`;
+    $distance.innerText = `${roundByN(length, 0)}`;
 
     map.getSource("user-extrude-src").setData(polygon);
     map.getSource( "line-src" ).setData( geometricRoute( polygon, fetchInputVals() ) );
-    let routeL3n = geometricRoute(polygon, fetchInputVals())
-      .features.map((d) => d.properties.LOOPLENGTH + d.properties.STEPHEIGHT)
-      .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    console.log("routeLen " + routeL3n);
-    $infoTop.innerText = "";
-    $infoTop.innerText = "" + roundByN(routeL3n, 0) + " m";
+    renderRouteDistance(polygon, "calc-route-dist");
+    renderLoopLength(polygon, "calc-loop-length");
     
   } else {
     $area.innerHTML = "";
@@ -452,8 +454,8 @@ map.on("style.load", () => {
       "fill-extrusion-edge-radius": 0.0,
     },
     paint: {
-      "fill-extrusion-height": userTopHeight,
-      "fill-extrusion-base": userBaseHeight,
+      "fill-extrusion-height": fetchInputVals().inTopHi,
+      "fill-extrusion-base": fetchInputVals().inBaseHi,
       "fill-extrusion-emissive-strength": 0.9,
       "fill-extrusion-color": "SkyBlue",
       "fill-extrusion-flood-light-color": "DarkTurquoise",

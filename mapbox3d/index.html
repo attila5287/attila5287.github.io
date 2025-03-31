@@ -6,6 +6,9 @@
   <title>droneQube</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="icon"
+      href="https://droneqube.com.tr/wp-content/uploads/2023/03/Adsiz-tasarim-2-300x300.png"
+      sizes="192x192" />
   <link
       href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
       rel="stylesheet" />
@@ -51,15 +54,6 @@
       </li>
       <li class="nav-item nav-link py-1">
         <div class="custom-checkbox custom-control">
-          <input class="custom-control-input" id="duskModeCkbox" type="checkbox"
-              checked="" />
-          <label class="custom-control-label" for="duskModeCkbox">
-            <i class="fa fa-adjust nav-icon"></i>
-          </label>
-        </div>
-      </li>
-      <li class="nav-item nav-link py-1">
-        <div class="custom-checkbox custom-control">
           <input class="custom-control-input" id="show-panel-cam"
               type="checkbox" checked="" />
           <label class="custom-control-label" for="show-panel-cam">
@@ -85,9 +79,14 @@
           </label>
         </div>
       </li>
-      <li class="nav-item nav-link disabled text-success py-1 fa-xl">
-        <i class="fas fa-route"></i>
-        <i id="info-top"></i>
+      <li class="nav-item nav-link py-1">
+        <div class="custom-checkbox custom-control">
+          <input class="custom-control-input" id="duskModeCkbox" type="checkbox"
+              checked="" />
+          <label class="custom-control-label" for="duskModeCkbox">
+            <i class="fa fa-adjust nav-icon"></i>
+          </label>
+        </div>
       </li>
     </ul>
   </nav>
@@ -264,17 +263,32 @@
       <i> Click polygon icon to draw </i>
       <i class="fas fa-vector-square text-xl text-primary"></i>
     </div>
-    <div class="list-group">
-      <a href="#" class="text-info p-1 list-group-item list-group-item-action disabled">
-        <i class="fas fa-chart-area fa-fw text-xl"></i>
-        <span id="calculated-area">140</span>
-         m<sup>2</sup>
+
+    <div class="list-group list-group-horizontal text-lg">
+      <a href="#" class="text-success p-1 list-group-item list-group-item-action disabled">
+        <i class="fas fa-ring fa-fw text-xl"></i>
+        <span id="calc-loop-length"></span>
       </a>
-      <a href="#" class="text-info p-1 list-group-item list-group-item-action disabled">
-        <i class="fas fa-arrows-alt-h fa-fw text-xl"></i>
-        <span id="calculated-distance">51.39</span>
-         m
+      <a href="#"
+          class="text-success p-1 list-group-item list-group-item-action disabled">
+        <i class="fas fa-route fa-fw text-xl"></i>
+        <span id="calc-route-dist"></span>
       </a>
+
+    </div>
+
+    <div class="list-group list-group-horizontal">
+      <a href="#"
+          class="text-info p-1 list-group-item list-group-item-action disabled">
+        <i class="fas fa-draw-polygon fa-fw text-xl"></i>
+        <span id="calculated-distance">51</span>m
+      </a>
+      <a href="#"
+          class="text-info p-1 list-group-item list-group-item-action disabled">
+        <i class="fas fa-cube fa-rotate-270 fa-fw text-xl"></i>
+        <span id="calculated-area">140</span>m<sup>2</sup>
+      </a>
+    
     </div>
   </div>
   
