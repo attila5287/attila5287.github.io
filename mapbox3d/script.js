@@ -1,25 +1,40 @@
 import { geometricRoute } from "./geometricRoute.js";
 import { testpoly } from "./testdata.js";
 
-// nav-bar HTML elements
-let $duskMode = document.querySelector("#duskModeCkbox");
-let $camControls = document.querySelector("#navCamControls");
-let $disableCamControls = document.querySelector("#disableCamControls");
-let $showCam = document.querySelector("#show-panel-cam");
-let $showGeo = document.querySelector("#show-panel-geo");
-let $info = document.getElementById( "info" );
+const $duskMode = document.querySelector("#duskModeCkbox");
+const $camControls = document.querySelector("#navCamControls");
+const $disableCamControls = document.querySelector("#disableCamControls");
+const $info = document.querySelector("#info");
+const $area = document.querySelector("#calculated-area");
+const $distance = document.querySelector("#calculated-distance");
+const $switchSatellite = document.querySelector("#enableSatellite");
+const $showPanelGeo = document.querySelector("#show-panel-geo");
+const $geoButtons = document.querySelectorAll( ".geo-btn" );
+const $camCheckBoxes = document.querySelectorAll(".camCheckBox");
+const $showPanelCam = document.querySelector("#show-panel-cam");
+const $geoInputs = document.querySelectorAll( ".geo-input-el" );
+const $showPanelCoords = document.querySelector("#show-panel-coords");
+
+
+const userBaseHeight  = document.querySelector("#user-base-height");
+const userTopHeight  = document.querySelector("#user-top-height");
+const userStepCount  = document.querySelector("#user-step-count");
+const userToleranceW  = document.querySelector("#user-tolerance-w");
+
+
 
 // ----------------
-let fetchInputVals= () => {return {
-  inBaseHi:document.querySelector("#user-base-height").value * 1,
-  inTopHi: document.querySelector("#user-top-height").value * 1,
-  inStepCount:document.querySelector("#user-step-count").value * 1,
-  inToleranceWidth:document.querySelector("#user-tolerance-w").value * 1,
+let fetchUserInput= () => {return {
+  inBaseHi:        userBaseHeight.value * 1,
+  inTopHi:         userTopHeight.value  * 1,
+  inStepCount:     userStepCount.value  * 1,
+  inToleranceWidth:userToleranceW.value * 1,
 }};
+
 
 function renderRouteDistance(poly, elementId) {
   function geoRouteDistance( poly ) {
-    return geometricRoute(poly, fetchInputVals())
+    return geometricRoute(poly, fetchUserInput())
     .features.map((d) => d.properties.LOOPLENGTH + d.properties.STEPHEIGHT)
     .reduce( ( accumulator, currentValue ) => accumulator + currentValue, 0 )
   }
@@ -27,11 +42,11 @@ function renderRouteDistance(poly, elementId) {
   console.log("routeLen " + routeDistance);
   const $el = document.getElementById( elementId )
   $el.innerText = "";
-  $el.innerText = "" + roundByN(routeDistance, 0) + " m";
+  $el.innerText = "" + roundByN(routeDistance, 0);
 }
 function renderLoopLength(poly, elementID) {
   function geoLoopLength(poly) {
-  return geometricRoute(poly, fetchInputVals())
+  return geometricRoute(poly, fetchUserInput())
       .features.map((d) => d.properties.LOOPLENGTH)
       .reduce((accumulator, currentValue) => currentValue, 0);
   }
@@ -55,9 +70,7 @@ function handlerSatellite( e ) {
     map.setStyle("mapbox://styles/mapbox/standard");
   }
 }
-
-document
-  .querySelector("#enableSatellite")
+$switchSatellite
   .addEventListener("change", handlerSatellite);
 
 function handlerGeoBtn( e ) {
@@ -85,34 +98,28 @@ function handlerGeoBtn( e ) {
   }
 
 }
-
-document
-  .querySelectorAll(".geo-btn")
-  .forEach((button) => button.addEventListener("click", handlerGeoBtn));
-
-
+  
+$geoButtons.forEach((button) =>
+  button.addEventListener("click", handlerGeoBtn)
+);
+  
 const handlerGeo = () => {
-
   if (map.getLayer("user-extrude-layer")) {
     map.setPaintProperty(
       "user-extrude-layer",
       "fill-extrusion-base",
-      + fetchInputVals().inBaseHi 
+      + fetchUserInput().inBaseHi 
     );
-
-  }
-
-  if (map.getLayer("user-extrude-layer")) {
     map.setPaintProperty(
       "user-extrude-layer",
       "fill-extrusion-height",
-      +fetchInputVals().inTopHi
+      +fetchUserInput().inTopHi
     );
   }
   if (draw.getAll().features.length) {
     map
       .getSource("line-src")
-      .setData( geometricRoute( draw.getAll(), fetchInputVals() ) );
+      .setData( geometricRoute( draw.getAll(), fetchUserInput() ) );
     map.triggerRepaint()
     renderRouteDistance(draw.getAll(), "calc-route-dist");
     renderLoopLength(draw.getAll(), "calc-loop-length");
@@ -120,37 +127,53 @@ const handlerGeo = () => {
   } else { // TEST RUN WITH NO DRAW DATA 
     map
       .getSource("line-src")
-      .setData( geometricRoute(testpoly, fetchInputVals() ) );
+      .setData( geometricRoute(testpoly, fetchUserInput() ) );
     map.triggerRepaint()
     renderRouteDistance(testpoly, "calc-route-dist")
     renderLoopLength(testpoly, "calc-loop-length")
   }
 };
-document
-  .querySelectorAll(".geo-input-el")
-  .forEach((inputEl) => inputEl.addEventListener("change", handlerGeo));
 
-$showGeo.addEventListener(
-  "change",
-  (e) => {
-    // e.target is the SWITCH element
-    console.log("clk target:>> " + e.target.dataset.target);
-    console.log("clk on>> " + e.target.id + " chk stat>> " + e.target.checked);
-
-    const isChecked = e.target.checked;
-    // el is the DATA-TARGET ELEMENT that needs to be
-    const el = document.querySelector(e.target.dataset.target);
-    if (!isChecked) {
-      el.classList.remove("animate__slideInLeft");
-      el.classList.add("animate__fadeOutLeftBig");
-    } else {
-      el.classList.remove("animate__fadeOutLeftBig");
-      el.classList.add("animate__slideInLeft");
-    }
-  },
-  false
+$geoInputs.forEach((inputEl) =>
+    inputEl.addEventListener( "change", handlerGeo )
 );
 
+function handlerShowPanelGeo( e ) {
+     // e.target is the SWITCH element
+     console.log("clk target:>> " + e.target.dataset.target);
+     console.log("clk on>> " + e.target.id + " chk stat>> " + e.target.checked);
+
+     const isChecked = e.target.checked;
+     // el is the DATA-TARGET ELEMENT that needs to be
+     const el = document.getElementById(e.target.dataset.target);
+     if (!isChecked) {
+       el.classList.remove("animate__slideInLeft");
+       el.classList.add("animate__fadeOutLeftBig");
+     } else {
+       el.classList.remove("animate__fadeOutLeftBig");
+       el.classList.add("animate__slideInLeft");
+     }
+}
+function handlerShowPanelGeoInfo( e ) {
+     // e.target is the SWITCH element
+     console.log("clk target:>> " + e.target.dataset.target);
+     console.log("clk on>> " + e.target.id + " chk stat>> " + e.target.checked);
+
+     const isChecked = e.target.checked;
+     // el is the DATA-TARGET ELEMENT that needs to be
+     const el = document.getElementById(e.target.dataset.target);
+     if (!isChecked) {
+       el.classList.remove("animate__slideInLeft");
+       el.classList.add("animate__fadeOutLeftBig");
+     } else {
+       el.classList.remove("animate__fadeOutLeftBig");
+       el.classList.add("animate__slideInLeft");
+     }
+}
+
+$showPanelGeo.addEventListener("change", handlerShowPanelGeo);
+
+$showPanelGeo.addEventListener("change", handlerShowPanelGeoInfo);
 // #region base config and public key token
 mapboxgl.accessToken =
   "pk.eyJ1IjoiYXR0aWxhNTIiLCJhIjoiY2thOTE3N3l0MDZmczJxcjl6dzZoNDJsbiJ9.bzXjw1xzQcsIhjB_YoAuEw";
@@ -167,7 +190,7 @@ const map = new mapboxgl.Map({
   config: baseConfig,
   zoom: 18.93,
   bearing: 150,
-  center: [-104.9889, 39.7394], // civic
+  center: [-104.9889, 39.7394], // `civic`
   pitch: 60,
   antialias: true,
 });
@@ -193,24 +216,23 @@ map.on("draw.delete", updateArea);
 map.on("draw.update", updateArea);
 // #endregion
 // #region enable disable dusk mode
-$duskMode.addEventListener("change", (e) => {
-  console.log("before");
-  console.log(e.target.checked);
-  if (e.target.checked) {
-    console.log("dusk mode");
-    map.setConfigProperty("basemap", "lightPreset", "dusk");
-  } else {
-    map.setConfigProperty("basemap", "lightPreset", "day");
-  }
-});
+function handlerDuskMode(e) {
+    console.log("before");
+    console.log(e.target.checked);
+    if (e.target.checked) {
+      console.log("dusk mode");
+      map.setConfigProperty("basemap", "lightPreset", "dusk");
+    } else {
+      map.setConfigProperty("basemap", "lightPreset", "day");
+    }
+  };
+$duskMode.addEventListener("change", handlerDuskMode);
 // #endregion
 // #region ** updateArea()-** -blue extrusion - main function
 function updateArea(e) {
   const polygon = draw.getAll();
-  const $area = document.getElementById("calculated-area");
-  const $distance = document.getElementById("calculated-distance");
   map.getSource("user-extrude-src").setData(polygon);
-  map.getSource("line-src").setData(geometricRoute(polygon, fetchInputVals()));
+  map.getSource("line-src").setData(geometricRoute(polygon, fetchUserInput()));
   
   if (polygon.features.length > 0) {
     const area = turf.area(polygon);
@@ -219,7 +241,7 @@ function updateArea(e) {
     $distance.innerText = `${roundByN(length, 0)}`;
 
     map.getSource("user-extrude-src").setData(polygon);
-    map.getSource( "line-src" ).setData( geometricRoute( polygon, fetchInputVals() ) );
+    map.getSource( "line-src" ).setData( geometricRoute( polygon, fetchUserInput() ) );
     renderRouteDistance(polygon, "calc-route-dist");
     renderLoopLength(polygon, "calc-loop-length");
     
@@ -230,7 +252,7 @@ function updateArea(e) {
 }
 // #endregion
 // #region map camera control events: HANDLER DISABLE
-$camControls.addEventListener("change", (e) => {
+function handlerCamCheckBoxes(e) {
   const handler = e.target.id;
   // console.log('handler')
   // console.log(handler)
@@ -240,58 +262,68 @@ $camControls.addEventListener("change", (e) => {
   } else {
     map[handler].disable();
   }
-});
+}
+$camControls.addEventListener("change", handlerCamCheckBoxes);
 // #endregion
+
+
 // #region cam-controls-checkbox disable-enable ALL
-$disableCamControls.addEventListener("change", (e) => {
-  // console.log(`e.target.checked ${e.target.checked}`)
-  // document.querySelectorAll(".camCheckBox").forEach((h) => {
+
+function handlerDisableCam(e) {
   const handlers = [
     "scrollZoom",
     "boxZoom",
     "dragRotate",
     "dragPan",
     "keyboard",
-    "doubleClickZoom", // can not be disabled per draw controls
     "touchZoomRotate",
   ];
-  document.querySelectorAll(".camCheckBox").forEach((h) => {
-    // console.log(`h: ${h.id}`)
-    if (h.id != "") {
-      if (e.target.checked) {
-        map[h.id].disable();
-        document.getElementById(h.id).removeAttribute("checked");
+  const isChecked = e.target.checked;
+  handlers.forEach((h) => { // disables and unchks html el's
+    if (document.getElementById(h)) {
+      if (isChecked) {
+        map[h].disable();
+        document.getElementById(h).removeAttribute("checked");
       } else {
-        document.getElementById(h.id).setAttribute("checked", "checked");
-        map[h.id].enable();
+        map[h].enable();
+        document.getElementById(h).setAttribute("checked", "checked");
       }
+    } else {
+      if (isChecked) { // disables all cam controls
+        map[h].disable();
+      } else {
+        map[h].enable();
+      }
+      
     }
   });
-});
+}
+$disableCamControls.addEventListener("change", handlerDisableCam);
 // #endregion
 // #region show Camera Control Panel
-$showCam.addEventListener( "change", ( e ) => {
-  // console.log(`show-panel-cam: ${e.target.checked}`)
-  if (!e.target.checked) {
-    $camControls.classList.toggle("animate__slideInDown");
-    $camControls.classList.toggle("animate__fadeOutUpBig");
-    // $camControls.style.display = "none"; // removes layout
-    console.log("camControls: HIDDEN");
-  } else {
-    $camControls.classList.toggle("animate__slideInDown");
-    $camControls.classList.toggle("animate__fadeOutUpBig");
-    // $camControls.style.display = "block";
-    console.log("camControlsl DISPLAYED");
-  }
-});
+ function handlerShowPanelCam(e){
+   // console.log(`show-panel-cam: ${e.target.checked}`)
+   if (!e.target.checked) {
+     $camControls.classList.remove("animate__delay-1s");
+     $camControls.classList.toggle("animate__slideInDown");
+     $camControls.classList.toggle("animate__fadeOutUpBig");
+     // $camControls.style.display = "none"; // removes layout
+     console.log("camControls: HIDDEN");
+   } else {
+     $camControls.classList.toggle("animate__slideInDown");
+     $camControls.classList.toggle("animate__fadeOutUpBig");
+     // $camControls.style.display = "block";
+     console.log("camControlsl DISPLAYED");
+   }
+ };
+$showPanelCam.addEventListener( "change", handlerShowPanelCam );
 // #endregion
 // #region info box with 'lng and lat' vs 'x and y' (from documentation)
-map.on("mousemove", (e) => {
+function handlerMouseMove(e)  {
   $info.setAttribute("positionX", e.point.x);
   $info.setAttribute("positionY", e.point.y);
   $info.setAttribute("lng", e.lngLat.lng);
   $info.setAttribute("lat", e.lngLat.lat);
-  // TODO lets make this a table with rounded numbers so it wouldn't take so much space
   // console.log(e.lngLat.lng + " " + e.lngLat.lat)
   $info.innerHTML = `x ${roundByN(JSON.stringify(e.point.x), 4)} y ${roundByN(
     JSON.stringify(e.point.y),
@@ -301,7 +333,8 @@ map.on("mousemove", (e) => {
     JSON.stringify(e.lngLat.wrap().lat),
     6
   )}`;
-});
+}
+map.on("mousemove", handlerMouseMove);
 // #endregion
 // #region Object-3d model transformation: (from documentation)
 const modelOrigin = [-104.98887493053121, 39.73899257929499]; // Denver Civic Center
@@ -409,7 +442,7 @@ const customLayer = {
   // #endregion
 };
 // #endregion
-// #region blank geoJSON data to load when there is no polygon
+// #region blank geoJSON dat`a to load when there is no polygon
 const polyData = {
   type: "FeatureCollection",
   features: [],
@@ -442,7 +475,7 @@ map.on("style.load", () => {
   map.addSource("line-src", {
     type: "geojson",
     lineMetrics: true,
-    data: geometricRoute( fetchData(), fetchInputVals()),
+    data: geometricRoute( fetchData(), fetchUserInput()),
   });
 
   // Render id: "user-extrude-layer",
@@ -454,8 +487,8 @@ map.on("style.load", () => {
       "fill-extrusion-edge-radius": 0.0,
     },
     paint: {
-      "fill-extrusion-height": fetchInputVals().inTopHi,
-      "fill-extrusion-base": fetchInputVals().inBaseHi,
+      "fill-extrusion-height": fetchUserInput().inTopHi,
+      "fill-extrusion-base": fetchUserInput().inBaseHi,
       "fill-extrusion-emissive-strength": 0.9,
       "fill-extrusion-color": "SkyBlue",
       "fill-extrusion-flood-light-color": "DarkTurquoise",

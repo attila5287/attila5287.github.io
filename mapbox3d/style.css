@@ -59,7 +59,7 @@ body {
 }
 #info {
   display: table;
-  position: fixed;
+  position: absolute;
   bottom: 4px; 
   left: 50%;
   transform: translateX(-50%);
@@ -75,15 +75,14 @@ body {
 }
 .navCamControls {
   font-family: "Ubuntu", sans-serif;
-  position: fixed;
-  top: 30px;
+  position: absolute;
+  top: 55px;
   right: 44px;
   z-index: 1;
   max-width: 20%;
-  color: #fff;
-  margin: 0px;
-  padding: 8px;
+  color: #fff;   
 }
+
 .navCamControls input[type="checkbox"]:first-child + label {
   border-radius: 6px 6px 0 0;
 }
@@ -119,10 +118,11 @@ body {
 }
 .navCamControls input[type="checkbox"] + label:hover
 {
-  /* background-color: #4ea0da; */
+  background-color: #4ea0da;
   text-transform: capitalize;
   transform: scale(1.15, 1.15);
   box-shadow: skyblue 1px 2px 2px;
+  border-radius: 10px;
 }
 
 .navCamControls input[type="checkbox"]:checked + label:before {
@@ -131,25 +131,21 @@ body {
   padding:1px;
   margin-right: 4px;
   color: skyblue;
+  
 }
 .calculation-box {
-  position: fixed;
-  width: 160px;
-  bottom: 20px;
+  position: absolute;
+  width: 180px;
+  bottom: 30px;
   left: 5px;
   z-index: 2;
-  margin: 10px;
+  padding: 0px;
+  margin: 6px;
   margin-left: 0px;
 }
 
-.bring-front{
+.overlay{
   z-index:1;
-}
-.send-back{
-  z-index:-1;
-}
-.show-hide{
-  z-index: 1;
 }
 
 .add-anime {
@@ -160,40 +156,45 @@ body {
   transform: scale(1.1, 1.1);
   box-shadow: rgb(111, 230, 141) 5px 15px 20px; /* Increased blur radius */
 }
-.no-anime img:hover {
-  transform: scale(1.01, 1.01);
-  box-shadow: white 0px 0px 0px; /* Increased blur radius */
+
+.add-anime-blue {
+  transition: ease 0.15s;
+}
+
+.add-anime-blue:hover {
+  transform: scale(1.05, 1.05);
+  box-shadow: rgb(92, 128, 218) 5px 15px 20px; /* Increased blur radius */
+}
+.add-anime-white {
+  transition: ease 0.15s;
+}
+
+.add-anime-white:hover {
+  transform: scale(1.05, 1.05);
+  box-shadow: rgb(187, 200, 190) 5px 15px 20px; /* Increased blur radius */
+}
+.add-shadow {
+  transition: ease 0.15s;
+}
+
+.add-shadow:hover {
+  /* transform: scale(1.05, 1.05); */
+  box-shadow: rgb(187, 200, 190) 5px 15px 20px; /* Increased blur radius */
 }
 
 .btn-icon {
-  font-size: 1.50rem;
+  font-size: 1.50em;
 }
 .nav-icon{
-  font-size:1.75em;
+  font-size:1.750em;
 }
 .nav-item.nav-link {
-  transition: ease 0.15s;
+  transition: ease 0.10s;
 }
 .nav-item.nav-link:hover {
   transform: scale(1.03, 1.03);
+  border-radius: 10px;
   box-shadow: DarkTurquoise 0px 2px 8px; /* Increased blur radius */
-}
-#geo-route-panel {
-  position: fixed;
-  z-index: 1;
-  max-width: 180px;
-  margin: 2px;
-  border-radius: 8px;
-  padding: 0px;
-  top: 36px;
-  left: 0px;
-  z-index: 1;
-}
-#geo-route-panel input{
-  font-size: 2.00em;
-}
-#geo-route-panel button{
-  min-width: 35px;
 }
 
 .text-xs {
@@ -212,17 +213,97 @@ body {
 .opac{
   opacity: 1;
 }
-.geo-icons{
-  font-size: 2em;
-}
-.geo-route-row{
-  margin-top:    10px;
-  margin-bottom: 10px;
-}
 
 .round-sm {
   border-radius: 3px;
 }
 .round-lg {
   border-radius: 6px;
+}
+
+#coords-map-panel {
+  position: absolute;
+  top: 190px;
+  right: 2px;
+  z-index: 1;
+  width: 60px;
+  margin: 2px;
+  border-radius: 12px;
+  padding: 0px;
+  border-bottom: 1px solid skyblue;
+}
+#coords-map-panel:hover {
+  border-radius: 0;
+}
+
+#coods-map-panel label:first-child {
+  border-radius: 0 0 10px 10px;
+  border: none;
+  
+}
+#coods-map-panel input[type="checkbox"]:last-child + label {
+  border-radius: 6px 6px 0 0;
+}
+
+#geo-route-panel {
+  position: absolute;
+  max-width: 100px;
+  margin: 0px 0px 0px 10px;
+  padding: 0px;
+  top: 32px;
+  left: 0px;
+  z-index: 1;
+  height: 24px;
+  /* Set the desired height */
+}
+.input-group-sm.custom-input-group {
+  height: 24px;
+
+  /* Set the desired height */
+}
+.input-group-sm.custom-input-group .form-control {
+  height: 24px;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+.input-group-sm.custom-input-group .input-group-prepend .btn,
+.input-group-sm.custom-input-group .input-group-append .btn {
+  height: 24px;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+.geo-icons{
+  width: 14px;
+  margin: 1;
+  padding: 1;
+  font-size: 1.25em;
+}
+.geo-btn {
+width: 25px;
+}
+.geo-route-row {
+line-height: 1.75em;
+}
+.opac{
+  opacity: 1;
+}
+
+.camCheckBox input{
+  font-size: 1.00em;
+}
+
+.disable-all-cam{
+  position: absolute;
+  z-index: 1;
+  top: 34px;
+  right:72px;
+}
+
+
+.fa-rotate-45 {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
