@@ -1,0 +1,343 @@
+body {
+  margin: 0;
+  font-size: 10px;
+  padding: 0;
+}
+.ubuntu-light {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.ubuntu-regular {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.ubuntu-medium {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.ubuntu-bold {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.ubuntu-light-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.ubuntu-regular-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.ubuntu-medium-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.ubuntu-bold-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+#info {
+  display: table;
+  position: absolute;
+  bottom: 4px; 
+  left: 50%;
+  transform: translateX(-50%);
+  word-wrap: anywhere;
+  white-space: pre-wrap;
+  padding: 1px;
+  border: none;
+  border-radius: 3px;
+  font-family: Ubuntu;
+  text-align: center;
+  color: #222;
+  /* background: rgba(255, 255, 255, 0.8); */
+}
+.navCamControls {
+  font-family: "Ubuntu", sans-serif;
+  position: absolute;
+  top: 55px;
+  right: 44px;
+  z-index: 1;
+  max-width: 20%;
+  color: #fff;   
+}
+
+.navCamControls input[type="checkbox"]:first-child + label {
+  border-radius: 6px 6px 0 0;
+}
+
+.navCamControls label:last-child {
+  border-radius: 0 0 10px 10px;
+  border: none;
+}
+
+.navCamControls input[type="checkbox"] {
+  display: none;
+}
+
+.navCamControls input[type="checkbox"] + label {
+  /* background-color: #3386c0; */
+  color: #797775;
+  display: block;
+  cursor: pointer;
+  margin: 0px;
+  padding: 4px;
+  border-bottom: 1px solid skyblue;
+}
+
+.navCamControls input[type="checkbox"] + label {
+  /* font-style: italic; */
+  /* background-color: #b4bfc1; */
+  text-transform: capitalize;
+}
+
+.navCamControls input[type="checkbox"]:checked + label {
+  /* background-color: #4ea0da; */
+  text-transform: capitalize;
+}
+.navCamControls input[type="checkbox"] + label:hover
+{
+  background-color: #4ea0da;
+  text-transform: capitalize;
+  transform: scale(1.15, 1.15);
+  box-shadow: skyblue 1px 2px 2px;
+  border-radius: 10px;
+}
+
+.navCamControls input[type="checkbox"]:checked + label:before {
+  content: "✔";
+  /* font-weight: bold; */
+  padding:1px;
+  margin-right: 4px;
+  color: skyblue;
+  
+}
+.calculation-box {
+  position: absolute;
+  width: 180px;
+  bottom: 30px;
+  left: 5px;
+  z-index: 2;
+  padding: 0px;
+  margin: 6px;
+  margin-left: 0px;
+}
+
+.overlay{
+  z-index:1;
+}
+
+.add-anime {
+  transition: ease 0.15s;
+}
+
+.add-anime:hover {
+  transform: scale(1.1, 1.1);
+  box-shadow: rgb(111, 230, 141) 5px 15px 20px; /* Increased blur radius */
+}
+
+.add-anime-blue {
+  transition: ease 0.15s;
+}
+
+.add-anime-blue:hover {
+  transform: scale(1.05, 1.05);
+  box-shadow: rgb(92, 128, 218) 5px 15px 20px; /* Increased blur radius */
+}
+.add-anime-white {
+  transition: ease 0.15s;
+}
+
+.add-anime-white:hover {
+  transform: scale(1.05, 1.05);
+  box-shadow: rgb(187, 200, 190) 5px 15px 20px; /* Increased blur radius */
+}
+.add-shadow {
+  transition: ease 0.15s;
+}
+
+.add-shadow:hover {
+  /* transform: scale(1.05, 1.05); */
+  box-shadow: rgb(187, 200, 190) 5px 15px 20px; /* Increased blur radius */
+}
+
+.btn-icon {
+  font-size: 1.50em;
+}
+.nav-icon{
+  font-size:1.750em;
+}
+.nav-item.nav-link {
+  transition: ease 0.10s;
+}
+.nav-item.nav-link:hover {
+  transform: scale(1.03, 1.03);
+  border-radius: 10px;
+  box-shadow: DarkTurquoise 0px 2px 8px; /* Increased blur radius */
+}
+
+.text-xs {
+  font-size: 0.60em;
+}
+
+.text-lg {
+  font-size: 1.25em;
+}
+.text-xl {
+  font-size: 1.50em;
+}
+.text-sm {
+  font-size: 0.80em;
+}
+.opac{
+  opacity: 1;
+}
+
+.round-sm {
+  border-radius: 3px;
+}
+.round-lg {
+  border-radius: 6px;
+}
+
+#coords-map-panel {
+  position: absolute;
+  top: 190px;
+  right: 2px;
+  z-index: 1;
+  width: 60px;
+  margin: 2px;
+  border-radius: 12px;
+  padding: 0px;
+  border-bottom: 1px solid skyblue;
+}
+#coords-map-panel:hover {
+  border-radius: 0;
+}
+
+#coods-map-panel label:first-child {
+  border-radius: 0 0 10px 10px;
+  border: none;
+  
+}
+#coods-map-panel input[type="checkbox"]:last-child + label {
+  border-radius: 6px 6px 0 0;
+}
+
+#geo-route-panel {
+  position: absolute;
+  max-width: 100px;
+  margin: 0px 0px 0px 10px;
+  padding: 0px;
+  top: 32px;
+  left: 0px;
+  z-index: 1;
+  height: 24px;
+  /* Set the desired height */
+}
+.input-group-sm.custom-input-group {
+  height: 24px;
+
+  /* Set the desired height */
+}
+.input-group-sm.custom-input-group .form-control {
+  height: 24px;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+.input-group-sm.custom-input-group .input-group-prepend .btn,
+.input-group-sm.custom-input-group .input-group-append .btn {
+  height: 24px;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+.geo-icons{
+  width: 14px;
+  margin: 1;
+  padding: 1;
+  font-size: 1.25em;
+}
+.geo-btn {
+width: 25px;
+}
+.geo-route-row {
+line-height: 1.75em;
+}
+.opac{
+  opacity: 1;
+}
+
+.camCheckBox input{
+  font-size: 1.00em;
+}
+
+.disable-all-cam{
+  position: absolute;
+  z-index: 1;
+  top: 34px;
+  right:72px;
+}
+
+.f{
+    background-color: #4ea0da;
+      text-transform: capitalize;
+      transform: scale(1.15, 1.15);
+      box-shadow: skyblue 1px 2px 2px;
+      border-radius: 10px;
+}
+.fa-rotate-45 {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+#message-box {
+  position: absolute;
+  height: 20px;
+  top: 34px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: none;
+  font-family: Ubuntu;
+  text-align: center;
+  z-index: 1;
+  /* background: rgba(255, 255, 255, 0.8); */
+}
+
+.opac-100{
+  opacity: 1;
+}
+.opac-75{
+  opacity: 0.75;
+}
+.opac-50{
+  opacity: 0.50;
+}
+.opac-25{
+  opacity: 0.25;
+}
+.opac-0{
+  opacity: 0;
+}
