@@ -1,9 +1,4 @@
-import {
-  areaMode,
-  slopeMode,
-  waypointMode,
-  geoMode,
-} from "./draw-modes.js";
+import { areaMode, slopeMode, waypointMode, geoMode } from "./draw-modes.js";
 
 const coordsDenver = [-104.98887493053121, 39.73899257929499]; // civic
 mapboxgl.accessToken =
@@ -19,9 +14,7 @@ const map = new mapboxgl.Map({
   antialias: true,
 });
 
-map.on("style.load", function () {
-  map.setConfigProperty("basemap", "lightPreset", "dusk");
-}); 
+// D R A W     C O N T R O L S
 const draw = new MapboxDraw({
   displayControlsDefault: false,
   controls: {
@@ -36,16 +29,11 @@ const draw = new MapboxDraw({
     slope_mode: slopeMode,
     waypoint_mode: waypointMode,
   },
-} );
+});
 
 map.addControl(draw);
 
 // Set custom polygon mode as default
 draw.changeMode("area_mode");
 
-// Differentiate event listeners for each mode
-map.on("draw.create", (e) => {
-  const mode = draw.getMode();
-  console.log(`${mode} created!`, e.features[0]);
-});
 export { map, draw };

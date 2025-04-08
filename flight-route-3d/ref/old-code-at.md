@@ -287,11 +287,11 @@ const handlerGeo = () => {
     );
   }
   if (draw.getAll().features.length) {
+    renderRouteDistance(draw.getAll(), "calc-route-dist");
     map
       .getSource("line-src")
       .setData( geometricRoute( draw.getAll(), fetchUserInput() ) );
     map.triggerRepaint()
-    renderRouteDistance(draw.getAll(), "calc-route-dist");
     renderLoopLength(draw.getAll(), "calc-loop-length");
     
   } else { // TEST RUN WITH NO DRAW DATA 

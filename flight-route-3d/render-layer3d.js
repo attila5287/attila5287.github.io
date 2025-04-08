@@ -2,7 +2,7 @@ import { map } from "./map-config.js";
   // parameters to ensure the model is georeferenced correctly on the map
 
 
-function renderCustomLayer(urlModel3d, modelOrigin) {
+function generateCustomLayer(urlModel3d, modelOrigin) {
   const modelAltitude = 10;
   const modelRotate = [Math.PI / 2, 0, 0];
 
@@ -99,10 +99,6 @@ function renderCustomLayer(urlModel3d, modelOrigin) {
       this.map.triggerRepaint();
     },
   };
-
-  map.on("style.load", () => {
-    map.addLayer(customLayer);
-  });
+  return customLayer;
 }
-
-export { renderCustomLayer };
+export { generateCustomLayer };

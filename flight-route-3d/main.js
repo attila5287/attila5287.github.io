@@ -1,38 +1,82 @@
-'use strict';
+"use strict";
 import { renderModeButtons } from "./render-btn.js";
 import { map, draw } from "./map-config.js";
-import { renderCustomLayer } from "./render-layer3d.js";
+import { generateCustomLayer } from "./render-layer3d.js";
 import { renderCalcbox } from "./render-calcbox.js";
 import { testData } from "./test-data.js";
 import { fetchFormData } from "./fetch-forms.js";
 import { generateRoute3d } from "./gen-route3d.js";
 
 // Data object containing information and methods that have to do with the dataset
-const data = {
+const app = {
   modes: ["area", "geo", "slope", "waypoint"],
-  inputDraw: testData,
-  inputForm: fetchFormData,
-  prep: generateRoute3d,
   mapCenters: [[-104.98887493053121, 39.73899257929499]],
   modelURLs: [
-    "https://raw.githubusercontent.com/attila5287/attila5287.github.io/refs/heads/master/helloDrone/uav/scene.gltf"
-  ]
+    "https://raw.githubusercontent.com/attila5287/attila5287.github.io/refs/heads/master/helloDrone/uav/scene.gltf",
+  ],
+  inputDraw: testData,
+  inputForm: fetchFormData,
+  routeGenerator: generateRoute3d,
+  generateRoutes: function () {
+    this.modes.forEach((mode) => {
+      // console.log( mode );
+      // console.log(this.inputDraw);
+    });
+  },
+  init: function () {
+    renderModeButtons(this.modes);
+    renderCalcbox(0, 0);
+  },
 };
-console.log( data );
-function init(sessionData) {
-  renderModeButtons(sessionData.modes);
-  renderCustomLayer(sessionData.modelURLs[0], sessionData.mapCenters[0]);
-  renderCalcbox(0, 0);
-}
-init( data );
+console.log(app);
+app.init();
+map.on("draw.create", drawHandler);
+map.on("draw.delete", drawHandler);
+map.on("draw.update", drawHandler);
+map.on("draw.uncombine", drawHandler);
+map.on("draw.combine", drawHandler);
+
+map.on("style.load", function () {
+  map.addSource("geo-layer", {
+    type: "geojson",
+    data: app.inputDraw["geo"], //json data
+  });
+  console.log(app.inputDraw["geo"]);
+  map.addLayer(generateCustomLayer(app.modelURLs[0], app.mapCenters[0]));
+  // FIXME - this is a hack to get the geo layer to work
+  map.addSource("geo-extrude-src", {
+    type: "geojson",
+    data: app.inputDraw["geo"],
+  });
+  map.addLayer({
+    id: "geo-extrude-layer",
+    type: "fill-extrusion",
+    source: "geo-extrude-src",
+    layout: {
+      "fill-extrusion-edge-radius": 0.0,
+    },
+    paint: {
+      "fill-extrusion-height": 20,
+      "fill-extrusion-base": 0,
+      "fill-extrusion-emissive-strength": 0.9,
+      "fill-extrusion-color": "SkyBlue",
+      "fill-extrusion-opacity": 0.5,
+    },
+  });
+  map.setConfigProperty("basemap", "lightPreset", "dusk");
+  drawHandler();
+  map.getSource("geo-layer").setData(app.inputDraw["geo"]);
+});
+// map.getSource("geo-extrude-layer").setData(app.inputDraw["geo"]);
+// map.triggerRepaint();
 
 function drawHandler(e) {
-  console.log("D R A W   H A N D L E R");
+  const currentMode = draw.getMode();
+  console.log("draw   H A N D L E R" + currentMode);
+  const mode = draw.getMode();
   const userDrawn = draw.getAll();
-  console.log( map.getCenter() );
-  console.log( userDrawn );
+  // console.log(userDrawn);
 
-  // TODO addLayer > setData()
   if (userDrawn.features.length > 0) {
     const area = turf.area(userDrawn);
     const distance = turf.length(userDrawn, { units: "meters" });
@@ -46,9 +90,3 @@ function drawHandler(e) {
     }
   }
 }
-
-map.on("draw.create", drawHandler);
-map.on("draw.delete", drawHandler);
-map.on("draw.update", drawHandler);
-map.on("draw.uncombine", drawHandler);
-map.on("draw.combine", drawHandler);

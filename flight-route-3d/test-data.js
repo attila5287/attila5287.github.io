@@ -1,7 +1,7 @@
 "use strict";
 export const testData = {
   geo: {
-    type: "geojson",
+    type: "FeatureCollection",
     features: [
       {
         id: "test-data-for-geo-route",

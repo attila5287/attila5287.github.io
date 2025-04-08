@@ -16,8 +16,6 @@ export const renderModeButtons = (modes) => {
   $cont.style.margin = "1px";
   $cont.classList.add( "align-items-center" );
   
-
-  
   modes.forEach((mode) => {
     let buttonEl = document.createElement("a");
     buttonEl.classList.add("btn");
