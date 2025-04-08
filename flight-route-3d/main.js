@@ -37,18 +37,16 @@ map.on("draw.uncombine", drawHandler);
 map.on("draw.combine", drawHandler);
 
 map.on("style.load", function () {
-  map.addSource("geo-layer", {
+  map.addLayer( generateCustomLayer( app.modelURLs[0], app.mapCenters[0] ) );
+  
+  map.addSource("geo-extrude-src", {
     type: "geojson",
     data: app.inputDraw["geo"], //json data
   });
   console.log(app.inputDraw["geo"]);
-  map.addLayer(generateCustomLayer(app.modelURLs[0], app.mapCenters[0]));
+  
   // FIXME - this is a hack to get the geo layer to work
-  map.addSource("geo-extrude-src", {
-    type: "geojson",
-    data: app.inputDraw["geo"],
-  });
-  map.addLayer({
+  map.addLayer( {
     id: "geo-extrude-layer",
     type: "fill-extrusion",
     source: "geo-extrude-src",
@@ -60,15 +58,12 @@ map.on("style.load", function () {
       "fill-extrusion-base": 0,
       "fill-extrusion-emissive-strength": 0.9,
       "fill-extrusion-color": "SkyBlue",
-      "fill-extrusion-opacity": 0.5,
+      "fill-extrusion-opacity": 0.8,
+      "fill-extrusion-antialias": true,
     },
   });
   map.setConfigProperty("basemap", "lightPreset", "dusk");
-  drawHandler();
-  map.getSource("geo-layer").setData(app.inputDraw["geo"]);
 });
-// map.getSource("geo-extrude-layer").setData(app.inputDraw["geo"]);
-// map.triggerRepaint();
 
 function drawHandler(e) {
   const currentMode = draw.getMode();
@@ -76,13 +71,15 @@ function drawHandler(e) {
   const mode = draw.getMode();
   const userDrawn = draw.getAll();
   // console.log(userDrawn);
-
+  
   if (userDrawn.features.length > 0) {
+    map.getSource("geo-extrude-src").setData(userDrawn);
+    map.triggerRepaint();
     const area = turf.area(userDrawn);
     const distance = turf.length(userDrawn, { units: "meters" });
     // Restrict the area to 2 decimal points.
-    const rounded_area = Math.round(area * 100) / 100;
-    renderCalcbox(rounded_area, distance);
+    
+    renderCalcbox(area, distance);
   } else {
     renderCalcbox(0, 0);
     if (e.type !== "draw.delete") {

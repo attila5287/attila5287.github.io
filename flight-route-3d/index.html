@@ -1,83 +1,91 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>RoutePlanner3d</title>
-    <meta
-      name="viewport"
-      content="initial-scale=1,maximum-scale=1,user-scalable=no"
-    />
-    <link
-      href="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css"
-      rel="stylesheet"
-    />
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.2/slate/bootstrap.min.css"
-        integrity="sha512-s45Cp6qBZtDBpgMOVpm2GiA2SPPUCxOjNPNpQuUR0Hn/xEUvDESaR1qMFBJXGdT42VlYfMZoiPGG9xXoxYMaVw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://kit.fontawesome.com/5ddf6e0dc7.js"
-        crossorigin="anonymous"></script>
-    <script src="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js"></script>
-    
-  </head>
-  <body style="margin: 0; padding: 0;">
-    <pre id="info" style="position: fixed; z-index: 2;"> </pre>
+<head>
+  <meta charset="utf-8" />
+  <title>RoutePlanner3d</title>
+  <meta name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <link rel="icon"
+      href="https://img.icons8.com/external-others-phat-plus/64/external-business-photography-color-line-others-phat-plus-9.png"
+      type="image/x-icon">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css"
+      rel="stylesheet" />
+
+  <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.2/slate/bootstrap.min.css"
+      integrity="sha512-s45Cp6qBZtDBpgMOVpm2GiA2SPPUCxOjNPNpQuUR0Hn/xEUvDESaR1qMFBJXGdT42VlYfMZoiPGG9xXoxYMaVw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://kit.fontawesome.com/5ddf6e0dc7.js"
+      crossorigin="anonymous"></script>
+  <script
+      src="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js"></script>
+
+</head>
+
+<body style="margin: 0; padding: 0;">
+  <pre id="info" style="position: fixed; z-index: 2;"> </pre>
   <!-- C A L C    B O X    - D I S T A N C E -->
-    <style>
-      .calculation-box {
-        height: 75px;
-        /* width: 150px; */
-        bottom: 40px;
-        left: 10px;
-        background-color: rgba(255, 255, 255, 0.9);
-        padding: 5px;
-        text-align: center;
-        z-index: 1; 
-        position: absolute;
-      }
-      .calculation-box p{
-        margin: 0px;
-      }
-    .overlay{
-      z-index: 1; 
+  <style>
+    .calculation-box {
+      height: 75px;
+      /* width: 150px; */
+      bottom: 40px;
+      left: 10px;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 5px;
+      text-align: center;
+      z-index: 1;
       position: absolute;
     }
-    </style>
+
+    .calculation-box p {
+      margin: 0px;
+    }
+
+    .overlay {
+      z-index: 1;
+      position: absolute;
+    }
+  </style>
 
 
-    <div id="map"  style=" position: absolute;
+  <div id="map" style=" position: absolute;
         top: 0;
         bottom: 0;
         width: 100%;"></div>
 
-    <div class="calculation-box">
-      <p class="instructions-text"> Click the map to draw</p>
-      <div class="calculated-area"></div>
-    </div>
-      <style>
-        .custom-btn-container{
-          z-index: 1; 
-          position: absolute;
-        }
-      </style>
-    <div class="custom-btn-container btn-group btn-group-toggle">
-    </div>
+  <div class="calculation-box">
+    <p class="instructions-text"> Click the map to draw</p>
+    <div class="calculated-area"></div>
+  </div>
+  <style>
+    .custom-btn-container {
+      z-index: 1;
+      position: absolute;
+    }
+  </style>
+  <div class="custom-btn-container btn-group btn-group-toggle">
+  </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/6.5.0/turf.min.js"
-    integrity="sha512-Q7HOppxoH0L2M7hreVoFCtUZimR2YaY0fBewIYzkCgmNtgOOZ5IgMNYxHgfps0qrO1ef5m7L1FeHrhXlq1I9HA=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/6.5.0/turf.min.js"
+      integrity="sha512-Q7HOppxoH0L2M7hreVoFCtUZimR2YaY0fBewIYzkCgmNtgOOZ5IgMNYxHgfps0qrO1ef5m7L1FeHrhXlq1I9HA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script
       src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.5.0/mapbox-gl-draw.js"></script>
-    <link rel="stylesheet"
+  <link rel="stylesheet"
       href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.5.0/mapbox-gl-draw.css"
       type="text/css" />
-   <link href="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css" rel="stylesheet">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css"
+      rel="stylesheet">
 
-    <script src="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js"></script>
-    <script src="https://unpkg.com/three@0.126.0/build/three.min.js"></script>
-    <script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script
+      src="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js"></script>
+  <script src="https://unpkg.com/three@0.126.0/build/three.min.js"></script>
+  <script
+      src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
 
-    <script type="module" src="./main.js"></script>
-  </body>
+  <script type="module" src="./main.js"></script>
+</body>
+
 </html>

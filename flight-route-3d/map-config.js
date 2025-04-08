@@ -7,9 +7,9 @@ const map = new mapboxgl.Map({
   container: "map",
   style: "mapbox://styles/mapbox/standard",
   lightPreset: "dusk",
-  zoom: 19,
+  zoom: 18.25,
   center: coordsDenver, // civic
-  pitch: 60,
+  pitch: 50,
   bearing: 0,
   antialias: true,
 });
