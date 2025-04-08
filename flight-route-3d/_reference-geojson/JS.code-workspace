@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"name": "flight-route-3d",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "draw-3d"
+	}
+}
