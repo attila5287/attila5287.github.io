@@ -64,7 +64,6 @@ export const testData = {
         ],
     },
     waypoint: {
-        id: "waypoint",
         type: "FeatureCollection",
         features: [
             {
@@ -72,7 +71,7 @@ export const testData = {
                 type: "Feature",
                 properties: {},
                 geometry: {
-                    coordinates: [-104.98834605636421, 39.739328325790666],
+                    coordinates: [-104.98856871853614, 39.73919693270284],
                     type: "Point",
                 },
             },
@@ -81,7 +80,7 @@ export const testData = {
                 type: "Feature",
                 properties: {},
                 geometry: {
-                    coordinates: [-104.98800650565032, 39.73939646711008],
+                    coordinates: [-104.98847391745613, 39.73937595664805],
                     type: "Point",
                 },
             },
@@ -90,16 +89,7 @@ export const testData = {
                 type: "Feature",
                 properties: {},
                 geometry: {
-                    coordinates: [-104.98782806425507, 39.739303360174034],
-                    type: "Point",
-                },
-            },
-            {
-                id: "waypoint-drawn4",
-                type: "Feature",
-                properties: {},
-                geometry: {
-                    coordinates: [-104.98697406222989, 39.73929898251856],
+                    coordinates: [-104.9883284111343, 39.739505739705805],
                     type: "Point",
                 },
             },

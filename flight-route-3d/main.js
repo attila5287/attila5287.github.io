@@ -45,6 +45,13 @@ const app = {
             color: "MediumAquamarine",
             opacity: 0.8,
         },
+        waypoint: {
+            height: 10,
+            base: 8,
+            emissivestrength: 0.9,
+            color: "LightGreen",
+            opacity: 0.8,
+        },
     },
     prepInputDraw: function (mode) {
         switch (mode) {
@@ -53,7 +60,7 @@ const app = {
             case "area":
                 return this.inputDraw.area;
 			case "slope": {
-				const angle = 0;
+				const angle = 1;
 				// console.log('angle :>> ', angle);
 				const coordsInput = this.inputDraw.slope.features[0].geometry.coordinates;
 				const lineString = turf.lineString(coordsInput);
@@ -71,25 +78,54 @@ const app = {
 				} ).geometry.coordinates;
 				// console.log( 'coordsOffset :>> ', ...coordsOffset );
 				
-				const pol = [
+				const polCoords	 = [
 					...coordsInput,
 					...coordsOffset,
 				];
-				pol.push(coordsInput[0]);
+				// we need a ring so we push the first point again
+				polCoords.push(coordsInput[0]);
 				// console.log('pol :>> ', ...pol);
 
+				// we need to change the order of positions [x,y]s
 				const line2pol = turf.lineToPolygon(
 					turf.lineString([
-						pol[0],
-						pol[1],
-						pol[3],
-						pol[2],
-						pol[4],
+						polCoords[0],
+						polCoords[1],
+						polCoords[3],
+						polCoords[2],
+						polCoords[4],
 					])
                 );
 				// console.log('[line2pol] :>> ', line2pol);
                 return line2pol;
                 // return this.inputDraw.geo;
+			}
+			case "waypoint": {
+                const inputCoords = this.inputDraw.waypoint.features.map(
+                    (f) => f.geometry.coordinates
+                );
+                console.log( 'input coords :>> ', ...inputCoords );
+				// console.log('coords.length :>> ', inputCoords.length);
+				
+                const offsetCoords = turf.lineOffset(
+                    turf.lineString(inputCoords),
+                    2,
+                    { units: "meters" }
+				);
+				let tempArr = [];
+				tempArr = offsetCoords.geometry.coordinates;
+				tempArr.reverse();
+				const reversedOffsetCoords = tempArr;
+				// console.log( "offsetCoords :>> ", ...offsetCoords.geometry.coordinates );
+
+
+				const polCoords = [...inputCoords, ...reversedOffsetCoords];
+				// we need a ring so we push the first point again
+				polCoords.push( inputCoords[0] );
+				// console.log('polCoords :>> ', ...polCoords);
+
+				return turf.lineToPolygon( turf.lineString( polCoords ) );
+				// return this.inputDraw.geo;
             }
         }
     },
@@ -99,7 +135,12 @@ const app = {
         map.setConfigProperty("basemap", "lightPreset", "dusk");
         map.addLayer(generateCustomLayer(app.modelURLs[0], app.mapCenters[0]));
 
-        ["slope", "area", "geo"].forEach((mode) => {
+		[
+			"area",
+			"geo",
+			"slope",
+			"waypoint",
+		].forEach((mode) => {
             map.addSource(`${mode}-extrude-src`, {
                 type: "geojson",
                 data: app.prepInputDraw(mode),
@@ -127,12 +168,16 @@ const app = {
     updateLayers: function (e) {
         const currentMode = draw.getMode();
         console.log("draw H.A.N.D.L.E.R mode:" + currentMode);
-        const drawData = draw.getAll();
+		const drawData = draw.getAll();
         let layerData = drawData?.features?.length > 0 ? drawData : testData;
+		console.log(
+            "drawData :>> ",
+            layerData.features.map((d) => d.geometry.coordinates)
+        );
 
         console.log(layerData);
-        map.getSource(currentMode+"-extrude-src").setData(layerData);
-        renderCalcbox(layerData.currentMode);
+        // map.getSource(currentMode+"-extrude-src").setData(layerData);
+        // renderCalcbox(layerData.currentMode);
     },
 };
 map.on("draw.create", app.updateLayers);
