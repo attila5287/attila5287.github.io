@@ -1,13 +1,13 @@
 "use strict";
 export const generateRoute3d = {
   geo: ( poly, userInput ) => {
-    console.log( userInput );
     const {
       inBaseHi = 0,
       inTopHi = 20,
       inStepCount = 4,
       inToleranceWidth = 6,
     } = userInput || {};
+    console.log( userInput );
 
     let stepHeight = ( inTopHi - inBaseHi ) / inStepCount;
 

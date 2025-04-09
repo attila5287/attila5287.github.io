@@ -724,7 +724,10 @@ map.on("style.load", () => {
     "line-elevation-reference": "sea",
     "line-cap": "round",
   };
+```
+-----
 
+```JS
   // id: "elevated-line-horizontal",
   layoutLine["line-cross-slope"] = 0;
   map.addLayer({

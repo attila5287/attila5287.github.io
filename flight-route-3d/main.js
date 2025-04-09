@@ -53,7 +53,7 @@ const app = {
             opacity: 0.8,
         },
     },
-    prepInputDraw: function (mode) {
+    fillExtData: function (mode) {
         switch (mode) {
             case "geo":
                 return this.inputDraw.geo;
@@ -104,7 +104,7 @@ const app = {
                 const inputCoords = this.inputDraw.waypoint.features.map(
                     (f) => f.geometry.coordinates
                 );
-                console.log( 'input coords :>> ', ...inputCoords );
+                // console.log( 'input coords :>> ', ...inputCoords );
 				// console.log('coords.length :>> ', inputCoords.length);
 				
                 const offsetCoords = turf.lineOffset(
@@ -129,42 +129,108 @@ const app = {
             }
         }
     },
-    init: function () {
-        // app.generateRoutes();
-        loadModeButtons(app.modes);
-        map.setConfigProperty("basemap", "lightPreset", "dusk");
-        map.addLayer(generateCustomLayer(app.modelURLs[0], app.mapCenters[0]));
+	init: function () {
+		// app.generateRoutes();
+		loadModeButtons( app.modes );
+		map.setConfigProperty( "basemap", "lightPreset", "dusk" );
+		map.addLayer( generateCustomLayer( app.modelURLs[0], app.mapCenters[0] ) );
 
 		[
 			"area",
 			"geo",
 			"slope",
 			"waypoint",
-		].forEach((mode) => {
-            map.addSource(`${mode}-extrude-src`, {
+		].forEach( ( mode ) => {
+			map.addSource( `${ mode }-extrude-src`, {
+				type: "geojson",
+				data: app.fillExtData( mode ),
+			} );
+			
+			map.addLayer( {
+				id: `${ mode }-extrude-layer`,
+				type: "fill-extrusion",
+				source: `${ mode }-extrude-src`,
+				layout: {
+					"fill-extrusion-edge-radius": 0.0,
+				},
+				paint: {
+					"fill-extrusion-height": app.fillExtProps[mode].height,
+					"fill-extrusion-base": app.fillExtProps[mode].base,
+					"fill-extrusion-emissive-strength": 0.9,
+					"fill-extrusion-color": app.fillExtProps[mode].color,
+					"fill-extrusion-opacity": 0.8,
+					"fill-extrusion-antialias": true,
+				},
+			} );
+		} );
+
+		[
+			"geo",
+		].forEach( ( mode ) => {
+            console.log("app.inputDraw[mode] :>> ", app.inputDraw[mode]);
+			const generatedRoute = generateRoute3d[mode]( app.inputDraw.geo );
+			
+            console.log("generatedRoute :>> ", generatedRoute);
+            map.addSource(`${mode}-line-src`, {
                 type: "geojson",
-                data: app.prepInputDraw(mode),
-            });
-
+                data: generatedRoute,
+				lineMetrics: true,
+			} );
+            // base config for 2 line layers hrz/vert
+            const paintLine = {
+                "line-emissive-strength": 1.0,
+                "line-blur": 0.2,
+                "line-width": 1.25,
+                "line-color": "limegreen",
+                // "line-gradient": [
+                //   "interpolate",
+                //   ["linear"],
+                //   ["line-progress"],
+                //   0.02, "skyblue",
+                //   0.04, "aqua",
+                //   0.06, "limegreen",
+                //   1.00, "lime",
+                // ],
+                // "line-trim-color": "red",
+                // "line-trim-offset": [0.0, 0.005],
+                // 'line-gap-width': 1,
+            };
+            let layoutLine = {
+                // shared layout between two layers
+                "line-z-offset": [
+                    "at",
+                    [
+                        "*",
+                        ["line-progress"],
+                        ["-", ["length", ["get", "elevation"]], 1],
+                    ],
+                    ["get", "elevation"],
+                ],
+                "line-elevation-reference": "sea",
+                "line-cap": "round",
+			};
+			
+			layoutLine["line-cross-slope"] = 0;
             map.addLayer({
-                id: `${mode}-extrude-layer`,
-                type: "fill-extrusion",
-                source: `${mode}-extrude-src`,
-                layout: {
-                    "fill-extrusion-edge-radius": 0.0,
-                },
-                paint: {
-                    "fill-extrusion-height": app.fillExtProps[mode].height,
-                    "fill-extrusion-base": app.fillExtProps[mode].base,
-                    "fill-extrusion-emissive-strength": 0.9,
-                    "fill-extrusion-color": app.fillExtProps[mode].color,
-                    "fill-extrusion-opacity": 0.8,
-                    "fill-extrusion-antialias": true,
-                },
+                id: `${mode}-line-horizontal`,
+                type: "line",
+                source: `${mode}-line-src`,
+                layout: layoutLine,
+                paint: paintLine,
             });
-        });
-    },
 
+            // elevated-line-vert
+            layoutLine["line-cross-slope"] = 1;
+            map.addLayer({
+                id: `${mode}-line-vertical`,
+                type: "line",
+                source: `${mode}-line-src`,
+                layout: layoutLine,
+                paint: paintLine,
+            });
+			
+        } );
+	},	
     updateLayers: function (e) {
         const currentMode = draw.getMode();
         console.log("draw H.A.N.D.L.E.R mode:" + currentMode);
