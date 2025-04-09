@@ -1,7 +1,6 @@
 import { map, draw } from './map-config.js';
-import { setCursorStyle } from './draw-modes.js';
-
-export const renderModeButtons = (modes) => {
+import { renderMessage } from './render-message.js';
+export const loadModeButtons = function (modes) {
   const modeIcons = {
     area: ["fa-draw-polygon"],
     geo: ["fa-building"],
@@ -30,9 +29,11 @@ export const renderModeButtons = (modes) => {
     buttonEl.textContent = mode;
     buttonEl.appendChild(btnIcon);
     buttonEl.style.marginLeft = "4px";
-    buttonEl.addEventListener("click", () => {
+    
+    buttonEl.addEventListener( "click", () => {
+      renderMessage( mode + " mode ON" );
       draw.changeMode(mode + "_mode");
-      setCursorStyle(mode + "_mode", map);
+      // map.getCanvas().style.cursor = "crosshair";
     });
 
     $cont.appendChild(buttonEl);

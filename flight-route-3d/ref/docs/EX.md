@@ -1,13 +1,4 @@
 ```js
-mapboxgl.accessToken = 'pk.eyJ1IjoiYXR0aWxhNTIiLCJhIjoiY2thOTE3N3l0MDZmczJxcjl6dzZoNDJsbiJ9.bzXjw1xzQcsIhjB_YoAuEw';
-const map = new mapboxgl.Map( {
-    container: 'map',
-    // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-    style: 'mapbox://styles/mapbox/streets-v12',
-    center: [2.3399, 48.8555],
-    zoom: 12
-} );
-
 const distanceContainer = document.getElementById( 'distance' );
 
 // GeoJSON object to hold our measurement features

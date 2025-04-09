@@ -1,75 +1,62 @@
 // Create custom modes by copying the default modes
-export const areaMode = Object.assign({}, window.MapboxDraw.modes.draw_polygon);
+import { renderMessage } from "./render-message.js";
+export const areaMode = Object.assign( {}, window.MapboxDraw.modes.draw_polygon );
 export const slopeMode = Object.assign({}, window.MapboxDraw.modes.draw_line_string);
 export const waypointMode = Object.assign({}, window.MapboxDraw.modes.draw_point);
 export const geoMode = Object.assign({}, window.MapboxDraw.modes.draw_polygon);
-export function setCursorStyle(mode, map) {
-  switch (mode) {
-    case "area_mode":
-    case "slope_mode":
-    case "geo_mode":
-      map.getCanvas().style.cursor = "crosshair";
-      break;
-    case "waypoint_mode":
-      map.getCanvas().style.cursor = "pointer";
-      break;
-    default:
-      map.getCanvas().style.cursor = "";
-  }
-}
 
 // Area Polygon Mode
-areaMode.onSetup = function (opts) {
+areaMode.onSetup = function ( opts, map) {
   const state = MapboxDraw.modes.draw_polygon.onSetup.call(this, opts);
   console.log("Area polygon mode activated!");
-  setCursorStyle("area_mode", this.map);
+  this.map.getCanvas().style.cursor = "crosshair";
   return state;
 };
 
-areaMode.onStop = function (state) {
+areaMode.onStop = function ( state, map) {
   console.log("Area polygon mode stopped.");
-  setCursorStyle("", this.map);
-  MapboxDraw.modes.draw_polygon.onStop.call(this, state);
+  this.map.getCanvas().style.cursor = "";
+  MapboxDraw.modes.draw_polygon.onStop.call( this, state );
 };
 
 // Perimeter Polygon Mode
-geoMode.onSetup = function (opts) {
+geoMode.onSetup = function ( opts, map) {
   const state = MapboxDraw.modes.draw_polygon.onSetup.call(this, opts);
   console.log("Perimeter polygon mode activated!");
-  setCursorStyle("geo_mode", this.map);
+  this.map.getCanvas().style.cursor = "crosshair";
   return state;
 };
 
-geoMode.onStop = function (state) {
+geoMode.onStop = function ( state, map) {
   console.log("Perimeter polygon mode stopped.");
-  setCursorStyle("", this.map);
+  this.map.getCanvas().style.cursor = "";
   MapboxDraw.modes.draw_polygon.onStop.call(this, state);
 };
 
 // Line Mode
-slopeMode.onSetup = function (opts) {
+slopeMode.onSetup = function ( opts, map) {
   const state = MapboxDraw.modes.draw_line_string.onSetup.call(this, opts);
   console.log("Slope line mode activated!");
-  setCursorStyle("slope_mode", this.map);
+  this.map.getCanvas().style.cursor = "crosshair";
   return state;
 };
 
-slopeMode.onStop = function (state) {
+slopeMode.onStop = function ( state, map) {
   console.log("Slope line mode stopped.");
-  setCursorStyle("", this.map);
+  this.map.getCanvas().style.cursor = "";
   MapboxDraw.modes.draw_line_string.onStop.call(this, state);
 };
 
 // Point Mode
-waypointMode.onSetup = function (opts) {
+waypointMode.onSetup = function ( opts, map) {
   const state = MapboxDraw.modes.draw_point.onSetup.call(this, opts);
   console.log("Waypoint mode activated!");
-  setCursorStyle("waypoint_mode", this.map);
+  this.map.getCanvas().style.cursor = "crosshair";
   return state;
 };
 
-waypointMode.onStop = function (state) {
+waypointMode.onStop = function ( state, map) {
   console.log("Waypoint mode stopped.");
-  setCursorStyle("", this.map);
+  this.map.getCanvas().style.cursor = "";
   MapboxDraw.modes.draw_point.onStop.call(this, state);
 }; 

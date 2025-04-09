@@ -33,7 +33,4 @@ const draw = new MapboxDraw({
 
 map.addControl(draw);
 
-// Set custom polygon mode as default
-draw.changeMode("area_mode");
-
 export { map, draw };

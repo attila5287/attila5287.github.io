@@ -29,14 +29,16 @@
   <style>
     .calculation-box {
       height: 75px;
-      /* width: 150px; */
+      width: 150px;
       bottom: 40px;
       left: 10px;
-      background-color: rgba(255, 255, 255, 0.9);
+      background-color: rgba(48, 40, 40, 0.371);
       padding: 5px;
       text-align: center;
       z-index: 1;
       position: absolute;
+      color: silver;
+      border-radius: 4px;
     }
 
     .calculation-box p {
@@ -50,13 +52,16 @@
   </style>
 
 
-  <div id="map" style=" position: absolute;
+  <div id="map" 
+        style="
+        position: absolute;
         top: 0;
         bottom: 0;
-        width: 100%;"></div>
+        width: 100%;
+        "></div>
 
   <div class="calculation-box">
-    <p class="instructions-text"> Click the map to draw</p>
+    <p class="message-text"></p>
     <div class="calculated-area"></div>
   </div>
   <style>
