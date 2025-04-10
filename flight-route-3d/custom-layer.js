@@ -22,7 +22,7 @@ function generateCustomLayer(urlModel3d, modelOrigin) {
     /* Since the 3D model is in real world meters, a scale transform needs to be
      * applied since the CustomLayerInterface expects units in MercatorCoordinates.
      */
-    scale: modelAsMercatorCoordinate.meterInMercatorCoordinateUnits(),
+    scale: modelAsMercatorCoordinate.meterInMercatorCoordinateUnits()*0.5,
   };
 
   const THREE = window.THREE;

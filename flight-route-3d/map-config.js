@@ -6,10 +6,9 @@ mapboxgl.accessToken =
 const map = new mapboxgl.Map({
   container: "map",
   style: "mapbox://styles/mapbox/standard",
-  lightPreset: "dusk",
-  zoom: 18.25,
+  zoom: 18.00,
   center: coordsDenver, // civic
-  pitch: 50,
+  pitch: 40,
   bearing: 0,
   antialias: true,
 });

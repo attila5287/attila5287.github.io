@@ -670,7 +670,6 @@ map.on("style.load", () => {
       "fill-extrusion-base": fetchUserInput().inBaseHi,
       "fill-extrusion-emissive-strength": 0.9,
       "fill-extrusion-color": "SkyBlue",
-      "fill-extrusion-flood-light-color": "DarkTurquoise",
       "fill-extrusion-opacity": 0.5,
       "fill-extrusion-ambient-occlusion-wall-radius": 0,
       "fill-extrusion-ambient-occlusion-radius": 6.0,
@@ -680,6 +679,7 @@ map.on("style.load", () => {
       "fill-extrusion-line-width": 0, //outwards like a wall
       "fill-extrusion-flood-light-wall-radius": 20,
       "fill-extrusion-flood-light-intensity": 0.9,
+      "fill-extrusion-flood-light-color": "DarkTurquoise",
       "fill-extrusion-flood-light-ground-radius": 20,
       "fill-extrusion-cutoff-fade-range": 0,
       "fill-extrusion-rounded-roof": true,
