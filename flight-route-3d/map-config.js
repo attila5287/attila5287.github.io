@@ -6,10 +6,10 @@ mapboxgl.accessToken =
 const map = new mapboxgl.Map({
   container: "map",
   style: "mapbox://styles/mapbox/standard",
-  zoom: 18.00,
+  zoom: 18,
   center: coordsDenver, // civic
-  pitch: 40,
-  bearing: 0,
+  pitch: 60,
+  bearing: 10,
   antialias: true,
 });
 

@@ -1,32 +1,33 @@
 const fillExtProps = {
-    geo: {
-        height: 20,
-        base: 0,
-        emissivestrength: 0.9,
-        color: "SkyBlue",
-        opacity: 0.8,
-    },
-    area: {
-        height: 1,
-        base: 0,
-        emissivestrength: 0.9,
-        color: "RoyalBlue",
-        opacity: 0.8,
-    },
-    slope: {
-        height: 20,
-        base: 0,
-        emissivestrength: 0.9,
-        color: "MediumAquamarine",
-        opacity: 0.8,
-    },
-    waypoint: {
-        height: 20,
-        base: 0,
-        emissivestrength: 0.9,
-        color: "LightGreen",
-        opacity: 0.8,
-    },
+	geo: {
+		height: 20,
+		base: 0,
+		emissivestrength: 0.9,
+		color: "SkyBlue",
+		opacity: 0.8,
+	},
+	area: {
+		height: 1,
+		base: 0,
+		emissivestrength: 0.9,
+		color: "RoyalBlue",
+		opacity: 0.8,
+	},
+	slope: {
+		height: 20,
+		base: 0,
+		emissivestrength: 0.9,
+		// color: "MediumAquamarine",
+		color: "Black",
+		opacity: 0.8,
+	},
+	waypoint: {
+		height: 20,
+		base: 0,
+		emissivestrength: 0.9,
+		color: "SlateBlue",
+		opacity: 0.8,
+	},
 };
 const fillExtData = function (mode) {
     switch (mode) {
@@ -37,8 +38,19 @@ const fillExtData = function (mode) {
         case "slope": {
             const angle = 3;
             // console.log('angle :>> ', angle);
-            const coordsInput =
-                this.inputDraw.slope.features[0].geometry.coordinates;
+            const indexOfLastPos =
+                this.inputDraw.slope.features[0].geometry.coordinates.length - 1;
+            // console.log(indexOfLastPos);
+            const coordsInput = [
+				this.inputDraw.slope.features[0].geometry.coordinates[
+					indexOfLastPos-1
+				],
+				this.inputDraw.slope.features[0].geometry.coordinates[
+					indexOfLastPos
+				],
+            ];
+            // const coords1nput = this.inputDraw.slope.features[0].geometry.coordinates.splice( -2 );
+            
             const lineString = turf.lineString(coordsInput);
             // console.log( 'coordsInput :>> ', ...coordsInput );
             const tan = Math.tan((angle * Math.PI) / 180);

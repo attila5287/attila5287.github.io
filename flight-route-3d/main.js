@@ -52,7 +52,7 @@ const app = {
                     "fill-extrusion-base": app.fillExtProps[mode].base,
                     "fill-extrusion-color": app.fillExtProps[mode].color,
                     "fill-extrusion-emissive-strength": 0.9,
-                    "fill-extrusion-opacity": 0.8,
+                    "fill-extrusion-opacity": 0.4,
                     "fill-extrusion-antialias": true,
                     "fill-extrusion-cast-shadows": false,
                     "fill-extrusion-flood-light-intensity": 0.9,
@@ -63,7 +63,7 @@ const app = {
         });
 
         //TODO - gten route line layers - route path
-        ["geo", "area", "slope"].forEach((mode) => {
+        ["geo", "area", "slope", "waypoint"].forEach((mode) => {
             // console.log("app.inputDraw" + mode, app.inputDraw[mode]);
 
             const generatedRoute = generateRoute3d[mode](app.inputDraw[mode]);

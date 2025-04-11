@@ -19,7 +19,7 @@ export const genRouteGeo = ( poly, userInput ) => {
       units: "meters",
     });
     const simplified = turf.simplify(buffered, {
-      tolerance: 0.000001,
+      tolerance: 0.0000001,
       highQuality: true,
     });
     return turf.polygonSmooth(simplified, { iterations: 3 });
@@ -105,7 +105,7 @@ export const genRouteGeo = ( poly, userInput ) => {
     }
   }
   
-  // console.log(features[0].geometry.coordinates.length);
+  // console.log( ...features );
   return {
     type: "FeatureCollection",
     features: features,
