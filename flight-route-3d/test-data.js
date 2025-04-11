@@ -1,106 +1,115 @@
 "use strict";
 export const testData = {
-    geo: {
-        id: "geo",
-        type: "FeatureCollection",
-        features: [
-            {
-                id: "geo-drawn",
-                type: "Feature",
-                properties: {},
-                geometry: {
-                    coordinates: [
-                        [
-                            [-104.98880577159332, 39.73931234424225],
-                            [-104.9888047909794, 39.739474425443774],
-                            [-104.98889877496177, 39.739474389236506],
-                            [-104.98890000860759, 39.73931432060394],
-                            [-104.98880577159332, 39.73931234424225],
-                        ],
-                    ],
-                    type: "Polygon",
-                },
-            },
-        ],
-    },
-    area: {
-        id: "area",
-        type: "FeatureCollection",
-        features: [
-            {
-                id: "area-drawn",
-                type: "Feature",
-                geometry: {
-                    coordinates: [
-                        [
-                            [-104.98896674950852, 39.73912645283187],
-                            [-104.98946986603366, 39.73913859698544],
-                            [-104.9897045033536, 39.739365865964174],
-                            [-104.98915626542545, 39.7393676004568],
-                            [-104.98896674950852, 39.73912645283187],
-                        ],
-                    ],
-                    type: "Polygon",
-                },
-            },
-        ],
-    },
-    slope: {
-        id: "slope",
-        type: "FeatureCollection",
-        features: [
-            {
-                id: "slope-drawn",
-                type: "Feature",
-                type: "LineString",
-                geometry: {
-                    coordinates: [
-                        [-104.98868933367768, 39.739292666320125],
-                        [-104.9883717991386, 39.739218068040856],
-                    ],
-                },
-            },
-        ],
-    },
-    waypoint: {
-        type: "FeatureCollection",
-        features: [
-            {
-                id: "waypoint-drawn0",
-                type: "Feature",
-                properties: {},
-                geometry: {
-                    coordinates: [-104.98833605697591, 39.73920584798282],
-                    type: "Point",
-                },
-            },
-            {
-                id: "waypoint-drawn1",
-                type: "Feature",
-                properties: {},
-                geometry: {
-                    coordinates: [-104.98822709052405, 39.73924307111167],
-                    type: "Point",
-                },
-            },
-            {
-                id: "waypoint-drawn2",
-                type: "Feature",
-                properties: {},
-                geometry: {
-                    coordinates: [-104.98819490822522, 39.73937299253359],
-                    type: "Point",
-                },
-            },
-            {
-                id: "waypoint-drawn3",
-                type: "Feature",
-                properties: {},
-                geometry: {
-                    coordinates: [-104.98806349717078, 39.73944929547727],
-                    type: "Point",
-                },
-            },
-        ],
-    },
+	geo: {
+		id: "geo",
+		type: "FeatureCollection",
+		features: [
+			{
+				id: "geo-drawn",
+				type: "Feature",
+				properties: {},
+				geometry: {
+					coordinates: [
+						[
+							[-104.98880577159332, 39.73931234424225],
+							[-104.9888047909794, 39.739474425443774],
+							[-104.98889877496177, 39.739474389236506],
+							[-104.98890000860759, 39.73931432060394],
+							[-104.98880577159332, 39.73931234424225],
+						],
+					],
+					type: "Polygon",
+				},
+			},
+		],
+	},
+	area: {
+		id: "area",
+		type: "FeatureCollection",
+		features: [
+			{
+				id: "area-drawn",
+				type: "Feature",
+				geometry: {
+					coordinates: [
+						[
+							[-104.98896674950852, 39.73912645283187],
+							[-104.98946986603366, 39.73913859698544],
+							[-104.9897045033536, 39.739365865964174],
+							[-104.98915626542545, 39.7393676004568],
+							[-104.98896674950852, 39.73912645283187],
+						],
+					],
+					type: "Polygon",
+				},
+			},
+		],
+	},
+	slope: {
+		id: "slope",
+		type: "FeatureCollection",
+		features: [
+			{
+				id: "slope-drawn",
+				type: "Feature",
+				type: "LineString",
+				geometry: {
+					coordinates: [
+							[-104.98881326473402, 39.73920871530939],
+							[-104.98839605462733, 39.73907142450156],
+					],
+				},
+			},
+		],
+	},
+	waypoint: {
+		type: "FeatureCollection",
+		features: [
+			{
+				id: "2lNwYiRH3w94iUxFIhHhTxtg9uev09vY",
+				type: "Feature",
+				properties: {},
+				geometry: {
+					coordinates: [-104.9883363062525, 39.73916544140897],
+					type: "Point",
+				},
+			},
+			{
+				id: "dsZlveKqeu4ieLN62gqyqDKcQIj3z6NE",
+				type: "Feature",
+				properties: {},
+				geometry: {
+					coordinates: [-104.98807277881374, 39.73918516564379],
+					type: "Point",
+				},
+			},
+			{
+				id: "w4bCp3vw5oWNKDXPXxkhwSsYgk3Cqg95",
+				type: "Feature",
+				properties: {},
+				geometry: {
+					coordinates: [-104.98830108599321, 39.73938745825862],
+					type: "Point",
+				},
+			},
+			{
+				id: "mOMAWEacxBylbxL61xqy9U5x2fxm35wG",
+				type: "Feature",
+				properties: {},
+				geometry: {
+					coordinates: [-104.98795849481498, 39.73927698340856],
+					type: "Point",
+				},
+			},
+			{
+				id: "NMjEvdHkiOwIBnqOuNv3zp4HYqEXfMQn",
+				type: "Feature",
+				properties: {},
+				geometry: {
+					coordinates: [-104.9881205167563, 39.73947261303269],
+					type: "Point",
+				},
+			},
+		],
+	},
 };
