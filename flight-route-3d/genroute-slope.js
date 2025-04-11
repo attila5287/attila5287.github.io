@@ -16,50 +16,61 @@ export const genRouteSlope = (lineSegment, userInput) => {
 	};
 
 	// console.log(disp.vert, disp.horz);
-	const inputCoords = lineSegment.features[0].geometry.coordinates;
+	const inputPair = lineSegment.features[0].geometry.coordinates.splice(-2);
 	const inMeters = { units: "meters" };
 	const inp = {
 		start: {
-			x: inputCoords[inputCoords.length - 2][0],
-			y: inputCoords[inputCoords.length - 2][1],
+			x: inputPair[0][0],
+			y: inputPair[0][1],
 		},
 		end: {
-			x: inputCoords[inputCoords.length - 1][0],
-			y: inputCoords[inputCoords.length - 1][1],
+			x: inputPair[1][0],
+			y: inputPair[1][1],
 		},
 	};
-	const len = turf.distance(inputCoords[0], inputCoords[1], inMeters);
+	const len = turf.distance(inputPair[0], inputPair[1], inMeters);
 	const numCoords = 200;
-
-	const offset = turf.lineOffset( turf.lineString( [[inp.start.x, inp.start.y], [inp.end.x, inp.end.y] ]), disp.horz, inMeters );
-	// console.log(offset);
-	const off = {
-		start: {
-			x: offset.geometry.coordinates[0][0],
-			y: offset.geometry.coordinates[0][1],
-		},
-		end: {
-			x: offset.geometry.coordinates[1][0],
-			y: offset.geometry.coordinates[1][1],
-		},
-	};
-	console.log(off);
 	
 	// step 1: iter thru 200 pos vectors, create a sample coords-elev array
 	for ( let indexPass = 0; indexPass < stepCount; indexPass++ ) {
+		let enter = [inp.start.x, inp.start.y];
+		console.log(enter);
+		const offset = turf.lineOffset( turf.lineString( [[inp.start.x, inp.start.y], [inp.end.x, inp.end.y] ]), disp.horz/stepCount, inMeters );
+		// console.log(offset);
+		const off = {
+			start: {
+				x: offset.geometry.coordinates[0][0],
+				y: offset.geometry.coordinates[0][1],
+			},
+			end: {
+				x: offset.geometry.coordinates[1][0],
+				y: offset.geometry.coordinates[1][1],
+			},
+		};
+		const exit = [off.end.x, off.end.y];
+		console.log( exit );
+		console.log(turf.distance(enter, exit, inMeters));
 		const distVec = [];
 		const elevs = [];
 		const coords = [];
+		// SECTION - add Modified positions modX, modY
 		for (let i = 0; i <= numCoords; i++) {
 			const posX = inp.start.x + (inp.end.x - inp.start.x) * (i / numCoords);
 			const posY = inp.start.y + (inp.end.y - inp.start.y) * (i / numCoords);
-			const dist = turf.distance([posX, posY], [inp.start.x, inp.start.y], inMeters);
+			const dist = turf.distance([posX, posY], [inp.start.	x, inp.start.y], inMeters);
 			// console.log(dist, len);
 			const startHiPass = startHi;
 			const elev = utils.elevateFromDistance(dist, len, stepHi, 0);
 			// console.log( elev );
 			elevs.push(elev);
 			coords.push([posX, posY]);
+			
+			const modX = enter.x + (exit.x - enter.x) * (i / numCoords);
+			const modY = enter.y + (exit.y - enter.y) * (i / numCoords);
+			// 
+			coords.push( [
+				posX, 
+				posY] );
 			distVec.push(dist);
 		}
 		const geometry = {
