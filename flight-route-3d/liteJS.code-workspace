@@ -1,0 +1,13 @@
+{
+    "folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"editor.suggest.showClasses": false,
+		"editor.suggest.showInterfaces": false,
+		"outline.showInterfaces": false,
+		"breadcrumbs.showInterfaces": false
+	}
+}

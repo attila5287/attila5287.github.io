@@ -59,9 +59,9 @@ export const testData = {
 				type: "LineString",
 				geometry: {
 					coordinates: [
-						[-104.98872762611701, 39.73941031151935],
-						[-104.98892146570941, 39.73914624529985],
-						[-104.9883443285896, 39.73898023580185],
+						[-104.9890505253979, 39.73934229970274],
+						[-104.98895472324512, 39.739218116228955],
+						[-104.98850308452633, 39.73918654412361],
 					],
 				},
 			},
@@ -71,47 +71,47 @@ export const testData = {
 		type: "FeatureCollection",
 		features: [
 			{
-				id: "2lNwYiRH3w94iUxFIhHhTxtg9uev09vY",
+				id: "qYftL2gBP4s2Gq4J1bugGPEqMOBYgMJx",
 				type: "Feature",
 				properties: {},
 				geometry: {
-					coordinates: [-104.9883363062525, 39.73916544140897],
+					coordinates: [-104.9884559540231, 39.73917341215039],
 					type: "Point",
 				},
 			},
 			{
-				id: "dsZlveKqeu4ieLN62gqyqDKcQIj3z6NE",
+				id: "7UULuodjaBJMb72muL4R0P07GvMyILTF",
 				type: "Feature",
 				properties: {},
 				geometry: {
-					coordinates: [-104.98807277881374, 39.73918516564379],
+					coordinates: [-104.988114199535, 39.73904261892682],
 					type: "Point",
 				},
 			},
 			{
-				id: "w4bCp3vw5oWNKDXPXxkhwSsYgk3Cqg95",
+				id: "1HV2SGdaprGMcvIot8KmMiF0FoygJTkR",
 				type: "Feature",
 				properties: {},
 				geometry: {
-					coordinates: [-104.98830108599321, 39.73938745825862],
+					coordinates: [-104.98827533129328, 39.73928299585319],
 					type: "Point",
 				},
 			},
 			{
-				id: "mOMAWEacxBylbxL61xqy9U5x2fxm35wG",
+				id: "ROwbvX6KJLjka8l5IcUmbcczEUDXD2Hv",
 				type: "Feature",
 				properties: {},
 				geometry: {
-					coordinates: [-104.98795849481498, 39.73927698340856],
+					coordinates: [-104.98790970565379, 39.73917536819383],
 					type: "Point",
 				},
 			},
 			{
-				id: "NMjEvdHkiOwIBnqOuNv3zp4HYqEXfMQn",
+				id: "COKSeoDUjAj8yeyVjau90e0v35ZuyBty",
 				type: "Feature",
 				properties: {},
 				geometry: {
-					coordinates: [-104.9881205167563, 39.73947261303269],
+					coordinates: [-104.98822617185245, 39.73949181329584],
 					type: "Point",
 				},
 			},

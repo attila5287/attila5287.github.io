@@ -20,7 +20,8 @@ export const genRouteGeo = ( poly, userInput ) => {
     });
     const simplified = turf.simplify(buffered, {
       tolerance: 0.0000001,
-      highQuality: true,
+      highQuality: false,
+      mutate: true,
     });
     return turf.polygonSmooth(simplified, { iterations: 3 });
   }
@@ -64,7 +65,7 @@ export const genRouteGeo = ( poly, userInput ) => {
         const cord = coords[idxCord];
         feat.geometry.coordinates.push(cord);
       }
-      // FIXME only works with [0]th polygon
+      //  only works with [0]th polygon
       feat.properties.distFromStart = utils.distanceFromCoords(
         smoother.features[indexOfLastFeat].geometry.coordinates.flatMap(
           (d) => d

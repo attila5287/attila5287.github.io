@@ -26,6 +26,7 @@ const app = {
     fillExtProps: fillExtProps,
     fillExtData: fillExtData,
     init: function () {
+        // console.log(app.fillExtProps["slope"].height);
         // app.generateRoutes();
         loadModeButtons(app.modes);
         map.setConfigProperty("basemap", "lightPreset", "night");
@@ -41,35 +42,32 @@ const app = {
             // console.log(mode + " Fill Ext layer ", genFillExt);
 
             map.addLayer({
-                id: `${mode}-extrude-layer`,
-                type: "fill-extrusion",
-                source: `${mode}-extrude-src`,
-                layout: {
-                    "fill-extrusion-edge-radius": 0.0,
-                },
-                paint: {
-                    "fill-extrusion-height": app.fillExtProps[mode].height,
-                    "fill-extrusion-base": app.fillExtProps[mode].base,
-                    "fill-extrusion-color": app.fillExtProps[mode].color,
-                    "fill-extrusion-emissive-strength": 0.9,
-                    "fill-extrusion-opacity": 0.4,
-                    "fill-extrusion-antialias": true,
-                    "fill-extrusion-cast-shadows": false,
-                    "fill-extrusion-flood-light-intensity": 0.9,
-                    "fill-extrusion-flood-light-color": "DarkTurquoise",
-                    "fill-extrusion-flood-light-ground-radius": 1,
-                },
-            });
+				id: `${mode}-extrude-layer`,
+				type: "fill-extrusion",
+				source: `${mode}-extrude-src`,
+				layout: {
+					"fill-extrusion-edge-radius": app.fillExtProps[mode].edgeRadius,
+				},
+				paint: {
+					"fill-extrusion-height": app.fillExtProps[mode].height,
+					"fill-extrusion-base": app.fillExtProps[mode].base,
+					"fill-extrusion-color": app.fillExtProps[mode].color,
+					"fill-extrusion-emissive-strength": 0.9,
+					"fill-extrusion-opacity": 0.4,
+					"fill-extrusion-cast-shadows": false,
+					"fill-extrusion-flood-light-intensity": 0.5,
+					"fill-extrusion-flood-light-color": "DarkTurquoise",
+					"fill-extrusion-flood-light-ground-radius": 1,
+				},
+			});
         });
-
-        //TODO - gten route line layers - route path
+        // ADD  export those functions to a new file
         ["geo", "area", "slope", "waypoint"].forEach((mode) => {
             // console.log("app.inputDraw" + mode, app.inputDraw[mode]);
 
             const generatedRoute = generateRoute3d[mode](app.inputDraw[mode]);
 
             // console.log(mode + " gen'd route -Line- layer ", generatedRoute);
-
             map.addSource(`${mode}-line-src`, {
                 type: "geojson",
                 data: generatedRoute,
@@ -78,8 +76,8 @@ const app = {
             // base config for 2 line layers hrz/vert
             const paintLine = {
                 "line-emissive-strength": 1.0,
-                "line-blur": 0.2,
-                "line-width": 1.75,
+                "line-blur": 0.25,
+                "line-width": 2.75,
                 "line-color": "limegreen",
             };
             let layoutLine = {

@@ -53,4 +53,10 @@ export const utils = {
 			JSON.stringify(Object.entries(obj2).sort())
 		);
 	},
+	translateCoords: function (fe) {
+		const cor = fe.geometry.coordinates;
+		const elev = fe.properties.elevation;
+		const newCoords = [];
+		
+	}
 };
