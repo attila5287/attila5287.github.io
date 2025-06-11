@@ -28,7 +28,7 @@
 |Project| desc:|
 |--|--|
 |[DU_Coding_PR02_JobVizzy_flask_python_MongoDB_JavaScript_Plotly_BeautifulSoup](https://github.com/attila5287/DU_Coding_PR02_JobVizzy_flask_python_MongoDB_JavaScript_Plotly_BeautifulSoup)|  |
-|[DU_Coding_PR02_VenCOMM_Flask_JS_Bootstrap_Python_SQLite_SQLalchemy](https://github.com/attila5287/DU_Coding_PR02_VenCOMM_Flask_JS_Bootstrap_Python_SQLite_SQLalchemy)|  |
+| [DU_Coding_PR02_VenCOMM_Flask_JS_Bootstrap_Python_SQLite_SQLalchemy](https://github.com/attila5287/DU_Coding_PR02_VenCOMM_Flask_JS_Bootstrap_Python_SQLite_SQLalchemy)|  |
 |[DU_Coding_pr02_Extract-Transform-Load_Indeed-Jobs-Web-Scraping](https://github.com/attila5287/DU_Coding_pr02_Extract-Transform-Load_Indeed-Jobs-Web-Scraping)|  |
 |[DU_BigData_Project1](https://github.com/attila5287/DU_BigData_Project1)|  |
 |[DU_BigData_Project1_TeamRepo_WheresJames](https://github.com/attila5287/DU_BigData_Project1_TeamRepo_WheresJames)|  |
