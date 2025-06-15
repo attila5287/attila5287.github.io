@@ -5,6 +5,7 @@
 ` (URL links to deployed apps, please find the code in repos below)`
 |app URL|description|github repo|  
 | --|--|  --|  
+| [HackerRank REACT interview question](https://react-hackerrank-itemlist.vercel.app/) |  Item List Manager: add an item with text input and submit button|  [solution code](https://github.com/attila5287/react-hackerrank-itemlist)|  
 | [Drone 3d Route Planner](https://droneqube.vercel.app/) | serverless, client-side node-js app, drawing 3-d route for drone|[droneqube](https://github.com/attila5287/droneqube)|| 
 | [Flight Route 3d](https://attila5287.github.io/flight-route-3d/) | Extended edition of above drone flight route planner- in development, need form elements| 
 | [ElectionDataViz](https://electiondataviz.herokuapp.com/) | python flask framework, d3.JS charts, MIT 2020 election data set| 
