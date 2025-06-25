@@ -1,0 +1,154 @@
+body {
+  margin: 0;
+  font-size: 10px;
+  padding: 0;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.calculation-box {
+  position: absolute;
+  width: 180px;
+  bottom: 30px;
+  left: 5px;
+  z-index: 2;
+  padding: 0px;
+  margin: 6px;
+  margin-left: 0px;
+}
+
+.overlay{
+  z-index:1;
+}
+
+.add-anime {
+  transition: ease 0.15s;
+}
+
+.add-anime:hover {
+  transform: scale(1.1, 1.1);
+  box-shadow: rgb(111, 230, 141) 5px 15px 20px; /* Increased blur radius */
+}
+
+.add-anime-blue {
+  transition: ease 0.15s;
+}
+
+.add-anime-blue:hover {
+  transform: scale(1.05, 1.05);
+  box-shadow: rgb(92, 128, 218) 5px 15px 20px; /* Increased blur radius */
+}
+.add-anime-white {
+  transition: ease 0.15s;
+}
+
+.add-anime-white:hover {
+  transform: scale(1.05, 1.05);
+  box-shadow: rgb(187, 200, 190) 5px 15px 20px; /* Increased blur radius */
+}
+.add-shadow {
+  transition: ease 0.15s;
+}
+
+.add-shadow:hover {
+  /* transform: scale(1.05, 1.05); */
+  box-shadow: rgb(187, 200, 190) 5px 15px 20px; /* Increased blur radius */
+}
+
+.btn-icon {
+  font-size: 1.50em;
+}
+.nav-icon{
+  font-size:1.750em;
+}
+.nav-item.nav-link {
+  transition: ease 0.10s;
+}
+.nav-item.nav-link:hover {
+  transform: scale(1.03, 1.03);
+  border-radius: 10px;
+  box-shadow: DarkTurquoise 0px 2px 8px; /* Increased blur radius */
+}
+
+.text-xs {
+  font-size: 0.60em;
+}
+
+.text-lg {
+  font-size: 1.25em;
+}
+.text-xl {
+  font-size: 1.50em;
+}
+.text-sm {
+  font-size: 0.80em;
+}
+.opac{
+  opacity: 1;
+}
+
+.round-sm {
+  border-radius: 3px;
+}
+.round-lg {
+  border-radius: 6px;
+}
+
+#geo-route-panel {
+  position: absolute;
+  max-width: 100px;
+  margin: 0px 0px 0px 10px;
+  padding: 0px;
+  top: 32px;
+  left: 0px;
+  z-index: 1;
+  height: 24px;
+  /* Set the desired height */
+}
+.input-group-sm.custom-input-group {
+  height: 24px;
+
+  /* Set the desired height */
+}
+.input-group-sm.custom-input-group .form-control {
+  height: 24px;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+.input-group-sm.custom-input-group .input-group-prepend .btn,
+.input-group-sm.custom-input-group .input-group-append .btn {
+  height: 24px;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+.geo-icons{
+  width: 14px;
+  margin: 1;
+  padding: 1;
+  font-size: 1.25em;
+}
+.geo-btn {
+width: 25px;
+}
+.geo-route-row {
+line-height: 1.75em;
+}
+.opac{
+  opacity: 1;
+}
+
+.camCheckBox input{
+  font-size: 1.00em;
+}
+
+.disable-all-cam{
+  position: absolute;
+  z-index: 1;
+  top: 34px;
+  right:72px;
+}
