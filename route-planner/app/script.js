@@ -200,7 +200,7 @@ const $navIcons = document.querySelectorAll(".nav-icon");
 const positionMap = {
   lng: "-104.9889",
   lat: "39.7394"
-}; // denver civics 
+}; // denver civics
 // console.log(positionMap)
 setTimeMessagebox();
 $messageButton.addEventListener( 'click', ( e ) => {
@@ -238,7 +238,7 @@ function setTimeMessagebox() {
           $messageText.textContent = '';
           $messageBox.classList.remove( 'animate__delay-3s' );
           $messageBox.classList.add( 'd-none' );
-          
+
           clearInterval( timerInterval );
 
           return; // Exit the function to avoid further execution
@@ -347,7 +347,7 @@ $buttonCoords.addEventListener( "click", ( e ) => {
       document.querySelector( "#map-coords-lat" ).dataset.alt;
     document.querySelector( ".map-coords-button-icon" ).innerHTML = '';
     document.querySelector(".map-coords-button-icon").innerHTML = `<i class="fas fa-fw fa-undo"</i>`;
-    
+
   } else {
     e.target.dataset.selected = "primary";
     document.querySelector("#map-coords-lng").value =
@@ -355,12 +355,12 @@ $buttonCoords.addEventListener( "click", ( e ) => {
     document.querySelector("#map-coords-lat").value =
     document.querySelector("#map-coords-lat").dataset.primary;
     document.querySelector(".map-coords-button-icon").innerHTML = `<i class="fas fa-fw fa-plane-departure"</i>`;
-    
+
   }
-  
+
 
 })
-  
+
 const userBaseHeight  = document.querySelector("#user-base-height");
 const userTopHeight  = document.querySelector("#user-top-height");
 const userStepCount  = document.querySelector("#user-step-count");
@@ -398,7 +398,7 @@ function renderLoopLength(poly, elementID) {
   const $el = document.getElementById(elementID);
   $el.innerText = "";
   $el.innerText = "" + roundByN(loopLength, 0) + " m";
-  
+
 }
 
 renderLoopLength( testpoly, "calc-loop-length" );
@@ -442,17 +442,17 @@ function handlerGeoBtn( e ) {
   }
 
 }
-  
+
 $geoButtons.forEach((button) =>
   button.addEventListener("click", handlerGeoBtn)
 );
-  
+
 const handlerGeo = () => {
   if (map.getLayer("user-extrude-layer")) {
     map.setPaintProperty(
       "user-extrude-layer",
       "fill-extrusion-base",
-      + fetchUserInput().inBaseHi 
+      + fetchUserInput().inBaseHi
     );
     map.setPaintProperty(
       "user-extrude-layer",
@@ -467,8 +467,8 @@ const handlerGeo = () => {
     map.triggerRepaint()
     renderRouteDistance(draw.getAll(), "calc-route-dist");
     renderLoopLength(draw.getAll(), "calc-loop-length");
-    
-  } else { // TEST RUN WITH NO DRAW DATA 
+
+  } else { // TEST RUN WITH NO DRAW DATA
     map
       .getSource("line-src")
       .setData( geometricRoute(testpoly, fetchUserInput() ) );
@@ -582,7 +582,7 @@ function updateArea(e) {
   const polygon = draw.getAll();
   map.getSource("user-extrude-src").setData(polygon);
   map.getSource("line-src").setData(geometricRoute(polygon, fetchUserInput()));
-  
+
   if (polygon.features.length > 0) {
     const area = turf.area(polygon);
     const length = turf.length(polygon, { units: "meters" });
@@ -593,7 +593,7 @@ function updateArea(e) {
     map.getSource( "line-src" ).setData( geometricRoute( polygon, fetchUserInput() ) );
     renderRouteDistance(polygon, "calc-route-dist");
     renderLoopLength(polygon, "calc-loop-length");
-    
+
   } else {
     $area.innerHTML = "";
     if (e.type !== "draw.delete") alert("Click the map to draw a polygon.");
@@ -643,7 +643,7 @@ function handlerDisableCam(e) {
       } else {
         map[h].enable();
       }
-      
+
     }
   });
 }
@@ -813,7 +813,7 @@ map.on("style.load", () => {
   // ZERO: user draw polygon or we feed for test purposes (ex: testpoly)
   let fetchData = () => ( draw.getAll().features.length ? draw.getAll() : testpoly );
   console.log(fetchData())
-  
+
   // Extrude layer data
   map.addSource("user-extrude-src", {
     type: "geojson",

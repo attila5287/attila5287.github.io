@@ -179,13 +179,14 @@ const $info = document.querySelector("#info");
 const $area = document.querySelector("#calculated-area");
 const $distance = document.querySelector("#calculated-distance");
 const $geoInputs = document.querySelectorAll( ".geo-input-el" );
+const $geoButtons = document.querySelectorAll( ".geo-btn" );
 
 
 
 const positionMap = {
   lng: "-104.9889",
   lat: "39.7394"
-}; // denver civics 
+}; // denver civics
 // console.log(positionMap)
 
 function fetchCoordsInput() {
@@ -194,7 +195,7 @@ function fetchCoordsInput() {
      +document.querySelector("#map-coords-lat").value,
   ]
 }
-  
+
 const userBaseHeight  = document.querySelector("#user-base-height");
 const userTopHeight  = document.querySelector("#user-top-height");
 const userStepCount  = document.querySelector("#user-step-count");
@@ -232,26 +233,94 @@ function renderLoopLength(poly, elementID) {
   const $el = document.getElementById(elementID);
   $el.innerText = "";
   $el.innerText = "" + roundByN(loopLength, 0) + " m";
-  
+
 }
 
 renderLoopLength( testpoly, "calc-loop-length" );
 renderRouteDistance( testpoly, "calc-route-dist" );
 
-$geoInputs.forEach(slider => {
-    slider.addEventListener('input', (event) => {
-        const valueSpan = document.getElementById(`${event.target.id}-value`);
-        if (valueSpan) {
-            valueSpan.textContent = event.target.value;
-        }
-    });
-});
+function handlerGeoBtn( e ) {
+  const deltaMapping = {
+    plus: +1,
+    minus: -1,
+  }
+  console.log( e.target.dataset.target )
+  console.log( e.target.dataset.delta )
+  let temp = document.getElementById( e.target.dataset.target );
+  if (temp.value > temp.min) {
+    console.log(temp.min);
+    temp.value = +temp.value + deltaMapping[e.target.dataset.delta];
+    handlerGeo()
+  } else if ( temp.value === temp.min ) {
+    console.log(temp.min);
+    if (e.target.dataset.delta==='plus') {
+      temp.value = +temp.value + deltaMapping[e.target.dataset.delta];
+    } else {
+      console.log('MIN LIMIT REACHED')
+    }
+    handlerGeo();
+  } else {
+    console.log("MIN LIMIT REACHED");
+  }
 
-function handlerShowPanelGeo(e) {
-  $geoRoutePanel.classList.toggle( "d-none" )
 }
 
-const $panelToggler = document.querySelector( "#panelToggler" );
+
+const handlerGeo = () => {
+  if (map.getLayer("user-extrude-layer")) {
+    map.setPaintProperty(
+      "user-extrude-layer",
+      "fill-extrusion-base",
+      + fetchUserInput().inBaseHi
+    );
+    map.setPaintProperty(
+      "user-extrude-layer",
+      "fill-extrusion-height",
+      +fetchUserInput().inTopHi
+    );
+  }
+  if (draw.getAll().features.length) {
+    map
+      .getSource("line-src")
+      .setData( geometricRoute( draw.getAll(), fetchUserInput() ) );
+    map.triggerRepaint()
+    renderRouteDistance(draw.getAll(), "calc-route-dist");
+    renderLoopLength(draw.getAll(), "calc-loop-length");
+
+  } else { // TEST RUN WITH NO DRAW DATA
+    map
+      .getSource("line-src")
+      .setData( geometricRoute(testpoly, fetchUserInput() ) );
+    map.triggerRepaint()
+    renderRouteDistance(testpoly, "calc-route-dist")
+    renderLoopLength(testpoly, "calc-loop-length")
+  }
+};
+
+$geoInputs.forEach((inputEl) =>
+    inputEl.addEventListener( "change", handlerGeo )
+);
+$geoButtons.forEach((button) =>
+  button.addEventListener("click", handlerGeoBtn)
+);
+
+function handlerShowPanelGeo(e) {
+  // e.target is the SWITCH element
+  console.log("clk target:>> " + e.target.dataset.target);
+  console.log("clk on>> " + e.target.id + " chk stat>> " + e.target.checked);
+
+  const isChecked = e.target.checked;
+  // el is the DATA-TARGET ELEMENT that needs to be
+  const el = document.getElementById(e.target.dataset.target);
+  if (!isChecked) {
+    el.classList.remove("animate__slideInLeft");
+    el.classList.add("animate__fadeOutLeftBig");
+  } else {
+    el.classList.remove("animate__fadeOutLeftBig");
+    el.classList.add("animate__slideInLeft");
+  }
+}
+
 
 // #region base config and public key token
 mapboxgl.accessToken =
@@ -303,7 +372,7 @@ function updateArea(e) {
   const polygon = draw.getAll();
   map.getSource("user-extrude-src").setData(polygon);
   map.getSource("line-src").setData(geometricRoute(polygon, fetchUserInput()));
-  
+
   if (polygon.features.length > 0) {
     const area = turf.area(polygon);
     const length = turf.length(polygon, { units: "meters" });
@@ -314,7 +383,7 @@ function updateArea(e) {
     map.getSource( "line-src" ).setData( geometricRoute( polygon, fetchUserInput() ) );
     renderRouteDistance(polygon, "calc-route-dist");
     renderLoopLength(polygon, "calc-loop-length");
-    
+
   } else {
     $area.innerHTML = "";
     if (e.type !== "draw.delete") alert("Click the map to draw a polygon.");
@@ -443,7 +512,7 @@ map.on("style.load", () => {
   // ZERO: user draw polygon or we feed for test purposes (ex: testpoly)
   let fetchData = () => ( draw.getAll().features.length ? draw.getAll() : testpoly );
   console.log(fetchData())
-  
+
   // Extrude layer data
   map.addSource("user-extrude-src", {
     type: "geojson",

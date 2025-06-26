@@ -45,24 +45,123 @@
         </ul>
     </nav>
 
-    <!-- G E O    R O U T E   P A N E L -->
-    <div id="geo-route-panel" class="p-2 bg-primary round-lg">
-        <div class="geo-route-row">
-            <label for="user-base-height" class="text-info mb-0">Base Height: <span id="user-base-height-value">0</span> m</label>
-            <input type="range" id="user-base-height" class="custom-range geo-input-el" name="user-base-height" min="0" max="100" value="0" step="1">
-        </div>
-        <div class="geo-route-row">
-            <label for="user-top-height" class="text-info mb-0">Top Height: <span id="user-top-height-value">20</span> m</label>
-            <input type="range" id="user-top-height" class="custom-range geo-input-el" name="user-top-height" min="1" max="200" value="20" step="1">
-        </div>
-        <div class="geo-route-row">
-            <label for="user-step-count" class="text-success mb-0">Step Count: <span id="user-step-count-value">4</span></label>
-            <input type="range" id="user-step-count" class="custom-range geo-input-el" name="user-step-count" min="1" max="20" value="4" step="1">
-        </div>
-        <div class="geo-route-row">
-            <label for="user-tolerance-w" class="text-success mb-0">Tolerance Width: <span id="user-tolerance-w-value">6</span> m</label>
-            <input type="range" id="user-tolerance-w" class="custom-range geo-input-el" name="user-tolerance-w" min="1" max="20" value="6" step="1">
-        </div>
+    <!-- G E O    R O U T E   P A N E L test *** test v2 ***-->
+    <div id="geo-route-panel" class="">
+        <span class="geo-route-row">
+            <p class="text-info mb-0">
+                Base Height
+            </p>
+            <div class="custom-input-group input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <div class="geo-btn add-anime-blue btn btn-primary text-info"
+                        tabindex="-1" data-target="user-base-height"
+                        data-delta="minus">
+                        <i data-target="user-base-height" data-delta="minus"
+                            class="fa fa-minus"></i>
+                    </div>
+                    <div class="btn btn-info disabled text-primary opac">
+                        <i
+                            class="geo-icons fa fa-fw fa-arrow-up-from-bracket"></i>
+                    </div>
+                </div>
+                <input id="user-base-height" value="0" min="0"
+                    class="geo-input-el px-0 text-center form-control text-info bg-primary border-0"
+                    type="number">
+                <div class="input-group-append">
+                    <div tabindex="-1"
+                        class="geo-btn add-anime-blue btn btn-primary text-info"
+                        data-target="user-base-height" data-delta="plus">
+                        <i data-target="user-base-height" data-delta="plus"
+                            class="fas fa-plus"></i>
+                    </div>
+                </div>
+            </div>
+        </span>
+        <span class="geo-route-row">
+            <p class="text-info mb-0">
+                Top Height
+            </p>
+            <div class="custom-input-group input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <div class="geo-btn add-anime-blue btn btn-primary text-info"
+                        tabindex="-1" data-target="user-top-height"
+                        data-delta="minus">
+                        <i data-target="user-top-height" data-delta="minus"
+                            class="fa fa-minus"></i>
+                    </div>
+                    <div class="btn btn-info disabled text-primary opac">
+                        <i class="geo-icons fa fa-fw fa-arrows-up-to-line"></i>
+                    </div>
+                </div>
+                <input id="user-top-height" value="20" min="1"
+                    class="geo-input-el px-0 text-center form-control text-info bg-primary border-0" type="number">
+                <div class="input-group-append">
+                    <div tabindex="-1"
+                        class="geo-btn add-anime-blue btn btn-primary text-info py-0"
+                        data-target="user-top-height" data-delta="plus">
+                        <i data-target="user-top-height" data-delta="plus"
+                            class="fas fa-plus"></i>
+                    </div>
+                </div>
+            </div>
+        </span>
+        <span class="geo-route-row">
+            <p class="text-success mb-0">
+                Step Count
+            </p>
+            <div class="custom-input-group input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <div class="geo-btn add-anime btn btn-primary text-success"
+                        tabindex="-1" data-target="user-step-count"
+                        data-delta="minus">
+                        <i data-target="user-step-count" data-delta="minus"
+                            class="fa fa-minus"></i>
+                    </div>
+                    <div class="btn btn-success disabled text-primary opac">
+                        <i
+                            class="geo-icons fa fa-fw fa-arrows-turn-to-dots"></i>
+                    </div>
+                </div>
+                <input id="user-step-count" value="4" min="1"
+                    class="geo-input-el px-0 text-center form-control text-success bg-primary border-0" type="number">
+                <div class="input-group-append">
+                    <div tabindex="-1"
+                        class="geo-btn add-anime btn btn-primary text-success"
+                        data-target="user-step-count" data-delta="plus">
+                        <i data-target="user-step-count" data-delta="plus"
+                            class="fas fa-plus"></i>
+                    </div>
+                </div>
+            </div>
+        </span>
+        <span class="geo-route-row">
+            <p class="text-success mb-0">
+                Tolerance Width
+            </p>
+            <div class="custom-input-group input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <div class="geo-btn add-anime btn btn-primary text-success btn-sm "
+                        tabindex="-1" data-target="user-tolerance-w"
+                        data-delta="minus">
+                        <i data-target="user-tolerance-w" data-delta="minus"
+                            class="fa fa-minus"></i>
+                    </div>
+                    <div class="btn btn-success disabled text-primary opac">
+                        <i class="geo-icons fa fa-fw fa-text-width"></i>
+                    </div>
+                </div>
+                <input id="user-tolerance-w" value="6" min="1"
+                    class="geo-input-el px-0 text-center form-control text-success bg-primary border-0" type="number">
+                <div class="input-group-append">
+                    <div tabindex="-1"
+                        class="geo-btn add-anime btn btn-primary text-success"
+                        data-target="user-tolerance-w" data-delta="plus">
+                        <i data-target="user-tolerance-w" data-delta="plus"
+                            class="fas fa-plus"></i>
+                    </div>
+                </div>
+            </div>
+        </span>
     </div>
 
     <div class="calculation-box py-0"
