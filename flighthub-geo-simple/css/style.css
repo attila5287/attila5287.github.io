@@ -101,15 +101,17 @@ body {
 
 #geo-route-panel {
   position: absolute;
-  max-width: 100px;
-  margin: 0px 0px 0px 10px;
-  padding: 0px;
+  width: 220px;
+  margin: 10px;
   top: 32px;
   left: 0px;
   z-index: 1;
-  height: 24px;
-  /* Set the desired height */
 }
+
+.geo-route-row {
+  padding: 4px 8px;
+}
+
 .input-group-sm.custom-input-group {
   height: 24px;
 
@@ -134,9 +136,6 @@ body {
 }
 .geo-btn {
 width: 25px;
-}
-.geo-route-row {
-line-height: 1.75em;
 }
 .opac{
   opacity: 1;

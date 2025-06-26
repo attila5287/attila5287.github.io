@@ -238,85 +238,20 @@ function renderLoopLength(poly, elementID) {
 renderLoopLength( testpoly, "calc-loop-length" );
 renderRouteDistance( testpoly, "calc-route-dist" );
 
-function handlerGeoBtn( e ) {
-  const deltaMapping = {
-    plus: +1,
-    minus: -1,
-  }
-  console.log( e.target.dataset.target )
-  console.log( e.target.dataset.delta )
-  let temp = document.getElementById( e.target.dataset.target );
-  if (temp.value > temp.min) {
-    console.log(temp.min);
-    temp.value = +temp.value + deltaMapping[e.target.dataset.delta];
-    handlerGeo()
-  } else if ( temp.value === temp.min ) {
-    console.log(temp.min);
-    if (e.target.dataset.delta==='plus') {
-      temp.value = +temp.value + deltaMapping[e.target.dataset.delta];
-    } else {
-      console.log('MIN LIMIT REACHED')
-    }
-    handlerGeo();
-  } else {
-    console.log("MIN LIMIT REACHED");
-  }
-
-}
-  
-  
-const handlerGeo = () => {
-  if (map.getLayer("user-extrude-layer")) {
-    map.setPaintProperty(
-      "user-extrude-layer",
-      "fill-extrusion-base",
-      + fetchUserInput().inBaseHi 
-    );
-    map.setPaintProperty(
-      "user-extrude-layer",
-      "fill-extrusion-height",
-      +fetchUserInput().inTopHi
-    );
-  }
-  if (draw.getAll().features.length) {
-    map
-      .getSource("line-src")
-      .setData( geometricRoute( draw.getAll(), fetchUserInput() ) );
-    map.triggerRepaint()
-    renderRouteDistance(draw.getAll(), "calc-route-dist");
-    renderLoopLength(draw.getAll(), "calc-loop-length");
-    
-  } else { // TEST RUN WITH NO DRAW DATA 
-    map
-      .getSource("line-src")
-      .setData( geometricRoute(testpoly, fetchUserInput() ) );
-    map.triggerRepaint()
-    renderRouteDistance(testpoly, "calc-route-dist")
-    renderLoopLength(testpoly, "calc-loop-length")
-  }
-};
-
-$geoInputs.forEach((inputEl) =>
-    inputEl.addEventListener( "change", handlerGeo )
-);
+$geoInputs.forEach(slider => {
+    slider.addEventListener('input', (event) => {
+        const valueSpan = document.getElementById(`${event.target.id}-value`);
+        if (valueSpan) {
+            valueSpan.textContent = event.target.value;
+        }
+    });
+});
 
 function handlerShowPanelGeo(e) {
-  // e.target is the SWITCH element
-  console.log("clk target:>> " + e.target.dataset.target);
-  console.log("clk on>> " + e.target.id + " chk stat>> " + e.target.checked);
-
-  const isChecked = e.target.checked;
-  // el is the DATA-TARGET ELEMENT that needs to be
-  const el = document.getElementById(e.target.dataset.target);
-  if (!isChecked) {
-    el.classList.remove("animate__slideInLeft");
-    el.classList.add("animate__fadeOutLeftBig");
-  } else {
-    el.classList.remove("animate__fadeOutLeftBig");
-    el.classList.add("animate__slideInLeft");
-  }
+  $geoRoutePanel.classList.toggle( "d-none" )
 }
 
+const $panelToggler = document.querySelector( "#panelToggler" );
 
 // #region base config and public key token
 mapboxgl.accessToken =
