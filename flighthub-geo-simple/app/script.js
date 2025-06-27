@@ -1,5 +1,18 @@
 "use strict";
+const $info = document.querySelector("#info");
+const $area = document.querySelector("#calculated-area");
+const $distance = document.querySelector("#calculated-distance");
+const $geoInputs = document.querySelectorAll(".geo-input-el");
+const $geoButtons = document.querySelectorAll(".geo-btn");
 
+const MAPBOX_TOKEN = "pk.eyJ1IjoiYXR0aWxhNTIiLCJhIjoiY2thOTE3N3l0MDZmczJxcjl6dzZoNDJsbiJ9.bzXjw1xzQcsIhjB_YoAuEw";
+// helper function to round numbers
+function roundByN(floatNum, numDecimals) {
+  const tenExp = 10 ** numDecimals;
+  const res = Math.round(floatNum * tenExp) / tenExp;
+  // console.log(res)
+  return res;
+}
 // Test data
 const testpoly = {
   type: "FeatureCollection",
@@ -171,30 +184,11 @@ const geometricRoute = (poly, userInput) => {
   };
 };
 
-// Export the functions and data
-export { testpoly, geometricRoute };
-
-// Main application code
-const $info = document.querySelector("#info");
-const $area = document.querySelector("#calculated-area");
-const $distance = document.querySelector("#calculated-distance");
-const $geoInputs = document.querySelectorAll( ".geo-input-el" );
-const $geoButtons = document.querySelectorAll( ".geo-btn" );
-
-
-
 const positionMap = {
   lng: "-104.9889",
   lat: "39.7394"
 }; // denver civics
-// console.log(positionMap)
 
-function fetchCoordsInput() {
-  return [
-    +document.querySelector("#map-coords-lng").value,
-     +document.querySelector("#map-coords-lat").value,
-  ]
-}
 
 const userBaseHeight  = document.querySelector("#user-base-height");
 const userTopHeight  = document.querySelector("#user-top-height");
@@ -265,7 +259,6 @@ function handlerGeoBtn( e ) {
 
 }
 
-
 const handlerGeo = () => {
   if (map.getLayer("user-extrude-layer")) {
     map.setPaintProperty(
@@ -304,55 +297,26 @@ $geoButtons.forEach((button) =>
   button.addEventListener("click", handlerGeoBtn)
 );
 
-function handlerShowPanelGeo(e) {
-  // e.target is the SWITCH element
-  console.log("clk target:>> " + e.target.dataset.target);
-  console.log("clk on>> " + e.target.id + " chk stat>> " + e.target.checked);
-
-  const isChecked = e.target.checked;
-  // el is the DATA-TARGET ELEMENT that needs to be
-  const el = document.getElementById(e.target.dataset.target);
-  if (!isChecked) {
-    el.classList.remove("animate__slideInLeft");
-    el.classList.add("animate__fadeOutLeftBig");
-  } else {
-    el.classList.remove("animate__fadeOutLeftBig");
-    el.classList.add("animate__slideInLeft");
-  }
-}
-
-
-// #region base config and public key token
-mapboxgl.accessToken =
-  "pk.eyJ1IjoiYXR0aWxhNTIiLCJhIjoiY2thOTE3N3l0MDZmczJxcjl6dzZoNDJsbiJ9.bzXjw1xzQcsIhjB_YoAuEw";
-let baseConfig = {
-  basemap: {
-    lightPreset: "dusk",
-  },
-};
-// #endregion
+mapboxgl.accessToken =MAPBOX_TOKEN  ;
 // #region map construct map object
 const map = new mapboxgl.Map({
   container: "map",
-  style: "mapbox://styles/mapbox/standard",
-  config: baseConfig,
+  // style: "mapbox://styles/mapbox/standard",
+  style: "mapbox://styles/mapbox/satellite-v9",
+  config: {
+  basemap: {
+    lightPreset: "dusk",
+  },
+  },
   zoom: 18.93,
   bearing: 150,
-  center: positionMap, // `civic`
-  // center: [ 27.1428, 38.423733, ], // izmir
+  center: {
+    lng: "-104.9889",
+    lat: "39.7394",
+  },
   pitch: 60,
   antialias: true,
 });
-// #endregion
-// #region TEST data to draw an initial polygon
-// #endregion
-// #region geometric route
-function roundByN(floatNum, numDecimals) {
-  const tenExp = 10 ** numDecimals;
-  const res = Math.round(floatNum * tenExp) / tenExp;
-  // console.log(res)
-  return res;
-}
 // #endregion
 // #region mapbox GL Draw Controls
 const draw = new MapboxDraw({
@@ -366,7 +330,6 @@ map.on("draw.update", updateArea);
 map.on("draw.combine", updateArea);
 map.on("draw.uncombine", updateArea);
 // #endregion
-// #region enable disable dusk mode
 // #region ** updateArea()-** -blue extrusion - main function
 function updateArea(e) {
   const polygon = draw.getAll();
@@ -390,37 +353,8 @@ function updateArea(e) {
   }
 }
 // #endregion
-// #region map camera control events: HANDLER DISABLE
-function handlerCamCheckBoxes(e) {
-  const handler = e.target.id;
-  // console.log('handler')
-  // console.log(handler)
-  // console.log(e.target.checked)
-  if (e.target.checked) {
-    map[handler].enable();
-  } else {
-    map[handler].disable();
-  }
-}
-// #region blank geoJSON dat`a to load when there is no polygon
-const polyData = {
-  type: "FeatureCollection",
-  features: [],
-};
-const lineData = {
-  type: "Feature",
-  properties: {
-    elevation: [],
-  },
-  geometry: {
-    coordinates: [],
-    type: "LineString",
-  },
-};
-// #endregion
-// #region  MAP ON LOAD: LAYERS and DATA SOURCEs
+// #region style load: MAP ON LOAD: LAYERS and DATA SOURCEs
 map.on("style.load", () => {
-  // map.addLayer(customLayer);
   // ZERO: user draw polygon or we feed for test purposes (ex: testpoly)
   let fetchData = () => ( draw.getAll().features.length ? draw.getAll() : testpoly );
   console.log(fetchData())
@@ -467,13 +401,6 @@ map.on("style.load", () => {
       "fill-extrusion-cast-shadows": false,
       // "":,
     },
-  });
-
-  map.on("dblclick", "user-extrude-layer", function (ob) {
-    if (ob && ob.features && ob.features.length > 0) {
-      // alert("test");
-      console.log("test event on ext feature");
-    }
   });
 
   // base config for 2 line layers hrz/vert
@@ -525,38 +452,6 @@ map.on("style.load", () => {
     layout: layoutLine,
     paint: paintLine,
   });
-  map.on("moveend", () => {
-    const mapCenter = map.getCenter();
-    const isMapAway = () => {
-      const isLngAway = Math.abs(+mapCenter.lng - positionMap.lng) > 0.5;
-      const isLatAway = Math.abs(+mapCenter.lat - positionMap.lat) > 0.5;
-      if (isLatAway ) {
-        if (isLngAway) {
-          return true;
-        } else {
-          return false;
-        }
-      } else {
-        return false;
-      }
-    };
-    if ( isMapAway() ) {
-      console.log( 'is Map Away TRUE' );
-      console.log(`Map Lng: ${mapCenter.lng}, Lat: ${mapCenter.lat}`);
-      document.querySelector("#map-coords-lng").value =
-        document.querySelector("#map-coords-lng").dataset.alt;
 
-      document.querySelector("#map-coords-lat").value =
-        document.querySelector("#map-coords-lat").dataset.alt;
-      document.querySelector(
-        ".map-coords-button-icon"
-      ).innerHTML = `<i class="fas fa-fw fa-undo"></i>`;
-    }
-
-
-  });
-
-  map.on("load", function () {
-  });
 });
 // #endregion
